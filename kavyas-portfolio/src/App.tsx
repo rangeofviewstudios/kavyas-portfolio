@@ -9,6 +9,7 @@ import LowesCaseStudy from "./pages/LowesCaseStudy";
 import AboutMe from "./pages/AboutMe";
 import Resume from "./pages/Resume";
 import NotFound from "./pages/NotFound";
+import AesturaCampaign from "./pages/AesturaCampaign";
 
 import { ScrollToTop } from "./components/ScrollToTop";
 
@@ -25,6 +26,7 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/case-study/ubs" element={<UBSCaseStudy />} />
           <Route path="/case-study/lowes" element={<LowesCaseStudy />} />
+          <Route path="/case-study/aestura" element={<AesturaCampaign />} />
           <Route path="/about" element={<AboutMe />} />
           <Route path="/resume" element={<Resume />} />
           <Route path="*" element={<NotFound />} />
