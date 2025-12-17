@@ -72,11 +72,11 @@ const projects = [
     company: "Startupa",
     partner: "SCAD",
     isNda: false,
-    title: "Empowering Entrepreneurs",
+    title: "Startup (LOOMA)",
     description:
-      "Creating an intuitive platform for Startupa that connects entrepreneurs with resources, mentorship, and funding opportunities, designed to simplify the startup journey and foster innovation.",
-    image: '/images/startupacrd.png',
-    logoSrc: '/images/startupa-logo.png',
+      "Participated in a week-long competition to design a futuristic wearable. Developed smart glasses aimed at supporting Alzheimer's patients through memory retention, facial recognition, and real-time reminders to enhance daily life.",
+    image: '/images/startupcard.png',
+    logoSrc: '/images/looma/startuplogo.png',
     logoAlt: 'Startupa Logo',
     logoClass: 'h-6 w-auto mr-2',
     partnerColor: '#868481',
@@ -224,40 +224,28 @@ export function WorkSection() {
                     display: 'block'
                   }}
                 >
-                  {/* Gradient Overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent z-10" />
-
-                  {/* Content Overlay */}
+                  {/* Content Container */}
                   <div className="relative z-20 h-full flex flex-col justify-end p-8 md:p-12">
-                    <div className="max-w-2xl">
-                      {/* Logo */}
-                      <div className="mb-6">
-                        <img
-                          src={project.logoSrc}
-                          alt={project.logoAlt}
-                          className="h-8 w-auto brightness-0 invert"
-                        />
-                      </div>
+                    {/* Content at Bottom Left */}
+                    <div className="max-w-lg">
+                      {/* Button */}
+                      <Link
+                        to="/case-study/looma"
+                        className="inline-flex items-center gap-2 px-8 py-3 rounded-full bg-white text-[#4A4238] text-base font-medium transition-transform hover:scale-105 mb-8 shadow-sm"
+                      >
+                        View Case Study
+                        <ArrowRight className="w-5 h-5" />
+                      </Link>
 
                       {/* Title */}
-                      <h3 className="text-3xl font-bold text-white mb-4">
+                      <h3 className="text-3xl font-bold text-[#4A4238] mb-4">
                         {project.title}
                       </h3>
 
                       {/* Description */}
-                      <p className="text-gray-200 text-lg mb-8 max-w-xl">
+                      <p className="text-[#4A4238] text-base leading-relaxed">
                         {project.description}
                       </p>
-
-                      {/* Button */}
-                      <button
-                        className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-white text-black font-medium transition-transform hover:scale-105"
-                      >
-                        View Case Study
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                          <path d="M7 17L17 7M17 7H7M17 7V17" />
-                        </svg>
-                      </button>
                     </div>
                   </div>
                 </div>
