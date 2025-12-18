@@ -67,18 +67,18 @@ export function HeroSection() {
             <div
               className="relative overflow-visible"
               style={{
-                width: '571px',
-                height: '39 4px',
+                width: '420px',
+                height: '380px',
                 borderRadius: '20px',
                 background: 'linear-gradient(180deg, #F3F3F3 0%, #E6E6E6 100%)',
               }}
             >
 
-              {/* The Image */}
+              {/* The Image - positioned to extend above the card */}
               <img
                 src="/images/kavyaportimage1.png"
                 alt="Kavya - UX Designer"
-                className="w-full h-full rounded-[2rem] z-10 absolute left-0 -top-16 object-contain"
+                className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-auto object-contain z-10"
                 style={{ height: '520px' }}
               />
 

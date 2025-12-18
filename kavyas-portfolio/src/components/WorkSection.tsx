@@ -381,7 +381,8 @@ export function WorkSection() {
                       {/* Title & Description */}
                       {project.company === 'Porsche' ? (
                         <div style={{ position: 'absolute', left: 0, bottom: 0, margin: 32, maxWidth: 400, display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
-                          <button
+                          <Link
+                            to="/case-study/porsche"
                             style={{
                               display: 'flex',
                               width: '180px',
@@ -396,12 +397,13 @@ export function WorkSection() {
                               fontWeight: 500,
                               fontSize: '16px',
                               marginBottom: '18px',
+                              textDecoration: 'none',
                             }}
                             className="group"
                           >
                             View Case Study
                             <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
-                          </button>
+                          </Link>
                           <h3
                             className="text-xl font-semibold mb-2"
                             style={{ color: '#fff', textAlign: 'left' }}
@@ -532,63 +534,56 @@ export function WorkSection() {
           <div className="mt-20 relative h-64 w-full max-w-[100vw] overflow-visible">
             <div className="flex justify-center items-end gap-[-20px] absolute left-1/2 transform -translate-x-1/2 w-full" style={{ bottom: '-120px' }}>
               {/* Photo 1 */}
-              <div className="bg-white p-3 shadow-2xl transform -rotate-12 hover:rotate-0 transition-transform duration-300 relative" style={{ width: '240px', zIndex: 1, top: '40px' }}>
+              <div className="bg-white p-3 shadow-2xl transform -rotate-12 hover:rotate-0 transition-transform duration-300 relative" style={{ width: '280px', zIndex: 1, top: '40px' }}>
                 <img
                   src="/images/footer/homefooter1.png"
                   alt="Travel moment 1"
-                  className="w-full h-56 object-cover"
+                  className="w-full h-64 object-cover"
                 />
               </div>
 
-              {/* Photo 2 with profile badge */}
-              <div className="relative bg-white p-3 shadow-2xl transform rotate-6 hover:rotate-0 transition-transform duration-300" style={{ width: '240px', zIndex: 2, top: '10px' }}>
-                <div className="absolute -top-6 -left-6 w-16 h-16 rounded-full bg-blue-500 border-4 border-white overflow-hidden z-20 shadow-md">
-                  <img
-                    src="/images/gettoknowmekavya.png"
-                    alt="Profile"
-                    className="w-full h-full object-cover"
-                  />
-                </div>
+              {/* Photo 2 - removed profile badge */}
+              <div className="relative bg-white p-3 shadow-2xl transform rotate-6 hover:rotate-0 transition-transform duration-300" style={{ width: '280px', zIndex: 2, top: '10px' }}>
                 <img
                   src="/images/footer/homefooter2.png"
                   alt="Travel moment 2"
-                  className="w-full h-56 object-cover"
+                  className="w-full h-64 object-cover"
                 />
               </div>
 
               {/* Photo 3 */}
-              <div className="bg-white p-3 shadow-2xl transform -rotate-3 hover:rotate-0 transition-transform duration-300 relative" style={{ width: '240px', zIndex: 3, top: '-20px' }}>
+              <div className="bg-white p-3 shadow-2xl transform -rotate-3 hover:rotate-0 transition-transform duration-300 relative" style={{ width: '280px', zIndex: 3, top: '-20px' }}>
                 <img
                   src="/images/footer/homefooter3.png"
                   alt="Travel moment 3"
-                  className="w-full h-56 object-cover"
+                  className="w-full h-64 object-cover"
                 />
               </div>
 
               {/* Photo 4 */}
-              <div className="bg-white p-3 shadow-2xl transform rotate-3 hover:rotate-0 transition-transform duration-300 relative" style={{ width: '240px', zIndex: 2, top: '-10px' }}>
+              <div className="bg-white p-3 shadow-2xl transform rotate-3 hover:rotate-0 transition-transform duration-300 relative" style={{ width: '280px', zIndex: 2, top: '-10px' }}>
                 <img
                   src="/images/footer/homefooter4.png"
                   alt="Travel moment 4"
-                  className="w-full h-56 object-cover"
+                  className="w-full h-64 object-cover"
                 />
               </div>
 
               {/* Photo 5 */}
-              <div className="bg-white p-3 shadow-2xl transform -rotate-6 hover:rotate-0 transition-transform duration-300 relative" style={{ width: '240px', zIndex: 1, top: '30px' }}>
+              <div className="bg-white p-3 shadow-2xl transform -rotate-6 hover:rotate-0 transition-transform duration-300 relative" style={{ width: '280px', zIndex: 1, top: '30px' }}>
                 <img
                   src="/images/footer/homefooter5.png"
                   alt="Travel moment 5"
-                  className="w-full h-56 object-cover"
+                  className="w-full h-64 object-cover"
                 />
               </div>
 
               {/* Photo 6 */}
-              <div className="bg-white p-3 shadow-2xl transform rotate-12 hover:rotate-0 transition-transform duration-300 relative" style={{ width: '240px', zIndex: 0, top: '60px' }}>
+              <div className="bg-white p-3 shadow-2xl transform rotate-12 hover:rotate-0 transition-transform duration-300 relative" style={{ width: '280px', zIndex: 0, top: '60px' }}>
                 <img
                   src="/images/footer/homefooter6.png"
                   alt="Travel moment 6"
-                  className="w-full h-56 object-cover"
+                  className="w-full h-64 object-cover"
                 />
               </div>
             </div>
