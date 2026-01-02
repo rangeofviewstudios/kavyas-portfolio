@@ -20,7 +20,7 @@ const projects = [
     logoAlt: 'UBS Logo',
     logoClass: 'h-7 w-auto mr-2',
     partnerColor: '#868481',
-    cardBg: '#fff',
+    cardBg: '#EFEFEF',
   },
   {
     id: 2,
@@ -93,7 +93,7 @@ export function WorkSection() {
       : projects;
 
   return (
-    <section id="work" className="py-20 px-6">
+    <section id="work" className="pt-8 pb-20 px-6">
       <div className="container mx-auto">
         {/* Section Header */}
         <div className="mb-10 animate-fade-in-up">
@@ -134,311 +134,481 @@ export function WorkSection() {
                 animationDelay: `${index * 0.1}s`,
               }}
             >
-              {/* For Aestura, use card image as background with text overlay */}
+              {/* Aestura Card with Layered Images */}
               {project.company === 'Aestura' ? (
                 <div
                   className="relative rounded-2xl overflow-hidden"
                   style={{
-                    backgroundImage: `url(${project.image})`,
-                    backgroundSize: 'contain',
-                    backgroundPosition: 'right center',
-                    backgroundRepeat: 'no-repeat',
-                    backgroundColor: '#E7EDF3',
-                    minHeight: '494px',
-                    height: '494px'
-                  }}
-                >
-                  <div className="flex items-center h-full p-12 md:p-14 lg:p-16">
-                    {/* Left side - Text content */}
-                    <div style={{ maxWidth: '50%', zIndex: 2, flexShrink: 0 }}>
-                      {/* AESTURA Logo */}
-                      <img
-                        src="/images/aesturalogo.png"
-                        alt="Aestura Logo"
-                        style={{
-                          height: '100px',
-                          width: 'auto',
-                          marginBottom: '32px',
-                          display: 'block'
-                        }}
-                      />
-
-                      {/* View Campaign Button */}
-                      {/* View Campaign Button */}
-                      <Link
-                        to="/case-study/aestura"
-                        style={{
-                          display: 'inline-flex',
-                          alignItems: 'center',
-                          gap: '12px',
-                          padding: '12px 28px',
-                          border: '2px solid #6B8DD6',
-                          borderRadius: '40px',
-                          background: '#FFF',
-                          color: '#6B8DD6',
-                          fontSize: '16px',
-                          fontWeight: 500,
-                          textDecoration: 'none',
-                          marginBottom: '40px'
-                        }}
-                      >
-                        View Campaign
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                          <path d="M7 17L17 7M17 7H7M17 7V17" />
-                        </svg>
-                      </Link>
-
-                      {/* Title */}
-                      <h3 style={{
-                        fontSize: '32px',
-                        fontWeight: 600,
-                        color: '#333',
-                        marginBottom: '16px',
-                        lineHeight: '1.3'
-                      }}>
-                        The Essence Edit
-                      </h3>
-
-                      {/* Description */}
-                      <p style={{
-                        fontSize: '14px',
-                        lineHeight: '1.6',
-                        color: '#666'
-                      }}>
-                        Selected as a Semi-Finalist in the AmorePacific Brand Challenge, where I developed a comprehensive campaign to introduce Aestura skincare products to the North American market. Conducted market research to identify consumer needs and trends, then created a go-to-market strategy with creative ideas for brand positioning, launch channels, and promotional tactics.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              ) : project.company === 'Startupa' ? (
-                <div
-                  className="relative rounded-2xl overflow-hidden"
-                  style={{
-                    backgroundImage: `url(${project.image})`,
-                    backgroundSize: 'cover',
-                    backgroundPosition: 'center',
-                    backgroundRepeat: 'no-repeat',
+                    backgroundColor: '#EBF1F3',
                     minHeight: '494px',
                     height: '494px',
-                    width: '100%',
-                    display: 'block'
+                    padding: '48px 56px'
                   }}
                 >
-                  {/* Content Container */}
-                  <div className="relative z-20 h-full flex flex-col justify-end p-8 md:p-12">
-                    {/* Content at Bottom Left */}
-                    <div className="max-w-lg">
-                      {/* Button */}
-                      <Link
-                        to="/case-study/looma"
-                        className="inline-flex items-center gap-2 px-8 py-3 rounded-full bg-white text-[#4A4238] text-base font-medium transition-transform hover:scale-105 mb-8 shadow-sm"
-                      >
-                        View Case Study
-                        <ArrowRight className="w-5 h-5" />
-                      </Link>
+                  {/* Left side - Text content */}
+                  <div style={{
+                    position: 'absolute',
+                    left: '56px',
+                    top: '50%',
+                    transform: 'translateY(-50%)',
+                    maxWidth: '45%',
+                    zIndex: 10
+                  }}>
+                    {/* AESTURA Logo */}
+                    <img
+                      src="/images/aesturalogosvg.svg"
+                      alt="Aestura Logo"
+                      style={{
+                        height: '48px',
+                        width: 'auto',
+                        marginBottom: '40px',
+                        display: 'block'
+                      }}
+                    />
 
-                      {/* Title */}
-                      <h3 className="text-3xl font-bold text-[#4A4238] mb-4">
-                        {project.title}
-                      </h3>
-
-                      {/* Description */}
-                      <p className="text-[#4A4238] text-base leading-relaxed">
-                        {project.description}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              ) : project.company === "Lowe's" ? (
-                <div className="relative rounded-2xl overflow-hidden">
-                  <img
-                    src={project.image}
-                    alt={project.title}
-                    className="w-full h-auto"
-                    style={{ display: 'block' }}
-                  />
-                  {/* Text overlay - positioned to match reference image */}
-                  <div className="absolute top-0 left-0 p-12 md:p-14 lg:p-16" style={{ maxWidth: '55%' }}>
-                    {/* Company Logos */}
-                    <div className="flex items-center gap-4 mb-6">
-                      <img src={project.logoSrc} alt={project.logoAlt} style={{ height: '48px', width: 'auto' }} />
-                      <span style={{ height: '40px', width: '2px', background: '#9B9B9B', display: 'inline-block' }}></span>
-                      <span style={{ fontSize: '32px', fontWeight: 400, color: '#9B9B9B', fontFamily: 'sans-serif' }}>SCADpro</span>
-                    </div>
-
-                    {/* NDA Badge */}
-                    {project.isNda && (
-                      <div className="mb-20" style={{ fontSize: '20px', color: '#7A7A7A', fontWeight: 400 }}>
-                        NDA Protected
-                      </div>
-                    )}
-
-                    {/* CTA Button */}
+                    {/* View Campaign Button */}
                     <Link
-                      to="/case-study/lowes"
+                      to="/case-study/aestura"
                       style={{
                         display: 'inline-flex',
-                        padding: '14px 32px',
-                        justifyContent: 'center',
                         alignItems: 'center',
-                        gap: '12px',
-                        borderRadius: '40px',
-                        border: '2px solid #003D7A',
-                        background: '#FFF',
-                        color: '#003D7A',
+                        gap: '8px',
+                        padding: '11px 26px',
+                        border: '1.5px solid #6B8DD6',
+                        borderRadius: '20px',
+                        background: 'transparent',
+                        color: '#6B8DD6',
+                        fontSize: '14px',
                         fontWeight: 500,
-                        fontSize: '18px',
                         textDecoration: 'none',
                         marginBottom: '32px',
+                        transition: 'all 0.3s ease'
                       }}
-                      className="group"
+                      className="group hover:bg-blue-600 hover:text-white hover:border-blue-600"
                     >
-                      View Case Study
-                      <ArrowRight style={{ width: '20px', height: '20px' }} className="transition-transform group-hover:translate-x-1" />
+                      View Campaign
+                      <ArrowRight style={{ width: '16px', height: '16px' }} className="transition-transform group-hover:translate-x-1" />
                     </Link>
 
                     {/* Title */}
                     <h3 style={{
-                      fontSize: '36px',
+                      fontSize: '28px',
                       fontWeight: 700,
-                      color: '#003D7A',
+                      color: '#2A2A2A',
+                      marginBottom: '14px',
                       lineHeight: '1.2',
-                      marginBottom: '20px',
-                      marginTop: '32px'
+                      letterSpacing: '-0.01em'
                     }}>
-                      {project.title}
+                      The Essence Edit
                     </h3>
 
                     {/* Description */}
                     <p style={{
-                      fontSize: '15px',
-                      lineHeight: '1.6',
-                      color: '#003D7A',
+                      fontSize: '12px',
+                      lineHeight: '1.7',
+                      color: '#5A5A5A'
+                    }}>
+                      Selected as a Semi-Finalist in the AmorePacific Brand Challenge, where I developed a comprehensive campaign to introduce Aestura skincare products to the North American market. Conducted market research to identify consumer needs and trends, then created a go-to-market strategy with creative ideas for brand positioning, launch channels, and promotional tactics.
+                    </p>
+                  </div>
+
+                  {/* Right side - Layered Images */}
+                  <div style={{
+                    position: 'absolute',
+                    right: '20px',
+                    top: '50%',
+                    transform: 'translateY(-50%)',
+                    width: '560px',
+                    height: '560px'
+                  }}>
+                    {/* Water Bubble Background */}
+                    <img
+                      src="/images/aesturawaterbub.png"
+                      alt="Water Bubble"
+                      style={{
+                        position: 'absolute',
+                        width: '100%',
+                        height: '100%',
+                        objectFit: 'contain',
+                        zIndex: 1
+                      }}
+                    />
+
+                    {/* Product Image */}
+                    <img
+                      src="/images/aesturacardproduct.png"
+                      alt="Aestura Product"
+                      style={{
+                        position: 'absolute',
+                        width: '100%',
+                        height: '100%',
+                        objectFit: 'contain',
+                        zIndex: 2
+                      }}
+                    />
+                  </div>
+                </div>
+              ) : project.company === 'Startupa' ? (
+                <div
+                  className="rounded-2xl overflow-hidden"
+                  style={{
+                    backgroundColor: '#DBD1C5',
+                    minHeight: '494px',
+                    height: '494px',
+                    position: 'relative',
+                    padding: 0
+                  }}
+                >
+                  {/* START UP Logo - Top Left */}
+                  <div style={{ position: 'absolute', top: '48px', left: '56px', zIndex: 10 }}>
+                    <img
+                      src="/images/startuplogosvg.svg"
+                      alt="START UP Logo"
+                      style={{ height: '200px', width: 'auto' }}
+                    />
+                  </div>
+
+                  {/* Content - Bottom Left */}
+                  <div style={{ position: 'absolute', bottom: '48px', left: '56px', maxWidth: '42%', zIndex: 10 }}>
+                    {/* CTA Button */}
+                    <Link
+                      to="/case-study/looma"
+                      style={{
+                        display: 'inline-flex',
+                        padding: '11px 26px',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        gap: '8px',
+                        borderRadius: '20px',
+                        border: '1.5px solid #5A4A3C',
+                        background: 'transparent',
+                        color: '#5A4A3C',
+                        fontWeight: 500,
+                        fontSize: '14px',
+                        textDecoration: 'none',
+                        marginBottom: '24px',
+                        transition: 'all 0.3s ease'
+                      }}
+                      className="group hover:bg-gray-800 hover:text-white hover:border-gray-800"
+                    >
+                      View Case Study
+                      <ArrowRight style={{ width: '16px', height: '16px' }} className="transition-transform group-hover:translate-x-1" />
+                    </Link>
+
+                    {/* Title */}
+                    <h3 style={{
+                      fontSize: '26px',
+                      fontWeight: 700,
+                      color: '#3D3530',
+                      lineHeight: '1.3',
+                      marginBottom: '14px',
+                      letterSpacing: '-0.01em'
+                    }}>
+                      Startup (LOOMA)
+                    </h3>
+
+                    {/* Description */}
+                    <p style={{
+                      fontSize: '12px',
+                      lineHeight: '1.7',
+                      color: '#5A4A3C',
                       fontWeight: 400
                     }}>
-                      {project.description}
+                      Participated in a week-long competition to design a futuristic wearable. Developed smart glasses aimed at supporting Alzheimer's patients through memory retention, facial recognition, and real-time reminders to enhance daily life.
                     </p>
+                  </div>
+
+                  {/* Glasses Image - Right Edge */}
+                  <div style={{
+                    position: 'absolute',
+                    right: 0,
+                    top: '50%',
+                    transform: 'translateY(-50%)',
+                    width: '60%',
+                    height: '100%',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'flex-end'
+                  }}>
+                    <img
+                      src="/images/loomaglasses.png"
+                      alt="LOOMA Smart Glasses"
+                      style={{
+                        width: '100%',
+                        height: 'auto',
+                        maxHeight: '85%',
+                        objectFit: 'contain',
+                        objectPosition: 'right center'
+                      }}
+                    />
+                  </div>
+                </div>
+              ) : project.company === "Lowe's" ? (
+                <div
+                  className="rounded-2xl overflow-hidden"
+                  style={{
+                    backgroundColor: '#EBE8E1',
+                    minHeight: '494px',
+                    height: '494px',
+                    position: 'relative',
+                    display: 'flex',
+                    alignItems: 'center',
+                    padding: '48px 56px'
+                  }}
+                >
+                  <div className="w-full h-full flex items-center justify-between" style={{ gap: '40px' }}>
+                    {/* Left side - Text Content */}
+                    <div className="flex-1" style={{ maxWidth: '45%' }}>
+                      {/* Company Logos */}
+                      <div className="flex items-center gap-4 mb-4">
+                        <img
+                          src={project.logoSrc}
+                          alt={project.logoAlt}
+                          style={{ height: '36px', width: 'auto' }}
+                        />
+                        <span style={{ height: '36px', width: '2px', background: '#A8A8A8', display: 'inline-block' }}></span>
+                        <span style={{ fontSize: '26px', fontWeight: 400, color: '#A8A8A8', letterSpacing: '-0.01em' }}>SCADpro</span>
+                      </div>
+
+                      {/* NDA Badge */}
+                      {project.isNda && (
+                        <div className="mb-10" style={{ fontSize: '13px', color: '#8A8A8A', fontWeight: 400 }}>
+                          NDA Protected
+                        </div>
+                      )}
+
+                      {/* CTA Button */}
+                      <Link
+                        to="/case-study/lowes"
+                        style={{
+                          display: 'inline-flex',
+                          padding: '11px 26px',
+                          justifyContent: 'center',
+                          alignItems: 'center',
+                          gap: '8px',
+                          borderRadius: '20px',
+                          border: '1.5px solid #003D7A',
+                          background: 'transparent',
+                          color: '#003D7A',
+                          fontWeight: 500,
+                          fontSize: '14px',
+                          textDecoration: 'none',
+                          marginBottom: '26px',
+                          transition: 'all 0.3s ease'
+                        }}
+                        className="group hover:bg-blue-900 hover:text-white"
+                      >
+                        View Case Study
+                        <ArrowRight style={{ width: '16px', height: '16px' }} className="transition-transform group-hover:translate-x-1" />
+                      </Link>
+
+                      {/* Title */}
+                      <h3 style={{
+                        fontSize: '30px',
+                        fontWeight: 700,
+                        color: '#003D7A',
+                        lineHeight: '1.25',
+                        marginBottom: '14px',
+                        letterSpacing: '-0.02em'
+                      }}>
+                        {project.title}
+                      </h3>
+
+                      {/* Description */}
+                      <p style={{
+                        fontSize: '13px',
+                        lineHeight: '1.65',
+                        color: '#003D7A',
+                        fontWeight: 400
+                      }}>
+                        {project.description}
+                      </p>
+                    </div>
+
+                    {/* Right side - Image */}
+                    <div className="flex-shrink-0">
+                      <div className="rounded-2xl overflow-hidden" style={{ width: '440px', height: '398px' }}>
+                        <img
+                          src={project.image}
+                          alt={project.title}
+                          style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                        />
+                      </div>
+                    </div>
                   </div>
                 </div>
               ) : (
                 <div
                   className="rounded-2xl overflow-hidden"
                   style={{
-                    backgroundImage: 'none',
-                    backgroundSize: 'cover',
-                    backgroundPosition: 'center',
                     backgroundColor: project.cardBg,
                     minHeight: '494px',
+                    height: '494px',
                     position: 'relative',
-                    ...(project.company === 'UBS' ? { maxHeight: '494px' } : {})
+                    display: 'flex',
+                    alignItems: 'center',
+                    padding: '48px 56px'
                   }}
                 >
-                  {/* No overlay needed anymore */}
-
                   <div
-                    className="flex flex-col lg:flex-row gap-8 p-6 md:p-8"
-                    style={project.company === 'Porsche' ? { position: 'relative', alignItems: 'stretch' } : {}}
+                    className="flex flex-col lg:flex-row items-center justify-between w-full"
+                    style={{ gap: '40px' }}
                   >
-                    {/* Original layout for UBS and Porsche */}
-                    <div className="flex-1">
-                      {/* Company Logos */}
-                      <div className="flex items-center gap-3 mb-4">
-                        <img src={project.logoSrc} alt={project.logoAlt} className={project.logoClass} style={{ display: 'inline', verticalAlign: 'middle' }} />
-                        <span style={{ height: '24px', width: '1px', background: project.partnerColor, display: 'inline-block', margin: '0 8px' }}></span>
-                        <span className="text-lg font-medium" style={{ color: project.partnerColor }}>{project.partner}</span>
-                      </div>
+                    {/* Left side - Text Content for UBS */}
+                    {project.company === 'UBS' ? (
+                      <div className="flex-1" style={{ maxWidth: '450px' }}>
+                        {/* Company Logos */}
+                        <div className="flex items-center gap-4 mb-6">
+                          <img
+                            src={project.logoSrc}
+                            alt={project.logoAlt}
+                            style={{ height: '32px', width: 'auto' }}
+                          />
+                          <span style={{ height: '32px', width: '2px', background: '#D0D0D0', display: 'inline-block' }}></span>
+                          <span style={{ fontSize: '24px', fontWeight: 400, color: '#6B6B6B', letterSpacing: '-0.02em' }}>SCADpro</span>
+                        </div>
 
-                      {/* NDA Badge */}
-                      {project.isNda && (
-                        <span className="inline-block text-xs text-muted-foreground mb-4">
-                          NDA Protected
-                        </span>
-                      )}
+                        {/* NDA Badge */}
+                        {project.isNda && (
+                          <div className="mb-12" style={{ fontSize: '14px', color: '#6B6B6B', fontWeight: 400 }}>
+                            NDA Protected
+                          </div>
+                        )}
 
-                      {/* CTA (only for non-Porsche cards) */}
-                      {project.company !== 'Porsche' && (
+                        {/* CTA Button */}
                         <Link
                           to="/case-study/ubs"
                           style={{
-                            display: 'flex',
-                            width: '210px',
-                            height: '52px',
-                            padding: '0 19px',
+                            display: 'inline-flex',
+                            padding: '14px 28px',
                             justifyContent: 'center',
                             alignItems: 'center',
                             gap: '10px',
                             borderRadius: '20px',
-                            border: '1px solid #000',
-                            background: '#FFF',
+                            border: '1.5px solid #000',
+                            background: 'transparent',
+                            color: '#000',
+                            fontWeight: 500,
+                            fontSize: '16px',
+                            textDecoration: 'none',
+                            marginBottom: '32px',
+                            transition: 'all 0.3s ease'
                           }}
-                          className="group text-base font-medium text-foreground mb-6"
+                          className="group hover:bg-black hover:text-white"
                         >
                           View Case Study
-                          <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
+                          <ArrowRight style={{ width: '18px', height: '18px' }} className="transition-transform group-hover:translate-x-1" />
                         </Link>
-                      )}
 
-                      {/* Title & Description */}
-                      {project.company === 'Porsche' ? (
-                        <div style={{ position: 'absolute', left: 0, bottom: 0, margin: 32, maxWidth: 400, display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
+                        {/* Title */}
+                        <h3 style={{
+                          fontSize: '28px',
+                          fontWeight: 600,
+                          color: '#000',
+                          lineHeight: '1.3',
+                          marginBottom: '16px',
+                          letterSpacing: '-0.01em'
+                        }}>
+                          {project.title}
+                        </h3>
+
+                        {/* Description */}
+                        <p style={{
+                          fontSize: '14px',
+                          lineHeight: '1.7',
+                          color: '#333',
+                          fontWeight: 400
+                        }}>
+                          {project.description}
+                        </p>
+                      </div>
+                    ) : project.company === 'Porsche' ? (
+                      <div className="w-full h-full flex flex-col justify-between" style={{ position: 'absolute', inset: 0, padding: '48px 56px' }}>
+                        {/* Top - Logo and Partner */}
+                        <div className="flex items-center gap-4">
+                          <img
+                            src={project.logoSrc}
+                            alt={project.logoAlt}
+                            style={{ height: '28px', width: 'auto' }}
+                          />
+                          <span style={{ height: '28px', width: '2px', background: '#6B6B6B', display: 'inline-block' }}></span>
+                          <span style={{ fontSize: '22px', fontWeight: 400, color: '#8A8A8A' }}>SCAD</span>
+                        </div>
+
+                        {/* Bottom Left - Text Content */}
+                        <div style={{ maxWidth: '50%' }}>
+                          {/* CTA Button */}
                           <Link
                             to="/case-study/porsche"
                             style={{
-                              display: 'flex',
-                              width: '180px',
-                              height: '40px',
+                              display: 'inline-flex',
+                              padding: '12px 24px',
                               justifyContent: 'center',
                               alignItems: 'center',
                               gap: '10px',
-                              borderRadius: '14px',
-                              border: '1px solid #fff',
+                              borderRadius: '20px',
+                              border: '1.5px solid #fff',
                               background: '#FFF',
                               color: '#2A353B',
                               fontWeight: 500,
-                              fontSize: '16px',
-                              marginBottom: '18px',
+                              fontSize: '15px',
+                              marginBottom: '24px',
                               textDecoration: 'none',
+                              transition: 'all 0.3s ease'
                             }}
-                            className="group"
+                            className="group hover:bg-transparent hover:text-white"
                           >
                             View Case Study
-                            <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
+                            <ArrowRight style={{ width: '16px', height: '16px' }} className="transition-transform group-hover:translate-x-1" />
                           </Link>
-                          <h3
-                            className="text-xl font-semibold mb-2"
-                            style={{ color: '#fff', textAlign: 'left' }}
-                          >
+
+                          {/* Title */}
+                          <h3 style={{
+                            fontSize: '28px',
+                            fontWeight: 600,
+                            color: '#fff',
+                            lineHeight: '1.3',
+                            marginBottom: '16px',
+                            letterSpacing: '-0.01em'
+                          }}>
                             {project.title}
                           </h3>
-                          <p
-                            className="text-sm leading-relaxed max-w-md"
-                            style={{ color: '#fff', textAlign: 'left', margin: 0 }}
-                          >
+
+                          {/* Description */}
+                          <p style={{
+                            fontSize: '14px',
+                            lineHeight: '1.7',
+                            color: '#E0E0E0',
+                            fontWeight: 400
+                          }}>
                             {project.description}
                           </p>
                         </div>
-                      ) : (
-                        <>
-                          <h3 className="text-xl font-semibold text-foreground mb-3">
-                            {project.title}
-                          </h3>
-                          <p className="text-muted-foreground text-sm leading-relaxed max-w-md">
-                            {project.description}
-                          </p>
-                        </>
-                      )}
-                    </div>
-
-                    {/* Project Image (only for UBS and Porsche) */}
-                    <div className="lg:w-1/2">
-                      <div className="rounded-2xl overflow-hidden">
-                        <img
-                          src={project.image}
-                          alt={project.title}
-                          style={{ width: '571px', height: '494px', objectFit: 'cover' }}
-                        />
                       </div>
-                    </div>
+                    ) : null}
+
+                    {/* Right side - Project Image */}
+                    {project.company === 'Porsche' ? (
+                      <div style={{ position: 'absolute', right: '48px', top: '48px', bottom: '48px' }}>
+                        <div className="rounded-2xl overflow-hidden" style={{ width: '380px', height: '100%' }}>
+                          <img
+                            src={project.image}
+                            alt={project.title}
+                            style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                          />
+                        </div>
+                      </div>
+                    ) : (
+                      <div className="flex-shrink-0">
+                        <div className="rounded-2xl overflow-hidden" style={{ width: '420px', height: '398px' }}>
+                          <img
+                            src={project.image}
+                            alt={project.title}
+                            style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                          />
+                        </div>
+                      </div>
+                    )}
                   </div>
                 </div>
               )}

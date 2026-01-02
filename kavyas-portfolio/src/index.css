@@ -1,10 +1,19 @@
-@import '@fontsource/playfair-display/400.css';
-@import '@fontsource/playfair-display/500.css';
-@import '@fontsource/playfair-display/600.css';
-@import '@fontsource/inter/300.css';
-@import '@fontsource/inter/400.css';
-@import '@fontsource/inter/500.css';
-@import '@fontsource/inter/600.css';
+/* DM Sans Font Faces */
+@font-face {
+  font-family: 'DM Sans';
+  src: url('/fonts/DM_Sans/DMSans-VariableFont_opsz,wght.ttf') format('truetype');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'DM Sans';
+  src: url('/fonts/DM_Sans/DMSans-Italic-VariableFont_opsz,wght.ttf') format('truetype');
+  font-weight: 100 900;
+  font-style: italic;
+  font-display: swap;
+}
 
 @tailwind base;
 @tailwind components;
@@ -50,10 +59,10 @@
     --card-shadow: 0 4px 24px -4px hsl(0 0% 0% / 0.08);
     --card-shadow-hover: 0 8px 32px -4px hsl(0 0% 0% / 0.12);
     --float-shadow: 0 8px 24px -8px hsl(0 0% 0% / 0.15);
-    
+
     /* Typography */
-    --font-serif: 'Playfair Display', Georgia, serif;
-    --font-sans: 'Inter', system-ui, sans-serif;
+    --font-serif: 'DM Sans', system-ui, sans-serif;
+    --font-sans: 'DM Sans', system-ui, sans-serif;
 
     /* Sidebar */
     --sidebar-background: 0 0% 98%;
@@ -124,7 +133,12 @@
     @apply bg-background text-foreground font-sans antialiased;
   }
 
-  h1, h2, h3, h4, h5, h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     @apply font-serif;
   }
 }
@@ -169,9 +183,12 @@
   }
 
   @keyframes float {
-    0%, 100% {
+
+    0%,
+    100% {
       transform: translateY(0px);
     }
+
     50% {
       transform: translateY(-10px);
     }
@@ -189,6 +206,7 @@
     from {
       opacity: 0;
     }
+
     to {
       opacity: 1;
     }
@@ -199,6 +217,7 @@
       opacity: 0;
       transform: translateY(20px);
     }
+
     to {
       opacity: 1;
       transform: translateY(0);
