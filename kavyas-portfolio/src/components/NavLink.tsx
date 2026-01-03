@@ -1,62 +1,54 @@
-import { NavLink as RouterNavLink, NavLinkProps, useNavigate, useLocation } from "react-router-dom";
-import { forwardRef } from "react";
+'use client';
+
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { forwardRef, AnchorHTMLAttributes } from "react";
 import { cn } from "@/lib/utils";
 
-interface NavLinkCompatProps extends Omit<NavLinkProps, "className"> {
+interface NavLinkCompatProps extends Omit<AnchorHTMLAttributes<HTMLAnchorElement>, "href"> {
+  href: string;
   className?: string;
   activeClassName?: string;
   pendingClassName?: string;
 }
 
 const NavLink = forwardRef<HTMLAnchorElement, NavLinkCompatProps>(
-  ({ className, activeClassName, pendingClassName, to, ...props }, ref) => {
-    const navigate = useNavigate();
-    const location = useLocation();
+  ({ className, activeClassName, pendingClassName, href, ...props }, ref) => {
+    const pathname = usePathname();
 
     const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
-      const toString = typeof to === 'string' ? to : to.pathname || '';
-
       // Check if it's the home link
-      if (toString === '/') {
-        e.preventDefault();
-        navigate('/');
+      if (href === '/') {
         window.scrollTo({ top: 0, behavior: 'smooth' });
         return;
       }
 
       // Check if it's a hash link
-      if (toString.includes('#')) {
+      if (href.includes('#')) {
         e.preventDefault();
-        const [path, hash] = toString.split('#');
+        const [path, hash] = href.split('#');
 
-        // Navigate to the path first if not already there
-        if (path && location.pathname !== path) {
-          navigate(path);
-          // Wait for navigation then scroll
-          setTimeout(() => {
-            const element = document.getElementById(hash);
-            if (element) {
-              element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }
-          }, 100);
-        } else {
-          // Already on the page, just scroll
+        // If we're already on the page, just scroll
+        if (!path || pathname === path) {
           const element = document.getElementById(hash);
           if (element) {
             element.scrollIntoView({ behavior: 'smooth', block: 'start' });
           }
+        } else {
+          // Navigate then scroll
+          window.location.href = href;
         }
       }
     };
 
+    const isActive = pathname === href || pathname?.startsWith(href + '/');
+
     return (
-      <RouterNavLink
+      <Link
         ref={ref}
-        to={to}
+        href={href}
         onClick={handleClick}
-        className={({ isActive, isPending }) =>
-          cn(className, isActive && activeClassName, isPending && pendingClassName)
-        }
+        className={cn(className, isActive && activeClassName)}
         {...props}
       />
     );

@@ -1,5 +1,7 @@
+'use client';
+
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import projectUbs from "@/assets/project-ubs.jpg";
 
@@ -93,11 +95,11 @@ export function WorkSection() {
       : projects;
 
   return (
-    <section id="work" className="pt-8 pb-20 px-6">
+    <section id="work" className="pt-6 sm:pt-8 pb-16 sm:pb-20 px-4 sm:px-6">
       <div className="container mx-auto">
         {/* Section Header */}
-        <div className="mb-10 animate-fade-in-up">
-          <h2 className="text-3xl md:text-4xl font-medium text-foreground mb-6">
+        <div className="mb-8 sm:mb-10 animate-fade-in-up">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-medium text-foreground mb-4 sm:mb-6">
             My Work
           </h2>
 
@@ -105,7 +107,7 @@ export function WorkSection() {
           <div className="flex gap-2">
             <button
               onClick={() => setActiveFilter("all")}
-              className={`px-4 py-2 text-sm font-medium rounded-full transition-all ${activeFilter === "all"
+              className={`px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm font-medium rounded-full transition-all ${activeFilter === "all"
                 ? "bg-foreground text-background"
                 : "bg-card text-muted-foreground hover:bg-muted"
                 }`}
@@ -114,7 +116,7 @@ export function WorkSection() {
             </button>
             <button
               onClick={() => setActiveFilter("nda")}
-              className={`px-4 py-2 text-sm font-medium rounded-full transition-all ${activeFilter === "nda"
+              className={`px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm font-medium rounded-full transition-all ${activeFilter === "nda"
                 ? "bg-foreground text-background"
                 : "bg-card text-muted-foreground hover:bg-muted"
                 }`}
@@ -125,7 +127,7 @@ export function WorkSection() {
         </div>
 
         {/* Projects Grid */}
-        <div className="space-y-8">
+        <div className="space-y-6 sm:space-y-8">
           {filteredProjects.map((project, index) => (
             <article
               key={project.id}
@@ -136,116 +138,56 @@ export function WorkSection() {
             >
               {/* Aestura Card with Layered Images */}
               {project.company === 'Aestura' ? (
-                <div
-                  className="relative rounded-2xl overflow-hidden"
-                  style={{
-                    backgroundColor: '#EBF1F3',
-                    minHeight: '494px',
-                    height: '494px',
-                    padding: '48px 56px'
-                  }}
-                >
-                  {/* Left side - Text content */}
-                  <div style={{
-                    position: 'absolute',
-                    left: '56px',
-                    top: '50%',
-                    transform: 'translateY(-50%)',
-                    maxWidth: '45%',
-                    zIndex: 10
-                  }}>
-                    {/* AESTURA Logo */}
-                    <img
-                      src="/images/aesturalogosvg.svg"
-                      alt="Aestura Logo"
-                      style={{
-                        height: '48px',
-                        width: 'auto',
-                        marginBottom: '40px',
-                        display: 'block'
-                      }}
-                    />
+                <div className="relative rounded-xl sm:rounded-2xl overflow-hidden bg-[#EBF1F3] min-h-[400px] sm:min-h-[450px] md:min-h-[494px] p-6 sm:p-8 md:p-10 lg:p-12 xl:p-14">
 
-                    {/* View Campaign Button */}
-                    <Link
-                      to="/case-study/aestura"
-                      style={{
-                        display: 'inline-flex',
-                        alignItems: 'center',
-                        gap: '8px',
-                        padding: '11px 26px',
-                        border: '1.5px solid #6B8DD6',
-                        borderRadius: '20px',
-                        background: 'transparent',
-                        color: '#6B8DD6',
-                        fontSize: '14px',
-                        fontWeight: 500,
-                        textDecoration: 'none',
-                        marginBottom: '32px',
-                        transition: 'all 0.3s ease'
-                      }}
-                      className="group hover:bg-blue-600 hover:text-white hover:border-blue-600"
-                    >
-                      View Campaign
-                      <ArrowRight style={{ width: '16px', height: '16px' }} className="transition-transform group-hover:translate-x-1" />
-                    </Link>
+                  {/* Flex container - stack on mobile, side-by-sideon desktop */}
+                  <div className="flex flex-col lg:flex-row items-start lg:items-center gap-6 lg:gap-8 h-full">
 
-                    {/* Title */}
-                    <h3 style={{
-                      fontSize: '28px',
-                      fontWeight: 700,
-                      color: '#2A2A2A',
-                      marginBottom: '14px',
-                      lineHeight: '1.2',
-                      letterSpacing: '-0.01em'
-                    }}>
-                      The Essence Edit
-                    </h3>
+                    {/* Left side - Text content */}
+                    <div className="w-full lg:w-[45%] z-10 flex flex-col justify-center items-start">
+                      {/* AESTURA Logo */}
+                      <img
+                        src="/images/aesturalogosvg.svg"
+                        alt="Aestura Logo"
+                        className="h-8 sm:h-10 md:h-12 mb-6 sm:mb-8 md:mb-10"
+                      />
 
-                    {/* Description */}
-                    <p style={{
-                      fontSize: '12px',
-                      lineHeight: '1.7',
-                      color: '#5A5A5A'
-                    }}>
-                      Selected as a Semi-Finalist in the AmorePacific Brand Challenge, where I developed a comprehensive campaign to introduce Aestura skincare products to the North American market. Conducted market research to identify consumer needs and trends, then created a go-to-market strategy with creative ideas for brand positioning, launch channels, and promotional tactics.
-                    </p>
-                  </div>
+                      {/* View Campaign Button */}
+                      <Link
+                        href="/case-study/aestura"
+                        className="inline-flex items-center gap-2 px-5 py-2.5 sm:px-6 sm:py-3 border-[1.5px] border-[#6B8DD6] rounded-2xl bg-transparent text-[#6B8DD6] text-sm font-medium no-underline mb-6 sm:mb-8 transition-all group hover:bg-blue-600 hover:text-white hover:border-blue-600 w-fit"
+                      >
+                        View Campaign
+                        <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+                      </Link>
 
-                  {/* Right side - Layered Images */}
-                  <div style={{
-                    position: 'absolute',
-                    right: '20px',
-                    top: '50%',
-                    transform: 'translateY(-50%)',
-                    width: '560px',
-                    height: '560px'
-                  }}>
-                    {/* Water Bubble Background */}
-                    <img
-                      src="/images/aesturawaterbub.png"
-                      alt="Water Bubble"
-                      style={{
-                        position: 'absolute',
-                        width: '100%',
-                        height: '100%',
-                        objectFit: 'contain',
-                        zIndex: 1
-                      }}
-                    />
+                      {/* Title */}
+                      <h3 className="text-2xl sm:text-3xl lg:text-[28px] font-bold text-[#2A2A2A] mb-3 sm:mb-4 leading-tight">
+                        The Essence Edit
+                      </h3>
 
-                    {/* Product Image */}
-                    <img
-                      src="/images/aesturacardproduct.png"
-                      alt="Aestura Product"
-                      style={{
-                        position: 'absolute',
-                        width: '100%',
-                        height: '100%',
-                        objectFit: 'contain',
-                        zIndex: 2
-                      }}
-                    />
+                      {/* Description */}
+                      <p className="text-xs sm:text-sm leading-relaxed text-[#5A5A5A]">
+                        Selected as a Semi-Finalist in the AmorePacific Brand Challenge, where I developed a comprehensive campaign to introduce Aestura skincare products to the North American market. Conducted market research to identify consumer needs and trends, then created a go-to-market strategy with creative ideas for brand positioning, launch channels, and promotional tactics.
+                      </p>
+                    </div>
+
+                    {/* Right side - Layered Images */}
+                    <div className="relative w-full lg:w-[55%] h-64 sm:h-80 md:h-96 lg:h-[400px] xl:h-[460px] flex items-center justify-center lg:justify-end">
+                      {/* Water Bubble Background */}
+                      <img
+                        src="/images/aesturawaterbub.png"
+                        alt="Water Bubble"
+                        className="absolute w-full h-full object-contain z-[1]"
+                      />
+
+                      {/* Product Image */}
+                      <img
+                        src="/images/aesturacardproduct.png"
+                        alt="Aestura Product"
+                        className="absolute w-full h-full object-contain z-[2]"
+                      />
+                    </div>
                   </div>
                 </div>
               ) : project.company === 'Startupa' ? (
@@ -272,7 +214,7 @@ export function WorkSection() {
                   <div style={{ position: 'absolute', bottom: '48px', left: '56px', maxWidth: '42%', zIndex: 10 }}>
                     {/* CTA Button */}
                     <Link
-                      to="/case-study/looma"
+                      href="/case-study/looma"
                       style={{
                         display: 'inline-flex',
                         padding: '11px 26px',
@@ -379,7 +321,7 @@ export function WorkSection() {
 
                       {/* CTA Button */}
                       <Link
-                        to="/case-study/lowes"
+                        href="/case-study/lowes"
                         style={{
                           display: 'inline-flex',
                           padding: '11px 26px',
@@ -427,11 +369,11 @@ export function WorkSection() {
 
                     {/* Right side - Image */}
                     <div className="flex-shrink-0">
-                      <div className="rounded-2xl overflow-hidden" style={{ width: '440px', height: '398px' }}>
+                      <div style={{ width: '500px', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                         <img
-                          src={project.image}
+                          src="/images/loweshouse.png"
                           alt={project.title}
-                          style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                          style={{ width: 'auto', height: '100%', maxHeight: '450px', objectFit: 'contain' }}
                         />
                       </div>
                     </div>
@@ -477,7 +419,7 @@ export function WorkSection() {
 
                         {/* CTA Button */}
                         <Link
-                          to="/case-study/ubs"
+                          href="/case-study/ubs"
                           style={{
                             display: 'inline-flex',
                             padding: '14px 28px',
@@ -539,7 +481,7 @@ export function WorkSection() {
                         <div style={{ maxWidth: '50%' }}>
                           {/* CTA Button */}
                           <Link
-                            to="/case-study/porsche"
+                            href="/case-study/porsche"
                             style={{
                               display: 'inline-flex',
                               padding: '12px 24px',
@@ -687,73 +629,72 @@ export function WorkSection() {
         </div>
 
         {/* About Me Section */}
-        <div className="mt-32 text-center animate-fade-in-up">
-          <p className="text-2xl md:text-3xl font-medium text-foreground mb-8 leading-relaxed">
+        <div className="mt-20 sm:mt-24 md:mt-28 lg:mt-32 text-center animate-fade-in-up">
+          <p className="text-xl sm:text-2xl md:text-3xl font-medium text-foreground mb-6 sm:mb-8 leading-relaxed">
             Traveler by choice, foodie<br />
             by instinct, dog lover always
           </p>
           <Link
-            to="/about"
-            className="inline-block px-12 py-4 text-xl rounded-full text-white font-semibold transition-all hover:scale-105"
-            style={{ backgroundColor: '#2E6B5F' }}
+            href="/about"
+            className="inline-block px-8 sm:px-10 md:px-12 py-3 sm:py-3.5 md:py-4 text-lg sm:text-xl rounded-full text-white font-semibold transition-all hover:scale-105 bg-[#2E6B5F]"
           >
             About Me
           </Link>
 
           {/* Photo Strip */}
-          <div className="mt-20 relative h-64 w-full max-w-[100vw] overflow-visible">
+          <div className="mt-16 sm:mt-20 relative h-48 sm:h-56 md:h-64 w-full max-w-[100vw] overflow-visible">
             <div className="flex justify-center items-end gap-[-20px] absolute left-1/2 transform -translate-x-1/2 w-full" style={{ bottom: '-120px' }}>
               {/* Photo 1 */}
-              <div className="bg-white p-3 shadow-2xl transform -rotate-12 hover:rotate-0 transition-transform duration-300 relative" style={{ width: '280px', zIndex: 1, top: '40px' }}>
+              <div className="bg-white p-2 sm:p-3 shadow-2xl transform -rotate-12 hover:rotate-0 transition-transform duration-300 relative w-40 sm:w-52 md:w-60 lg:w-[280px] z-[1]" style={{ top: '40px' }}>
                 <img
                   src="/images/footer/homefooter1.png"
                   alt="Travel moment 1"
-                  className="w-full h-64 object-cover"
+                  className="w-full h-48 sm:h-56 md:h-60 lg:h-64 object-cover"
                 />
               </div>
 
               {/* Photo 2 - removed profile badge */}
-              <div className="relative bg-white p-3 shadow-2xl transform rotate-6 hover:rotate-0 transition-transform duration-300" style={{ width: '280px', zIndex: 2, top: '10px' }}>
+              <div className="relative bg-white p-2 sm:p-3 shadow-2xl transform rotate-6 hover:rotate-0 transition-transform duration-300 w-40 sm:w-52 md:w-60 lg:w-[280px] z-[2]" style={{ top: '10px' }}>
                 <img
                   src="/images/footer/homefooter2.png"
                   alt="Travel moment 2"
-                  className="w-full h-64 object-cover"
+                  className="w-full h-48 sm:h-56 md:h-60 lg:h-64 object-cover"
                 />
               </div>
 
               {/* Photo 3 */}
-              <div className="bg-white p-3 shadow-2xl transform -rotate-3 hover:rotate-0 transition-transform duration-300 relative" style={{ width: '280px', zIndex: 3, top: '-20px' }}>
+              <div className="bg-white p-2 sm:p-3 shadow-2xl transform -rotate-3 hover:rotate-0 transition-transform duration-300 relative w-40 sm:w-52 md:w-60 lg:w-[280px] z-[3]" style={{ top: '-20px' }}>
                 <img
                   src="/images/footer/homefooter3.png"
                   alt="Travel moment 3"
-                  className="w-full h-64 object-cover"
+                  className="w-full h-48 sm:h-56 md:h-60 lg:h-64 object-cover"
                 />
               </div>
 
               {/* Photo 4 */}
-              <div className="bg-white p-3 shadow-2xl transform rotate-3 hover:rotate-0 transition-transform duration-300 relative" style={{ width: '280px', zIndex: 2, top: '-10px' }}>
+              <div className="bg-white p-2 sm:p-3 shadow-2xl transform rotate-3 hover:rotate-0 transition-transform duration-300 relative w-40 sm:w-52 md:w-60 lg:w-[280px] z-[2]" style={{ top: '-10px' }}>
                 <img
                   src="/images/footer/homefooter4.png"
                   alt="Travel moment 4"
-                  className="w-full h-64 object-cover"
+                  className="w-full h-48 sm:h-56 md:h-60 lg:h-64 object-cover"
                 />
               </div>
 
               {/* Photo 5 */}
-              <div className="bg-white p-3 shadow-2xl transform -rotate-6 hover:rotate-0 transition-transform duration-300 relative" style={{ width: '280px', zIndex: 1, top: '30px' }}>
+              <div className="bg-white p-2 sm:p-3 shadow-2xl transform -rotate-6 hover:rotate-0 transition-transform duration-300 relative w-40 sm:w-52 md:w-60 lg:w-[280px] z-[1]" style={{ top: '30px' }}>
                 <img
                   src="/images/footer/homefooter5.png"
                   alt="Travel moment 5"
-                  className="w-full h-64 object-cover"
+                  className="w-full h-48 sm:h-56 md:h-60 lg:h-64 object-cover"
                 />
               </div>
 
               {/* Photo 6 */}
-              <div className="bg-white p-3 shadow-2xl transform rotate-12 hover:rotate-0 transition-transform duration-300 relative" style={{ width: '280px', zIndex: 0, top: '60px' }}>
+              <div className="bg-white p-2 sm:p-3 shadow-2xl transform rotate-12 hover:rotate-0 transition-transform duration-300 relative w-40 sm:w-52 md:w-60 lg:w-[280px] z-[0]" style={{ top: '60px' }}>
                 <img
                   src="/images/footer/homefooter6.png"
                   alt="Travel moment 6"
-                  className="w-full h-64 object-cover"
+                  className="w-full h-48 sm:h-56 md:h-60 lg:h-64 object-cover"
                 />
               </div>
             </div>
