@@ -1,0 +1,10 @@
+# Allow all crawlers
+User-agent: *
+Allow: /
+
+# Disallow crawling of NextJS internals
+Disallow: /_next/static/
+Disallow: /api/
+
+# Sitemap location
+Sitemap: https://kavyaray.com/sitemap.xml
