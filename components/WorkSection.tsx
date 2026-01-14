@@ -154,7 +154,7 @@ export function WorkSection() {
                       {/* View Campaign Button */}
                       <Link
                         href="/case-study/aestura"
-                        className="inline-flex items-center gap-2 px-5 py-2.5 sm:px-6 sm:py-3 border-[1.5px] border-[#6B8DD6] rounded-2xl bg-transparent text-[#6B8DD6] text-sm font-medium no-underline mb-6 sm:mb-8 transition-all group hover:bg-blue-600 hover:text-white hover:border-blue-600 w-fit"
+                        className="inline-flex items-center gap-2 px-5 py-2.5 sm:px-6 sm:py-3 border-[1.5px] border-[#6B8DD6] rounded-2xl bg-white text-[#6B8DD6] text-sm font-medium no-underline mb-6 sm:mb-8 transition-all group hover:bg-blue-600 hover:text-white hover:border-blue-600 w-fit"
                       >
                         View Campaign
                         <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
@@ -166,7 +166,7 @@ export function WorkSection() {
                       </h3>
 
                       {/* Description */}
-                      <p className="text-xs sm:text-sm leading-relaxed text-[#5A5A5A]">
+                      <p className="text-[#5A5A5A]" style={{ fontWeight: 600, fontSize: '14px', lineHeight: '140%', letterSpacing: '0%' }}>
                         Selected as a Semi-Finalist in the AmorePacific Brand Challenge, where I developed a comprehensive campaign to introduce Aestura skincare products to the North American market. Conducted market research to identify consumer needs and trends, then created a go-to-market strategy with creative ideas for brand positioning, launch channels, and promotional tactics.
                       </p>
                     </div>
@@ -213,7 +213,7 @@ export function WorkSection() {
                       {/* CTA Button */}
                       <Link
                         href="/case-study/looma"
-                        className="inline-flex items-center justify-center gap-2 px-6 py-[11px] rounded-[20px] border-[1.5px] border-[#5A4A3C] bg-transparent text-[#5A4A3C] font-medium text-sm no-underline mb-6 transition-all duration-300 group hover:bg-gray-800 hover:text-white hover:border-gray-800"
+                        className="inline-flex items-center justify-center gap-2 px-6 py-[11px] rounded-[20px] border-[1.5px] border-[#5A4A3C] bg-white text-[#5A4A3C] font-medium text-sm no-underline mb-6 transition-all duration-300 group hover:bg-gray-800 hover:text-white hover:border-gray-800"
                       >
                         View Case Study
                         <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
@@ -225,7 +225,7 @@ export function WorkSection() {
                       </h3>
 
                       {/* Description */}
-                      <p className="text-sm sm:text-xs leading-[1.7] text-[#5A4A3C] font-normal">
+                      <p className="text-[#5A4A3C]" style={{ fontWeight: 600, fontSize: '14px', lineHeight: '140%', letterSpacing: '0%' }}>
                         Participated in a week-long competition to design a futuristic wearable. Developed smart glasses aimed at supporting Alzheimer's patients through memory retention, facial recognition, and real-time reminders to enhance daily life.
                       </p>
                     </div>
@@ -268,7 +268,7 @@ export function WorkSection() {
                       {/* CTA Button */}
                       <Link
                         href="/case-study/lowes"
-                        className="inline-flex items-center justify-center gap-2 px-6 py-[11px] rounded-[20px] border-[1.5px] border-[#003D7A] bg-transparent text-[#003D7A] font-medium text-sm no-underline mb-6 transition-all duration-300 group hover:bg-blue-900 hover:text-white"
+                        className="inline-flex items-center justify-center gap-2 px-6 py-[11px] rounded-[20px] border-[1.5px] border-[#003D7A] bg-white text-[#003D7A] font-medium text-sm no-underline mb-6 transition-all duration-300 group hover:bg-blue-900 hover:text-white"
                       >
                         View Case Study
                         <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
@@ -280,7 +280,7 @@ export function WorkSection() {
                       </h3>
 
                       {/* Description */}
-                      <p className="text-sm leading-[1.65] text-[#003D7A] font-normal">
+                      <p className="text-[#003D7A]" style={{ fontWeight: 600, fontSize: '14px', lineHeight: '140%', letterSpacing: '0%' }}>
                         {project.description}
                       </p>
                     </div>
@@ -329,9 +329,9 @@ export function WorkSection() {
 
                       <Link
                         href={`/case-study/${project.company.toLowerCase()}`}
-                        className={`inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full border-[1.5px] font-medium text-sm transition-all duration-300 group hover:bg-opacity-10 w-fit mb-6 ${project.company === 'Porsche'
-                          ? 'border-white text-white hover:bg-white hover:text-black'
-                          : 'border-black text-black hover:bg-black hover:text-white'
+                        className={`inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full border-[1.5px] font-medium text-sm transition-all duration-300 group w-fit mb-6 ${project.company === 'Porsche'
+                            ? 'border-white bg-white text-black hover:bg-black hover:text-white hover:border-white'
+                            : 'border-black bg-white text-black hover:bg-black hover:text-white'
                           }`}
                       >
                         View Case Study
@@ -342,7 +342,7 @@ export function WorkSection() {
                         {project.title}
                       </h3>
 
-                      <p className={`text-sm sm:text-base leading-relaxed ${project.company === 'Porsche' ? 'text-gray-300' : 'text-gray-700'}`}>
+                      <p className={`${project.company === 'Porsche' ? 'text-white' : 'text-gray-700'}`} style={{ fontWeight: 600, fontSize: '14px', lineHeight: '140%', letterSpacing: '0%' }}>
                         {project.description}
                       </p>
                     </div>
