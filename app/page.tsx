@@ -49,9 +49,9 @@ export default function HomePage() {
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteStructuredData) }}
             />
-            <div className="min-h-screen bg-background">
+            <div className="flex flex-col min-h-screen bg-background">
                 <Navigation />
-                <main>
+                <main className="flex-1">
                     <HeroSection />
                     <WorkSection />
                 </main>
