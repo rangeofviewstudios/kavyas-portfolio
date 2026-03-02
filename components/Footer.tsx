@@ -1,9 +1,11 @@
 import { ArrowUpRight } from "lucide-react";
-import Link from "next/link";
 
 export function Footer() {
   return (
-    <footer className="py-12 sm:py-16 px-6 relative z-10" style={{ backgroundColor: '#2E6B5F' }}>
+    <footer
+      className="pt-12 sm:pt-16 px-6 relative z-10 overflow-hidden"
+      style={{ backgroundColor: '#2E6B5F' }}
+    >
       <div className="container mx-auto max-w-6xl">
         {/* Top Section */}
         <div className="flex flex-col md:flex-row items-start justify-between gap-8 mb-10 sm:mb-12">
@@ -32,22 +34,30 @@ export function Footer() {
               LinkedIn
               <ArrowUpRight className="w-4 h-4 sm:w-5 sm:h-5" />
             </a>
-
+            <a
+              href="/Kavya_Ray_Resume.pdf"
+              download="Kavya_Ray_Resume.pdf"
+              className="flex items-center gap-2 text-base sm:text-lg transition-opacity hover:opacity-70"
+              style={{ color: '#FFFFFF' }}
+            >
+              Resume
+              <ArrowUpRight className="w-4 h-4 sm:w-5 sm:h-5" />
+            </a>
           </div>
         </div>
 
         {/* Divider Line */}
         <div className="w-full h-px mb-10 sm:mb-12" style={{ backgroundColor: '#FFFFFF' }}></div>
 
-        {/* Bottom - Large Name */}
-        <div className="text-center -mb-12 sm:-mb-16">
+        {/* Bottom - Large Name, bleeds out of footer bottom (clipped by overflow:hidden) */}
+        <div className="text-center" style={{ marginBottom: '-0.45em' }}>
           <h1
             className="font-bold tracking-wider whitespace-nowrap"
             style={{
               fontSize: 'clamp(2.5rem, 12vw, 12rem)',
               color: '#FFFFFF',
-              lineHeight: '0.9',
-              letterSpacing: '0.05em'
+              lineHeight: '1',
+              letterSpacing: '0.05em',
             }}
           >
             KAVYA RAY

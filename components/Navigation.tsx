@@ -19,6 +19,13 @@ export function Navigation() {
             {item.label}
           </NavLink>
         ))}
+        <a
+          href="/Kavya_Ray_Resume.pdf"
+          download="Kavya_Ray_Resume.pdf"
+          className="px-2 py-1.5 sm:px-6 sm:py-3 text-[13px] sm:text-base font-medium text-black rounded-full transition-colors hover:text-black hover:bg-background hover:shadow-sm whitespace-nowrap"
+        >
+          Resume
+        </a>
       </div>
     </nav>
   );

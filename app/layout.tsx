@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Script from 'next/script';
 import '@fontsource/inter';
 import '@fontsource/dm-sans';
 import '@fontsource/playfair-display';
@@ -98,6 +99,19 @@ export default function RootLayout({
     return (
         <html lang="en">
             <body suppressHydrationWarning>
+                {/* Google Analytics */}
+                <Script
+                    src="https://www.googletagmanager.com/gtag/js?id=G-5ZG5CZJC8H"
+                    strategy="afterInteractive"
+                />
+                <Script id="google-analytics" strategy="afterInteractive">
+                    {`
+                        window.dataLayer = window.dataLayer || [];
+                        function gtag(){dataLayer.push(arguments);}
+                        gtag('js', new Date());
+                        gtag('config', 'G-5ZG5CZJC8H');
+                    `}
+                </Script>
                 <Providers>
                     <TooltipProvider>
                         <Toaster />
