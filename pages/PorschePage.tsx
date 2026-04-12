@@ -1,5 +1,6 @@
 import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/Footer";
+import { PorscheAppFlow } from "@/components/PorscheAppFlow";
 
 export default function PorschePage() {
     return (
@@ -416,6 +417,82 @@ export default function PorschePage() {
                                         <span>Best Display Configurations</span>
                                     </li>
                                 </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {/* Why the Porsche App Section */}
+            <PorscheAppFlow />
+
+            {/* Screen Explorations Section */}
+            <div className="w-full bg-white py-20">
+                <div className="container mx-auto px-6">
+                    <div className="max-w-6xl mx-auto">
+                        <h2 className="text-3xl md:text-4xl font-bold text-gray-900 italic mb-2">
+                            Screen Explorations
+                        </h2>
+                        <p className="text-base text-gray-500 mb-16">
+                            Where experience meets the dashboard
+                        </p>
+
+                        <div className="space-y-20">
+                            {/* Tech-Luxe Minimalism */}
+                            <div>
+                                <div className="rounded-2xl overflow-hidden mb-6">
+                                    <img
+                                        src="/images/porsche/screen1.png"
+                                        alt="Tech-Luxe Minimalism Dashboard"
+                                        className="w-full h-auto"
+                                    />
+                                </div>
+                                <div className="flex flex-col md:flex-row md:items-start gap-4 md:gap-12">
+                                    <h3 className="text-xl font-bold text-gray-900 md:w-1/3 flex-shrink-0">
+                                        Tech-Luxe Minimalism
+                                    </h3>
+                                    <p className="text-sm text-gray-600 leading-relaxed md:w-2/3">
+                                        Elevate Porsche&apos;s EV UI by refining what exists. Embrace Tech-Luxe Minimalism&mdash;ultra-clean design, tactile interactions, and understated innovation.
+                                    </p>
+                                </div>
+                            </div>
+
+                            {/* Heritage-Luxe Classic */}
+                            <div>
+                                <div className="rounded-2xl overflow-hidden mb-6">
+                                    <img
+                                        src="/images/porsche/screen2.png"
+                                        alt="Heritage-Luxe Classic Dashboard"
+                                        className="w-full h-auto"
+                                    />
+                                </div>
+                                <div className="flex flex-col md:flex-row md:items-start gap-4 md:gap-12">
+                                    <h3 className="text-xl font-bold text-gray-900 md:w-1/3 flex-shrink-0">
+                                        Heritage-Luxe Classic
+                                    </h3>
+                                    <p className="text-sm text-gray-600 leading-relaxed md:w-2/3">
+                                        Channel the warmth and class of vintage Porsche interiors, refined for today. Prioritize elegance, comfort, and analog nods.
+                                    </p>
+                                </div>
+                            </div>
+
+                            {/* Tactical Heritage */}
+                            <div>
+                                <div className="rounded-2xl overflow-hidden mb-6">
+                                    <img
+                                        src="/images/porsche/screen3.png"
+                                        alt="Tactical Heritage Dashboard"
+                                        className="w-full h-auto"
+                                    />
+                                </div>
+                                <div className="flex flex-col md:flex-row md:items-start gap-4 md:gap-12">
+                                    <h3 className="text-xl font-bold text-gray-900 md:w-1/3 flex-shrink-0">
+                                        Tactical Heritage
+                                    </h3>
+                                    <p className="text-sm text-gray-600 leading-relaxed md:w-2/3">
+                                        Rugged UI built for unpredictable terrain. Reflects endurance, modularity, and quick-access functionality.
+                                    </p>
+                                </div>
                             </div>
                         </div>
                     </div>
