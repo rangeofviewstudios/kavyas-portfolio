@@ -18,6 +18,13 @@ const GLOW_PROPS = {
   colors: ['#5E6B4D', '#F1E9D5', '#7A8763'],
 };
 
+const GLOW_PROPS_GREEN = {
+  ...GLOW_PROPS,
+  glowColor: '80 38 42',
+  glowIntensity: 1.0,
+  colors: ['#5E6B4D', '#7A8763', '#4A5540'],
+};
+
 const OLIVE = '#5E6B4D';
 const OLIVE_DEEP = '#4A5540';
 const CREAM = '#F1E9D5';
@@ -95,9 +102,18 @@ function Chapter({
 }
 
 export default function Playground() {
-  /* ---------- Raptors: basketball click counter ---------- */
+  /* ---------- Raptors: shoot-the-ball ---------- */
   const [shots, setShots] = useState(0);
   const [bounce, setBounce] = useState(false);
+  const [flights, setFlights] = useState<Array<{ id: number; dx: number; dy: number }>>([]);
+  const [netSwish, setNetSwish] = useState(false);
+  const [rimGlow, setRimGlow] = useState(false);
+  const [countPulse, setCountPulse] = useState(false);
+  const [championUnlocked, setChampionUnlocked] = useState(false);
+  const [celebrate, setCelebrate] = useState(false);
+  const ballRef = useRef<HTMLButtonElement | null>(null);
+  const hoopRef = useRef<HTMLDivElement | null>(null);
+
   const shotMsg =
     shots === 0
       ? 'go ahead, take the shot'
@@ -109,12 +125,96 @@ export default function Playground() {
       ? "you're on fire"
       : shots < 20
       ? 'okay we get it, you\'re a fan'
-      : 'vince carter who';
+      : shots < 30
+      ? 'vince carter who'
+      : 'champion. certified.';
+
+  const CONFETTI = Array.from({ length: 14 }, (_, i) => {
+    const angle = (i / 14) * Math.PI * 2 + (i % 2 ? 0.18 : -0.18);
+    const dist = 70 + (i % 3) * 22;
+    return {
+      cx: Math.cos(angle) * dist,
+      cy: Math.sin(angle) * dist - 10, // bias upward a touch
+      spin: (i % 2 ? 1 : -1) * (180 + (i * 37) % 180),
+      color: ['#C45827', CREAM, '#7A8763', CREAM_SOFT][i % 4],
+      delay: (i % 5) * 28,
+    };
+  });
+
+  const triggerChampion = () => {
+    setChampionUnlocked(true);
+    setCelebrate(true);
+    window.setTimeout(() => setCelebrate(false), 3200);
+  };
 
   const takeShot = () => {
-    setShots((s) => s + 1);
+    // squish feedback on the main ball
     setBounce(true);
     window.setTimeout(() => setBounce(false), 280);
+
+    const reduced =
+      typeof window !== 'undefined' &&
+      window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+
+    if (reduced) {
+      setShots((s) => {
+        const next = s + 1;
+        if (next % 5 === 0) {
+          setRimGlow(true);
+          window.setTimeout(() => setRimGlow(false), 600);
+        }
+        if (next === 30 && !championUnlocked) triggerChampion();
+        return next;
+      });
+      setCountPulse(true);
+      window.setTimeout(() => setCountPulse(false), 520);
+      return;
+    }
+
+    // soft cap to prevent runaway DOM
+    if (flights.length >= 8) return;
+
+    // compute arc distance from ball center to hoop rim at click-time
+    let dx = 140;
+    let dy = 0;
+    const ball = ballRef.current;
+    const hoop = hoopRef.current;
+    if (ball && hoop) {
+      const b = ball.getBoundingClientRect();
+      const h = hoop.getBoundingClientRect();
+      // target the rim (about 52px down inside the hoop box, horizontal center)
+      const bx = b.left + b.width / 2;
+      const by = b.top + b.height / 2;
+      const hx = h.left + h.width / 2;
+      const hy = h.top + 52;
+      dx = hx - bx;
+      dy = hy - by;
+    }
+
+    const id = Date.now() + Math.random();
+    setFlights((f) => [...f, { id, dx, dy }]);
+
+    // on arrival: swish, count, milestone
+    window.setTimeout(() => {
+      setShots((s) => {
+        const next = s + 1;
+        if (next % 5 === 0) {
+          setRimGlow(true);
+          window.setTimeout(() => setRimGlow(false), 600);
+        }
+        if (next === 30 && !championUnlocked) triggerChampion();
+        return next;
+      });
+      setNetSwish(true);
+      window.setTimeout(() => setNetSwish(false), 420);
+      setCountPulse(true);
+      window.setTimeout(() => setCountPulse(false), 520);
+    }, 420);
+
+    // cleanup the ghost ball after its animation
+    window.setTimeout(() => {
+      setFlights((f) => f.filter((flight) => flight.id !== id));
+    }, 520);
   };
 
   /* ---------- Korean: spice slider ---------- */
@@ -146,11 +246,26 @@ export default function Playground() {
         <div className="container mx-auto max-w-6xl px-4 sm:px-6">
           <div className="grid md:grid-cols-[1.1fr_0.9fr] gap-10 md:gap-14 items-center">
             <div className="animate-fade-in-up">
-              <div
-                className="text-xs tracking-[0.28em] uppercase mb-6"
-                style={{ color: CREAM, opacity: 0.75 }}
-              >
-                the playground · off the record
+              <div className="flex items-center gap-3 mb-6">
+                <Image
+                  src="/kavwhitelogo.svg"
+                  alt="Kavya Ray monogram"
+                  width={115}
+                  height={106}
+                  className="h-7 w-auto opacity-80"
+                  style={{ filter: 'drop-shadow(0 1px 2px rgba(0,0,0,0.2))' }}
+                />
+                <span
+                  className="block h-px w-6"
+                  style={{ backgroundColor: CREAM, opacity: 0.3 }}
+                  aria-hidden
+                />
+                <span
+                  className="text-xs tracking-[0.28em] uppercase"
+                  style={{ color: CREAM, opacity: 0.75 }}
+                >
+                  the playground · off the record
+                </span>
               </div>
               <h1
                 className="text-5xl sm:text-6xl md:text-7xl lg:text-[88px] font-medium tracking-tight leading-[0.95]"
@@ -240,7 +355,7 @@ export default function Playground() {
             </Reveal>
 
             <Reveal delay={120} className="order-1 md:order-2">
-              <BorderGlow {...GLOW_PROPS}>
+              <BorderGlow {...GLOW_PROPS_GREEN}>
                 <div className="relative aspect-[2/3]">
                   <Image
                     src="/voyageatlkavya-1.webp"
@@ -289,33 +404,49 @@ export default function Playground() {
                 when Kawhi&apos;s shot bounced four times and fell in.
               </p>
 
-              <div className="mt-8 flex flex-col sm:flex-row items-start sm:items-center gap-5 sm:gap-8">
-                <button
-                  onClick={takeShot}
-                  aria-label="take a shot"
-                  className="group relative h-24 w-24 md:h-28 md:w-28 rounded-full border-2 active:scale-90 transition-transform focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
-                  style={{
-                    borderColor: CREAM,
-                    backgroundColor: '#C45827',
-                    transform: bounce ? 'translateY(-14px) rotate(12deg)' : 'translateY(0) rotate(0)',
-                    transition: 'transform 260ms cubic-bezier(.2,.9,.3,1.4)',
-                    boxShadow: '0 10px 24px -12px rgba(0,0,0,0.55)',
-                  }}
-                >
-                  {/* basketball lines */}
-                  <span
-                    className="absolute inset-2 rounded-full pointer-events-none"
-                    style={{ border: '2px solid rgba(0,0,0,0.3)' }}
-                  />
-                  <span
-                    className="absolute left-1/2 top-0 bottom-0 w-[2px] -translate-x-1/2 pointer-events-none"
-                    style={{ backgroundColor: 'rgba(0,0,0,0.3)' }}
-                  />
-                  <span
-                    className="absolute top-1/2 left-0 right-0 h-[2px] -translate-y-1/2 pointer-events-none"
-                    style={{ backgroundColor: 'rgba(0,0,0,0.3)' }}
-                  />
-                </button>
+              <div className="mt-8 relative flex flex-wrap items-center gap-5 sm:gap-8">
+                <div className="relative">
+                  <button
+                    ref={ballRef}
+                    onClick={takeShot}
+                    aria-label="take a shot"
+                    className="group relative h-24 w-24 md:h-28 md:w-28 rounded-full border-2 active:scale-90 transition-transform focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
+                    style={{
+                      borderColor: CREAM,
+                      backgroundColor: '#C45827',
+                      transform: bounce ? 'translateY(-14px) rotate(12deg)' : 'translateY(0) rotate(0)',
+                      transition: 'transform 260ms cubic-bezier(.2,.9,.3,1.4)',
+                      boxShadow: '0 10px 24px -12px rgba(0,0,0,0.55)',
+                    }}
+                  >
+                    {/* basketball lines */}
+                    <span
+                      className="absolute inset-2 rounded-full pointer-events-none"
+                      style={{ border: '2px solid rgba(0,0,0,0.3)' }}
+                    />
+                    <span
+                      className="absolute left-1/2 top-0 bottom-0 w-[2px] -translate-x-1/2 pointer-events-none"
+                      style={{ backgroundColor: 'rgba(0,0,0,0.3)' }}
+                    />
+                    <span
+                      className="absolute top-1/2 left-0 right-0 h-[2px] -translate-y-1/2 pointer-events-none"
+                      style={{ backgroundColor: 'rgba(0,0,0,0.3)' }}
+                    />
+                  </button>
+                  {/* ghost balls in flight */}
+                  {flights.map((flight) => (
+                    <span
+                      key={flight.id}
+                      className="ghost-ball"
+                      style={
+                        {
+                          '--shot-dx': `${flight.dx}px`,
+                          '--shot-dy': `${flight.dy}px`,
+                        } as React.CSSProperties
+                      }
+                    />
+                  ))}
+                </div>
 
                 <div>
                   <div
@@ -325,7 +456,8 @@ export default function Playground() {
                     shots taken
                   </div>
                   <div
-                    className="text-5xl md:text-6xl font-medium tabular-nums"
+                    key={countPulse ? 'p' : 'r'}
+                    className={`text-5xl md:text-6xl font-medium tabular-nums ${countPulse ? 'animate-count-pulse' : ''}`}
                     style={{ color: CREAM }}
                   >
                     {String(shots).padStart(2, '0')}
@@ -335,6 +467,101 @@ export default function Playground() {
                     style={{ color: CREAM, opacity: 0.75 }}
                   >
                     {shotMsg}
+                  </div>
+                  {championUnlocked && (
+                    <div
+                      className="mt-3 inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] tracking-[0.22em] uppercase font-medium"
+                      style={{
+                        backgroundColor: CREAM,
+                        color: OLIVE_DEEP,
+                      }}
+                    >
+                      <span aria-hidden>🏆</span>
+                      <span>champion</span>
+                    </div>
+                  )}
+                </div>
+
+                {/* hoop */}
+                <div
+                  ref={hoopRef}
+                  className="relative ml-auto sm:ml-0 w-20 h-24"
+                  aria-hidden
+                >
+                  {/* confetti burst (from rim center) */}
+                  {celebrate && (
+                    <div
+                      className="absolute pointer-events-none"
+                      style={{ top: '48px', left: '50%' }}
+                    >
+                      {CONFETTI.map((c, i) => (
+                        <span
+                          key={i}
+                          className="confetti-piece"
+                          style={
+                            {
+                              backgroundColor: c.color,
+                              animationDelay: `${c.delay}ms`,
+                              '--cx': `${c.cx}px`,
+                              '--cy': `${c.cy}px`,
+                              '--spin': `${c.spin}deg`,
+                            } as React.CSSProperties
+                          }
+                        />
+                      ))}
+                    </div>
+                  )}
+                  {/* celebration banner */}
+                  {celebrate && (
+                    <div
+                      className="absolute left-1/2 animate-banner-drop z-10 whitespace-nowrap rounded-full px-4 py-2 text-[11px] tracking-[0.28em] uppercase font-medium shadow-lg"
+                      style={{
+                        top: '-56px',
+                        transform: 'translate(-50%, 0)',
+                        backgroundColor: CREAM,
+                        color: OLIVE_DEEP,
+                        boxShadow: '0 10px 30px -8px rgba(0,0,0,0.4)',
+                      }}
+                    >
+                      🏆 champion unlocked
+                    </div>
+                  )}
+                  {/* backboard */}
+                  <div
+                    className="absolute top-0 left-0 right-0 h-12 rounded-md border"
+                    style={{
+                      backgroundColor: CREAM,
+                      borderColor: OLIVE_DEEP,
+                      boxShadow: '0 2px 8px -2px rgba(0,0,0,0.35)',
+                    }}
+                  />
+                  {/* rim */}
+                  <div
+                    className="absolute left-1/2 -translate-x-1/2 w-14 h-[6px] rounded-full transition-all duration-500"
+                    style={{
+                      top: '48px',
+                      backgroundColor: rimGlow ? CREAM : '#C45827',
+                      boxShadow: rimGlow
+                        ? '0 0 14px 3px rgba(241, 233, 213, 0.9), 0 0 3px 1px rgba(241, 233, 213, 0.6)'
+                        : '0 2px 4px rgba(0,0,0,0.35)',
+                    }}
+                  />
+                  {/* net: 5 strands */}
+                  <div
+                    className={`absolute left-1/2 -translate-x-1/2 flex gap-[3px] ${netSwish ? 'animate-net-swish' : ''}`}
+                    style={{ top: '54px' }}
+                  >
+                    {[0, 1, 2, 3, 4].map((i) => (
+                      <span
+                        key={i}
+                        className="block w-[2px] origin-top"
+                        style={{
+                          height: i === 2 ? '22px' : i === 1 || i === 3 ? '20px' : '18px',
+                          backgroundColor: `${CREAM}B0`,
+                          animationDelay: `${i * 40}ms`,
+                        }}
+                      />
+                    ))}
                   </div>
                 </div>
               </div>
@@ -412,7 +639,7 @@ export default function Playground() {
             </Reveal>
 
             <Reveal delay={120} className="order-1 md:order-2">
-              <BorderGlow {...GLOW_PROPS}>
+              <BorderGlow {...GLOW_PROPS_GREEN}>
                 <div className="relative aspect-[2/3]">
                   <Image
                     src="/voyageatlkavya-4.webp"
@@ -487,7 +714,7 @@ export default function Playground() {
             </Reveal>
 
             <Reveal delay={120} className="order-1 md:order-2">
-              <BorderGlow {...GLOW_PROPS}>
+              <BorderGlow {...GLOW_PROPS_GREEN}>
                 <div className="relative aspect-[3/2]">
                   <Image
                     src="/voyageatlkavya-2.webp"
@@ -538,11 +765,33 @@ export default function Playground() {
                 the professional version
               </Link>
             </div>
+
+            <div className="mt-20 md:mt-24 flex flex-col items-center gap-4">
+              <span
+                className="block h-px w-10"
+                style={{ backgroundColor: CREAM, opacity: 0.25 }}
+                aria-hidden
+              />
+              <Image
+                src="/kavwhitelogo.svg"
+                alt="Kavya Ray signature"
+                width={115}
+                height={106}
+                className="h-14 w-auto md:h-16 opacity-70 hover:opacity-100 transition-opacity duration-500"
+                style={{ filter: 'drop-shadow(0 2px 6px rgba(0,0,0,0.25))' }}
+              />
+              <span
+                className="text-[11px] tracking-[0.32em] uppercase"
+                style={{ color: CREAM, opacity: 0.45 }}
+              >
+                kavya
+              </span>
+            </div>
           </Reveal>
         </div>
       </section>
 
-      <Footer bgColor={OLIVE} />
+      <Footer bgColor={OLIVE} rayEffect />
     </div>
   );
 }

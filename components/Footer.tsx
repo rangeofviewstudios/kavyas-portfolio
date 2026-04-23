@@ -1,8 +1,40 @@
-import { ArrowUpRight } from "lucide-react";
+'use client';
 
-export function Footer({ bgColor = '#2E6B5F' }: { bgColor?: string } = {}) {
+import { useEffect, useRef, useState } from 'react';
+import { ArrowUpRight } from 'lucide-react';
+
+export function Footer({
+  bgColor = '#2E6B5F',
+  rayEffect = false,
+}: {
+  bgColor?: string;
+  rayEffect?: boolean;
+} = {}) {
+  const footerRef = useRef<HTMLElement | null>(null);
+  const [rayPos, setRayPos] = useState<{ x: number; y: number } | null>(null);
+
+  useEffect(() => {
+    if (!rayEffect) return;
+    const el = footerRef.current;
+    if (!el) return;
+
+    const onMove = (e: PointerEvent) => {
+      const rect = el.getBoundingClientRect();
+      setRayPos({ x: e.clientX - rect.left, y: e.clientY - rect.top });
+    };
+    const onLeave = () => setRayPos(null);
+
+    el.addEventListener('pointermove', onMove);
+    el.addEventListener('pointerleave', onLeave);
+    return () => {
+      el.removeEventListener('pointermove', onMove);
+      el.removeEventListener('pointerleave', onLeave);
+    };
+  }, [rayEffect]);
+
   return (
     <footer
+      ref={footerRef}
       className="pt-12 sm:pt-16 px-6 relative z-10 overflow-hidden"
       style={{ backgroundColor: bgColor }}
     >
@@ -11,7 +43,7 @@ export function Footer({ bgColor = '#2E6B5F' }: { bgColor?: string } = {}) {
         <div className="flex flex-col md:flex-row items-start justify-between gap-8 mb-10 sm:mb-12">
           {/* Left - Let's Connect */}
           <h2 className="text-4xl sm:text-5xl font-semibold" style={{ color: '#FFFFFF' }}>
-            Let's<br />Connect!
+            Let&apos;s<br />Connect!
           </h2>
 
           {/* Right - Links */}
@@ -64,6 +96,46 @@ export function Footer({ bgColor = '#2E6B5F' }: { bgColor?: string } = {}) {
           </h1>
         </div>
       </div>
+
+      {/* Ray cursor effect — only on the playground footer */}
+      {rayEffect && (
+        <>
+          <div
+            className={`ray-overlay ray-burst ${rayPos ? 'is-active' : ''}`}
+            style={{
+              left: rayPos?.x ?? -9999,
+              top: rayPos?.y ?? -9999,
+              transform: 'translate(-50%, -50%)',
+            }}
+            aria-hidden
+          />
+          <div
+            className={`ray-overlay ray-burst-inner ${rayPos ? 'is-active' : ''}`}
+            style={{
+              left: rayPos?.x ?? -9999,
+              top: rayPos?.y ?? -9999,
+              transform: 'translate(-50%, -50%)',
+            }}
+            aria-hidden
+          />
+          <div
+            className={`ray-overlay ray-glow ${rayPos ? 'is-active' : ''}`}
+            style={{
+              left: rayPos?.x ?? -9999,
+              top: rayPos?.y ?? -9999,
+            }}
+            aria-hidden
+          />
+          <div
+            className={`ray-overlay ray-core ${rayPos ? 'is-active' : ''}`}
+            style={{
+              left: rayPos?.x ?? -9999,
+              top: rayPos?.y ?? -9999,
+            }}
+            aria-hidden
+          />
+        </>
+      )}
     </footer>
   );
 }
