@@ -1,10 +1,10 @@
 import { ArrowUpRight } from "lucide-react";
 
-export function Footer() {
+export function Footer({ bgColor = '#2E6B5F' }: { bgColor?: string } = {}) {
   return (
     <footer
       className="pt-12 sm:pt-16 px-6 relative z-10 overflow-hidden"
-      style={{ backgroundColor: '#2E6B5F' }}
+      style={{ backgroundColor: bgColor }}
     >
       <div className="container mx-auto max-w-6xl">
         {/* Top Section */}
