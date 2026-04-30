@@ -270,28 +270,28 @@ export default function PorschePage() {
             {/* Statistics Section */}
             <div className="w-full bg-white py-20">
                 <div className="container mx-auto px-6">
-                    <div className="max-w-6xl mx-auto space-y-16">
+                    <div className="max-w-6xl mx-auto space-y-12">
                         {/* First Stats Block - The Delicate Balance */}
-                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
                             {/* Left - Text and Stats */}
-                            <div className="space-y-8">
-                                <h3 className="text-3xl md:text-4xl font-semibold text-gray-900 leading-tight">
+                            <div className="space-y-6">
+                                <h3 className="text-2xl md:text-3xl font-semibold text-gray-900 leading-tight">
                                     The Delicate Balance:<br />
                                     Porsche's Soul, Electrified
                                 </h3>
 
                                 {/* Stat 1 */}
-                                <div className="flex items-start gap-6">
-                                    <div className="text-6xl font-bold text-gray-900">62%</div>
-                                    <p className="text-lg text-gray-700 pt-4">
+                                <div className="flex items-start gap-4">
+                                    <div className="text-5xl font-bold text-gray-900 leading-none">62%</div>
+                                    <p className="text-base text-gray-700 pt-3">
                                         want "smart & connected"
                                     </p>
                                 </div>
 
                                 {/* Stat 2 */}
-                                <div className="flex items-start gap-6">
-                                    <div className="text-6xl font-bold text-gray-900">71%</div>
-                                    <p className="text-lg text-gray-700 pt-4">
+                                <div className="flex items-start gap-4">
+                                    <div className="text-5xl font-bold text-gray-900 leading-none">71%</div>
+                                    <p className="text-base text-gray-700 pt-3">
                                         fear that tech will interfere<br />
                                         with the purity of driving
                                     </p>
@@ -299,63 +299,56 @@ export default function PorschePage() {
                             </div>
 
                             {/* Right - Image */}
-                            <div className="rounded-2xl overflow-hidden">
+                            <div className="rounded-2xl overflow-hidden h-56 lg:h-64">
                                 <img
                                     src="/images/porsche/porschestatsimage.png"
                                     alt="Porsche Classic and Modern"
-                                    className="w-full h-auto object-cover"
+                                    className="w-full h-full object-cover"
                                 />
                             </div>
                         </div>
 
                         {/* Second Stats Block - Why Feel Matters */}
-                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
                             {/* Left - Image */}
-                            <div className="rounded-2xl overflow-hidden order-2 lg:order-1">
+                            <div className="rounded-2xl overflow-hidden h-56 lg:h-64 order-2 lg:order-1">
                                 <img
                                     src="/images/porsche/porschestatsimage2.png"
                                     alt="Porsche Interior Controls"
-                                    className="w-full h-auto object-cover"
+                                    className="w-full h-full object-cover"
                                 />
                             </div>
 
                             {/* Right - Text and Stats */}
-                            <div className="space-y-8 order-1 lg:order-2">
-                                <h3 className="text-3xl md:text-4xl font-semibold text-gray-900 leading-tight">
+                            <div className="space-y-6 order-1 lg:order-2">
+                                <h3 className="text-2xl md:text-3xl font-semibold text-gray-900 leading-tight">
                                     Why "Feel" Matters: Controls &<br />
                                     Cabin Ambience
                                 </h3>
 
                                 {/* Stat 1 */}
-                                <div className="flex items-start gap-6">
-                                    <div className="text-6xl font-bold text-gray-900">62%</div>
-                                    <p className="text-lg text-gray-700 pt-4">
+                                <div className="flex items-start gap-4">
+                                    <div className="text-5xl font-bold text-gray-900 leading-none">62%</div>
+                                    <p className="text-base text-gray-700 pt-3">
                                         prefer a mix of physical<br />
                                         and digital controls
                                     </p>
                                 </div>
 
                                 {/* Stat 2 */}
-                                <div className="flex items-start gap-6">
-                                    <div className="text-6xl font-bold text-gray-900">71%</div>
-                                    <p className="text-lg text-gray-700 pt-4">
+                                <div className="flex items-start gap-4">
+                                    <div className="text-5xl font-bold text-gray-900 leading-none">71%</div>
+                                    <p className="text-base text-gray-700 pt-3">
                                         feel distracted with full-<br />
                                         touch UI's
                                     </p>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-            </div>
-
-            {/* Research Methodology Section */}
-            <div className="w-full bg-white py-20">
-                <div className="container mx-auto px-6">
-                    <div className="max-w-6xl mx-auto">
-                        <div className="flex flex-col lg:flex-row gap-12 items-start">
+                        {/* Research Methodology Row */}
+                        <div className="flex flex-row gap-12 items-start">
                             {/* Left - Overlapping Circles */}
-                            <div className="relative w-full lg:w-auto" style={{ minHeight: '280px', minWidth: '350px' }}>
+                            <div className="relative shrink-0" style={{ width: '350px', height: '280px' }}>
                                 {/* First Circle - 160+ Survey Responses */}
                                 <div
                                     className="absolute top-0 left-0 rounded-full overflow-hidden flex flex-col items-center justify-center text-white shadow-lg"
@@ -367,7 +360,6 @@ export default function PorschePage() {
                                         backgroundPosition: 'center',
                                     }}
                                 >
-                                    {/* Dark overlay */}
                                     <div className="absolute inset-0 bg-black/50"></div>
                                     <div className="relative z-10 text-center px-4">
                                         <div className="text-5xl font-bold mb-1">160+</div>
@@ -388,7 +380,6 @@ export default function PorschePage() {
                                         backgroundPosition: 'center',
                                     }}
                                 >
-                                    {/* Dark overlay */}
                                     <div className="absolute inset-0 bg-black/50"></div>
                                     <div className="relative z-10 text-center px-4">
                                         <div className="text-5xl font-bold mb-1">30+</div>
@@ -398,28 +389,37 @@ export default function PorschePage() {
                             </div>
 
                             {/* Right - Research Topics List */}
-                            <div className="flex-1 pt-8">
-                                <ul className="space-y-5 text-base text-gray-700">
-                                    <li className="flex items-start gap-3">
-                                        <span className="text-gray-400 mt-1">•</span>
-                                        <span>HMI Reports</span>
-                                    </li>
-                                    <li className="flex items-start gap-3">
-                                        <span className="text-gray-400 mt-1">•</span>
-                                        <span>Sensory Experiences in EVs</span>
-                                    </li>
-                                    <li className="flex items-start gap-3">
-                                        <span className="text-gray-400 mt-1">•</span>
-                                        <span>Range Anxiety Mitigation Studies</span>
-                                    </li>
-                                    <li className="flex items-start gap-3">
-                                        <span className="text-gray-400 mt-1">•</span>
-                                        <span>Best Display Configurations</span>
-                                    </li>
-                                </ul>
+                            <div className="flex-1">
+                                <ol className="space-y-6 text-xl md:text-2xl text-gray-700 list-decimal list-inside">
+                                    <li>HMI Reports</li>
+                                    <li>Sensory Experiences in EVs</li>
+                                    <li>Range Anxiety Mitigation Studies</li>
+                                    <li>Best Display Configurations</li>
+                                </ol>
                             </div>
                         </div>
                     </div>
+                </div>
+            </div>
+
+            {/* What Porsche Drivers Expect Section */}
+            <div
+                className="w-full relative h-[450px] md:h-[500px] flex items-center"
+                style={{
+                    backgroundImage: 'url(/images/porsche/porschedrivers.png)',
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center',
+                }}
+            >
+                <div className="absolute inset-0 bg-black/50"></div>
+                <div className="relative z-10 container mx-auto px-6 md:px-12 max-w-6xl">
+                    <h2 className="text-4xl md:text-6xl font-bold text-white mb-6 md:mb-8">
+                        What Porsche Drivers Expect
+                    </h2>
+                    <div className="w-24 h-1 bg-white mb-8"></div>
+                    <p className="text-xl md:text-2xl text-white leading-relaxed max-w-3xl">
+                        Porsche drivers want systems that adapt instantly and reinforce control, performance, and presence behind the wheel.
+                    </p>
                 </div>
             </div>
 
@@ -496,30 +496,6 @@ export default function PorschePage() {
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-
-            {/* What Porsche Drivers Expect Section */}
-            <div
-                className="w-full relative h-[450px] md:h-[500px] flex items-center"
-                style={{
-                    backgroundImage: 'url(/images/porsche/porschedrivers.png)',
-                    backgroundSize: 'cover',
-                    backgroundPosition: 'center',
-                }}
-            >
-                {/* Dark overlay to dim the image */}
-                <div className="absolute inset-0 bg-black/50"></div>
-
-                {/* Text content */}
-                <div className="relative z-10 container mx-auto px-6 md:px-12 max-w-6xl">
-                    <h2 className="text-4xl md:text-6xl font-bold text-white mb-6 md:mb-8">
-                        What Porsche Drivers Expect
-                    </h2>
-                    <div className="w-24 h-1 bg-white mb-8"></div>
-                    <p className="text-xl md:text-2xl text-white leading-relaxed max-w-3xl">
-                        Porsche drivers want systems that adapt instantly and reinforce control, performance, and presence behind the wheel.
-                    </p>
                 </div>
             </div>
 

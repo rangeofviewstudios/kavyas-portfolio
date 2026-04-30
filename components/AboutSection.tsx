@@ -9,6 +9,7 @@ const experienceList = [
   { id: "01", role: "SCAD FLUX – Director" },
   { id: "02", role: "UBS x SCADpro – UX Research/ UI Bridge" },
   { id: "03", role: "Porsche x SCADpro – Senior Backend Lead" },
+  { id: "04", role: "Lowes x SCADpro – UX Team" },
 ];
 
 export function AboutSection() {
@@ -60,7 +61,7 @@ export function AboutSection() {
 
         {/* Education */}
         <div className="mb-16 animate-fade-in-up" style={{ animationDelay: "0.1s" }}>
-          <h2 className="text-2xl md:text-3xl font-medium text-foreground mb-8">
+          <h2 className="text-2xl md:text-3xl font-medium text-white mb-8">
             EDUCATION
           </h2>
 
@@ -68,10 +69,10 @@ export function AboutSection() {
             {educationList.map((edu) => (
               <div
                 key={edu.id}
-                className="flex items-center justify-between py-6 border-b border-border"
+                className="flex items-center justify-between py-6 border-b border-white/20"
               >
-                <span className="text-muted-foreground text-sm">{edu.id}.</span>
-                <span className="text-foreground font-medium">{edu.name}</span>
+                <span className="text-white/50 text-sm">{edu.id}.</span>
+                <span className="text-white font-medium">{edu.name}</span>
               </div>
             ))}
           </div>
@@ -79,7 +80,7 @@ export function AboutSection() {
 
         {/* Experience */}
         <div className="animate-fade-in-up" style={{ animationDelay: "0.2s" }}>
-          <h2 className="text-2xl md:text-3xl font-medium text-foreground mb-8">
+          <h2 className="text-2xl md:text-3xl font-medium text-white mb-8">
             EXPERIENCE
           </h2>
 
@@ -87,10 +88,10 @@ export function AboutSection() {
             {experienceList.map((exp) => (
               <div
                 key={exp.id}
-                className="flex items-center justify-between py-6 border-b border-border"
+                className="flex items-center justify-between py-6 border-b border-white/20"
               >
-                <span className="text-muted-foreground text-sm">{exp.id}.</span>
-                <span className="text-foreground font-medium">{exp.role}</span>
+                <span className="text-white/50 text-sm">{exp.id}.</span>
+                <span className="text-white font-medium">{exp.role}</span>
               </div>
             ))}
           </div>

@@ -4,7 +4,7 @@ export function Footer() {
   return (
     <footer
       className="pt-12 sm:pt-16 px-6 relative z-10 overflow-hidden"
-      style={{ backgroundColor: '#2E6B5F' }}
+      style={{ backgroundColor: '#343F28' }}
     >
       <div className="container mx-auto max-w-6xl">
         {/* Top Section */}

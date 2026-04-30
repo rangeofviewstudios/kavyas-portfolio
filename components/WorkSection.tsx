@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
@@ -10,7 +10,7 @@ const projects = [
   {
     id: 1,
     isNda: true,
-    cardImage: "/ubscard.png",
+    cardImage: "/images/ubscard.png",
     alt: "UBS - The Future of Banking",
     href: "/case-study/ubs",
     title: "The Future of Banking",
@@ -21,7 +21,7 @@ const projects = [
   {
     id: 2,
     isNda: false,
-    cardImage: "/loomacard.png",
+    cardImage: "/images/loomacard.png",
     alt: "LOOMA - Smart Glasses",
     href: "/case-study/looma",
     title: "Startup (LOOMA)",
@@ -32,7 +32,7 @@ const projects = [
   {
     id: 3,
     isNda: true,
-    cardImage: "/lowescard.png",
+    cardImage: "/images/lowescard.png",
     alt: "Lowes - Garden Center Redesign",
     href: "/case-study/lowes",
     title: "Garden Center Redesign",
@@ -44,7 +44,7 @@ const projects = [
   {
     id: 4,
     isNda: false,
-    cardImage: "/Porschecard.png",
+    cardImage: "/images/porschecard.png",
     alt: "Porsche - The Future of Electric Vehicles",
     href: "/case-study/porsche",
     title: "The Future of Electric Vehicles",
@@ -56,7 +56,7 @@ const projects = [
   {
     id: 5,
     isNda: false,
-    cardImage: "/aesturacard.png",
+    cardImage: "/images/aesturacard.png",
     alt: "Aestura - The Essence Edit",
     href: "/case-study/aestura",
     title: "The Essence Edit",
@@ -69,6 +69,82 @@ const projects = [
 
 export function WorkSection() {
   const [activeFilter, setActiveFilter] = useState<FilterTab>("all");
+
+  const aboutRef = useRef<HTMLDivElement>(null);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const trailRef = useRef<{ x: number; y: number; age: number }[]>([]);
+  const animFrameRef = useRef<number>();
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    const section = aboutRef.current;
+    if (!canvas || !section) return;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    const MAX_AGE = 50;
+
+    const resize = () => {
+      canvas.width = section.offsetWidth;
+      canvas.height = section.offsetHeight;
+    };
+    resize();
+    window.addEventListener('resize', resize);
+
+    const onMouseMove = (e: MouseEvent) => {
+      const rect = section.getBoundingClientRect();
+      trailRef.current.push({ x: e.clientX - rect.left, y: e.clientY - rect.top, age: 0 });
+      if (trailRef.current.length > 60) trailRef.current.shift();
+    };
+    section.addEventListener('mousemove', onMouseMove);
+
+    const draw = () => {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      trailRef.current = trailRef.current
+        .map(p => ({ ...p, age: p.age + 1 }))
+        .filter(p => p.age < MAX_AGE);
+
+      const pts = trailRef.current;
+
+      // Draw connecting streak line
+      if (pts.length > 1) {
+        for (let i = 1; i < pts.length; i++) {
+          const t = 1 - pts[i].age / MAX_AGE;
+          ctx.beginPath();
+          ctx.moveTo(pts[i - 1].x, pts[i - 1].y);
+          ctx.lineTo(pts[i].x, pts[i].y);
+          ctx.strokeStyle = `rgba(255, 240, 160, ${t * 0.6})`;
+          ctx.lineWidth = t * 3;
+          ctx.lineCap = 'round';
+          ctx.stroke();
+        }
+      }
+
+      // Draw glow orbs at each trail point
+      pts.forEach(p => {
+        const t = 1 - p.age / MAX_AGE;
+        const size = t * 28;
+        const grd = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, size);
+        grd.addColorStop(0, `rgba(255, 252, 220, ${t * 1.0})`);
+        grd.addColorStop(0.3, `rgba(255, 230, 100, ${t * 0.7})`);
+        grd.addColorStop(0.7, `rgba(255, 180, 50, ${t * 0.3})`);
+        grd.addColorStop(1, `rgba(255, 150, 30, 0)`);
+        ctx.fillStyle = grd;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, size, 0, Math.PI * 2);
+        ctx.fill();
+      });
+
+      animFrameRef.current = requestAnimationFrame(draw);
+    };
+    draw();
+
+    return () => {
+      section.removeEventListener('mousemove', onMouseMove);
+      window.removeEventListener('resize', resize);
+      if (animFrameRef.current) cancelAnimationFrame(animFrameRef.current);
+    };
+  }, []);
 
   const filteredProjects =
     activeFilter === "nda"
@@ -107,18 +183,21 @@ export function WorkSection() {
           </div>
         </div>
 
-        {/* Projects Grid */}
-        <div className="space-y-6 sm:space-y-8">
+        {/* Projects Grid — stacking cards */}
+        <div className="relative flex flex-col gap-0">
           {filteredProjects.map((project, index) => (
             <article
               key={project.id}
-              className="card-float animate-fade-in-up"
+              className="animate-fade-in-up rounded-2xl overflow-hidden sticky"
               style={{
                 animationDelay: `${index * 0.1}s`,
+                top: `${80 + index * 24}px`,
+                marginBottom: index < filteredProjects.length - 1 ? '24px' : '0',
+                zIndex: index + 1,
               }}
             >
               {project.title ? (
-                <div className="relative rounded-2xl overflow-hidden">
+                <div className="relative">
                   <img
                     src={project.cardImage}
                     alt={project.alt}
@@ -142,7 +221,7 @@ export function WorkSection() {
 
                       {/* Spacer - push content down for cards with baked-in headers */}
                       {!project.showLowesHeader && (
-                        <div className={project.extraTopSpacing ? "mt-32 sm:mt-36 md:mt-40 lg:mt-48" : "mt-24 sm:mt-28 md:mt-32 lg:mt-36"} />
+                        <div className={project.extraTopSpacing ? "mt-16 sm:mt-20 md:mt-24 lg:mt-28" : "mt-24 sm:mt-28 md:mt-32 lg:mt-36"} />
                       )}
 
                       <Link
@@ -195,7 +274,8 @@ export function WorkSection() {
         </div>
 
         {/* Get To Know Me Section */}
-        <div id="about" className="mt-20 animate-fade-in-up">
+        <div id="about" ref={aboutRef} className="mt-20 animate-fade-in-up relative">
+          <canvas ref={canvasRef} className="absolute inset-0 pointer-events-none z-50" />
           <div className="flex flex-col lg:flex-row items-center gap-12">
             {/* Left - Text Content */}
             <div className="flex-1">
@@ -209,11 +289,11 @@ export function WorkSection() {
 
             {/* Right - Image */}
             <div className="flex-shrink-0 w-full lg:w-auto flex justify-center lg:block">
-              <div className="rounded-2xl overflow-hidden w-full max-w-[428px] aspect-[428/404]">
+              <div className="rounded-2xl overflow-hidden w-full max-w-[428px]">
                 <img
-                  src="/images/gettoknowmekavya.png"
-                  alt="Toronto Skyline"
-                  className="object-cover w-full h-full"
+                  src="/images/aboutmekavya.jpg"
+                  alt="Kavya Ray"
+                  className="w-full h-auto object-contain"
                 />
               </div>
             </div>
@@ -224,38 +304,38 @@ export function WorkSection() {
         <div className="mt-20 space-y-16">
           {/* Education */}
           <div className="animate-fade-in-up">
-            <h3 className="text-2xl font-semibold text-foreground mb-8">EDUCATION</h3>
+            <h3 className="text-2xl font-semibold text-white mb-8">EDUCATION</h3>
             <div className="space-y-6">
-              <div className="flex items-start gap-4 pb-6 border-b border-border">
-                <span className="text-muted-foreground font-medium">01.</span>
-                <span className="text-muted-foreground flex-1 text-right">Savannah College Of Art and Design</span>
+              <div className="flex items-start gap-4 pb-6 border-b border-white/20">
+                <span className="text-white/50 font-medium">01.</span>
+                <span className="text-white flex-1 text-right">Savannah College Of Art and Design</span>
               </div>
-              <div className="flex items-start gap-4 pb-6 border-b border-border">
-                <span className="text-muted-foreground font-medium">02.</span>
-                <span className="text-muted-foreground flex-1 text-right">Westwood High School</span>
+              <div className="flex items-start gap-4 pb-6 border-b border-white/20">
+                <span className="text-white/50 font-medium">02.</span>
+                <span className="text-white flex-1 text-right">Westwood High School</span>
               </div>
             </div>
           </div>
 
           {/* Experience */}
           <div className="animate-fade-in-up" style={{ animationDelay: "0.1s" }}>
-            <h3 className="text-2xl font-semibold text-foreground mb-8">EXPERIENCE</h3>
+            <h3 className="text-2xl font-semibold text-white mb-8">EXPERIENCE</h3>
             <div className="space-y-6">
-              <div className="flex items-start gap-4 pb-6 border-b border-border">
-                <span className="text-muted-foreground font-medium">01.</span>
-                <span className="text-muted-foreground flex-1 text-right">SCAD FLUX - Director</span>
+              <div className="flex items-start gap-4 pb-6 border-b border-white/20">
+                <span className="text-white/50 font-medium">01.</span>
+                <span className="text-white flex-1 text-right">SCAD FLUX - Director</span>
               </div>
-              <div className="flex items-start gap-4 pb-6 border-b border-border">
-                <span className="text-muted-foreground font-medium">02.</span>
-                <span className="text-muted-foreground flex-1 text-right">UBS x SCADpro - UX Research/ UI Bridge</span>
+              <div className="flex items-start gap-4 pb-6 border-b border-white/20">
+                <span className="text-white/50 font-medium">02.</span>
+                <span className="text-white flex-1 text-right">UBS x SCADpro - UX Research/ UI Bridge</span>
               </div>
-              <div className="flex items-start gap-4 pb-6 border-b border-border">
-                <span className="text-muted-foreground font-medium">03.</span>
-                <span className="text-muted-foreground flex-1 text-right">Porsche x SCADpro - Senior Backend Lead</span>
+              <div className="flex items-start gap-4 pb-6 border-b border-white/20">
+                <span className="text-white/50 font-medium">03.</span>
+                <span className="text-white flex-1 text-right">Porsche x SCADpro - Senior Backend Lead</span>
               </div>
-              <div className="flex items-start gap-4 pb-6 border-b border-border">
-                <span className="text-muted-foreground font-medium">04.</span>
-                <span className="text-muted-foreground flex-1 text-right">Lowes x SCADpro - UX Team</span>
+              <div className="flex items-start gap-4 pb-6 border-b border-white/20">
+                <span className="text-white/50 font-medium">04.</span>
+                <span className="text-white flex-1 text-right">Lowes x SCADpro - UX Team</span>
               </div>
             </div>
           </div>
@@ -269,7 +349,7 @@ export function WorkSection() {
           </p>
           <Link
             href="/about"
-            className="inline-block px-8 sm:px-10 md:px-12 py-3 sm:py-3.5 md:py-4 text-lg sm:text-xl rounded-full text-white font-semibold transition-all hover:scale-105 bg-[#2E6B5F]"
+            className="inline-block px-8 sm:px-10 md:px-12 py-3 sm:py-3.5 md:py-4 text-lg sm:text-xl rounded-full text-white font-semibold transition-all hover:scale-105 bg-[#343F28]"
           >
             About Me
           </Link>

@@ -1,5 +1,6 @@
 import { Navigation } from "@/components/Navigation";
 import { HeroSection } from "@/components/HeroSection";
+import { LogoMarquee } from "@/components/LogoMarquee";
 import { WorkSection } from "@/components/WorkSection";
 import { Footer } from "@/components/Footer";
 import Script from 'next/script';
@@ -53,6 +54,7 @@ export default function HomePage() {
                 <Navigation />
                 <main className="flex-1">
                     <HeroSection />
+                    <LogoMarquee />
                     <WorkSection />
                 </main>
                 <Footer />

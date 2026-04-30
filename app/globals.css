@@ -21,8 +21,8 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 0 0% 8%;
+    --background: 86 10% 45%;
+    --foreground: 0 0% 100%;
 
     --card: 0 0% 97%;
     --card-foreground: 0 0% 8%;
@@ -182,10 +182,11 @@
   }
 
   .nav-pill {
-    background: #F2F2F2;
-    border-radius: 15px;
-    @apply px-3 py-1.5 md:px-8 md:py-3;
-    box-shadow: var(--card-shadow);
+    background: rgba(46, 107, 95, 0.05);
+    border-radius: 28px;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(46, 107, 95, 0.12);
   }
 }
 
@@ -242,5 +243,14 @@
       opacity: 1;
       transform: translateY(0);
     }
+  }
+
+  .animate-marquee {
+    animation: marquee 28s linear infinite;
+  }
+
+  @keyframes marquee {
+    0%   { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
   }
 }

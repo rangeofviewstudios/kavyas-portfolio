@@ -1,4 +1,7 @@
-import { NavLink } from "@/components/NavLink";
+'use client';
+
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 const navItems = [
   { label: "Home", href: "/" },
@@ -7,22 +10,35 @@ const navItems = [
 ];
 
 export function Navigation() {
+  const pathname = usePathname();
+
   return (
-    <nav className="fixed top-6 left-1/2 -translate-x-1/2 z-50">
-      <div className="nav-pill flex items-center gap-1 sm:gap-3">
-        {navItems.map((item) => (
-          <NavLink
-            key={item.href}
-            href={item.href}
-            className="px-2 py-1.5 sm:px-6 sm:py-3 text-[13px] sm:text-base font-medium text-black rounded-full transition-colors hover:text-black hover:bg-background hover:shadow-sm whitespace-nowrap"
-          >
-            {item.label}
-          </NavLink>
-        ))}
+    <nav className="fixed top-6 left-1/2 -translate-x-1/2 z-50 whitespace-nowrap">
+      <div className="flex items-center gap-2 px-6 py-2 rounded-full bg-white/10 backdrop-blur-md border border-white/30 shadow-[0_8px_32px_0_rgba(0,0,0,0.1)]">
+        {navItems.map((item) => {
+          const isActive = item.href === '/'
+            ? pathname === '/'
+            : pathname === item.href || pathname?.startsWith(item.href.split('#')[0] + '/');
+
+          return (
+            <Link
+              key={item.href}
+              href={item.href}
+              className={`text-white font-medium px-6 py-2 rounded-full transition-all duration-200 ${
+                isActive
+                  ? 'bg-black/20 border border-black/10'
+                  : 'hover:bg-white/10'
+              }`}
+            >
+              {item.label}
+            </Link>
+          );
+        })}
+
         <a
           href="/Kavya_Ray_Resume.pdf"
           download="Kavya_Ray_Resume.pdf"
-          className="px-2 py-1.5 sm:px-6 sm:py-3 text-[13px] sm:text-base font-medium text-black rounded-full transition-colors hover:text-black hover:bg-background hover:shadow-sm whitespace-nowrap"
+          className="text-white font-medium px-6 py-2 rounded-full transition-all duration-200 hover:bg-white/10"
         >
           Resume
         </a>
