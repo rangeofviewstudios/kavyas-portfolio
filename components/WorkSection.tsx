@@ -1,8 +1,10 @@
 'use client';
 
-import { useState, useRef, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 type FilterTab = "all" | "nda";
 
@@ -67,95 +69,51 @@ const projects = [
   },
 ];
 
+gsap.registerPlugin(ScrollTrigger);
+
 export function WorkSection() {
   const [activeFilter, setActiveFilter] = useState<FilterTab>("all");
-
-  const aboutRef = useRef<HTMLDivElement>(null);
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-  const trailRef = useRef<{ x: number; y: number; age: number }[]>([]);
-  const animFrameRef = useRef<number>();
-
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    const section = aboutRef.current;
-    if (!canvas || !section) return;
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
-
-    const MAX_AGE = 50;
-
-    const resize = () => {
-      canvas.width = section.offsetWidth;
-      canvas.height = section.offsetHeight;
-    };
-    resize();
-    window.addEventListener('resize', resize);
-
-    const onMouseMove = (e: MouseEvent) => {
-      const rect = section.getBoundingClientRect();
-      trailRef.current.push({ x: e.clientX - rect.left, y: e.clientY - rect.top, age: 0 });
-      if (trailRef.current.length > 60) trailRef.current.shift();
-    };
-    section.addEventListener('mousemove', onMouseMove);
-
-    const draw = () => {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      trailRef.current = trailRef.current
-        .map(p => ({ ...p, age: p.age + 1 }))
-        .filter(p => p.age < MAX_AGE);
-
-      const pts = trailRef.current;
-
-      // Draw connecting streak line
-      if (pts.length > 1) {
-        for (let i = 1; i < pts.length; i++) {
-          const t = 1 - pts[i].age / MAX_AGE;
-          ctx.beginPath();
-          ctx.moveTo(pts[i - 1].x, pts[i - 1].y);
-          ctx.lineTo(pts[i].x, pts[i].y);
-          ctx.strokeStyle = `rgba(255, 240, 160, ${t * 0.6})`;
-          ctx.lineWidth = t * 3;
-          ctx.lineCap = 'round';
-          ctx.stroke();
-        }
-      }
-
-      // Draw glow orbs at each trail point
-      pts.forEach(p => {
-        const t = 1 - p.age / MAX_AGE;
-        const size = t * 28;
-        const grd = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, size);
-        grd.addColorStop(0, `rgba(255, 252, 220, ${t * 1.0})`);
-        grd.addColorStop(0.3, `rgba(255, 230, 100, ${t * 0.7})`);
-        grd.addColorStop(0.7, `rgba(255, 180, 50, ${t * 0.3})`);
-        grd.addColorStop(1, `rgba(255, 150, 30, 0)`);
-        ctx.fillStyle = grd;
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, size, 0, Math.PI * 2);
-        ctx.fill();
-      });
-
-      animFrameRef.current = requestAnimationFrame(draw);
-    };
-    draw();
-
-    return () => {
-      section.removeEventListener('mousemove', onMouseMove);
-      window.removeEventListener('resize', resize);
-      if (animFrameRef.current) cancelAnimationFrame(animFrameRef.current);
-    };
-  }, []);
+  const cardRefs = useRef<(HTMLElement | null)[]>([]);
 
   const filteredProjects =
     activeFilter === "nda"
       ? projects.filter((p) => p.isNda)
       : projects;
 
+  useEffect(() => {
+    const cards = cardRefs.current.filter(Boolean) as HTMLElement[];
+    if (cards.length < 2) return;
+
+    const ctx = gsap.context(() => {
+      cards.forEach((card, i) => {
+        if (i === cards.length - 1) return;
+
+        // Scale this card down as the NEXT card scrolls over it
+        gsap.to(card, {
+          scale: 0.93,
+          borderRadius: '20px',
+          ease: "none",
+          scrollTrigger: {
+            trigger: cards[i + 1],
+            start: "top 90%",
+            end: "top 80px",
+            scrub: 0.4,
+          },
+        });
+      });
+    });
+
+    return () => {
+      ctx.revert();
+      ScrollTrigger.getAll().forEach(t => t.kill());
+    };
+  }, [filteredProjects]);
+
   return (
     <section id="work" className="pt-6 sm:pt-8 pb-16 sm:pb-20 px-4 sm:px-6">
       <div className="container mx-auto">
         {/* Section Header */}
-        <div className="mb-8 sm:mb-10 animate-fade-in-up">
+        <div className="mb-8 sm:mb-10">
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-medium text-foreground mb-4 sm:mb-6">
             My Work
           </h2>
@@ -183,17 +141,18 @@ export function WorkSection() {
           </div>
         </div>
 
-        {/* Projects Grid — stacking cards */}
-        <div className="relative flex flex-col gap-0">
+        {/* Projects Grid — GSAP stacking cards */}
+        <div className="flex flex-col">
           {filteredProjects.map((project, index) => (
             <article
               key={project.id}
-              className="animate-fade-in-up rounded-2xl overflow-hidden sticky"
+              ref={el => { cardRefs.current[index] = el; }}
+              className="rounded-2xl overflow-hidden sticky will-change-transform"
               style={{
-                animationDelay: `${index * 0.1}s`,
-                top: `${80 + index * 24}px`,
-                marginBottom: index < filteredProjects.length - 1 ? '24px' : '0',
+                top: '80px',
                 zIndex: index + 1,
+                marginBottom: 0,
+                transformOrigin: 'center top',
               }}
             >
               {project.title ? (
@@ -219,7 +178,7 @@ export function WorkSection() {
                         </div>
                       )}
 
-                      {/* Spacer - push content down for cards with baked-in headers */}
+                      {/* Spacer */}
                       {!project.showLowesHeader && (
                         <div className={project.extraTopSpacing ? "mt-16 sm:mt-20 md:mt-24 lg:mt-28" : "mt-24 sm:mt-28 md:mt-32 lg:mt-36"} />
                       )}
@@ -274,8 +233,7 @@ export function WorkSection() {
         </div>
 
         {/* Get To Know Me Section */}
-        <div id="about" ref={aboutRef} className="mt-20 animate-fade-in-up relative">
-          <canvas ref={canvasRef} className="absolute inset-0 pointer-events-none z-50" />
+        <div id="about" className="mt-20">
           <div className="flex flex-col lg:flex-row items-center gap-12">
             {/* Left - Text Content */}
             <div className="flex-1">
@@ -303,7 +261,7 @@ export function WorkSection() {
         {/* Education and Experience Section */}
         <div className="mt-20 space-y-16">
           {/* Education */}
-          <div className="animate-fade-in-up">
+          <div>
             <h3 className="text-2xl font-semibold text-white mb-8">EDUCATION</h3>
             <div className="space-y-6">
               <div className="flex items-start gap-4 pb-6 border-b border-white/20">
@@ -318,7 +276,7 @@ export function WorkSection() {
           </div>
 
           {/* Experience */}
-          <div className="animate-fade-in-up" style={{ animationDelay: "0.1s" }}>
+          <div>
             <h3 className="text-2xl font-semibold text-white mb-8">EXPERIENCE</h3>
             <div className="space-y-6">
               <div className="flex items-start gap-4 pb-6 border-b border-white/20">
@@ -342,7 +300,7 @@ export function WorkSection() {
         </div>
 
         {/* About Me Section */}
-        <div className="mt-20 sm:mt-24 md:mt-28 lg:mt-32 text-center animate-fade-in-up">
+        <div className="mt-20 sm:mt-24 md:mt-28 lg:mt-32 text-center">
           <p className="text-xl sm:text-2xl md:text-3xl font-medium text-foreground mb-6 sm:mb-8 leading-relaxed">
             Traveler by choice, foodie<br />
             by instinct, dog lover always
@@ -358,58 +316,23 @@ export function WorkSection() {
           <div className="mt-16 sm:mt-20 relative w-full overflow-hidden md:overflow-visible">
             <div className="flex justify-start md:justify-center items-center overflow-x-auto md:overflow-x-visible pb-8 md:pb-0 px-4 md:px-0 -mx-4 md:mx-0 snap-x snap-mandatory md:snap-none">
               <div className="flex items-center pl-20 md:pl-0 h-[300px] md:h-auto">
-                {/* Photo 1 */}
                 <div className="bg-white p-2 sm:p-3 shadow-2xl transform -rotate-12 hover:rotate-0 transition-transform duration-300 relative w-40 sm:w-52 md:w-60 lg:w-[280px] z-[1] flex-shrink-0 snap-center -mr-8 md:-mr-12" style={{ top: "40px" }}>
-                  <img
-                    src="/images/footer/homefooter1.png"
-                    alt="Travel moment 1"
-                    className="w-full h-48 sm:h-56 md:h-60 lg:h-64 object-cover"
-                  />
+                  <img src="/images/footer/homefooter1.png" alt="Travel moment 1" className="w-full h-48 sm:h-56 md:h-60 lg:h-64 object-cover" />
                 </div>
-
-                {/* Photo 2 */}
                 <div className="relative bg-white p-2 sm:p-3 shadow-2xl transform rotate-6 hover:rotate-0 transition-transform duration-300 w-40 sm:w-52 md:w-60 lg:w-[280px] z-[2] flex-shrink-0 snap-center -mr-8 md:-mr-12" style={{ top: "10px" }}>
-                  <img
-                    src="/images/footer/homefooter2.png"
-                    alt="Travel moment 2"
-                    className="w-full h-48 sm:h-56 md:h-60 lg:h-64 object-cover"
-                  />
+                  <img src="/images/footer/homefooter2.png" alt="Travel moment 2" className="w-full h-48 sm:h-56 md:h-60 lg:h-64 object-cover" />
                 </div>
-
-                {/* Photo 3 */}
                 <div className="bg-white p-2 sm:p-3 shadow-2xl transform -rotate-3 hover:rotate-0 transition-transform duration-300 relative w-40 sm:w-52 md:w-60 lg:w-[280px] z-[3] flex-shrink-0 snap-center -mr-8 md:-mr-12" style={{ top: "-20px" }}>
-                  <img
-                    src="/images/footer/homefooter3.png"
-                    alt="Travel moment 3"
-                    className="w-full h-48 sm:h-56 md:h-60 lg:h-64 object-cover"
-                  />
+                  <img src="/images/footer/homefooter3.png" alt="Travel moment 3" className="w-full h-48 sm:h-56 md:h-60 lg:h-64 object-cover" />
                 </div>
-
-                {/* Photo 4 */}
                 <div className="bg-white p-2 sm:p-3 shadow-2xl transform rotate-3 hover:rotate-0 transition-transform duration-300 relative w-40 sm:w-52 md:w-60 lg:w-[280px] z-[2] flex-shrink-0 snap-center -mr-8 md:-mr-12" style={{ top: "-10px" }}>
-                  <img
-                    src="/images/footer/homefooter4.png"
-                    alt="Travel moment 4"
-                    className="w-full h-48 sm:h-56 md:h-60 lg:h-64 object-cover"
-                  />
+                  <img src="/images/footer/homefooter4.png" alt="Travel moment 4" className="w-full h-48 sm:h-56 md:h-60 lg:h-64 object-cover" />
                 </div>
-
-                {/* Photo 5 */}
                 <div className="bg-white p-2 sm:p-3 shadow-2xl transform -rotate-6 hover:rotate-0 transition-transform duration-300 relative w-40 sm:w-52 md:w-60 lg:w-[280px] z-[1] flex-shrink-0 snap-center -mr-8 md:-mr-12" style={{ top: "30px" }}>
-                  <img
-                    src="/images/footer/homefooter5.png"
-                    alt="Travel moment 5"
-                    className="w-full h-48 sm:h-56 md:h-60 lg:h-64 object-cover"
-                  />
+                  <img src="/images/footer/homefooter5.png" alt="Travel moment 5" className="w-full h-48 sm:h-56 md:h-60 lg:h-64 object-cover" />
                 </div>
-
-                {/* Photo 6 */}
                 <div className="bg-white p-2 sm:p-3 shadow-2xl transform rotate-12 hover:rotate-0 transition-transform duration-300 relative w-40 sm:w-52 md:w-60 lg:w-[280px] z-[0] flex-shrink-0 snap-center pr-20 md:pr-0" style={{ top: "60px" }}>
-                  <img
-                    src="/images/footer/homefooter6.png"
-                    alt="Travel moment 6"
-                    className="w-full h-48 sm:h-56 md:h-60 lg:h-64 object-cover"
-                  />
+                  <img src="/images/footer/homefooter6.png" alt="Travel moment 6" className="w-full h-48 sm:h-56 md:h-60 lg:h-64 object-cover" />
                 </div>
               </div>
             </div>
