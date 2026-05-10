@@ -3,7 +3,7 @@ import { Footer } from "@/components/Footer";
 
 const UBSCaseStudy = () => {
     return (
-        <div className="min-h-screen bg-white">
+        <div className="min-h-screen bg-white overflow-x-hidden">
             <Navigation />
             <main>
                 {/* Hero Image Section */}

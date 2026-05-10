@@ -4,7 +4,7 @@ import { Footer } from "@/components/Footer";
 
 export default function LoomaPage() {
     return (
-        <div className="min-h-screen bg-white">
+        <div className="min-h-screen bg-white overflow-x-hidden">
             <Navigation />
 
             {/* Hero Section */}
@@ -65,7 +65,7 @@ export default function LoomaPage() {
                     <div
                         className="w-full relative overflow-hidden flex flex-col md:flex-row items-center md:items-end"
                         style={{
-                            borderRadius: '100px 100px 100px 0',
+                            borderRadius: 'clamp(24px, 8vw, 100px) clamp(24px, 8vw, 100px) clamp(24px, 8vw, 100px) 0',
                             backgroundColor: '#343F28',
                             minHeight: '400px'
                         }}
@@ -139,8 +139,8 @@ export default function LoomaPage() {
                 </div>
 
                 {/* Research Section */}
-                <div className="w-full mb-10 sm:mb-20 animate-fade-in-up bg-white py-20">
-                    <div className="max-w-7xl mx-auto px-6">
+                <div className="w-full mb-10 sm:mb-20 animate-fade-in-up bg-white py-20 overflow-hidden">
+                    <div className="max-w-7xl mx-auto px-4 sm:px-6">
                         {/* Section Header */}
                         <div className="mb-16">
                             <h2 className="text-2xl sm:text-3xl md:text-5xl font-medium mb-4" style={{ color: '#343F28' }}>
@@ -152,7 +152,8 @@ export default function LoomaPage() {
                         </div>
 
                         {/* World Map with Data Points */}
-                        <div className="relative w-full" style={{ minHeight: '500px' }}>
+                        {/* Desktop: absolute-positioned bubbles over the map */}
+                        <div className="relative w-full hidden md:block" style={{ minHeight: '500px' }}>
                             {/* World Map Background Image */}
                             <div className="absolute inset-0 flex items-center justify-center">
                                 <img
@@ -206,8 +207,27 @@ export default function LoomaPage() {
                             </div>
                         </div>
 
+                        {/* Mobile: grid of stat bubbles */}
+                        <div className="md:hidden grid grid-cols-3 gap-4 py-6">
+                            {[
+                                { label: 'N. America', value: '6.7M' },
+                                { label: 'Europe', value: '9.7M' },
+                                { label: 'Asia', value: '15.4M' },
+                                { label: 'Africa', value: '2.13M' },
+                                { label: 'S. America', value: '4.5M' },
+                                { label: 'Australia', value: '400K' },
+                            ].map(({ label, value }) => (
+                                <div key={label} className="flex flex-col items-center gap-2">
+                                    <div className="flex items-center justify-center w-20 h-20 rounded-full text-white font-bold text-base shadow-lg" style={{ background: 'linear-gradient(90deg, #2E6B5F 0%, #5AD1B9 100%)' }}>
+                                        {value}
+                                    </div>
+                                    <span className="text-xs text-center text-gray-600 font-medium">{label}</span>
+                                </div>
+                            ))}
+                        </div>
+
                         {/* Leading Cause of Death Section */}
-                        <div className="mt-10 sm:mt-20 bg-[#343F28]/10 rounded-3xl p-12 md:p-16 flex flex-col md:flex-row items-center justify-between gap-8">
+                        <div className="mt-10 sm:mt-20 bg-[#343F28]/10 rounded-3xl p-6 sm:p-12 md:p-16 flex flex-col md:flex-row items-center justify-between gap-8">
                             <div className="text-center md:text-left">
                                 <h3 className="text-5xl sm:text-7xl md:text-8xl font-bold mb-4 text-black">
                                     N°7
@@ -299,7 +319,7 @@ export default function LoomaPage() {
                 <div className="w-full mb-10 sm:mb-20 animate-fade-in-up">
                     <div className="max-w-7xl mx-auto px-4 sm:px-6">
                         {/* Facial Recognition - Text Left, Image Right */}
-                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-32">
+                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center mb-16 lg:mb-32">
                             <div className="space-y-4">
                                 <h3 className="text-3xl md:text-4xl font-semibold" style={{ color: '#343F28' }}>
                                     Facial Recognition
@@ -319,7 +339,7 @@ export default function LoomaPage() {
                         </div>
 
                         {/* Spatial Awareness - Text Left, Image Right */}
-                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-32">
+                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center mb-16 lg:mb-32">
                             <div className="space-y-4">
                                 <h3 className="text-3xl md:text-4xl font-semibold" style={{ color: '#343F28' }}>
                                     Spatial Awareness
@@ -427,7 +447,7 @@ export default function LoomaPage() {
                                     className="w-full max-w-3xl h-auto object-contain"
                                 />
                                 <div className="absolute inset-0 flex items-center justify-center">
-                                    <h2 className="text-8xl md:text-9xl font-bold text-white opacity-60" style={{ letterSpacing: '0.1em' }}>
+                                    <h2 className="text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-bold text-white opacity-60" style={{ letterSpacing: '0.1em' }}>
                                         looma
                                     </h2>
                                 </div>

@@ -3,7 +3,7 @@ import { Footer } from "@/components/Footer";
 
 const AesturaCampaign = () => {
     return (
-        <div className="min-h-screen bg-white font-sans">
+        <div className="min-h-screen bg-white font-sans overflow-x-hidden">
             <Navigation />
             <main>
                 {/* Hero Section */}
@@ -102,9 +102,9 @@ const AesturaCampaign = () => {
                         </p>
                     </div>
 
-                    <div className="flex flex-col lg:flex-row gap-6 relative">
+                    <div className="flex flex-col lg:flex-row gap-6 relative pb-16 lg:pb-10">
                         {/* Left Card - Image Background */}
-                        <div className="relative flex-[1.2] rounded-[32px] overflow-hidden min-h-[400px] group">
+                        <div className="relative flex-[1.2] rounded-[32px] overflow-hidden min-h-[300px] sm:min-h-[400px] group">
                             <div className="absolute inset-0">
                                 <img
                                     src="/images/aestura/aesturaHMWimage.png"
@@ -114,15 +114,15 @@ const AesturaCampaign = () => {
                                 <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/60 to-transparent"></div>
                             </div>
 
-                            <div className="relative z-10 h-full flex flex-col justify-center p-12 max-w-xl">
-                                <p className="text-white text-2xl md:text-3xl leading-snug font-light">
+                            <div className="relative z-10 h-full flex flex-col justify-center p-6 sm:p-12 max-w-xl">
+                                <p className="text-white text-xl md:text-3xl leading-snug font-light">
                                     <span className="font-bold">Younger consumers</span>, especially U.S. Gen Z, strongly prefer <span className="font-bold">phygital</span> experiences that combine <span className="font-bold">physical interactions</span> with <span className="font-bold">digital engagement</span> to drive <span className="font-bold">social shareability</span> and <span className="font-bold">brand loyalty</span>.
                                 </p>
                             </div>
                         </div>
 
                         {/* Right Card - Blue Stats */}
-                        <div className="relative flex-1 rounded-[32px] bg-[#343F28] text-white p-12 min-h-[400px] flex flex-col overflow-hidden">
+                        <div className="relative flex-1 rounded-[32px] bg-[#343F28] text-white p-8 sm:p-12 min-h-[300px] sm:min-h-[400px] flex flex-col overflow-hidden">
                             {/* Top Stats */}
                             <div className="relative z-10">
                                 <div className="text-6xl sm:text-[120px] font-bold leading-none tracking-tighter mb-4">92%</div>
@@ -131,8 +131,8 @@ const AesturaCampaign = () => {
                                 </div>
                             </div>
 
-                            {/* Decorative Elements */}
-                            <div className="absolute top-1/2 right-12 transform -translate-y-1/2 flex flex-col items-center">
+                            {/* Decorative Elements — hidden on small screens to prevent overflow */}
+                            <div className="hidden sm:flex absolute top-1/2 right-12 transform -translate-y-1/2 flex-col items-center">
                                 {/* Arrow */}
                                 <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" className="mb-4">
                                     <path d="M12 19V5M12 5l-7 7M12 5l7 7" />
@@ -162,8 +162,13 @@ const AesturaCampaign = () => {
                             </div>
                         </div>
 
-                        {/* Floating Center Card */}
-                        <div className="absolute bottom-[-30px] left-1/2 transform -translate-x-1/2 bg-[#343F28]/10 p-8 rounded-3xl shadow-xl w-[300px] z-20 text-center">
+                        {/* Floating Center Card — absolute on desktop, inline on mobile */}
+                        <div className="hidden lg:block absolute bottom-[-30px] left-1/2 transform -translate-x-1/2 bg-[#343F28]/10 p-8 rounded-3xl shadow-xl w-[300px] z-20 text-center">
+                            <div className="text-5xl font-bold text-black mb-2">57%</div>
+                            <div className="text-sm font-medium text-gray-800">growth of phygital experiences</div>
+                        </div>
+                        {/* Mobile inline version of the floating card */}
+                        <div className="lg:hidden w-full bg-[#343F28]/10 p-6 rounded-3xl shadow-xl text-center">
                             <div className="text-4xl sm:text-5xl font-bold text-black mb-2">57%</div>
                             <div className="text-sm font-medium text-gray-800">growth of phygital experiences</div>
                         </div>
@@ -446,7 +451,7 @@ const AesturaCampaign = () => {
                 </div>
 
                 {/* Pop-Up Experience Section */}
-                <div className="w-full relative h-[700px] overflow-hidden">
+                <div className="w-full relative min-h-[400px] sm:min-h-[600px] lg:h-[700px] overflow-hidden">
                     {/* Background Image */}
                     <div className="absolute inset-0">
                         <img
@@ -465,12 +470,12 @@ const AesturaCampaign = () => {
                     </div>
 
                     {/* Content Overlay */}
-                    <div className="absolute bottom-16 left-6 md:left-20 max-w-4xl z-20">
-                        <div className="bg-gradient-to-r from-[#343F28]/80 to-[#343F28]/50 backdrop-blur-md border border-white/20 rounded-[32px] p-8 md:p-12 text-white shadow-2xl">
-                            <h2 className="text-3xl md:text-4xl font-bold mb-6 italic">
+                    <div className="relative z-20 flex items-end min-h-[400px] sm:min-h-[600px] lg:h-[700px] px-6 md:px-20 pb-10 sm:pb-16">
+                        <div className="w-full max-w-4xl bg-gradient-to-r from-[#343F28]/80 to-[#343F28]/50 backdrop-blur-md border border-white/20 rounded-[32px] p-6 sm:p-8 md:p-12 text-white shadow-2xl">
+                            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 sm:mb-6 italic">
                                 Pop-Up Experience
                             </h2>
-                            <p className="text-base md:text-lg leading-relaxed font-light">
+                            <p className="text-sm sm:text-base md:text-lg leading-relaxed font-light">
                                 Step into the Aestura Barrier Bar, an immersive wellness pop-up designed to educate, engage, and empower. Guests will enjoy skin-boosting drinks, professional consultations with dermatologists, and hands-on product testing of the AtoBarrier365 Cream. Through <span className="font-bold">augmented reality animatronics</span>, visitors will uncover the science behind Aestura, learn how the AtoBarrier365 Cream are made, and hear real stories from sensitive skin users. It’s <span className="font-bold">skincare education reimagined</span> — sensory, social, and scientifically backed.
                             </p>
                         </div>

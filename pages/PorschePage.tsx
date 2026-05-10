@@ -4,21 +4,21 @@ import { PorscheAppFlow } from "@/components/PorscheAppFlow";
 
 export default function PorschePage() {
     return (
-        <div className="min-h-screen bg-white">
+        <div className="min-h-screen bg-white overflow-x-hidden">
             <Navigation />
 
             {/* Hero Image Grid Section */}
             <div className="w-full px-4 pt-4">
                 {/* First Row - 2 images */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-                    <div className="w-full h-[400px] md:h-[500px] overflow-hidden">
+                    <div className="w-full h-[240px] sm:h-[350px] md:h-[500px] overflow-hidden">
                         <img
                             src="/images/porsche/porchehero1.png"
                             alt="Porsche Hero 1"
                             className="w-full h-full object-cover"
                         />
                     </div>
-                    <div className="w-full h-[400px] md:h-[500px] overflow-hidden">
+                    <div className="w-full h-[240px] sm:h-[350px] md:h-[500px] overflow-hidden">
                         <img
                             src="/images/porsche/porshcehero2.png"
                             alt="Porsche Hero 2"
@@ -28,22 +28,22 @@ export default function PorschePage() {
                 </div>
 
                 {/* Second Row - 3 images */}
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    <div className="w-full h-[350px] md:h-[450px] overflow-hidden">
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                    <div className="w-full h-[200px] sm:h-[300px] md:h-[450px] overflow-hidden">
                         <img
                             src="/images/porsche/porschehero3.png"
                             alt="Porsche Hero 3"
                             className="w-full h-full object-cover"
                         />
                     </div>
-                    <div className="w-full h-[350px] md:h-[450px] overflow-hidden">
+                    <div className="w-full h-[200px] sm:h-[300px] md:h-[450px] overflow-hidden">
                         <img
                             src="/images/porsche/porschehero4.png"
                             alt="Porsche Hero 4"
                             className="w-full h-full object-cover"
                         />
                     </div>
-                    <div className="w-full h-[350px] md:h-[450px] overflow-hidden">
+                    <div className="w-full h-[200px] sm:h-[300px] md:h-[450px] overflow-hidden">
                         <img
                             src="/images/porsche/porschehero5.png"
                             alt="Porsche Hero 5"
@@ -164,45 +164,19 @@ export default function PorschePage() {
 
                         {/* Audience Type Labels */}
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
-                            <div className="text-center">
-                                <div
-                                    className="inline-flex justify-center items-center text-white font-medium text-xl sm:text-3xl h-[60px] sm:h-[76px]"
-                                    style={{
-                                        borderRadius: '11.146px',
-                                        background: 'linear-gradient(90deg, #2E6B5F 0%, #5AD1B9 100%)',
-                                        padding: '21.177px 71.333px',
-                                        gap: '11.146px',
-                                    }}
-                                >
-                                    Primary
+                            {['Primary', 'Secondary', 'Tertiary'].map((label) => (
+                                <div key={label} className="flex justify-center">
+                                    <div
+                                        className="w-full flex justify-center items-center text-white font-medium text-xl sm:text-2xl h-[60px] sm:h-[76px] px-6"
+                                        style={{
+                                            borderRadius: '11.146px',
+                                            background: 'linear-gradient(90deg, #2E6B5F 0%, #5AD1B9 100%)',
+                                        }}
+                                    >
+                                        {label}
+                                    </div>
                                 </div>
-                            </div>
-                            <div className="text-center">
-                                <div
-                                    className="inline-flex justify-center items-center text-white font-medium text-xl sm:text-3xl h-[60px] sm:h-[76px]"
-                                    style={{
-                                        borderRadius: '11.146px',
-                                        background: 'linear-gradient(90deg, #2E6B5F 0%, #5AD1B9 100%)',
-                                        padding: '21.177px 71.333px',
-                                        gap: '11.146px',
-                                    }}
-                                >
-                                    Secondary
-                                </div>
-                            </div>
-                            <div className="text-center">
-                                <div
-                                    className="inline-flex justify-center items-center text-white font-medium text-xl sm:text-3xl h-[60px] sm:h-[76px]"
-                                    style={{
-                                        borderRadius: '11.146px',
-                                        background: 'linear-gradient(90deg, #2E6B5F 0%, #5AD1B9 100%)',
-                                        padding: '21.177px 71.333px',
-                                        gap: '11.146px',
-                                    }}
-                                >
-                                    Tertiary
-                                </div>
-                            </div>
+                            ))}
                         </div>
                     </div>
                 </div>
@@ -343,9 +317,10 @@ export default function PorschePage() {
                             </div>
                         </div>
                         {/* Research Methodology Row */}
-                        <div className="flex flex-row gap-12 items-start">
+                        <div className="flex flex-col sm:flex-row gap-8 sm:gap-12 items-start">
                             {/* Left - Overlapping Circles */}
-                            <div className="relative shrink-0" style={{ width: '350px', height: '280px' }}>
+                            {/* Desktop: absolute overlap layout inside a constrained box */}
+                            <div className="relative shrink-0 hidden sm:block" style={{ width: '350px', height: '280px' }}>
                                 {/* First Circle - 160+ Survey Responses */}
                                 <div
                                     className="absolute top-0 left-0 rounded-full overflow-hidden flex flex-col items-center justify-center text-white shadow-lg"
@@ -385,8 +360,40 @@ export default function PorschePage() {
                                 </div>
                             </div>
 
+                            {/* Mobile: two circles side by side, no absolute overlap */}
+                            <div className="flex sm:hidden gap-4 w-full">
+                                <div
+                                    className="relative flex-1 rounded-full overflow-hidden flex flex-col items-center justify-center text-white shadow-lg aspect-square max-w-[160px]"
+                                    style={{
+                                        backgroundImage: 'url(/images/porsche/porschecircleimage.png)',
+                                        backgroundSize: 'cover',
+                                        backgroundPosition: 'center',
+                                    }}
+                                >
+                                    <div className="absolute inset-0 bg-black/50"></div>
+                                    <div className="relative z-10 text-center px-2">
+                                        <div className="text-3xl font-bold mb-1">160+</div>
+                                        <div className="text-xs uppercase tracking-wide font-medium">Survey<br />Responses</div>
+                                    </div>
+                                </div>
+                                <div
+                                    className="relative flex-1 rounded-full overflow-hidden flex flex-col items-center justify-center text-white shadow-lg aspect-square max-w-[160px]"
+                                    style={{
+                                        backgroundImage: 'url(/images/porsche/porschecircleimage2.png)',
+                                        backgroundSize: 'cover',
+                                        backgroundPosition: 'center',
+                                    }}
+                                >
+                                    <div className="absolute inset-0 bg-black/50"></div>
+                                    <div className="relative z-10 text-center px-2">
+                                        <div className="text-3xl font-bold mb-1">30+</div>
+                                        <div className="text-xs uppercase tracking-wide font-medium">Interviews</div>
+                                    </div>
+                                </div>
+                            </div>
+
                             {/* Right - Research Topics List */}
-                            <div className="flex-1">
+                            <div className="flex-1 w-full">
                                 <ol className="space-y-6 text-base sm:text-xl md:text-2xl text-gray-700 list-decimal list-inside">
                                     <li>HMI Reports</li>
                                     <li>Sensory Experiences in EVs</li>
@@ -401,7 +408,7 @@ export default function PorschePage() {
 
             {/* What Porsche Drivers Expect Section */}
             <div
-                className="w-full relative h-[450px] md:h-[500px] flex items-center"
+                className="w-full relative min-h-[400px] md:h-[500px] flex items-center py-16 md:py-0"
                 style={{
                     backgroundImage: 'url(/images/porsche/porschedrivers.png)',
                     backgroundSize: 'cover',
@@ -410,7 +417,7 @@ export default function PorschePage() {
             >
                 <div className="absolute inset-0 bg-black/50"></div>
                 <div className="relative z-10 container mx-auto px-6 md:px-12 max-w-6xl">
-                    <h2 className="text-4xl md:text-6xl font-bold text-white mb-6 md:mb-8">
+                    <h2 className="text-3xl sm:text-4xl md:text-6xl font-bold text-white mb-6 md:mb-8">
                         What Porsche Drivers Expect
                     </h2>
                     <div className="w-24 h-1 bg-white mb-8"></div>
