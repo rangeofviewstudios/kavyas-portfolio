@@ -148,7 +148,7 @@ export function WorkSection() {
             <article
               key={project.id}
               ref={el => { cardRefs.current[index] = el; }}
-              className="rounded-2xl overflow-hidden sm:sticky will-change-transform mb-4 sm:mb-0"
+              className="sm:rounded-2xl sm:overflow-hidden sm:sticky will-change-transform mb-4 sm:mb-0"
               style={{
                 top: '80px',
                 zIndex: index + 1,
@@ -157,19 +157,22 @@ export function WorkSection() {
             >
               {project.title ? (
                 <>
-                  {/* Mobile layout: image + text below */}
-                  <div className="sm:hidden">
-                    <img src={project.cardImage} alt={project.alt} className="w-full h-auto rounded-t-2xl" />
-                    <div className={`p-5 rounded-b-2xl ${project.darkCard ? 'bg-[#1a1f2e]' : project.showLowesHeader ? 'bg-[#EAF0F8]' : 'bg-[#F5F3EF]'}`}>
+                  {/* Mobile layout: thumbnail + content in one card */}
+                  <div className={`sm:hidden rounded-2xl overflow-hidden shadow-sm ${project.darkCard ? 'bg-[#1a1f2e]' : project.showLowesHeader ? 'bg-[#EAF0F8]' : 'bg-[#F5F3EF]'}`}>
+                    <img src={project.cardImage} alt={project.alt} className="w-full h-auto block" />
+                    <div className="p-5 pt-4">
                       {project.showLowesHeader && (
-                        <div className="flex items-center gap-2 mb-1">
-                          <img src="/images/lowes.png" alt="Lowes Logo" className="h-6 w-auto" />
-                          <span className="h-6 w-[1.5px] bg-[#A8A8A8] inline-block" />
-                          <span className="text-base font-normal text-[#A8A8A8]">SCADpro</span>
+                        <div className="flex items-center gap-2 mb-2">
+                          <img src="/images/lowes.png" alt="Lowes Logo" className="h-5 w-auto" />
+                          <span className="h-4 w-[1.5px] bg-[#A8A8A8] inline-block" />
+                          <span className="text-sm font-normal text-[#A8A8A8]">SCADpro</span>
+                          <span className="ml-auto text-xs text-[#8A8A8A]">NDA Protected</span>
                         </div>
                       )}
-                      {project.showLowesHeader && <p className="text-xs text-[#8A8A8A] mb-3">NDA Protected</p>}
-                      <h3 className="text-lg font-bold mb-4 leading-tight" style={{ color: project.darkCard ? '#FFF' : project.showLowesHeader ? '#003D7A' : '#2A2A2A' }}>
+                      {project.isNda && !project.showLowesHeader && (
+                        <p className="text-xs text-[#8A8A8A] mb-1">NDA Protected</p>
+                      )}
+                      <h3 className="text-base font-bold mb-4 leading-tight" style={{ color: project.darkCard ? '#FFF' : project.showLowesHeader ? '#003D7A' : '#2A2A2A' }}>
                         {project.title}
                       </h3>
                       <Link

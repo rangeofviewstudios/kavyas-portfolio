@@ -16,7 +16,7 @@ export function HeroSection() {
           alt="Kavya Ray - UX Designer at SCAD"
           fill
           priority
-          className="object-cover object-top sm:object-center"
+          className="object-cover [object-position:70%_20%] sm:[object-position:center]"
         />
         {/* Gradient scrim so text is legible on mobile */}
         <div className="absolute inset-0 bg-gradient-to-t from-[#2a3220]/80 via-[#2a3220]/30 to-transparent sm:bg-gradient-to-r sm:from-[#2a3220]/60 sm:via-[#2a3220]/20 sm:to-transparent" />

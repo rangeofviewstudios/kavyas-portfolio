@@ -54,7 +54,7 @@ export function Footer() {
           <h1
             className="font-bold tracking-wider whitespace-nowrap"
             style={{
-              fontSize: 'clamp(2.5rem, 12vw, 12rem)',
+              fontSize: 'clamp(3rem, calc((100vw - 3rem) / 6.2), 12rem)',
               color: '#FFFFFF',
               lineHeight: '1',
               letterSpacing: '0.05em',
