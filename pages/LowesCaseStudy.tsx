@@ -7,7 +7,7 @@ const LowesCaseStudy = () => {
             <Navigation />
             <main>
                 {/* Hero Image Section */}
-                <div className="w-full mt-20">
+                <div className="w-full mt-10 sm:mt-20">
                     <img
                         src="/images/lowesbanner.png"
                         alt="Lowes Team"
@@ -16,9 +16,9 @@ const LowesCaseStudy = () => {
                 </div>
 
                 {/* Content Section */}
-                <div className="container mx-auto px-6 py-16 max-w-6xl">
+                <div className="container mx-auto px-4 sm:px-6 py-8 sm:py-16 max-w-6xl">
                     {/* Title */}
-                    <h1 className="text-3xl md:text-5xl font-semibold text-gray-900 mb-8 lg:mb-16">
+                    <h1 className="text-2xl sm:text-3xl md:text-5xl font-semibold text-gray-900 mb-8 lg:mb-16">
                         Lowes x SCADpro
                     </h1>
 
@@ -69,18 +69,18 @@ const LowesCaseStudy = () => {
                     </div>
 
                     {/* My Contributions Section */}
-                    <div className="mt-20">
-                        <h2 className="text-3xl md:text-4xl font-semibold text-gray-900 mb-6">
+                    <div className="mt-10 sm:mt-20">
+                        <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold text-gray-900 mb-6">
                             My Contributions
                         </h2>
-                        <p className="text-base text-gray-900 leading-relaxed mb-12" style={{ color: 'rgba(0, 0, 0, 0.60)' }}>
+                        <p className="text-base text-gray-900 leading-relaxed mb-8 sm:mb-12" style={{ color: 'rgba(0, 0, 0, 0.60)' }}>
                             As part of the UX Research and presentation team, I conducted thorough research through different research methods. This included gathering thorough
                         </p>
 
                         {/* Contribution Cards */}
-                        <div className="grid md:grid-cols-3 gap-6">
+                        <div className="grid md:grid-cols-3 gap-4 sm:gap-6">
                             {/* Card 01 */}
-                            <div className="border-2 border-gray-200 rounded-2xl p-8 group cursor-pointer transition-all duration-300 hover:border-[#343F28] hover:shadow-lg">
+                            <div className="border-2 border-gray-200 rounded-2xl p-5 sm:p-8 group cursor-pointer transition-all duration-300 hover:border-[#343F28] hover:shadow-lg">
                                 <div className="mb-6">
                                     <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                                         <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
@@ -96,7 +96,7 @@ const LowesCaseStudy = () => {
                             </div>
 
                             {/* Card 02 */}
-                            <div className="border-2 border-gray-200 rounded-2xl p-8 group cursor-pointer transition-all duration-300 hover:border-[#343F28] hover:shadow-lg">
+                            <div className="border-2 border-gray-200 rounded-2xl p-5 sm:p-8 group cursor-pointer transition-all duration-300 hover:border-[#343F28] hover:shadow-lg">
                                 <div className="mb-6">
                                     <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                                         <rect x="3" y="3" width="7" height="7"></rect>
@@ -112,7 +112,7 @@ const LowesCaseStudy = () => {
                             </div>
 
                             {/* Card 03 */}
-                            <div className="border-2 border-gray-200 rounded-2xl p-8 group cursor-pointer transition-all duration-300 hover:border-[#343F28] hover:shadow-lg">
+                            <div className="border-2 border-gray-200 rounded-2xl p-5 sm:p-8 group cursor-pointer transition-all duration-300 hover:border-[#343F28] hover:shadow-lg">
                                 <div className="mb-6">
                                     <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                                         <path d="M9 5H2v7l6.29 6.29c.94.94 2.48.94 3.42 0l3.58-3.58c.94-.94.94-2.48 0-3.42L9 5Z"></path>
@@ -129,22 +129,22 @@ const LowesCaseStudy = () => {
                     </div>
 
                     {/* Research Section */}
-                    <div className="mt-20">
-                        <h2 className="text-3xl md:text-5xl font-semibold mb-8 lg:mb-12" style={{ color: '#343F28' }}>
+                    <div className="mt-10 sm:mt-20">
+                        <h2 className="text-2xl sm:text-3xl md:text-5xl font-semibold mb-8 lg:mb-12" style={{ color: '#343F28' }}>
                             Research
                         </h2>
 
                         {/* Understanding the Garden Market */}
                         <div className="mb-12">
-                            <h3 className="text-2xl md:text-3xl font-semibold text-gray-900 mb-6">
+                            <h3 className="text-xl sm:text-3xl font-semibold text-gray-900 mb-6">
                                 Understanding the Garden Market
                             </h3>
-                            <p className="text-base leading-relaxed mb-12" style={{ color: 'rgba(0, 0, 0, 0.60)' }}>
+                            <p className="text-base leading-relaxed mb-8 sm:mb-12" style={{ color: 'rgba(0, 0, 0, 0.60)' }}>
                                 This project aimed to uncover hidden friction points within the garden center experience to better understand user behaviors, challenges, and motivations. By identifying these insights, we sought to address the distinct needs of both customers and employees, creating a more cohesive, efficient, and enjoyable experience for everyone involved.
                             </p>
 
                             {/* User Type Cards */}
-                            <div className="grid md:grid-cols-3 gap-6">
+                            <div className="grid md:grid-cols-3 gap-4 sm:gap-6">
                                 {/* Patient/User */}
                                 <div>
                                     <div className="rounded-2xl overflow-hidden mb-4">
@@ -155,7 +155,7 @@ const LowesCaseStudy = () => {
                                         />
                                     </div>
                                     <div
-                                        className="flex h-[91px] w-full items-center justify-center text-white font-medium text-2xl transition-all hover:brightness-110 hover:scale-105 cursor-pointer"
+                                        className="flex h-[60px] sm:h-[91px] w-full items-center justify-center text-white font-medium text-xl sm:text-2xl transition-all hover:brightness-110 hover:scale-105 cursor-pointer"
                                         style={{ background: 'linear-gradient(90deg, #2E6B5F 0%, #5AD1B9 100%)', borderRadius: '11.146px' }}
                                     >
                                         Patient/User
@@ -172,7 +172,7 @@ const LowesCaseStudy = () => {
                                         />
                                     </div>
                                     <div
-                                        className="flex h-[91px] w-full items-center justify-center text-white font-medium text-2xl transition-all hover:brightness-110 hover:scale-105 cursor-pointer"
+                                        className="flex h-[60px] sm:h-[91px] w-full items-center justify-center text-white font-medium text-xl sm:text-2xl transition-all hover:brightness-110 hover:scale-105 cursor-pointer"
                                         style={{ background: 'linear-gradient(90deg, #2E6B5F 0%, #5AD1B9 100%)', borderRadius: '11.146px' }}
                                     >
                                         Family Members
@@ -189,7 +189,7 @@ const LowesCaseStudy = () => {
                                         />
                                     </div>
                                     <div
-                                        className="flex h-[91px] w-full items-center justify-center text-white font-medium text-2xl transition-all hover:brightness-110 hover:scale-105 cursor-pointer"
+                                        className="flex h-[60px] sm:h-[91px] w-full items-center justify-center text-white font-medium text-xl sm:text-2xl transition-all hover:brightness-110 hover:scale-105 cursor-pointer"
                                         style={{ background: 'linear-gradient(90deg, #2E6B5F 0%, #5AD1B9 100%)', borderRadius: '11.146px' }}
                                     >
                                         Caregiver
@@ -200,8 +200,8 @@ const LowesCaseStudy = () => {
                     </div>
 
                     {/* Design Process Section */}
-                    <div className="mt-20">
-                        <h2 className="text-3xl md:text-5xl font-semibold mb-8 lg:mb-12" style={{ color: '#343F28' }}>
+                    <div className="mt-10 sm:mt-20">
+                        <h2 className="text-2xl sm:text-3xl md:text-5xl font-semibold mb-8 lg:mb-12" style={{ color: '#343F28' }}>
                             Design Process
                         </h2>
 
@@ -215,7 +215,7 @@ const LowesCaseStudy = () => {
                                 />
                             </div>
                             <div className="flex-1">
-                                <h3 className="text-2xl md:text-3xl font-semibold text-gray-900 mb-4">Iteration</h3>
+                                <h3 className="text-xl sm:text-3xl font-semibold text-gray-900 mb-4">Iteration</h3>
                                 <p className="text-base text-gray-900 leading-relaxed">
                                     During this phase, we explored multiple design directions, using research insights and user feedback to refine our ideas. Rapid prototyping and continuous testing allowed us to identify what resonated most with users and adapt our approach accordingly.
                                 </p>
@@ -225,7 +225,7 @@ const LowesCaseStudy = () => {
                         {/* Execution */}
                         <div className="flex flex-col lg:flex-row gap-8 mb-16 items-start">
                             <div className="flex-1 order-2 lg:order-1">
-                                <h3 className="text-2xl md:text-3xl font-semibold text-gray-900 mb-4">Execution</h3>
+                                <h3 className="text-xl sm:text-3xl font-semibold text-gray-900 mb-4">Execution</h3>
                                 <p className="text-base text-gray-900 leading-relaxed">
                                     Once we aligned on a clear direction, we focused on building high-fidelity designs and ensuring they met user needs and business goals. This stage emphasized attention to detail, consistency, and collaboration across the UI, research, and strategy teams.
                                 </p>
@@ -249,7 +249,7 @@ const LowesCaseStudy = () => {
                                 />
                             </div>
                             <div className="flex-1">
-                                <h3 className="text-2xl md:text-3xl font-semibold text-gray-900 mb-4">Deliver</h3>
+                                <h3 className="text-xl sm:text-3xl font-semibold text-gray-900 mb-4">Deliver</h3>
                                 <p className="text-base text-gray-900 leading-relaxed">
                                     The final phase centered on presenting our work to clients and communicating the design rationale clearly. We delivered polished designs backed by user data, showcasing not just the final product but the decisions and insights that shaped it.
                                 </p>
@@ -258,8 +258,8 @@ const LowesCaseStudy = () => {
                     </div>
 
                     {/* Takeaways Section */}
-                    <div className="mt-20">
-                        <h2 className="text-3xl md:text-5xl font-semibold mb-8 lg:mb-12" style={{ color: '#343F28' }}>
+                    <div className="mt-10 sm:mt-20">
+                        <h2 className="text-2xl sm:text-3xl md:text-5xl font-semibold mb-8 lg:mb-12" style={{ color: '#343F28' }}>
                             Takeaways
                         </h2>
 

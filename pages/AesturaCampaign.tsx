@@ -36,8 +36,8 @@ const AesturaCampaign = () => {
                 </div>
 
                 {/* Brand Challenge Section */}
-                <div className="container mx-auto px-6 py-20 max-w-6xl">
-                    <h2 className="text-3xl md:text-5xl font-semibold mb-8 lg:mb-16 text-black">Aestura Brand Challenge</h2>
+                <div className="container mx-auto px-4 sm:px-6 py-8 sm:py-16 max-w-6xl">
+                    <h2 className="text-2xl sm:text-3xl md:text-5xl font-semibold mb-8 lg:mb-16 text-black">Aestura Brand Challenge</h2>
 
                     {/* Project Details Grid with Dividers */}
                     <div className="grid grid-cols-2 lg:flex lg:items-start gap-8 lg:gap-12 mb-12 lg:mb-16">
@@ -63,7 +63,7 @@ const AesturaCampaign = () => {
                         </div>
                     </div>
 
-                    <div className="mt-16 text-gray-800 text-lg leading-relaxed max-w-4xl">
+                    <div className="mt-8 sm:mt-16 text-gray-800 text-lg leading-relaxed max-w-4xl">
                         Qualified as a Semi-Finalist in AmorePacific's global brand challenge by developing a U.S. market entry strategy for Aestura, showcasing skills in research, strategy, and brand positioning.
                     </div>
                 </div>
@@ -80,21 +80,21 @@ const AesturaCampaign = () => {
                     </div>
 
                     <div className="relative z-10 text-center text-white px-6 max-w-5xl mx-auto py-20">
-                        <h2 className="text-5xl md:text-6xl font-medium mb-12">How Might We?</h2>
-                        <p className="text-3xl md:text-4xl md:leading-normal font-light">
+                        <h2 className="text-2xl sm:text-3xl md:text-5xl font-medium mb-8 sm:mb-12">How Might We?</h2>
+                        <p className="text-xl sm:text-3xl md:text-4xl md:leading-normal font-light">
                             We're turning Aestura into the skincare essential consumers trust, crave, and can't live without.
                         </p>
                     </div>
                 </div>
 
                 {/* Research Section */}
-                <div className="container mx-auto px-6 py-20 max-w-6xl">
-                    <h2 className="text-3xl md:text-5xl font-semibold mb-8 lg:mb-12" style={{ color: '#343F28' }}>
+                <div className="container mx-auto px-4 sm:px-6 py-8 sm:py-16 max-w-6xl">
+                    <h2 className="text-2xl sm:text-3xl md:text-5xl font-semibold mb-8 lg:mb-12" style={{ color: '#343F28' }}>
                         Research
                     </h2>
 
-                    <div className="mb-16">
-                        <h3 className="text-3xl font-semibold text-gray-900 mb-6">
+                    <div className="mb-8 sm:mb-16">
+                        <h3 className="text-xl sm:text-3xl font-semibold text-gray-900 mb-6">
                             Understanding the Skin Care Market
                         </h3>
                         <p className="text-base text-gray-600 leading-relaxed max-w-4xl">
@@ -125,7 +125,7 @@ const AesturaCampaign = () => {
                         <div className="relative flex-1 rounded-[32px] bg-[#343F28] text-white p-12 min-h-[400px] flex flex-col overflow-hidden">
                             {/* Top Stats */}
                             <div className="relative z-10">
-                                <div className="text-[120px] font-bold leading-none tracking-tighter mb-4">92%</div>
+                                <div className="text-6xl sm:text-[120px] font-bold leading-none tracking-tighter mb-4">92%</div>
                                 <div className="inline-flex items-center px-6 py-3 bg-white rounded-full text-black font-bold text-lg shadow-lg">
                                     +61% growth
                                 </div>
@@ -164,16 +164,16 @@ const AesturaCampaign = () => {
 
                         {/* Floating Center Card */}
                         <div className="absolute bottom-[-30px] left-1/2 transform -translate-x-1/2 bg-[#343F28]/10 p-8 rounded-3xl shadow-xl w-[300px] z-20 text-center">
-                            <div className="text-5xl font-bold text-black mb-2">57%</div>
+                            <div className="text-4xl sm:text-5xl font-bold text-black mb-2">57%</div>
                             <div className="text-sm font-medium text-gray-800">growth of phygital experiences</div>
                         </div>
                     </div>
                 </div>
 
                 {/* Customer Profile Section */}
-                <div className="container mx-auto px-6 py-20 max-w-7xl relative">
-                    <div className="flex flex-col md:flex-row justify-between items-start mb-20">
-                        <h2 className="text-5xl md:text-6xl text-black font-light">
+                <div className="container mx-auto px-4 sm:px-6 py-8 sm:py-16 max-w-7xl relative">
+                    <div className="flex flex-col md:flex-row justify-between items-start mb-10 sm:mb-20">
+                        <h2 className="text-2xl sm:text-3xl md:text-5xl text-black font-light">
                             Customer <span className="italic font-light text-[#343F28]">PROFILE</span>
                         </h2>
                         <blockquote className="md:max-w-md text-right mt-8 md:mt-0">
@@ -364,9 +364,9 @@ const AesturaCampaign = () => {
                 </div>
 
                 {/* Campaign Strategy Section */}
-                <div className="container mx-auto px-6 py-24 max-w-7xl">
-                    <div className="mb-12">
-                        <h2 className="text-5xl font-semibold mb-4" style={{ color: '#343F28' }}>
+                <div className="container mx-auto px-4 sm:px-6 py-8 sm:py-16 max-w-7xl">
+                    <div className="mb-8 sm:mb-12">
+                        <h2 className="text-2xl sm:text-3xl md:text-5xl font-semibold mb-4" style={{ color: '#343F28' }}>
                             Campaign Strategy
                         </h2>
                         <p className="text-xl text-gray-800">
@@ -478,9 +478,9 @@ const AesturaCampaign = () => {
                 </div>
 
                 {/* Brand Presence & Opportunity Section */}
-                <div className="container mx-auto px-6 py-24 max-w-7xl">
-                    <div className="mb-16">
-                        <h2 className="text-4xl md:text-5xl font-semibold mb-6 text-black">
+                <div className="container mx-auto px-4 sm:px-6 py-8 sm:py-16 max-w-7xl">
+                    <div className="mb-8 sm:mb-16">
+                        <h2 className="text-2xl sm:text-3xl md:text-5xl font-semibold mb-6 text-black">
                             How We Can Establish a Presence in the USA
                         </h2>
                         <p className="text-lg text-gray-700 leading-relaxed max-w-5xl">
@@ -503,7 +503,7 @@ const AesturaCampaign = () => {
                         {/* Right Side - Brand Opportunity */}
                         <div className="md:w-[60%] p-10 md:p-14 flex flex-col justify-center text-white">
                             <div className="border-l-4 border-[#343F28] pl-6 mb-8">
-                                <h3 className="text-3xl md:text-4xl italic font-medium leading-tight">
+                                <h3 className="text-xl sm:text-3xl md:text-4xl italic font-medium leading-tight">
                                     Brand<br />Opportunity
                                 </h3>
                             </div>
@@ -516,9 +516,9 @@ const AesturaCampaign = () => {
                 </div>
 
                 {/* Strategic Impact Section */}
-                <div className="container mx-auto px-6 py-24 max-w-7xl">
-                    <div className="flex flex-col md:flex-row justify-between items-start mb-20 gap-12">
-                        <h2 className="text-5xl md:text-6xl text-black font-light leading-tight">
+                <div className="container mx-auto px-4 sm:px-6 py-8 sm:py-16 max-w-7xl">
+                    <div className="flex flex-col md:flex-row justify-between items-start mb-10 sm:mb-20 gap-12">
+                        <h2 className="text-2xl sm:text-3xl md:text-5xl text-black font-light leading-tight">
                             Strategic<br />
                             <span className="italic font-light text-[#343F28]">Impact</span>
                         </h2>
@@ -527,7 +527,7 @@ const AesturaCampaign = () => {
                         </p>
                     </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+                    <div className="grid grid-cols-1 md:grid-cols-4 gap-4 sm:gap-8">
                         {/* Step 1 */}
                         <div className="flex flex-col items-center text-center relative">
                             <div className="w-48 h-48 rounded-full overflow-hidden mb-8 border-4 border-white shadow-lg z-10 relative">
@@ -605,8 +605,8 @@ const AesturaCampaign = () => {
                 </div>
 
                 {/* Takeaways Section */}
-                <div className="container mx-auto px-6 py-24 max-w-5xl">
-                    <h2 className="text-3xl md:text-5xl font-semibold mb-8 lg:mb-12 text-[#343F28]">
+                <div className="container mx-auto px-4 sm:px-6 py-8 sm:py-16 max-w-5xl">
+                    <h2 className="text-2xl sm:text-3xl md:text-5xl font-semibold mb-8 lg:mb-12 text-[#343F28]">
                         Takeaways
                     </h2>
 

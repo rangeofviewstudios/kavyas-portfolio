@@ -16,10 +16,10 @@ export default function LoomaPage() {
                 />
             </div>
 
-            <main className="container mx-auto px-6 py-20">
+            <main className="container mx-auto px-4 sm:px-6 py-8 sm:py-16">
                 {/* Project Header */}
-                <div className="max-w-5xl mx-auto mb-20 animate-fade-in-up">
-                    <h1 className="text-4xl md:text-5xl font-medium mb-16 text-black">LOOMA x StartUp</h1>
+                <div className="max-w-5xl mx-auto mb-10 sm:mb-20 animate-fade-in-up">
+                    <h1 className="text-2xl sm:text-4xl md:text-5xl font-medium mb-16 text-black">LOOMA x StartUp</h1>
 
                     {/* Project Details Grid */}
                     <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-8 md:gap-4 mb-20 border-b border-gray-100 pb-10 md:border-none md:pb-0">
@@ -61,7 +61,7 @@ export default function LoomaPage() {
                 </div>
 
                 {/* Quote Section */}
-                <div className="max-w-5xl mx-auto mb-20 animate-fade-in-up">
+                <div className="max-w-5xl mx-auto mb-10 sm:mb-20 animate-fade-in-up">
                     <div
                         className="w-full relative overflow-hidden flex flex-col md:flex-row items-center md:items-end"
                         style={{
@@ -92,15 +92,15 @@ export default function LoomaPage() {
                 </div>
 
                 {/* The Situation at Hand Section */}
-                <div className="max-w-5xl mx-auto mb-20 animate-fade-in-up">
-                    <h2 className="text-4xl md:text-5xl font-medium mb-8 text-black">The Situation at Hand</h2>
+                <div className="max-w-5xl mx-auto mb-10 sm:mb-20 animate-fade-in-up">
+                    <h2 className="text-2xl sm:text-3xl md:text-5xl font-medium mb-8 text-black">The Situation at Hand</h2>
                     <p className="text-lg md:text-xl text-gray-700 leading-relaxed">
                         People with Alzheimer's and dementia struggle with memory loss, affecting their ability to recognize familiar faces, maintain daily routines, and navigate their surroundings. This not only leads to confusion and anxiety for the individuals but also creates emotional and logistical challenges for their caregivers, family, and friends, who often feel overwhelmed and helpless in providing adequate support.
                     </p>
                 </div>
 
                 {/* Looma Question Section */}
-                <div className="w-full mb-20 animate-fade-in-up">
+                <div className="w-full mb-10 sm:mb-20 animate-fade-in-up">
                     <div
                         className="relative w-full h-[500px] md:h-[600px] flex items-center justify-center overflow-hidden"
                         style={{
@@ -122,15 +122,15 @@ export default function LoomaPage() {
                 </div>
 
                 {/* Our Approach Section */}
-                <div className="max-w-5xl mx-auto mb-20 animate-fade-in-up">
-                    <h2 className="text-4xl md:text-5xl font-medium mb-8 text-black">Our Approach</h2>
+                <div className="max-w-5xl mx-auto mb-10 sm:mb-20 animate-fade-in-up">
+                    <h2 className="text-2xl sm:text-3xl md:text-5xl font-medium mb-8 text-black">Our Approach</h2>
                     <p className="text-lg md:text-xl text-gray-700 leading-relaxed">
                         To develop an product ecosystem centered around AR glasses that assist individuals with Alzheimer's and dementia by enhancing memory recall, providing routine reminders, and improving spatial awareness. The solution aims to empower caregivers and loved ones with real-time insights and support, fostering a more independent life for patients while easing emotional burdens.
                     </p>
                 </div>
 
                 {/* AR Glasses Demo Image */}
-                <div className="w-full mb-20 animate-fade-in-up">
+                <div className="w-full mb-10 sm:mb-20 animate-fade-in-up">
                     <img
                         src="/images/looma/looma4.png"
                         alt="Looma AR Glasses Demo"
@@ -139,11 +139,11 @@ export default function LoomaPage() {
                 </div>
 
                 {/* Research Section */}
-                <div className="w-full mb-20 animate-fade-in-up bg-white py-20">
+                <div className="w-full mb-10 sm:mb-20 animate-fade-in-up bg-white py-20">
                     <div className="max-w-7xl mx-auto px-6">
                         {/* Section Header */}
                         <div className="mb-16">
-                            <h2 className="text-5xl md:text-6xl font-medium mb-4" style={{ color: '#343F28' }}>
+                            <h2 className="text-2xl sm:text-3xl md:text-5xl font-medium mb-4" style={{ color: '#343F28' }}>
                                 Research
                             </h2>
                             <p className="text-xl text-gray-800">
@@ -207,14 +207,14 @@ export default function LoomaPage() {
                         </div>
 
                         {/* Leading Cause of Death Section */}
-                        <div className="mt-20 bg-[#343F28]/10 rounded-3xl p-12 md:p-16 flex flex-col md:flex-row items-center justify-between gap-8">
+                        <div className="mt-10 sm:mt-20 bg-[#343F28]/10 rounded-3xl p-12 md:p-16 flex flex-col md:flex-row items-center justify-between gap-8">
                             <div className="text-center md:text-left">
-                                <h3 className="text-7xl md:text-8xl font-bold mb-4 text-black">
+                                <h3 className="text-5xl sm:text-7xl md:text-8xl font-bold mb-4 text-black">
                                     N°7
                                 </h3>
                             </div>
                             <div className="flex-1 text-center md:text-left">
-                                <h4 className="text-3xl md:text-4xl font-semibold mb-4 text-black">
+                                <h4 className="text-xl sm:text-3xl md:text-4xl font-semibold mb-4 text-black">
                                     Leading Cause of Death
                                 </h4>
                                 <p className="text-lg md:text-xl text-black">
@@ -226,14 +226,14 @@ export default function LoomaPage() {
                 </div>
 
                 {/* Initial Target Audience Section */}
-                <div className="max-w-6xl mx-auto mb-20 animate-fade-in-up">
-                    <h2 className="text-4xl md:text-5xl font-medium mb-8 text-black">Initial Target Audience</h2>
-                    <p className="text-lg md:text-xl text-gray-700 leading-relaxed mb-16">
+                <div className="max-w-6xl mx-auto mb-10 sm:mb-20 animate-fade-in-up">
+                    <h2 className="text-2xl sm:text-3xl md:text-5xl font-medium mb-8 text-black">Initial Target Audience</h2>
+                    <p className="text-lg md:text-xl text-gray-700 leading-relaxed mb-8 sm:mb-16">
                         To develop an product ecosystem centered around AR glasses that assist individuals with Alzheimer's and dementia by enhancing memory recall, providing routine reminders, and improving spatial awareness. The solution aims to empower caregivers and loved ones with real-time insights and support, fostering a more independent life for patients while easing emotional burdens.
                     </p>
 
                     {/* Three Cards */}
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-8 mb-16">
                         {/* Patient/User Card */}
                         <div className="flex flex-col items-center">
                             <div className="w-full aspect-square rounded-2xl overflow-hidden mb-4 border-4 border-gray-200">
@@ -287,8 +287,8 @@ export default function LoomaPage() {
                     </div>
 
                     {/* How Might We Box */}
-                    <div className="border-4 border-gray-300 rounded-3xl p-8 md:p-12 bg-white">
-                        <h3 className="text-3xl md:text-4xl font-semibold mb-6 text-black">How Might We?</h3>
+                    <div className="border-4 border-gray-300 rounded-3xl p-5 sm:p-8 md:p-12 bg-white">
+                        <h3 className="text-xl sm:text-3xl md:text-4xl font-semibold mb-6 text-black">How Might We?</h3>
                         <p className="text-xl md:text-2xl text-gray-800 leading-relaxed">
                             How might we create a connected system that improves independence for Alzheimer's and dementia patients while easing the caregiving experience?
                         </p>
@@ -296,8 +296,8 @@ export default function LoomaPage() {
                 </div>
 
                 {/* Product Ecosystem Section */}
-                <div className="w-full mb-20 animate-fade-in-up">
-                    <div className="max-w-7xl mx-auto px-6">
+                <div className="w-full mb-10 sm:mb-20 animate-fade-in-up">
+                    <div className="max-w-7xl mx-auto px-4 sm:px-6">
                         {/* Facial Recognition - Text Left, Image Right */}
                         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-32">
                             <div className="space-y-4">
@@ -361,7 +361,7 @@ export default function LoomaPage() {
                 </div>
 
                 {/* Main Functions Section */}
-                <div className="max-w-6xl mx-auto mb-20 animate-fade-in-up">
+                <div className="max-w-6xl mx-auto mb-10 sm:mb-20 animate-fade-in-up">
                     {/* Mobile App Screens Image */}
                     <div className="w-full mb-16">
                         <img
@@ -373,7 +373,7 @@ export default function LoomaPage() {
 
                     {/* Main Functions List */}
                     <div className="space-y-8">
-                        <h2 className="text-4xl md:text-5xl font-medium mb-12 text-black">Main Functions</h2>
+                        <h2 className="text-2xl sm:text-3xl md:text-5xl font-medium mb-8 sm:mb-12 text-black">Main Functions</h2>
 
                         {/* Caregivers Support Portal */}
                         <div className="flex gap-4">
@@ -416,7 +416,7 @@ export default function LoomaPage() {
                 </div>
 
                 {/* Takeaways Section */}
-                <div className="w-full mb-20 animate-fade-in-up">
+                <div className="w-full mb-10 sm:mb-20 animate-fade-in-up">
                     {/* Glasses Hero Image */}
                     <div className="w-full bg-[#E8E4DD] py-20 mb-16">
                         <div className="max-w-4xl mx-auto px-6 flex items-center justify-center">
@@ -437,7 +437,7 @@ export default function LoomaPage() {
 
                     {/* Takeaways Content */}
                     <div className="max-w-4xl mx-auto px-6">
-                        <h2 className="text-5xl md:text-6xl font-medium mb-12" style={{ color: '#343F28' }}>Takeaways</h2>
+                        <h2 className="text-2xl sm:text-3xl md:text-5xl font-medium mb-8 sm:mb-12" style={{ color: '#343F28' }}>Takeaways</h2>
 
                         <div className="space-y-6">
                             {/* Takeaway 1 - Collaboration */}

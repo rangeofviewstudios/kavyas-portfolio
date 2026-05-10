@@ -53,10 +53,10 @@ export default function PorschePage() {
                 </div>
             </div>
 
-            <main className="container mx-auto px-6 py-20">
+            <main className="container mx-auto px-4 sm:px-6 py-8 sm:py-16">
                 {/* Project Header */}
-                <div className="max-w-5xl mx-auto mb-20 animate-fade-in-up">
-                    <h1 className="text-4xl md:text-5xl font-medium mb-16 text-black">Porsche x SCADpro Collaboration</h1>
+                <div className="max-w-5xl mx-auto mb-10 sm:mb-20 animate-fade-in-up">
+                    <h1 className="text-2xl sm:text-4xl md:text-5xl font-medium mb-16 text-black">Porsche x SCADpro Collaboration</h1>
 
                     {/* Project Details Grid */}
                     <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-8 md:gap-4 mb-20 border-b border-gray-100 pb-10 md:border-none md:pb-0">
@@ -127,50 +127,49 @@ export default function PorschePage() {
                 <div className="container mx-auto px-6">
                     <div className="max-w-6xl mx-auto">
                         {/* Research Header */}
-                        <h2 className="text-5xl md:text-6xl font-medium text-gray-800 mb-12">
+                        <h2 className="text-2xl sm:text-3xl md:text-5xl font-medium text-gray-800 mb-12">
                             Research
                         </h2>
 
                         {/* Research Subheading */}
-                        <h3 className="text-2xl md:text-3xl font-semibold text-gray-900 mb-6">
+                        <h3 className="text-xl sm:text-3xl font-semibold text-gray-900 mb-6">
                             Understanding the Porsche EV Market
                         </h3>
 
                         {/* Research Description */}
-                        <p className="text-base md:text-lg text-gray-700 leading-relaxed mb-16 max-w-4xl">
+                        <p className="text-base md:text-lg text-gray-700 leading-relaxed mb-8 sm:mb-16 max-w-4xl">
                             Catering to these diverse expectations while balancing digital natives and long-time loyalists requires more than a flexible, unmistakably Porsche experience. It depends on understanding who these audiences are and what they value, allowing the brand to evolve for new needs while preserving the heritage its loyal customers trust.
                         </p>
 
                         {/* Three Cards */}
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 mb-8">
                             {/* Card 01 */}
-                            <div className="border-2 border-gray-300 rounded-2xl p-8 text-center group cursor-pointer transition-all duration-300 hover:border-[#343F28] hover:shadow-lg">
+                            <div className="border-2 border-gray-300 rounded-2xl p-5 sm:p-8 text-center group cursor-pointer transition-all duration-300 hover:border-[#343F28] hover:shadow-lg">
                                 <div className="text-6xl font-bold text-gray-900 mb-4 transition-all duration-500 ease-out group-hover:scale-110 group-hover:bg-gradient-to-r group-hover:from-[#343F28] group-hover:to-[#343F28] group-hover:bg-clip-text group-hover:text-transparent">01</div>
                                 <p className="text-base font-medium text-gray-700">First Time<br />Porsche Buyers</p>
                             </div>
 
                             {/* Card 02 */}
-                            <div className="border-2 border-gray-300 rounded-2xl p-8 text-center group cursor-pointer transition-all duration-300 hover:border-[#343F28] hover:shadow-lg">
+                            <div className="border-2 border-gray-300 rounded-2xl p-5 sm:p-8 text-center group cursor-pointer transition-all duration-300 hover:border-[#343F28] hover:shadow-lg">
                                 <div className="text-6xl font-bold text-gray-900 mb-4 transition-all duration-500 ease-out group-hover:scale-110 group-hover:bg-gradient-to-r group-hover:from-[#343F28] group-hover:to-[#343F28] group-hover:bg-clip-text group-hover:text-transparent">02</div>
                                 <p className="text-base font-medium text-gray-700">Porsche Owners<br />exploring EV's</p>
                             </div>
 
                             {/* Card 03 */}
-                            <div className="border-2 border-gray-300 rounded-2xl p-8 text-center group cursor-pointer transition-all duration-300 hover:border-[#343F28] hover:shadow-lg">
+                            <div className="border-2 border-gray-300 rounded-2xl p-5 sm:p-8 text-center group cursor-pointer transition-all duration-300 hover:border-[#343F28] hover:shadow-lg">
                                 <div className="text-6xl font-bold text-gray-900 mb-4 transition-all duration-500 ease-out group-hover:scale-110 group-hover:bg-gradient-to-r group-hover:from-[#343F28] group-hover:to-[#343F28] group-hover:bg-clip-text group-hover:text-transparent">03</div>
                                 <p className="text-base font-medium text-gray-700">General EV Car<br />Owners</p>
                             </div>
                         </div>
 
                         {/* Audience Type Labels */}
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6">
                             <div className="text-center">
                                 <div
-                                    className="inline-flex justify-center items-center text-white font-medium text-base"
+                                    className="inline-flex justify-center items-center text-white font-medium text-xl sm:text-3xl h-[60px] sm:h-[76px]"
                                     style={{
                                         borderRadius: '11.146px',
                                         background: 'linear-gradient(90deg, #2E6B5F 0%, #5AD1B9 100%)',
-                                        height: '75.792px',
                                         padding: '21.177px 71.333px',
                                         gap: '11.146px',
                                     }}
@@ -180,11 +179,10 @@ export default function PorschePage() {
                             </div>
                             <div className="text-center">
                                 <div
-                                    className="inline-flex justify-center items-center text-white font-medium text-base"
+                                    className="inline-flex justify-center items-center text-white font-medium text-xl sm:text-3xl h-[60px] sm:h-[76px]"
                                     style={{
                                         borderRadius: '11.146px',
                                         background: 'linear-gradient(90deg, #2E6B5F 0%, #5AD1B9 100%)',
-                                        height: '75.792px',
                                         padding: '21.177px 71.333px',
                                         gap: '11.146px',
                                     }}
@@ -194,11 +192,10 @@ export default function PorschePage() {
                             </div>
                             <div className="text-center">
                                 <div
-                                    className="inline-flex justify-center items-center text-white font-medium text-base"
+                                    className="inline-flex justify-center items-center text-white font-medium text-xl sm:text-3xl h-[60px] sm:h-[76px]"
                                     style={{
                                         borderRadius: '11.146px',
                                         background: 'linear-gradient(90deg, #2E6B5F 0%, #5AD1B9 100%)',
-                                        height: '75.792px',
                                         padding: '21.177px 71.333px',
                                         gap: '11.146px',
                                     }}
@@ -216,17 +213,17 @@ export default function PorschePage() {
                 <div className="container mx-auto px-6">
                     <div className="max-w-6xl mx-auto">
                         {/* Section Header */}
-                        <h2 className="text-4xl md:text-5xl font-semibold text-gray-900 mb-6">
+                        <h2 className="text-2xl sm:text-3xl md:text-5xl font-semibold text-gray-900 mb-6">
                             Benchmarking and Competitive Analysis
                         </h2>
 
                         {/* Description */}
-                        <p className="text-base md:text-lg text-gray-700 leading-relaxed mb-12 max-w-4xl">
+                        <p className="text-base md:text-lg text-gray-700 leading-relaxed mb-8 sm:mb-12 max-w-4xl">
                             We analyzed Lucid, Audi, Mercedes, and Tesla to identify the strongest competitors in the market. By reviewing their digital experiences, brand strategies, and customer engagement, we assessed where each excels and where Porsche can further differentiate itself.
                         </p>
 
                         {/* 2x2 Grid of Competitor Images */}
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
                             {/* Lucid */}
                             <div className="relative rounded-2xl overflow-hidden">
                                 <img
@@ -390,7 +387,7 @@ export default function PorschePage() {
 
                             {/* Right - Research Topics List */}
                             <div className="flex-1">
-                                <ol className="space-y-6 text-xl md:text-2xl text-gray-700 list-decimal list-inside">
+                                <ol className="space-y-6 text-base sm:text-xl md:text-2xl text-gray-700 list-decimal list-inside">
                                     <li>HMI Reports</li>
                                     <li>Sensory Experiences in EVs</li>
                                     <li>Range Anxiety Mitigation Studies</li>
@@ -430,7 +427,7 @@ export default function PorschePage() {
             <div className="w-full bg-white py-20">
                 <div className="container mx-auto px-6">
                     <div className="max-w-6xl mx-auto">
-                        <h2 className="text-3xl md:text-4xl font-bold text-gray-900 italic mb-2">
+                        <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 italic mb-2">
                             Screen Explorations
                         </h2>
                         <p className="text-base text-gray-500 mb-16">

@@ -16,15 +16,15 @@ const UBSCaseStudy = () => {
                 </div>
 
                 {/* Content Section */}
-                <div className="container mx-auto px-6 py-16 max-w-6xl">
+                <div className="container mx-auto px-4 sm:px-6 py-8 sm:py-16 max-w-6xl">
                     {/* Title */}
-                    <h1 className="text-3xl md:text-5xl font-semibold text-gray-900 mb-8 lg:mb-16">
+                    <h1 className="text-2xl sm:text-3xl md:text-5xl font-semibold text-gray-900 mb-6 sm:mb-8 lg:mb-16">
                         UBS x SCADpro
                     </h1>
 
                     {/* Project Details Grid with Dividers */}
                     {/* Project Details Grid with Dividers */}
-                    <div className="grid grid-cols-2 lg:flex lg:items-start gap-8 lg:gap-12 mb-12 lg:mb-16">
+                    <div className="grid grid-cols-2 lg:flex lg:items-start gap-4 sm:gap-8 lg:gap-12 mb-8 sm:mb-12 lg:mb-16">
                         <div className="flex-1">
                             <h3 className="text-sm font-semibold text-gray-900 mb-2">Role:</h3>
                             <p className="text-base text-gray-900">UI/Research Bridge</p>
@@ -69,28 +69,21 @@ const UBSCaseStudy = () => {
                     </div>
 
                     {/* My Contributions Section */}
-                    <div className="mt-20">
-                        <h2 className="text-3xl md:text-4xl font-semibold text-gray-900 mb-6">
+                    <div className="mt-10 sm:mt-20">
+                        <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold text-gray-900 mb-4 sm:mb-6">
                             My Contributions
                         </h2>
                         <p
-                            style={{
-                                color: 'rgba(0, 0, 0, 0.60)',
-                                fontFamily: '"DM Sans"',
-                                fontSize: '24px',
-                                fontStyle: 'normal',
-                                fontWeight: 500,
-                                lineHeight: '40px',
-                            }}
-                            className="mb-12"
+                            className="mb-8 sm:mb-12 text-base sm:text-xl md:text-2xl font-medium leading-relaxed sm:leading-[40px]"
+                            style={{ color: 'rgba(0,0,0,0.60)', fontFamily: '"DM Sans"' }}
                         >
                             As part of the Research and UI team, I ensured that our design decisions were guided by our research insights. Since we were designing for a new demographic—the Swiss market, it was crucial that our solutions reflected the needs, preferences, and cultural nuances of that audience.
                         </p>
 
                         {/* Contribution Cards */}
-                        <div className="grid md:grid-cols-3 gap-6">
+                        <div className="grid md:grid-cols-3 gap-4 sm:gap-6">
                             {/* Card 01 */}
-                            <div className="border-2 border-gray-200 rounded-2xl p-8 group cursor-pointer transition-all duration-300 hover:border-[#343F28] hover:shadow-lg">
+                            <div className="border-2 border-gray-200 rounded-2xl p-5 sm:p-8 group cursor-pointer transition-all duration-300 hover:border-[#343F28] hover:shadow-lg">
                                 <div className="mb-6">
                                     <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                                         <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
@@ -139,26 +132,19 @@ const UBSCaseStudy = () => {
                     </div>
 
                     {/* Research Section */}
-                    <div className="mt-20">
-                        <h2 className="text-3xl md:text-5xl font-semibold mb-8 lg:mb-12" style={{ color: '#343F28' }}>
+                    <div className="mt-10 sm:mt-20">
+                        <h2 className="text-2xl sm:text-3xl md:text-5xl font-semibold mb-6 sm:mb-8 lg:mb-12" style={{ color: '#343F28' }}>
                             Research
                         </h2>
 
                         {/* Understanding the Swiss Market */}
-                        <div className="mb-12">
-                            <h3 className="text-3xl font-semibold text-gray-900 mb-6">
+                        <div className="mb-8 sm:mb-12">
+                            <h3 className="text-xl sm:text-3xl font-semibold text-gray-900 mb-4 sm:mb-6">
                                 Understanding the Swiss Market
                             </h3>
                             <p
-                                style={{
-                                    color: 'rgba(0, 0, 0, 0.60)',
-                                    fontFamily: '"DM Sans"',
-                                    fontSize: '24px',
-                                    fontStyle: 'normal',
-                                    fontWeight: 500,
-                                    lineHeight: '40px',
-                                }}
-                                className="mb-12"
+                                className="mb-8 sm:mb-12 text-base sm:text-xl md:text-2xl font-medium leading-relaxed sm:leading-[40px]"
+                                style={{ color: 'rgba(0,0,0,0.60)', fontFamily: '"DM Sans"' }}
                             >
                                 We used Maze to conduct primary research with users in Switzerland, aiming to understand how they manage their finances and financial decisions. The insights gathered revealed key patterns in their spending, saving, and trust behaviors, helping us design solutions tailored to their needs.
                             </p>
@@ -167,12 +153,12 @@ const UBSCaseStudy = () => {
                             <div className="grid md:grid-cols-3 gap-6">
                                 {/* Card 1 - Total Responses */}
                                 <div>
-                                    <div className="border-2 border-gray-200 rounded-2xl p-8 mb-4 text-center group cursor-pointer transition-all duration-300 hover:border-[#343F28] hover:shadow-lg">
-                                        <h4 className="text-7xl font-bold text-gray-900 mb-2 transition-all duration-500 ease-out group-hover:scale-110 group-hover:bg-gradient-to-r group-hover:from-[#343F28] group-hover:to-[#343F28] group-hover:bg-clip-text group-hover:text-transparent">70</h4>
+                                    <div className="border-2 border-gray-200 rounded-2xl p-5 sm:p-8 mb-4 text-center group cursor-pointer transition-all duration-300 hover:border-[#343F28] hover:shadow-lg">
+                                        <h4 className="text-5xl sm:text-7xl font-bold text-gray-900 mb-2 transition-all duration-500 ease-out group-hover:scale-110 group-hover:bg-gradient-to-r group-hover:from-[#343F28] group-hover:to-[#343F28] group-hover:bg-clip-text group-hover:text-transparent">70</h4>
                                         <p className="text-base text-gray-900">Total Responses</p>
                                     </div>
                                     <div
-                                        className="flex h-[76px] w-full items-center justify-center text-white font-bold text-3xl"
+                                        className="flex h-[60px] sm:h-[76px] w-full items-center justify-center text-white font-bold text-xl sm:text-3xl"
                                         style={{ background: 'linear-gradient(90deg, #2E6B5F 0%, #5AD1B9 100%)', borderRadius: '11.146px' }}
                                     >
                                         Responses
@@ -181,12 +167,12 @@ const UBSCaseStudy = () => {
 
                                 {/* Card 2 - GenZ Participants */}
                                 <div>
-                                    <div className="border-2 border-gray-200 rounded-2xl p-8 mb-4 text-center group cursor-pointer transition-all duration-300 hover:border-[#343F28] hover:shadow-lg">
-                                        <h4 className="text-7xl font-bold text-gray-900 mb-2 transition-all duration-500 ease-out group-hover:scale-110 group-hover:bg-gradient-to-r group-hover:from-[#343F28] group-hover:to-[#343F28] group-hover:bg-clip-text group-hover:text-transparent">30</h4>
+                                    <div className="border-2 border-gray-200 rounded-2xl p-5 sm:p-8 mb-4 text-center group cursor-pointer transition-all duration-300 hover:border-[#343F28] hover:shadow-lg">
+                                        <h4 className="text-5xl sm:text-7xl font-bold text-gray-900 mb-2 transition-all duration-500 ease-out group-hover:scale-110 group-hover:bg-gradient-to-r group-hover:from-[#343F28] group-hover:to-[#343F28] group-hover:bg-clip-text group-hover:text-transparent">30</h4>
                                         <p className="text-base text-gray-900">GenZ Participants</p>
                                     </div>
                                     <div
-                                        className="flex h-[76px] w-full items-center justify-center text-white font-bold text-3xl"
+                                        className="flex h-[60px] sm:h-[76px] w-full items-center justify-center text-white font-bold text-xl sm:text-3xl"
                                         style={{ background: 'linear-gradient(90deg, #2E6B5F 0%, #5AD1B9 100%)', borderRadius: '11.146px' }}
                                     >
                                         Surveys
@@ -195,12 +181,12 @@ const UBSCaseStudy = () => {
 
                                 {/* Card 3 - Swiss Participants */}
                                 <div>
-                                    <div className="border-2 border-gray-200 rounded-2xl p-8 mb-4 text-center group cursor-pointer transition-all duration-300 hover:border-[#343F28] hover:shadow-lg">
-                                        <h4 className="text-7xl font-bold text-gray-900 mb-2 transition-all duration-500 ease-out group-hover:scale-110 group-hover:bg-gradient-to-r group-hover:from-[#343F28] group-hover:to-[#343F28] group-hover:bg-clip-text group-hover:text-transparent">40</h4>
+                                    <div className="border-2 border-gray-200 rounded-2xl p-5 sm:p-8 mb-4 text-center group cursor-pointer transition-all duration-300 hover:border-[#343F28] hover:shadow-lg">
+                                        <h4 className="text-5xl sm:text-7xl font-bold text-gray-900 mb-2 transition-all duration-500 ease-out group-hover:scale-110 group-hover:bg-gradient-to-r group-hover:from-[#343F28] group-hover:to-[#343F28] group-hover:bg-clip-text group-hover:text-transparent">40</h4>
                                         <p className="text-base text-gray-900">Swiss Participants</p>
                                     </div>
                                     <div
-                                        className="flex h-[76px] w-full items-center justify-center text-white font-bold text-3xl"
+                                        className="flex h-[60px] sm:h-[76px] w-full items-center justify-center text-white font-bold text-xl sm:text-3xl"
                                         style={{ background: 'linear-gradient(90deg, #2E6B5F 0%, #5AD1B9 100%)', borderRadius: '11.146px' }}
                                     >
                                         Interviews
@@ -211,8 +197,8 @@ const UBSCaseStudy = () => {
                     </div>
 
                     {/* Design Process Section */}
-                    <div className="mt-20">
-                        <h2 className="text-3xl md:text-5xl font-semibold mb-8 lg:mb-12" style={{ color: '#343F28' }}>
+                    <div className="mt-10 sm:mt-20">
+                        <h2 className="text-2xl sm:text-3xl md:text-5xl font-semibold mb-6 sm:mb-8 lg:mb-12" style={{ color: '#343F28' }}>
                             Design Process
                         </h2>
 
@@ -270,8 +256,8 @@ const UBSCaseStudy = () => {
                     </div>
 
                     {/* Takeaways Section */}
-                    <div className="mt-20">
-                        <h2 className="text-3xl md:text-5xl font-semibold mb-8 lg:mb-12" style={{ color: '#343F28' }}>
+                    <div className="mt-10 sm:mt-20">
+                        <h2 className="text-2xl sm:text-3xl md:text-5xl font-semibold mb-6 sm:mb-8 lg:mb-12" style={{ color: '#343F28' }}>
                             Takeaways
                         </h2>
 
