@@ -162,8 +162,8 @@ export function WorkSection() {
                     alt={project.alt}
                     className="w-full h-auto"
                   />
-                  <div className="absolute inset-0 p-6 sm:p-8 md:p-10 lg:p-14 flex flex-col">
-                    <div className="max-w-[45%]">
+                  <div className="absolute inset-0 p-4 sm:p-8 md:p-10 lg:p-14 flex flex-col">
+                    <div className="max-w-[65%] sm:max-w-[55%] md:max-w-[45%]">
                       {/* Lowe's header */}
                       {project.showLowesHeader && (
                         <div>
@@ -180,7 +180,7 @@ export function WorkSection() {
 
                       {/* Spacer */}
                       {!project.showLowesHeader && (
-                        <div className={project.extraTopSpacing ? "mt-16 sm:mt-20 md:mt-24 lg:mt-28" : "mt-24 sm:mt-28 md:mt-32 lg:mt-36"} />
+                        <div className={project.extraTopSpacing ? "mt-8 sm:mt-16 md:mt-20 lg:mt-28" : "mt-10 sm:mt-20 md:mt-28 lg:mt-36"} />
                       )}
 
                       <Link

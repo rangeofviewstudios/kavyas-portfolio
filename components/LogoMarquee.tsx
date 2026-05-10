@@ -15,15 +15,15 @@ const track = [...companies, ...companies, ...companies];
 export function LogoMarquee() {
   return (
     <section className="bg-white border-y border-black/8 overflow-hidden">
-      <div className="flex items-center h-14 sm:h-16 px-6">
+      <div className="flex items-center h-12 sm:h-14 px-4 sm:px-6">
 
-        {/* Left: static label */}
-        <p className="shrink-0 text-xs sm:text-sm text-gray-500 whitespace-nowrap pr-5 border-r border-gray-200">
+        {/* Left: static label — hidden on mobile */}
+        <p className="hidden sm:block shrink-0 text-xs text-gray-500 whitespace-nowrap pr-5 border-r border-gray-200">
           Currently learning service design tools.....
         </p>
 
         {/* Right: "Previously at" + scrolling logos */}
-        <div className="flex items-center gap-4 min-w-0 overflow-hidden pl-5">
+        <div className="flex items-center gap-3 sm:gap-4 min-w-0 overflow-hidden sm:pl-5 w-full sm:w-auto">
           <span className="shrink-0 text-xs text-gray-400 whitespace-nowrap">Previously at</span>
 
           {/* Scrolling track */}
