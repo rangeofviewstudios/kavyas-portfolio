@@ -39,7 +39,7 @@ export function LogoMarquee() {
                     alt={company.name}
                     width={100}
                     height={32}
-                    className={`h-6 w-auto object-contain brightness-0 opacity-70 ${company.maxW}`}
+                    className={`h-6 w-auto object-contain opacity-70 ${company.maxW}`}
                   />
                 </div>
               ))}
