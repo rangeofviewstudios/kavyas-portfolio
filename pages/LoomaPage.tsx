@@ -441,7 +441,7 @@ export default function LoomaPage() {
 
                         <div className="space-y-6">
                             {/* Takeaway 1 - Collaboration */}
-                            <div className="w-full rounded-[30px] p-[4px] bg-[#343F28]">
+                            <div className="w-full rounded-[30px] p-[4px]" style={{ background: 'linear-gradient(90deg, #2E6B5F 0%, #5AD1B9 100%)' }}>
                                 <div className="w-full h-full rounded-[26px] bg-white p-6 md:p-8 hover:bg-zinc-50 transition-colors flex flex-col md:flex-row items-center gap-6">
                                     <div className="flex-shrink-0 text-black">
                                         <svg className="w-12 h-12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -458,7 +458,7 @@ export default function LoomaPage() {
                             </div>
 
                             {/* Takeaway 2 - Innovation */}
-                            <div className="w-full rounded-[30px] p-[4px] bg-[#343F28]">
+                            <div className="w-full rounded-[30px] p-[4px]" style={{ background: 'linear-gradient(90deg, #2E6B5F 0%, #5AD1B9 100%)' }}>
                                 <div className="w-full h-full rounded-[26px] bg-white p-6 md:p-8 hover:bg-zinc-50 transition-colors flex flex-col md:flex-row items-center gap-6">
                                     <div className="flex-shrink-0 text-black">
                                         <svg className="w-12 h-12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -475,7 +475,7 @@ export default function LoomaPage() {
                             </div>
 
                             {/* Takeaway 3 - Business Balance */}
-                            <div className="w-full rounded-[30px] p-[4px] bg-[#343F28]">
+                            <div className="w-full rounded-[30px] p-[4px]" style={{ background: 'linear-gradient(90deg, #2E6B5F 0%, #5AD1B9 100%)' }}>
                                 <div className="w-full h-full rounded-[26px] bg-white p-6 md:p-8 hover:bg-zinc-50 transition-colors flex flex-col md:flex-row items-center gap-6">
                                     <div className="flex-shrink-0 text-black">
                                         <svg className="w-12 h-12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">

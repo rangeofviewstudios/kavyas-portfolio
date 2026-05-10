@@ -265,7 +265,7 @@ const LowesCaseStudy = () => {
 
                         <div className="space-y-6">
                             {/* Takeaway 1 */}
-                            <div className="w-full rounded-[30px] p-[4px] bg-[#343F28]">
+                            <div className="w-full rounded-[30px] p-[4px]" style={{ background: 'linear-gradient(90deg, #2E6B5F 0%, #5AD1B9 100%)' }}>
                                 <div className="w-full h-full rounded-[26px] bg-white p-6 md:p-8 hover:bg-zinc-50 transition-colors flex flex-col md:flex-row items-center gap-6">
                                     <div className="flex-shrink-0 text-black">
                                         <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -282,7 +282,7 @@ const LowesCaseStudy = () => {
                             </div>
 
                             {/* Takeaway 2 */}
-                            <div className="w-full rounded-[30px] p-[4px] bg-[#343F28]">
+                            <div className="w-full rounded-[30px] p-[4px]" style={{ background: 'linear-gradient(90deg, #2E6B5F 0%, #5AD1B9 100%)' }}>
                                 <div className="w-full h-full rounded-[26px] bg-white p-6 md:p-8 hover:bg-zinc-50 transition-colors flex flex-col md:flex-row items-center gap-6">
                                     <div className="flex-shrink-0 text-black">
                                         <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -299,7 +299,7 @@ const LowesCaseStudy = () => {
                             </div>
 
                             {/* Takeaway 3 */}
-                            <div className="w-full rounded-[30px] p-[4px] bg-[#343F28]">
+                            <div className="w-full rounded-[30px] p-[4px]" style={{ background: 'linear-gradient(90deg, #2E6B5F 0%, #5AD1B9 100%)' }}>
                                 <div className="w-full h-full rounded-[26px] bg-white p-6 md:p-8 hover:bg-zinc-50 transition-colors flex flex-col md:flex-row items-center gap-6">
                                     <div className="flex-shrink-0 text-black">
                                         <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
