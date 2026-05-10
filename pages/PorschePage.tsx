@@ -144,20 +144,20 @@ export default function PorschePage() {
                         {/* Three Cards */}
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
                             {/* Card 01 */}
-                            <div className="border-2 border-gray-300 rounded-2xl p-8 text-center group cursor-pointer transition-all duration-300 hover:border-[#2E6B5F] hover:shadow-lg">
-                                <div className="text-6xl font-bold text-gray-900 mb-4 transition-all duration-500 ease-out group-hover:scale-110 group-hover:bg-gradient-to-r group-hover:from-[#2E6B5F] group-hover:to-[#5AD1B9] group-hover:bg-clip-text group-hover:text-transparent">01</div>
+                            <div className="border-2 border-gray-300 rounded-2xl p-8 text-center group cursor-pointer transition-all duration-300 hover:border-[#343F28] hover:shadow-lg">
+                                <div className="text-6xl font-bold text-gray-900 mb-4 transition-all duration-500 ease-out group-hover:scale-110 group-hover:bg-gradient-to-r group-hover:from-[#343F28] group-hover:to-[#343F28] group-hover:bg-clip-text group-hover:text-transparent">01</div>
                                 <p className="text-base font-medium text-gray-700">First Time<br />Porsche Buyers</p>
                             </div>
 
                             {/* Card 02 */}
-                            <div className="border-2 border-gray-300 rounded-2xl p-8 text-center group cursor-pointer transition-all duration-300 hover:border-[#2E6B5F] hover:shadow-lg">
-                                <div className="text-6xl font-bold text-gray-900 mb-4 transition-all duration-500 ease-out group-hover:scale-110 group-hover:bg-gradient-to-r group-hover:from-[#2E6B5F] group-hover:to-[#5AD1B9] group-hover:bg-clip-text group-hover:text-transparent">02</div>
+                            <div className="border-2 border-gray-300 rounded-2xl p-8 text-center group cursor-pointer transition-all duration-300 hover:border-[#343F28] hover:shadow-lg">
+                                <div className="text-6xl font-bold text-gray-900 mb-4 transition-all duration-500 ease-out group-hover:scale-110 group-hover:bg-gradient-to-r group-hover:from-[#343F28] group-hover:to-[#343F28] group-hover:bg-clip-text group-hover:text-transparent">02</div>
                                 <p className="text-base font-medium text-gray-700">Porsche Owners<br />exploring EV's</p>
                             </div>
 
                             {/* Card 03 */}
-                            <div className="border-2 border-gray-300 rounded-2xl p-8 text-center group cursor-pointer transition-all duration-300 hover:border-[#2E6B5F] hover:shadow-lg">
-                                <div className="text-6xl font-bold text-gray-900 mb-4 transition-all duration-500 ease-out group-hover:scale-110 group-hover:bg-gradient-to-r group-hover:from-[#2E6B5F] group-hover:to-[#5AD1B9] group-hover:bg-clip-text group-hover:text-transparent">03</div>
+                            <div className="border-2 border-gray-300 rounded-2xl p-8 text-center group cursor-pointer transition-all duration-300 hover:border-[#343F28] hover:shadow-lg">
+                                <div className="text-6xl font-bold text-gray-900 mb-4 transition-all duration-500 ease-out group-hover:scale-110 group-hover:bg-gradient-to-r group-hover:from-[#343F28] group-hover:to-[#343F28] group-hover:bg-clip-text group-hover:text-transparent">03</div>
                                 <p className="text-base font-medium text-gray-700">General EV Car<br />Owners</p>
                             </div>
                         </div>
@@ -212,7 +212,7 @@ export default function PorschePage() {
             </div>
 
             {/* Benchmarking and Competitive Analysis Section */}
-            <div className="w-full bg-gray-50 py-20">
+            <div className="w-full bg-white py-20">
                 <div className="container mx-auto px-6">
                     <div className="max-w-6xl mx-auto">
                         {/* Section Header */}

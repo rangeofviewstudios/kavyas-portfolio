@@ -66,7 +66,7 @@ export default function LoomaPage() {
                         className="w-full relative overflow-hidden flex flex-col md:flex-row items-center md:items-end"
                         style={{
                             borderRadius: '100px 100px 100px 0',
-                            backgroundColor: '#5E7FDA',
+                            backgroundColor: '#343F28',
                             minHeight: '400px'
                         }}
                     >
@@ -139,11 +139,11 @@ export default function LoomaPage() {
                 </div>
 
                 {/* Research Section */}
-                <div className="w-full mb-20 animate-fade-in-up bg-gray-50 py-20">
+                <div className="w-full mb-20 animate-fade-in-up bg-white py-20">
                     <div className="max-w-7xl mx-auto px-6">
                         {/* Section Header */}
                         <div className="mb-16">
-                            <h2 className="text-5xl md:text-6xl font-medium mb-4" style={{ color: '#5A7B7A' }}>
+                            <h2 className="text-5xl md:text-6xl font-medium mb-4" style={{ color: '#343F28' }}>
                                 Research
                             </h2>
                             <p className="text-xl text-gray-800">
@@ -165,59 +165,59 @@ export default function LoomaPage() {
                             {/* Data Bubbles */}
                             {/* North America - 6.7M */}
                             <div className="absolute" style={{ left: '18%', top: '35%' }}>
-                                <div className="flex items-center justify-center w-24 h-24 md:w-32 md:h-32 rounded-full bg-[#5E7FDA] text-white font-bold text-xl md:text-2xl shadow-lg">
+                                <div className="flex items-center justify-center w-24 h-24 md:w-32 md:h-32 rounded-full text-white font-bold text-xl md:text-2xl shadow-lg" style={{ background: 'linear-gradient(90deg, #2E6B5F 0%, #5AD1B9 100%)' }}>
                                     6.7M
                                 </div>
                             </div>
 
                             {/* Europe - 9.7M */}
                             <div className="absolute" style={{ left: '45%', top: '25%' }}>
-                                <div className="flex items-center justify-center w-28 h-28 md:w-36 md:h-36 rounded-full bg-[#5E7FDA] text-white font-bold text-2xl md:text-3xl shadow-lg">
+                                <div className="flex items-center justify-center w-28 h-28 md:w-36 md:h-36 rounded-full text-white font-bold text-2xl md:text-3xl shadow-lg" style={{ background: 'linear-gradient(90deg, #2E6B5F 0%, #5AD1B9 100%)' }}>
                                     9.7M
                                 </div>
                             </div>
 
                             {/* Asia - 15.4M */}
                             <div className="absolute" style={{ left: '70%', top: '30%' }}>
-                                <div className="flex items-center justify-center w-36 h-36 md:w-44 md:h-44 rounded-full bg-[#5E7FDA] text-white font-bold text-3xl md:text-4xl shadow-lg">
+                                <div className="flex items-center justify-center w-36 h-36 md:w-44 md:h-44 rounded-full text-white font-bold text-3xl md:text-4xl shadow-lg" style={{ background: 'linear-gradient(90deg, #2E6B5F 0%, #5AD1B9 100%)' }}>
                                     15.4M
                                 </div>
                             </div>
 
                             {/* Africa - 2.13M */}
                             <div className="absolute" style={{ left: '48%', top: '55%' }}>
-                                <div className="flex items-center justify-center w-20 h-20 md:w-28 md:h-28 rounded-full bg-[#5E7FDA] text-white font-bold text-lg md:text-xl shadow-lg">
+                                <div className="flex items-center justify-center w-20 h-20 md:w-28 md:h-28 rounded-full text-white font-bold text-lg md:text-xl shadow-lg" style={{ background: 'linear-gradient(90deg, #2E6B5F 0%, #5AD1B9 100%)' }}>
                                     2.13M
                                 </div>
                             </div>
 
                             {/* South America - 4.5M */}
                             <div className="absolute" style={{ left: '25%', top: '65%' }}>
-                                <div className="flex items-center justify-center w-24 h-24 md:w-32 md:h-32 rounded-full bg-[#5E7FDA] text-white font-bold text-xl md:text-2xl shadow-lg">
+                                <div className="flex items-center justify-center w-24 h-24 md:w-32 md:h-32 rounded-full text-white font-bold text-xl md:text-2xl shadow-lg" style={{ background: 'linear-gradient(90deg, #2E6B5F 0%, #5AD1B9 100%)' }}>
                                     4.5M
                                 </div>
                             </div>
 
                             {/* Australia - 400K */}
                             <div className="absolute" style={{ left: '82%', top: '70%' }}>
-                                <div className="flex items-center justify-center w-20 h-20 md:w-24 md:h-24 rounded-full bg-[#5E7FDA] text-white font-bold text-base md:text-lg shadow-lg">
+                                <div className="flex items-center justify-center w-20 h-20 md:w-24 md:h-24 rounded-full text-white font-bold text-base md:text-lg shadow-lg" style={{ background: 'linear-gradient(90deg, #2E6B5F 0%, #5AD1B9 100%)' }}>
                                     400K
                                 </div>
                             </div>
                         </div>
 
                         {/* Leading Cause of Death Section */}
-                        <div className="mt-20 bg-[#C5D3E8] rounded-3xl p-12 md:p-16 flex flex-col md:flex-row items-center justify-between gap-8">
+                        <div className="mt-20 bg-[#343F28]/10 rounded-3xl p-12 md:p-16 flex flex-col md:flex-row items-center justify-between gap-8">
                             <div className="text-center md:text-left">
-                                <h3 className="text-7xl md:text-8xl font-bold mb-4" style={{ color: '#4A3F35' }}>
+                                <h3 className="text-7xl md:text-8xl font-bold mb-4 text-black">
                                     N°7
                                 </h3>
                             </div>
                             <div className="flex-1 text-center md:text-left">
-                                <h4 className="text-3xl md:text-4xl font-semibold mb-4" style={{ color: '#4A3F35' }}>
+                                <h4 className="text-3xl md:text-4xl font-semibold mb-4 text-black">
                                     Leading Cause of Death
                                 </h4>
-                                <p className="text-lg md:text-xl" style={{ color: '#4A3F35' }}>
+                                <p className="text-lg md:text-xl text-black">
                                     According to the World Health Organization, Alzheimer's is the 7th leading cause of death globally.
                                 </p>
                             </div>
@@ -243,7 +243,10 @@ export default function LoomaPage() {
                                     className="w-full h-full object-cover"
                                 />
                             </div>
-                            <div className="w-full bg-[#4466C4] text-white text-center py-4 px-6 rounded-2xl font-semibold text-xl">
+                            <div
+                                className="w-full text-white text-center py-4 px-6 font-semibold text-xl"
+                                style={{ background: 'linear-gradient(90deg, #2E6B5F 0%, #5AD1B9 100%)', borderRadius: '11.146px' }}
+                            >
                                 Patient/User
                             </div>
                         </div>
@@ -257,7 +260,10 @@ export default function LoomaPage() {
                                     className="w-full h-full object-cover"
                                 />
                             </div>
-                            <div className="w-full bg-[#4466C4] text-white text-center py-4 px-6 rounded-2xl font-semibold text-xl">
+                            <div
+                                className="w-full text-white text-center py-4 px-6 font-semibold text-xl"
+                                style={{ background: 'linear-gradient(90deg, #2E6B5F 0%, #5AD1B9 100%)', borderRadius: '11.146px' }}
+                            >
                                 Family Members
                             </div>
                         </div>
@@ -271,7 +277,10 @@ export default function LoomaPage() {
                                     className="w-full h-full object-cover"
                                 />
                             </div>
-                            <div className="w-full bg-[#5E7FDA] text-white text-center py-4 px-6 rounded-2xl font-semibold text-xl">
+                            <div
+                                className="w-full text-white text-center py-4 px-6 font-semibold text-xl"
+                                style={{ background: 'linear-gradient(90deg, #2E6B5F 0%, #5AD1B9 100%)', borderRadius: '11.146px' }}
+                            >
                                 Caregiver
                             </div>
                         </div>
@@ -292,7 +301,7 @@ export default function LoomaPage() {
                         {/* Facial Recognition - Text Left, Image Right */}
                         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-32">
                             <div className="space-y-4">
-                                <h3 className="text-3xl md:text-4xl font-semibold" style={{ color: '#4466C4' }}>
+                                <h3 className="text-3xl md:text-4xl font-semibold" style={{ color: '#343F28' }}>
                                     Facial Recognition
                                 </h3>
                                 <div className="w-24 h-1 bg-gray-800"></div>
@@ -312,7 +321,7 @@ export default function LoomaPage() {
                         {/* Spatial Awareness - Text Left, Image Right */}
                         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-32">
                             <div className="space-y-4">
-                                <h3 className="text-3xl md:text-4xl font-semibold" style={{ color: '#4466C4' }}>
+                                <h3 className="text-3xl md:text-4xl font-semibold" style={{ color: '#343F28' }}>
                                     Spatial Awareness
                                 </h3>
                                 <div className="w-24 h-1 bg-gray-800"></div>
@@ -339,7 +348,7 @@ export default function LoomaPage() {
                                 />
                             </div>
                             <div className="space-y-4 order-1 lg:order-2">
-                                <h3 className="text-3xl md:text-4xl font-semibold" style={{ color: '#4466C4' }}>
+                                <h3 className="text-3xl md:text-4xl font-semibold" style={{ color: '#343F28' }}>
                                     Voice-Assisted Guidance & Bone Conduction Technology
                                 </h3>
                                 <div className="w-24 h-1 bg-gray-800"></div>
@@ -376,7 +385,7 @@ export default function LoomaPage() {
                                 </div>
                             </div>
                             <div>
-                                <h3 className="text-2xl font-semibold mb-2" style={{ color: '#4466C4' }}>
+                                <h3 className="text-2xl font-semibold mb-2" style={{ color: '#343F28' }}>
                                     Caregivers Support Portal
                                 </h3>
                                 <p className="text-lg text-gray-700 leading-relaxed">
@@ -395,7 +404,7 @@ export default function LoomaPage() {
                                 </div>
                             </div>
                             <div>
-                                <h3 className="text-2xl font-semibold mb-2" style={{ color: '#4466C4' }}>
+                                <h3 className="text-2xl font-semibold mb-2" style={{ color: '#343F28' }}>
                                     Health Tracking Integration
                                 </h3>
                                 <p className="text-lg text-gray-700 leading-relaxed">
@@ -428,11 +437,11 @@ export default function LoomaPage() {
 
                     {/* Takeaways Content */}
                     <div className="max-w-4xl mx-auto px-6">
-                        <h2 className="text-5xl md:text-6xl font-medium mb-12" style={{ color: '#2E6B5F' }}>Takeaways</h2>
+                        <h2 className="text-5xl md:text-6xl font-medium mb-12" style={{ color: '#343F28' }}>Takeaways</h2>
 
                         <div className="space-y-6">
                             {/* Takeaway 1 - Collaboration */}
-                            <div className="w-full rounded-[30px] p-[4px] bg-gradient-to-r from-[#2E6B5F] to-[#5AD1B9]">
+                            <div className="w-full rounded-[30px] p-[4px] bg-[#343F28]">
                                 <div className="w-full h-full rounded-[26px] bg-white p-6 md:p-8 hover:bg-zinc-50 transition-colors flex flex-col md:flex-row items-center gap-6">
                                     <div className="flex-shrink-0 text-black">
                                         <svg className="w-12 h-12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -449,7 +458,7 @@ export default function LoomaPage() {
                             </div>
 
                             {/* Takeaway 2 - Innovation */}
-                            <div className="w-full rounded-[30px] p-[4px] bg-gradient-to-r from-[#2E6B5F] to-[#5AD1B9]">
+                            <div className="w-full rounded-[30px] p-[4px] bg-[#343F28]">
                                 <div className="w-full h-full rounded-[26px] bg-white p-6 md:p-8 hover:bg-zinc-50 transition-colors flex flex-col md:flex-row items-center gap-6">
                                     <div className="flex-shrink-0 text-black">
                                         <svg className="w-12 h-12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -466,7 +475,7 @@ export default function LoomaPage() {
                             </div>
 
                             {/* Takeaway 3 - Business Balance */}
-                            <div className="w-full rounded-[30px] p-[4px] bg-gradient-to-r from-[#2E6B5F] to-[#5AD1B9]">
+                            <div className="w-full rounded-[30px] p-[4px] bg-[#343F28]">
                                 <div className="w-full h-full rounded-[26px] bg-white p-6 md:p-8 hover:bg-zinc-50 transition-colors flex flex-col md:flex-row items-center gap-6">
                                     <div className="flex-shrink-0 text-black">
                                         <svg className="w-12 h-12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">

@@ -3,7 +3,7 @@ import { Footer } from "@/components/Footer";
 
 const AesturaCampaign = () => {
     return (
-        <div className="min-h-screen bg-background font-sans">
+        <div className="min-h-screen bg-white font-sans">
             <Navigation />
             <main>
                 {/* Hero Section */}
@@ -21,11 +21,11 @@ const AesturaCampaign = () => {
                         <div className="absolute top-[20%] left-[10%] space-y-4 hidden md:block">
                             {/* The Essence Edit Badge */}
                             <div className="inline-block px-8 py-3 rounded-full bg-white/30 backdrop-blur-md border border-white/50 shadow-lg">
-                                <span className="text-[#6B8DD6] text-xl font-medium">The Essence Edit</span>
+                                <span className="text-[#343F28] text-xl font-medium">The Essence Edit</span>
                             </div>
 
                             {/* Campaign Box */}
-                            <div className="mt-4 p-8 rounded-3xl bg-gradient-to-br from-[#6B8DD6]/90 to-[#6B8DD6]/40 backdrop-blur-md text-white max-w-md shadow-xl border border-white/20">
+                            <div className="mt-4 p-8 rounded-3xl bg-gradient-to-br from-[#343F28]/90 to-[#343F28]/40 backdrop-blur-md text-white max-w-md shadow-xl border border-white/20">
                                 <h2 className="text-3xl font-bold mb-2">Campaign</h2>
                                 <p className="text-2xl font-light italic leading-tight">
                                     Bringing Seoul to<br />Your City
@@ -42,24 +42,24 @@ const AesturaCampaign = () => {
                     {/* Project Details Grid with Dividers */}
                     <div className="grid grid-cols-2 lg:flex lg:items-start gap-8 lg:gap-12 mb-12 lg:mb-16">
                         <div className="flex-1">
-                            <h3 className="text-sm font-semibold text-foreground mb-2">Role:</h3>
-                            <p className="text-base text-foreground">Project Manager</p>
-                            <p className="text-base text-foreground">Led UX Designer</p>
+                            <h3 className="text-sm font-semibold text-gray-900 mb-2">Role:</h3>
+                            <p className="text-base text-gray-900">Project Manager</p>
+                            <p className="text-base text-gray-900">Led UX Designer</p>
                         </div>
                         <div className="hidden lg:block w-px h-12 bg-gray-300"></div>
                         <div className="flex-1">
-                            <h3 className="text-sm font-semibold text-foreground mb-2">Industry:</h3>
-                            <p className="text-base text-foreground">Social Media Marketing Campaign</p>
+                            <h3 className="text-sm font-semibold text-gray-900 mb-2">Industry:</h3>
+                            <p className="text-base text-gray-900">Social Media Marketing Campaign</p>
                         </div>
                         <div className="hidden lg:block w-px h-12 bg-gray-300"></div>
                         <div className="flex-1">
-                            <h3 className="text-sm font-semibold text-foreground mb-2">Duration:</h3>
-                            <p className="text-base text-foreground">1.5 Months</p>
+                            <h3 className="text-sm font-semibold text-gray-900 mb-2">Duration:</h3>
+                            <p className="text-base text-gray-900">1.5 Months</p>
                         </div>
                         <div className="hidden lg:block w-px h-12 bg-gray-300"></div>
                         <div className="flex-1">
-                            <h3 className="text-sm font-semibold text-foreground mb-2">Location:</h3>
-                            <p className="text-base text-foreground">Atlanta, Georgia</p>
+                            <h3 className="text-sm font-semibold text-gray-900 mb-2">Location:</h3>
+                            <p className="text-base text-gray-900">Atlanta, Georgia</p>
                         </div>
                     </div>
 
@@ -89,12 +89,12 @@ const AesturaCampaign = () => {
 
                 {/* Research Section */}
                 <div className="container mx-auto px-6 py-20 max-w-6xl">
-                    <h2 className="text-3xl md:text-5xl font-semibold mb-8 lg:mb-12" style={{ color: '#2E6B5F' }}>
+                    <h2 className="text-3xl md:text-5xl font-semibold mb-8 lg:mb-12" style={{ color: '#343F28' }}>
                         Research
                     </h2>
 
                     <div className="mb-16">
-                        <h3 className="text-3xl font-semibold text-foreground mb-6">
+                        <h3 className="text-3xl font-semibold text-gray-900 mb-6">
                             Understanding the Skin Care Market
                         </h3>
                         <p className="text-base text-gray-600 leading-relaxed max-w-4xl">
@@ -122,7 +122,7 @@ const AesturaCampaign = () => {
                         </div>
 
                         {/* Right Card - Blue Stats */}
-                        <div className="relative flex-1 rounded-[32px] bg-[#5B85F8] text-white p-12 min-h-[400px] flex flex-col overflow-hidden">
+                        <div className="relative flex-1 rounded-[32px] bg-[#343F28] text-white p-12 min-h-[400px] flex flex-col overflow-hidden">
                             {/* Top Stats */}
                             <div className="relative z-10">
                                 <div className="text-[120px] font-bold leading-none tracking-tighter mb-4">92%</div>
@@ -163,7 +163,7 @@ const AesturaCampaign = () => {
                         </div>
 
                         {/* Floating Center Card */}
-                        <div className="absolute bottom-[-30px] left-1/2 transform -translate-x-1/2 bg-[#C3D0E5] p-8 rounded-3xl shadow-xl w-[300px] z-20 text-center">
+                        <div className="absolute bottom-[-30px] left-1/2 transform -translate-x-1/2 bg-[#343F28]/10 p-8 rounded-3xl shadow-xl w-[300px] z-20 text-center">
                             <div className="text-5xl font-bold text-black mb-2">57%</div>
                             <div className="text-sm font-medium text-gray-800">growth of phygital experiences</div>
                         </div>
@@ -174,10 +174,10 @@ const AesturaCampaign = () => {
                 <div className="container mx-auto px-6 py-20 max-w-7xl relative">
                     <div className="flex flex-col md:flex-row justify-between items-start mb-20">
                         <h2 className="text-5xl md:text-6xl text-black font-light">
-                            Customer <span className="italic font-light text-[#5B85F8]">PROFILE</span>
+                            Customer <span className="italic font-light text-[#343F28]">PROFILE</span>
                         </h2>
                         <blockquote className="md:max-w-md text-right mt-8 md:mt-0">
-                            <p className="text-[#5B85F8] text-lg font-medium leading-relaxed">
+                            <p className="text-[#343F28] text-lg font-medium leading-relaxed">
                                 "I used to think sensitivity meant I had to compromise. Now I know better. Aestura helped me understand the balance my skin barrier needs."
                             </p>
                         </blockquote>
@@ -205,13 +205,13 @@ const AesturaCampaign = () => {
                         {/* Item 1 - Far Left */}
                         <div className="absolute top-[150px] left-[0%] w-[18%] flex flex-col items-center text-center group">
                             {/* Connector Line */}
-                            <div className="h-24 w-px bg-[#B0C4DE] mb-4 absolute -top-20 right-0 hidden lg:block rotate-[-45deg] origin-bottom"></div>
+                            <div className="h-24 w-px bg-[#343F28]/10 mb-4 absolute -top-20 right-0 hidden lg:block rotate-[-45deg] origin-bottom"></div>
 
                             {/* Card Shape */}
-                            <div className="w-full aspect-square bg-[#B0C4DE]/40 rounded-tr-[60px] rounded-bl-[60px] rounded-tl-[20px] rounded-br-[20px] p-6 flex items-center justify-center mb-6 transform hover:scale-105 transition-transform duration-300">
+                            <div className="w-full aspect-square bg-[#343F28]/10 rounded-tr-[60px] rounded-bl-[60px] rounded-tl-[20px] rounded-br-[20px] p-6 flex items-center justify-center mb-6 transform hover:scale-105 transition-transform duration-300">
                                 <img src="/images/aestura/AesturaCustomer1.png" alt="Icon 1" className="w-16 h-16 object-contain" />
                             </div>
-                            <h3 className="text-[#3E5085] font-bold text-lg mb-3">K-Beauty Builds Skin Knowledge</h3>
+                            <h3 className="text-[#343F28] font-bold text-lg mb-3">K-Beauty Builds Skin Knowledge</h3>
                             <p className="text-sm text-gray-600 leading-relaxed">
                                 In Korea, skincare is a cultural tradition taught from a young age, centered on prevention, consistency, and care. This approach is reshaping how U.S. consumers understand skin health, giving Aestura an opportunity to lead with education and expertise rooted in that tradition.
                             </p>
@@ -220,10 +220,10 @@ const AesturaCampaign = () => {
                         {/* Item 2 - Left */}
                         <div className="absolute top-[280px] left-[20%] w-[18%] flex flex-col items-center text-center">
                             {/* Card Shape */}
-                            <div className="w-full aspect-square bg-[#B0C4DE]/60 rounded-tr-[60px] rounded-bl-[60px] rounded-tl-[20px] rounded-br-[20px] p-6 flex items-center justify-center mb-6 transform hover:scale-105 transition-transform duration-300 rotate-[-10deg]">
+                            <div className="w-full aspect-square bg-[#343F28]/15 rounded-tr-[60px] rounded-bl-[60px] rounded-tl-[20px] rounded-br-[20px] p-6 flex items-center justify-center mb-6 transform hover:scale-105 transition-transform duration-300 rotate-[-10deg]">
                                 <img src="/images/aestura/AesturaCustomer2.png" alt="Icon 2" className="w-16 h-16 object-contain rotate-[10deg]" />
                             </div>
-                            <h3 className="text-[#3E5085] font-bold text-lg mb-3">Preventative {'>'} Corrective</h3>
+                            <h3 className="text-[#343F28] font-bold text-lg mb-3">Preventative {'>'} Corrective</h3>
                             <p className="text-sm text-gray-600 leading-relaxed">
                                 Skincare is becoming proactive. Younger audiences are investing in their skin earlier, prioritizing maintenance over repair. Aestura aligns with this shift, offering long-term solutions that strengthen the skin barrier and support lasting skin health.
                             </p>
@@ -232,11 +232,11 @@ const AesturaCampaign = () => {
                         {/* Item 3 - Center (Bottom) */}
                         <div className="absolute top-[350px] left-[41%] w-[18%] flex flex-col items-center text-center">
                             {/* Card Shape */}
-                            <div className="w-full aspect-square bg-[#B0C4DE]/80 rounded-tr-[60px] rounded-bl-[60px] rounded-tl-[20px] rounded-br-[20px] p-6 flex items-center justify-center mb-6 transform hover:scale-105 transition-transform duration-300">
+                            <div className="w-full aspect-square bg-[#343F28]/20 rounded-tr-[60px] rounded-bl-[60px] rounded-tl-[20px] rounded-br-[20px] p-6 flex items-center justify-center mb-6 transform hover:scale-105 transition-transform duration-300">
                                 <img src="/images/aestura/AesturaCustomer3.png" alt="Icon 3" className="w-16 h-16 object-contain" />
                             </div>
-                            <div className="w-px h-12 bg-[#B0C4DE] mx-auto mb-4"></div>
-                            <h3 className="text-[#3E5085] font-bold text-lg mb-3">Seeking Gentle, Science-Backed Care</h3>
+                            <div className="w-px h-12 bg-[#343F28]/10 mx-auto mb-4"></div>
+                            <h3 className="text-[#343F28] font-bold text-lg mb-3">Seeking Gentle, Science-Backed Care</h3>
                             <p className="text-sm text-gray-600 leading-relaxed">
                                 Consumers are shifting away from harsh, one-size-fits-all routines. They want effective, dermatologist-developed products that deliver results without compromising skin health. Aestura meets this need with formulas rooted in medical science and built for sensitive skin.
                             </p>
@@ -245,10 +245,10 @@ const AesturaCampaign = () => {
                         {/* Item 4 - Right */}
                         <div className="absolute top-[280px] right-[20%] w-[18%] flex flex-col items-center text-center">
                             {/* Card Shape */}
-                            <div className="w-full aspect-square bg-[#B0C4DE]/60 rounded-tr-[60px] rounded-bl-[60px] rounded-tl-[20px] rounded-br-[20px] p-6 flex items-center justify-center mb-6 transform hover:scale-105 transition-transform duration-300 rotate-[10deg]">
+                            <div className="w-full aspect-square bg-[#343F28]/15 rounded-tr-[60px] rounded-bl-[60px] rounded-tl-[20px] rounded-br-[20px] p-6 flex items-center justify-center mb-6 transform hover:scale-105 transition-transform duration-300 rotate-[10deg]">
                                 <img src="/images/aestura/AesturaCustomer4.png" alt="Icon 4" className="w-16 h-16 object-contain rotate-[-10deg]" />
                             </div>
-                            <h3 className="text-[#3E5085] font-bold text-lg mb-3">Sensitive Skin Is a Growing Concern</h3>
+                            <h3 className="text-[#343F28] font-bold text-lg mb-3">Sensitive Skin Is a Growing Concern</h3>
                             <p className="text-sm text-gray-600 leading-relaxed">
                                 More Americans are experiencing skin sensitivity, irritation, and compromised barriers—whether due to stress, overuse of actives, medications, or environmental triggers. There's a rising demand for solutions that restore and protect, especially those backed by research and long-term results.
                             </p>
@@ -257,10 +257,10 @@ const AesturaCampaign = () => {
                         {/* Item 5 - Far Right */}
                         <div className="absolute top-[150px] right-[0%] w-[18%] flex flex-col items-center text-center">
                             {/* Card Shape */}
-                            <div className="w-full aspect-square bg-[#B0C4DE]/40 rounded-tr-[60px] rounded-bl-[60px] rounded-tl-[20px] rounded-br-[20px] p-6 flex items-center justify-center mb-6 transform hover:scale-105 transition-transform duration-300">
+                            <div className="w-full aspect-square bg-[#343F28]/10 rounded-tr-[60px] rounded-bl-[60px] rounded-tl-[20px] rounded-br-[20px] p-6 flex items-center justify-center mb-6 transform hover:scale-105 transition-transform duration-300">
                                 <img src="/images/aestura/AesturaCustomer5.png" alt="Icon 5" className="w-16 h-16 object-contain" />
                             </div>
-                            <h3 className="text-[#3E5085] font-bold text-lg mb-3">Creditable & Trustworthy Brands</h3>
+                            <h3 className="text-[#343F28] font-bold text-lg mb-3">Creditable & Trustworthy Brands</h3>
                             <p className="text-sm text-gray-600 leading-relaxed">
                                 In a market overwhelmed with trend-driven claims, consumers crave transparency, integrity, and expertise. Aestura's pharmaceutical origins set it apart as a brand that not only promises results, but proves them.
                             </p>
@@ -302,9 +302,9 @@ const AesturaCampaign = () => {
                                 desc: "In a market overwhelmed with trend-driven claims, consumers crave transparency, integrity, and expertise. Aestura's pharmaceutical origins set it apart as a brand that not only promises results, but proves them."
                             }
                         ].map((item, i) => (
-                            <div key={i} className="bg-[#F5F8FC] p-8 rounded-3xl">
+                            <div key={i} className="bg-[#343F28]/5 p-8 rounded-3xl">
                                 <img src={item.icon} alt={item.title} className="w-16 h-16 object-contain mb-4 mx-auto" />
-                                <h3 className="text-[#3E5085] font-bold text-xl mb-4 text-center">{item.title}</h3>
+                                <h3 className="text-[#343F28] font-bold text-xl mb-4 text-center">{item.title}</h3>
                                 <p className="text-gray-600 text-center leading-relaxed">{item.desc}</p>
                             </div>
                         ))}
@@ -327,7 +327,7 @@ const AesturaCampaign = () => {
 
                             {/* Left Card */}
                             <div className="md:col-span-4 bg-white rounded-2xl p-8 md:p-10 shadow-lg transform md:-rotate-1 transition-transform hover:rotate-0">
-                                <div className="border-l-4 border-[#3E5085] pl-4 mb-6">
+                                <div className="border-l-4 border-[#343F28] pl-4 mb-6">
                                     <h3 className="text-xl font-bold text-gray-900 leading-tight">
                                         Skincare Without the Guesswork
                                     </h3>
@@ -344,7 +344,7 @@ const AesturaCampaign = () => {
 
                             {/* Right Card */}
                             <div className="md:col-span-4 bg-white rounded-2xl p-8 md:p-10 shadow-lg transform md:rotate-1 transition-transform hover:rotate-0">
-                                <div className="border-l-4 border-[#3E5085] pl-4 mb-6">
+                                <div className="border-l-4 border-[#343F28] pl-4 mb-6">
                                     <h3 className="text-xl font-bold text-gray-900 leading-tight">
                                         Prevention Over Perfection
                                     </h3>
@@ -366,7 +366,7 @@ const AesturaCampaign = () => {
                 {/* Campaign Strategy Section */}
                 <div className="container mx-auto px-6 py-24 max-w-7xl">
                     <div className="mb-12">
-                        <h2 className="text-5xl font-semibold mb-4" style={{ color: '#2E6B5F' }}>
+                        <h2 className="text-5xl font-semibold mb-4" style={{ color: '#343F28' }}>
                             Campaign Strategy
                         </h2>
                         <p className="text-xl text-gray-800">
@@ -376,7 +376,7 @@ const AesturaCampaign = () => {
 
                     <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
                         {/* Left Column - Phone Mockup */}
-                        <div className="lg:col-span-4 relative rounded-[40px] overflow-hidden" style={{ background: 'linear-gradient(180deg, #A4C8E6 0%, #FFFFFF 100%)' }}>
+                        <div className="lg:col-span-4 relative rounded-[40px] overflow-hidden" style={{ background: 'linear-gradient(180deg, #343F28 0%, #FFFFFF 100%)' }}>
                             <img
                                 src="/images/aestura/AesturaHandMockup.png"
                                 alt="Social Media Campaign Mockup"
@@ -400,7 +400,7 @@ const AesturaCampaign = () => {
                                 <div className="inline-block bg-black text-white px-6 py-2 rounded-t-xl rounded-br-xl text-lg font-bold italic mb-[-2px] relative z-20">
                                     1. Campaign Introduction/ Teaser
                                 </div>
-                                <div className="bg-[#4D76D6] rounded-3xl p-6 pt-8 relative z-10 w-full">
+                                <div className="bg-[#343F28] rounded-3xl p-6 pt-8 relative z-10 w-full">
                                     <div className="grid grid-cols-5 gap-3">
                                         <img src="/images/aestura/Aesturaframe1.png" alt="Frame 1" className="w-full rounded-lg shadow-sm" />
                                         <img src="/images/aestura/Aesturaframe2.png" alt="Frame 2" className="w-full rounded-lg shadow-sm" />
@@ -418,7 +418,7 @@ const AesturaCampaign = () => {
                                     <div className="inline-block bg-black text-white px-6 py-2 rounded-t-xl rounded-br-xl text-lg font-bold italic mb-[-2px] relative z-20">
                                         2. Pop up Reveal
                                     </div>
-                                    <div className="bg-[#2E4DA7] rounded-3xl p-6 pt-8 relative z-10 h-full">
+                                    <div className="bg-[#343F28] rounded-3xl p-6 pt-8 relative z-10 h-full">
                                         <div className="grid grid-cols-3 gap-3">
                                             <img src="/images/aestura/Aesturaframe6.png" alt="Frame 6" className="w-full rounded-lg shadow-sm" />
                                             <img src="/images/aestura/Aesturaframe7.png" alt="Frame 7" className="w-full rounded-lg shadow-sm" />
@@ -432,7 +432,7 @@ const AesturaCampaign = () => {
                                     <div className="inline-block bg-black text-white px-6 py-2 rounded-t-xl rounded-br-xl text-lg font-bold italic mb-[-2px] relative z-20">
                                         3. UGC Content
                                     </div>
-                                    <div className="bg-[#214099] rounded-3xl p-6 pt-8 relative z-10 h-full">
+                                    <div className="bg-[#343F28] rounded-3xl p-6 pt-8 relative z-10 h-full">
                                         <div className="grid grid-cols-2 gap-3">
                                             <img src="/images/aestura/Aesturaframe9.png" alt="Frame 9" className="w-full rounded-lg shadow-sm" />
                                             <img src="/images/aestura/Aesturaframe10.png" alt="Frame 10" className="w-full rounded-lg shadow-sm" />
@@ -466,7 +466,7 @@ const AesturaCampaign = () => {
 
                     {/* Content Overlay */}
                     <div className="absolute bottom-16 left-6 md:left-20 max-w-4xl z-20">
-                        <div className="bg-gradient-to-r from-[#214099]/60 to-[#2E4DA7]/40 backdrop-blur-md border border-white/20 rounded-[32px] p-8 md:p-12 text-white shadow-2xl">
+                        <div className="bg-gradient-to-r from-[#343F28]/80 to-[#343F28]/50 backdrop-blur-md border border-white/20 rounded-[32px] p-8 md:p-12 text-white shadow-2xl">
                             <h2 className="text-3xl md:text-4xl font-bold mb-6 italic">
                                 Pop-Up Experience
                             </h2>
@@ -488,11 +488,11 @@ const AesturaCampaign = () => {
                         </p>
                     </div>
 
-                    <div className="rounded-[32px] overflow-hidden flex flex-col md:flex-row shadow-xl bg-[#839CD8]">
+                    <div className="rounded-[32px] overflow-hidden flex flex-col md:flex-row shadow-xl bg-[#343F28]">
                         {/* Note: Using a color close to the image reference, likely a periwinkle shade */}
 
                         {/* Left Side - Image */}
-                        <div className="md:w-[40%] bg-[#A4C0E8] relative flex items-center justify-center p-8">
+                        <div className="md:w-[40%] bg-[#343F28]/20 relative flex items-center justify-center p-8">
                             <img
                                 src="/images/aestura/AesturaSuitcase.png"
                                 alt="From Seoul to Your City"
@@ -502,7 +502,7 @@ const AesturaCampaign = () => {
 
                         {/* Right Side - Brand Opportunity */}
                         <div className="md:w-[60%] p-10 md:p-14 flex flex-col justify-center text-white">
-                            <div className="border-l-4 border-[#3E5085] pl-6 mb-8">
+                            <div className="border-l-4 border-[#343F28] pl-6 mb-8">
                                 <h3 className="text-3xl md:text-4xl italic font-medium leading-tight">
                                     Brand<br />Opportunity
                                 </h3>
@@ -520,7 +520,7 @@ const AesturaCampaign = () => {
                     <div className="flex flex-col md:flex-row justify-between items-start mb-20 gap-12">
                         <h2 className="text-5xl md:text-6xl text-black font-light leading-tight">
                             Strategic<br />
-                            <span className="italic font-light text-[#5B85F8]">Impact</span>
+                            <span className="italic font-light text-[#343F28]">Impact</span>
                         </h2>
                         <p className="text-base text-gray-700 leading-relaxed max-w-2xl text-right ml-auto">
                             Our strategy is to <span className="font-bold">educate and engage U.S. consumers</span> around Aestura's AtoBarrier365 Cream by highlighting how it supports and strengthens sensitive skin. For Aestura's first in-person U.S. launch, we are reimagining the full experience through pop-ups, immersive installations, and social media tailored to this market. By emphasizing its clinically backed and derma-certified formula, we aim to build trust in its long-lasting hydration, low irritation, and proven results.
@@ -606,13 +606,13 @@ const AesturaCampaign = () => {
 
                 {/* Takeaways Section */}
                 <div className="container mx-auto px-6 py-24 max-w-5xl">
-                    <h2 className="text-3xl md:text-5xl font-semibold mb-8 lg:mb-12 text-[#2E6B5F]">
+                    <h2 className="text-3xl md:text-5xl font-semibold mb-8 lg:mb-12 text-[#343F28]">
                         Takeaways
                     </h2>
 
                     <div className="space-y-6">
                         {/* Takeaway 1 */}
-                        <div className="w-full rounded-[30px] p-[4px] bg-gradient-to-r from-[#2E6B5F] to-[#5AD1B9]">
+                        <div className="w-full rounded-[30px] p-[4px] bg-[#343F28]">
                             <div className="w-full h-full rounded-[26px] bg-white p-6 md:p-8 hover:bg-zinc-50 transition-colors flex flex-col md:flex-row items-center gap-6">
                                 <div className="flex-shrink-0 text-black">
                                     <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
@@ -629,7 +629,7 @@ const AesturaCampaign = () => {
                         </div>
 
                         {/* Takeaway 2 */}
-                        <div className="w-full rounded-[30px] p-[4px] bg-gradient-to-r from-[#2E6B5F] to-[#5AD1B9]">
+                        <div className="w-full rounded-[30px] p-[4px] bg-[#343F28]">
                             <div className="w-full h-full rounded-[26px] bg-white p-6 md:p-8 hover:bg-zinc-50 transition-colors flex flex-col md:flex-row items-center gap-6">
                                 <div className="flex-shrink-0 text-black">
                                     <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
@@ -643,7 +643,7 @@ const AesturaCampaign = () => {
                         </div>
 
                         {/* Takeaway 3 */}
-                        <div className="w-full rounded-[30px] p-[4px] bg-gradient-to-r from-[#2E6B5F] to-[#5AD1B9]">
+                        <div className="w-full rounded-[30px] p-[4px] bg-[#343F28]">
                             <div className="w-full h-full rounded-[26px] bg-white p-6 md:p-8 hover:bg-zinc-50 transition-colors flex flex-col md:flex-row items-center gap-6">
                                 <div className="flex-shrink-0 text-black">
                                     <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">

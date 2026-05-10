@@ -83,6 +83,7 @@ export function WorkSection() {
   useEffect(() => {
     const cards = cardRefs.current.filter(Boolean) as HTMLElement[];
     if (cards.length < 2) return;
+    if (window.matchMedia('(max-width: 639px)').matches) return;
 
     const ctx = gsap.context(() => {
       cards.forEach((card, i) => {
@@ -147,78 +148,88 @@ export function WorkSection() {
             <article
               key={project.id}
               ref={el => { cardRefs.current[index] = el; }}
-              className="rounded-2xl overflow-hidden sticky will-change-transform"
+              className="rounded-2xl overflow-hidden sm:sticky will-change-transform mb-4 sm:mb-0"
               style={{
                 top: '80px',
                 zIndex: index + 1,
-                marginBottom: 0,
                 transformOrigin: 'center top',
               }}
             >
               {project.title ? (
-                <div className="relative">
-                  <img
-                    src={project.cardImage}
-                    alt={project.alt}
-                    className="w-full h-auto"
-                  />
-                  <div className="absolute inset-0 p-4 sm:p-8 md:p-10 lg:p-14 flex flex-col">
-                    <div className="max-w-[65%] sm:max-w-[55%] md:max-w-[45%]">
-                      {/* Lowe's header */}
+                <>
+                  {/* Mobile layout: image + text below */}
+                  <div className="sm:hidden">
+                    <img src={project.cardImage} alt={project.alt} className="w-full h-auto rounded-t-2xl" />
+                    <div className={`p-5 rounded-b-2xl ${project.darkCard ? 'bg-[#1a1f2e]' : project.showLowesHeader ? 'bg-[#EAF0F8]' : 'bg-[#F5F3EF]'}`}>
                       {project.showLowesHeader && (
-                        <div>
-                          <div className="flex items-center gap-3 mb-2">
-                            <img src="/images/lowes.png" alt="Lowes Logo" className="h-7 sm:h-8 lg:h-9 w-auto" />
-                            <span className="h-7 sm:h-8 lg:h-9 w-[2px] bg-[#A8A8A8] inline-block"></span>
-                            <span className="text-xl sm:text-2xl lg:text-[26px] font-normal text-[#A8A8A8]">SCADpro</span>
-                          </div>
-                          <div className="mb-6 lg:mb-8 text-[13px] text-[#8A8A8A] font-normal">
-                            NDA Protected
-                          </div>
+                        <div className="flex items-center gap-2 mb-1">
+                          <img src="/images/lowes.png" alt="Lowes Logo" className="h-6 w-auto" />
+                          <span className="h-6 w-[1.5px] bg-[#A8A8A8] inline-block" />
+                          <span className="text-base font-normal text-[#A8A8A8]">SCADpro</span>
                         </div>
                       )}
-
-                      {/* Spacer */}
-                      {!project.showLowesHeader && (
-                        <div className={project.extraTopSpacing ? "mt-8 sm:mt-16 md:mt-20 lg:mt-28" : "mt-10 sm:mt-20 md:mt-28 lg:mt-36"} />
-                      )}
-
-                      <Link
-                        href={project.href}
-                        className={`inline-flex items-center gap-2 px-5 py-2.5 sm:px-6 sm:py-3 border-[1.5px] rounded-2xl text-sm font-medium no-underline mb-5 sm:mb-6 transition-all group w-fit ${project.darkCard ? "bg-transparent" : "bg-white"}`}
-                        style={{
-                          borderColor: project.buttonColor,
-                          color: project.buttonColor,
-                        }}
-                        onMouseEnter={(e) => {
-                          e.currentTarget.style.backgroundColor = project.buttonColor || "";
-                          e.currentTarget.style.color = project.darkCard ? "#2A353B" : "white";
-                        }}
-                        onMouseLeave={(e) => {
-                          e.currentTarget.style.backgroundColor = project.darkCard ? "transparent" : "white";
-                          e.currentTarget.style.color = project.buttonColor || "";
-                        }}
-                      >
-                        {project.buttonText}
-                        <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-                      </Link>
-
-                      <h3
-                        className="text-xl sm:text-2xl lg:text-[28px] font-bold mb-3 leading-tight"
-                        style={{ color: project.darkCard ? "#FFFFFF" : project.showLowesHeader ? "#003D7A" : "#2A2A2A" }}
-                      >
+                      {project.showLowesHeader && <p className="text-xs text-[#8A8A8A] mb-3">NDA Protected</p>}
+                      <h3 className="text-lg font-bold mb-2 leading-tight" style={{ color: project.darkCard ? '#FFF' : project.showLowesHeader ? '#003D7A' : '#2A2A2A' }}>
                         {project.title}
                       </h3>
-
-                      <p
-                        className="text-xs sm:text-[13px] leading-[1.5]"
-                        style={{ color: project.darkCard ? "#B0B0B0" : project.showLowesHeader ? "#003D7A" : "#5A5A5A" }}
-                      >
+                      <p className="text-xs leading-relaxed mb-4" style={{ color: project.darkCard ? '#B0B0B0' : project.showLowesHeader ? '#003D7A' : '#5A5A5A' }}>
                         {project.description}
                       </p>
+                      <Link
+                        href={project.href}
+                        className="inline-flex items-center gap-2 px-4 py-2 border-[1.5px] rounded-xl text-sm font-medium no-underline transition-all group w-fit"
+                        style={{ borderColor: project.buttonColor, color: project.buttonColor, backgroundColor: project.darkCard ? 'transparent' : 'white' }}
+                      >
+                        {project.buttonText}
+                        <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
+                      </Link>
                     </div>
                   </div>
-                </div>
+
+                  {/* Desktop layout: text overlaid on image */}
+                  <div className="hidden sm:block relative">
+                    <img src={project.cardImage} alt={project.alt} className="w-full h-auto" />
+                    <div className="absolute inset-0 p-8 md:p-10 lg:p-14 flex flex-col">
+                      <div className="max-w-[55%] md:max-w-[45%]">
+                        {project.showLowesHeader && (
+                          <div>
+                            <div className="flex items-center gap-3 mb-2">
+                              <img src="/images/lowes.png" alt="Lowes Logo" className="h-8 lg:h-9 w-auto" />
+                              <span className="h-8 lg:h-9 w-[2px] bg-[#A8A8A8] inline-block" />
+                              <span className="text-2xl lg:text-[26px] font-normal text-[#A8A8A8]">SCADpro</span>
+                            </div>
+                            <div className="mb-6 lg:mb-8 text-[13px] text-[#8A8A8A]">NDA Protected</div>
+                          </div>
+                        )}
+                        {!project.showLowesHeader && (
+                          <div className={project.extraTopSpacing ? "mt-16 md:mt-20 lg:mt-28" : "mt-20 md:mt-28 lg:mt-36"} />
+                        )}
+                        <Link
+                          href={project.href}
+                          className={`inline-flex items-center gap-2 px-6 py-3 border-[1.5px] rounded-2xl text-sm font-medium no-underline mb-6 transition-all group w-fit ${project.darkCard ? "bg-transparent" : "bg-white"}`}
+                          style={{ borderColor: project.buttonColor, color: project.buttonColor }}
+                          onMouseEnter={(e) => {
+                            e.currentTarget.style.backgroundColor = project.buttonColor || "";
+                            e.currentTarget.style.color = project.darkCard ? "#2A353B" : "white";
+                          }}
+                          onMouseLeave={(e) => {
+                            e.currentTarget.style.backgroundColor = project.darkCard ? "transparent" : "white";
+                            e.currentTarget.style.color = project.buttonColor || "";
+                          }}
+                        >
+                          {project.buttonText}
+                          <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+                        </Link>
+                        <h3 className="text-2xl lg:text-[28px] font-bold mb-3 leading-tight" style={{ color: project.darkCard ? "#FFFFFF" : project.showLowesHeader ? "#003D7A" : "#2A2A2A" }}>
+                          {project.title}
+                        </h3>
+                        <p className="text-[13px] leading-[1.5]" style={{ color: project.darkCard ? "#B0B0B0" : project.showLowesHeader ? "#003D7A" : "#5A5A5A" }}>
+                          {project.description}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </>
               ) : (
                 <Link href={project.href} className="block rounded-2xl overflow-hidden">
                   <img
@@ -241,7 +252,7 @@ export function WorkSection() {
                 Get To Know Me
               </h2>
               <p className="text-base text-foreground leading-relaxed">
-                Hi, I&apos;m Kavya! A sophomore UX designer born and raised in Toronto, Canada. I&apos;m a curious and passionate individual, always striving to make a difference through thoughtful, human-centered design. When I&apos;m not glued to my computer, you&apos;ll find me exploring new places, trying new food, or watching basketball.
+                Hi, I&apos;m Kavya! A UX designer born and raised in Toronto, Canada. I&apos;m a curious and passionate individual, always striving to make a difference through thoughtful, human-centered design. When I&apos;m not glued to my computer, you&apos;ll find me exploring new places, trying new food, or watching basketball.
               </p>
             </div>
 
