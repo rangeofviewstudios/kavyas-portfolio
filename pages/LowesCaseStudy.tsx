@@ -54,18 +54,15 @@ const LowesCaseStudy = () => {
                     </div>
 
                     {/* NDA Notice Box */}
-                    <div className="w-full rounded-[30px] border-[4px] border-[#343F28] bg-white p-8 md:py-[74px] md:px-[60px] flex flex-col lg:flex-row items-center gap-8 lg:gap-20">
-                        <h2
-                            className="text-3xl md:text-[40px] font-medium leading-tight md:leading-[55px] flex-1 w-full lg:max-w-[50%]"
-                            style={{
-                                color: '#343F28',
-                            }}
-                        >
-                            This projects assets are currently under NDA
-                        </h2>
-                        <p className="text-base text-gray-900 leading-relaxed flex-1 w-full lg:max-w-[50%]">
-                            This case study focusses on the teams process, my role as UX Researcher, and all the lessons learned. All research findings and solutions remain confidential under NDA.
-                        </p>
+                    <div className="w-full rounded-[30px] p-[4px]" style={{ background: 'linear-gradient(90deg, #2E6B5F 0%, #5AD1B9 100%)' }}>
+                        <div className="w-full h-full rounded-[26px] bg-white p-8 md:py-[74px] md:px-[60px] flex flex-col lg:flex-row items-center gap-6 lg:gap-20">
+                            <h2 className="text-2xl sm:text-3xl md:text-[40px] font-medium leading-tight md:leading-[55px] flex-1 w-full lg:max-w-[50%]" style={{ color: '#343F28' }}>
+                                This projects assets are currently under NDA
+                            </h2>
+                            <p className="text-base text-gray-900 leading-relaxed flex-1 w-full lg:max-w-[50%]">
+                                This case study focusses on the teams process, my role as UX Researcher, and all the lessons learned. All research findings and solutions remain confidential under NDA.
+                            </p>
+                        </div>
                     </div>
 
                     {/* My Contributions Section */}

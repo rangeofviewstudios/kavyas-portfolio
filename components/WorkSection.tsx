@@ -169,12 +169,9 @@ export function WorkSection() {
                         </div>
                       )}
                       {project.showLowesHeader && <p className="text-xs text-[#8A8A8A] mb-3">NDA Protected</p>}
-                      <h3 className="text-lg font-bold mb-2 leading-tight" style={{ color: project.darkCard ? '#FFF' : project.showLowesHeader ? '#003D7A' : '#2A2A2A' }}>
+                      <h3 className="text-lg font-bold mb-4 leading-tight" style={{ color: project.darkCard ? '#FFF' : project.showLowesHeader ? '#003D7A' : '#2A2A2A' }}>
                         {project.title}
                       </h3>
-                      <p className="text-xs leading-relaxed mb-4" style={{ color: project.darkCard ? '#B0B0B0' : project.showLowesHeader ? '#003D7A' : '#5A5A5A' }}>
-                        {project.description}
-                      </p>
                       <Link
                         href={project.href}
                         className="inline-flex items-center gap-2 px-4 py-2 border-[1.5px] rounded-xl text-sm font-medium no-underline transition-all group w-fit"
@@ -324,26 +321,43 @@ export function WorkSection() {
           </Link>
 
           {/* Photo Strip */}
-          <div className="mt-16 sm:mt-20 relative w-full overflow-hidden md:overflow-visible">
-            <div className="flex justify-start md:justify-center items-center overflow-x-auto md:overflow-x-visible pb-8 md:pb-0 px-4 md:px-0 -mx-4 md:mx-0 snap-x snap-mandatory md:snap-none">
-              <div className="flex items-center pl-20 md:pl-0 h-[300px] md:h-auto">
-                <div className="bg-white p-2 sm:p-3 shadow-2xl transform -rotate-12 hover:rotate-0 transition-transform duration-300 relative w-40 sm:w-52 md:w-60 lg:w-[280px] z-[1] flex-shrink-0 snap-center -mr-8 md:-mr-12" style={{ top: "40px" }}>
-                  <img src="/images/footer/homefooter1.png" alt="Travel moment 1" className="w-full h-48 sm:h-56 md:h-60 lg:h-64 object-cover" />
+          <div className="mt-12 sm:mt-20 relative w-full">
+            {/* Mobile: 2-column polaroid grid */}
+            <div className="grid grid-cols-2 gap-4 px-2 md:hidden">
+              {[
+                { src: "/images/footer/homefooter1.png", rotate: "-rotate-3", alt: "Travel moment 1" },
+                { src: "/images/footer/homefooter2.png", rotate: "rotate-2", alt: "Travel moment 2" },
+                { src: "/images/footer/homefooter3.png", rotate: "rotate-3", alt: "Travel moment 3" },
+                { src: "/images/footer/homefooter4.png", rotate: "-rotate-2", alt: "Travel moment 4" },
+                { src: "/images/footer/homefooter5.png", rotate: "-rotate-1", alt: "Travel moment 5" },
+                { src: "/images/footer/homefooter6.png", rotate: "rotate-1", alt: "Travel moment 6" },
+              ].map((photo, i) => (
+                <div key={i} className={`bg-white p-2 shadow-lg transform ${photo.rotate} hover:rotate-0 transition-transform duration-300`}>
+                  <img src={photo.src} alt={photo.alt} className="w-full h-36 object-cover" />
                 </div>
-                <div className="relative bg-white p-2 sm:p-3 shadow-2xl transform rotate-6 hover:rotate-0 transition-transform duration-300 w-40 sm:w-52 md:w-60 lg:w-[280px] z-[2] flex-shrink-0 snap-center -mr-8 md:-mr-12" style={{ top: "10px" }}>
-                  <img src="/images/footer/homefooter2.png" alt="Travel moment 2" className="w-full h-48 sm:h-56 md:h-60 lg:h-64 object-cover" />
+              ))}
+            </div>
+
+            {/* Desktop: original overlapping scroll */}
+            <div className="hidden md:flex justify-center items-center overflow-visible">
+              <div className="flex items-center h-auto">
+                <div className="bg-white p-3 shadow-2xl transform -rotate-12 hover:rotate-0 transition-transform duration-300 relative w-60 lg:w-[280px] z-[1] flex-shrink-0 -mr-12" style={{ top: "40px" }}>
+                  <img src="/images/footer/homefooter1.png" alt="Travel moment 1" className="w-full h-60 lg:h-64 object-cover" />
                 </div>
-                <div className="bg-white p-2 sm:p-3 shadow-2xl transform -rotate-3 hover:rotate-0 transition-transform duration-300 relative w-40 sm:w-52 md:w-60 lg:w-[280px] z-[3] flex-shrink-0 snap-center -mr-8 md:-mr-12" style={{ top: "-20px" }}>
-                  <img src="/images/footer/homefooter3.png" alt="Travel moment 3" className="w-full h-48 sm:h-56 md:h-60 lg:h-64 object-cover" />
+                <div className="relative bg-white p-3 shadow-2xl transform rotate-6 hover:rotate-0 transition-transform duration-300 w-60 lg:w-[280px] z-[2] flex-shrink-0 -mr-12" style={{ top: "10px" }}>
+                  <img src="/images/footer/homefooter2.png" alt="Travel moment 2" className="w-full h-60 lg:h-64 object-cover" />
                 </div>
-                <div className="bg-white p-2 sm:p-3 shadow-2xl transform rotate-3 hover:rotate-0 transition-transform duration-300 relative w-40 sm:w-52 md:w-60 lg:w-[280px] z-[2] flex-shrink-0 snap-center -mr-8 md:-mr-12" style={{ top: "-10px" }}>
-                  <img src="/images/footer/homefooter4.png" alt="Travel moment 4" className="w-full h-48 sm:h-56 md:h-60 lg:h-64 object-cover" />
+                <div className="bg-white p-3 shadow-2xl transform -rotate-3 hover:rotate-0 transition-transform duration-300 relative w-60 lg:w-[280px] z-[3] flex-shrink-0 -mr-12" style={{ top: "-20px" }}>
+                  <img src="/images/footer/homefooter3.png" alt="Travel moment 3" className="w-full h-60 lg:h-64 object-cover" />
                 </div>
-                <div className="bg-white p-2 sm:p-3 shadow-2xl transform -rotate-6 hover:rotate-0 transition-transform duration-300 relative w-40 sm:w-52 md:w-60 lg:w-[280px] z-[1] flex-shrink-0 snap-center -mr-8 md:-mr-12" style={{ top: "30px" }}>
-                  <img src="/images/footer/homefooter5.png" alt="Travel moment 5" className="w-full h-48 sm:h-56 md:h-60 lg:h-64 object-cover" />
+                <div className="bg-white p-3 shadow-2xl transform rotate-3 hover:rotate-0 transition-transform duration-300 relative w-60 lg:w-[280px] z-[2] flex-shrink-0 -mr-12" style={{ top: "-10px" }}>
+                  <img src="/images/footer/homefooter4.png" alt="Travel moment 4" className="w-full h-60 lg:h-64 object-cover" />
                 </div>
-                <div className="bg-white p-2 sm:p-3 shadow-2xl transform rotate-12 hover:rotate-0 transition-transform duration-300 relative w-40 sm:w-52 md:w-60 lg:w-[280px] z-[0] flex-shrink-0 snap-center pr-20 md:pr-0" style={{ top: "60px" }}>
-                  <img src="/images/footer/homefooter6.png" alt="Travel moment 6" className="w-full h-48 sm:h-56 md:h-60 lg:h-64 object-cover" />
+                <div className="bg-white p-3 shadow-2xl transform -rotate-6 hover:rotate-0 transition-transform duration-300 relative w-60 lg:w-[280px] z-[1] flex-shrink-0 -mr-12" style={{ top: "30px" }}>
+                  <img src="/images/footer/homefooter5.png" alt="Travel moment 5" className="w-full h-60 lg:h-64 object-cover" />
+                </div>
+                <div className="bg-white p-3 shadow-2xl transform rotate-12 hover:rotate-0 transition-transform duration-300 relative w-60 lg:w-[280px] z-[0] flex-shrink-0" style={{ top: "60px" }}>
+                  <img src="/images/footer/homefooter6.png" alt="Travel moment 6" className="w-full h-60 lg:h-64 object-cover" />
                 </div>
               </div>
             </div>
