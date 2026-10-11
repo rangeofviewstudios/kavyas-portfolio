@@ -5,13 +5,6 @@ const educationList = [
   { id: "02", name: "Westwood High School" },
 ];
 
-const experienceList = [
-  { id: "01", role: "SCAD FLUX – Director" },
-  { id: "02", role: "UBS x SCADpro – UX Research/ UI Bridge" },
-  { id: "03", role: "Porsche x SCADpro – Senior Backend Lead" },
-  { id: "04", role: "Lowes x SCADpro – UX Team" },
-];
-
 export function AboutSection() {
   return (
     <section className="py-20 px-6">
@@ -78,24 +71,6 @@ export function AboutSection() {
           </div>
         </div>
 
-        {/* Experience */}
-        <div className="animate-fade-in-up" style={{ animationDelay: "0.2s" }}>
-          <h2 className="text-2xl md:text-3xl font-medium text-white mb-8">
-            EXPERIENCE
-          </h2>
-
-          <div className="space-y-0">
-            {experienceList.map((exp) => (
-              <div
-                key={exp.id}
-                className="flex items-center justify-between py-6 border-b border-white/20"
-              >
-                <span className="text-white/50 text-sm">{exp.id}.</span>
-                <span className="text-white font-medium">{exp.role}</span>
-              </div>
-            ))}
-          </div>
-        </div>
       </div>
     </section>
   );

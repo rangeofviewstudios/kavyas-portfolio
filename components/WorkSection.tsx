@@ -286,28 +286,6 @@ export function WorkSection() {
             </div>
           </div>
 
-          {/* Experience */}
-          <div>
-            <h3 className="text-2xl font-semibold text-white mb-8">EXPERIENCE</h3>
-            <div className="space-y-6">
-              <div className="flex items-start gap-4 pb-6 border-b border-white/20">
-                <span className="text-white/50 font-medium">01.</span>
-                <span className="text-white flex-1 text-right">SCAD FLUX - Director</span>
-              </div>
-              <div className="flex items-start gap-4 pb-6 border-b border-white/20">
-                <span className="text-white/50 font-medium">02.</span>
-                <span className="text-white flex-1 text-right">UBS x SCADpro - UX Research/ UI Bridge</span>
-              </div>
-              <div className="flex items-start gap-4 pb-6 border-b border-white/20">
-                <span className="text-white/50 font-medium">03.</span>
-                <span className="text-white flex-1 text-right">Porsche x SCADpro - Senior Backend Lead</span>
-              </div>
-              <div className="flex items-start gap-4 pb-6 border-b border-white/20">
-                <span className="text-white/50 font-medium">04.</span>
-                <span className="text-white flex-1 text-right">Lowes x SCADpro - UX Team</span>
-              </div>
-            </div>
-          </div>
         </div>
 
         {/* About Me Section */}

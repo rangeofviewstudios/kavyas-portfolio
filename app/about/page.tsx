@@ -2,7 +2,7 @@ import AboutMe from '@/pages/AboutMe';
 
 export const metadata = {
     title: "About Kavya Ray - UX Designer & Researcher",
-    description: "Learn about Kavya Ray, a UX designer at SCAD passionate about user-centered design, research, and creating meaningful digital experiences. View education, experience, and achievements.",
+    description: "Learn about Kavya Ray, a UX designer at SCAD passionate about user-centered design, research, and creating meaningful digital experiences. View her education and design achievements.",
     keywords: [
         "Kavya Ray",
         "UX designer bio",
