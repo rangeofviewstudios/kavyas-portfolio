@@ -32,7 +32,7 @@ const projects: Project[] = [
     href: "/case-study/ubs",
     alt: "UBS - The Future of Banking",
     cardImage: "/images/ubscard.png",
-    zoom: 1.22,
+    zoom: 1.32,
   },
   {
     id: 2,
