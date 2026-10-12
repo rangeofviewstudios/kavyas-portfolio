@@ -1,50 +1,27 @@
 import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/Footer";
+import { CaseNav, Details, GREEN } from "@/components/case-study/shared";
 
 const LowesCaseStudy = () => {
     return (
         <div className="min-h-screen bg-white overflow-x-hidden">
             <Navigation />
             <main>
-                {/* Hero Image Section */}
-                <div className="w-full mt-10 sm:mt-20">
-                    <img
-                        src="/images/lowesbanner.png"
-                        alt="Lowes Team"
-                        className="w-full h-auto"
-                    />
-                </div>
-
                 {/* Content Section */}
-                <div className="container mx-auto px-4 sm:px-6 py-8 sm:py-16 max-w-6xl">
+                <div className="container mx-auto px-4 sm:px-6 pt-24 sm:pt-32 pb-8 sm:pb-16 max-w-6xl">
                     {/* Title */}
                     <h1 className="text-2xl sm:text-3xl md:text-5xl font-semibold text-gray-900 mb-8 lg:mb-16">
                         Lowes x SCADpro
                     </h1>
 
-                    {/* Project Details Grid with Dividers */}
-                    {/* Project Details Grid with Dividers */}
-                    <div className="grid grid-cols-2 lg:flex lg:items-start gap-8 lg:gap-12 mb-12 lg:mb-16">
-                        <div className="flex-1">
-                            <h3 className="text-sm font-semibold text-gray-900 mb-2">Role:</h3>
-                            <p className="text-base text-gray-900">UX Researcher/Presenter</p>
-                        </div>
-                        <div className="hidden lg:block w-px h-12 bg-gray-200"></div>
-                        <div className="flex-1">
-                            <h3 className="text-sm font-semibold text-gray-900 mb-2">Industry:</h3>
-                            <p className="text-base text-gray-900">Home Improvement</p>
-                        </div>
-                        <div className="hidden lg:block w-px h-12 bg-gray-200"></div>
-                        <div className="flex-1">
-                            <h3 className="text-sm font-semibold text-gray-900 mb-2">Duration:</h3>
-                            <p className="text-base text-gray-900">10 Weeks</p>
-                        </div>
-                        <div className="hidden lg:block w-px h-12 bg-gray-200"></div>
-                        <div className="flex-1">
-                            <h3 className="text-sm font-semibold text-gray-900 mb-2">Location:</h3>
-                            <p className="text-base text-gray-900">Atlanta, Georgia</p>
-                        </div>
-                    </div>
+                    <Details
+                        items={[
+                            ["Role", "UX Researcher/Presenter"],
+                            ["Industry", "Home Improvement"],
+                            ["Duration", "10 Weeks"],
+                            ["Location", "Atlanta, Georgia"],
+                        ]}
+                    />
 
                     {/* Project Description */}
                     <div className="mb-16">
@@ -165,8 +142,7 @@ const LowesCaseStudy = () => {
                                         <img
                                             src="/images/lowespic2.png"
                                             alt="Family Members"
-                                            className="w-full h-64 object-cover"
-                                        />
+                                            className="w-full h-64 object-cover" loading="lazy" decoding="async" />
                                     </div>
                                     <div
                                         className="flex h-[60px] sm:h-[91px] w-full items-center justify-center text-white font-medium text-xl sm:text-2xl transition-all hover:brightness-110 hover:scale-105 cursor-pointer"
@@ -182,8 +158,7 @@ const LowesCaseStudy = () => {
                                         <img
                                             src="/images/lowespic3.png"
                                             alt="Caregiver"
-                                            className="w-full h-64 object-cover"
-                                        />
+                                            className="w-full h-64 object-cover" loading="lazy" decoding="async" />
                                     </div>
                                     <div
                                         className="flex h-[60px] sm:h-[91px] w-full items-center justify-center text-white font-medium text-xl sm:text-2xl transition-all hover:brightness-110 hover:scale-105 cursor-pointer"
@@ -208,8 +183,7 @@ const LowesCaseStudy = () => {
                                 <img
                                     src="/images/lowespic2nd1.png"
                                     alt="Iteration Process"
-                                    className="w-full h-auto rounded-2xl"
-                                />
+                                    className="w-full h-auto rounded-2xl" loading="lazy" decoding="async" />
                             </div>
                             <div className="flex-1">
                                 <h3 className="text-xl sm:text-3xl font-semibold text-gray-900 mb-4">Iteration</h3>
@@ -231,8 +205,7 @@ const LowesCaseStudy = () => {
                                 <img
                                     src="/images/lowespic2nd2.png"
                                     alt="Execution Process"
-                                    className="w-full h-auto rounded-2xl"
-                                />
+                                    className="w-full h-auto rounded-2xl" loading="lazy" decoding="async" />
                             </div>
                         </div>
 
@@ -242,8 +215,7 @@ const LowesCaseStudy = () => {
                                 <img
                                     src="/images/lowespic2nd3.png"
                                     alt="Deliver Process"
-                                    className="w-full h-auto rounded-2xl"
-                                />
+                                    className="w-full h-auto rounded-2xl" loading="lazy" decoding="async" />
                             </div>
                             <div className="flex-1">
                                 <h3 className="text-xl sm:text-3xl font-semibold text-gray-900 mb-4">Deliver</h3>
@@ -312,7 +284,9 @@ const LowesCaseStudy = () => {
                         </div>
                     </div>
 
-                    {/* Additional content sections can be added here */}
+                    <div className="mt-10 sm:mt-20 text-center">
+                        <CaseNav next={{ label: "Porsche", href: "/case-study/porsche" }} />
+                    </div>
                 </div>
             </main>
             <Footer />

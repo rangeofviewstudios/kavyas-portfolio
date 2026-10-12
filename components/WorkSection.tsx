@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { HomeAbout } from "@/components/HomeAbout";
@@ -51,7 +51,7 @@ const projects: Project[] = [
     title: "Garden Center Redesign",
     href: "/case-study/lowes",
     alt: "Lowes - Garden Center Redesign",
-    cardImage: "/images/lowescard.png",
+    cardImage: "/images/lowescard2.png",
   },
   {
     id: 4,
@@ -80,8 +80,9 @@ const projects: Project[] = [
     title: "FIFA",
     href: "/case-study/fifa",
     alt: "FIFA case study",
-    comingSoon: true,
-    placeholder: { bg: "#0B1D3F", fg: "#FFFFFF", wordmark: "FIFA" },
+    cardImage: "/images/fifacard.jpg",
+    focus: "50% 40%",
+    zoom: 1,
   },
   {
     id: 7,
@@ -90,17 +91,20 @@ const projects: Project[] = [
     title: "Brand & Visual Identity",
     href: "/case-study/rov",
     alt: "Range of View Studios — Brand & Visual Identity",
-    placeholder: { bg: "#1A1008", fg: "#F5E0C8", logo: "/images/rovgradlogo.png" },
+    cardImage: "/images/rovcard-ember.jpg",
+    focus: "50% 50%",
+    zoom: 1,
   },
   {
     id: 8,
     isNda: false,
-    client: "Solcae",
-    title: "Solcae",
-    href: "/case-study/solcae",
-    alt: "Solcae case study",
-    comingSoon: true,
-    placeholder: { bg: "#E9E2D6", fg: "#2A2420", wordmark: "Solcae" },
+    client: "Solace",
+    title: "Solace",
+    href: "/case-study/solace",
+    alt: "Solace case study",
+    cardImage: "/images/solacecard.png",
+    focus: "50% 50%",
+    zoom: 1,
   },
 ];
 
@@ -125,8 +129,7 @@ function ProjectVisual({ project, size }: { project: Project; size: "square" | "
         <img
           src={p.logo}
           alt={project.alt}
-          className={`w-auto object-contain ${size === "square" ? "h-20 lg:h-24" : "h-12 sm:h-14"}`}
-        />
+          className={`w-auto object-contain ${size === "square" ? "h-20 lg:h-24" : "h-12 sm:h-14"}`} loading="lazy" decoding="async" />
       ) : (
         <span
           className={`font-semibold tracking-tight ${size === "square" ? "text-6xl lg:text-7xl" : "text-4xl sm:text-5xl"}`}
@@ -308,14 +311,36 @@ function ProjectTile({
   isActive: boolean;
   onFocus: () => void;
 }) {
+  const pillRef = useRef<HTMLSpanElement>(null);
   const inner = (
     <div
       className={`h-full p-2.5 sm:p-3 rounded-3xl bg-[#1E2318]/55 backdrop-blur-sm ring-1 transition-[box-shadow,background-color] duration-300 group-hover:bg-[#1E2318]/70 ${isActive ? "ring-white/10 lg:ring-2 lg:ring-white/80" : "ring-white/10"}`}
     >
-      <div className="relative aspect-square rounded-2xl overflow-hidden">
+      <div
+        className="relative aspect-square rounded-2xl overflow-hidden"
+        onMouseMove={(e) => {
+          const pill = pillRef.current;
+          if (!pill) return;
+          const rect = e.currentTarget.getBoundingClientRect();
+          pill.style.left = `${e.clientX - rect.left}px`;
+          pill.style.top = `${e.clientY - rect.top}px`;
+        }}
+      >
         <div className="absolute inset-0 transition-transform duration-500 ease-out group-hover:scale-[1.04]">
           <ProjectVisual project={project} size="tile" />
         </div>
+        {!project.comingSoon && (
+          <span
+            ref={pillRef}
+            aria-hidden="true"
+            className="pointer-events-none absolute left-1/2 top-4 z-10 -translate-x-1/2 -translate-y-1/2 opacity-0 transition-opacity duration-200 ease-out group-hover:opacity-100 group-focus-visible:opacity-100"
+          >
+            <span className="inline-flex items-center gap-1.5 whitespace-nowrap rounded-full bg-white px-4 py-2 text-sm font-semibold text-[#343F28] shadow-lg ring-2 ring-[#343F28]">
+              Click me
+              <ArrowUpRight className="w-4 h-4" />
+            </span>
+          </span>
+        )}
         {(project.isNda || project.comingSoon) && (
           <span className="absolute top-3 left-3 px-2.5 py-1 rounded-full text-[11px] font-medium bg-black/45 text-white backdrop-blur">
             {project.comingSoon ? "Coming soon" : "NDA Protected"}

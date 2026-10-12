@@ -1,91 +1,26 @@
 import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/Footer";
+import { CaseNav, Details, GREEN } from "@/components/case-study/shared";
 import { PorscheAppFlow } from "@/components/PorscheAppFlow";
 
 export default function PorschePage() {
     return (
-        <div className="min-h-screen bg-white overflow-x-hidden">
+        <div className="min-h-screen bg-white overflow-x-clip">
             <Navigation />
 
-            {/* Hero Image Grid Section */}
-            <div className="w-full px-4 pt-4">
-                {/* First Row - 2 images */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-                    <div className="w-full h-[240px] sm:h-[350px] md:h-[500px] overflow-hidden">
-                        <img
-                            src="/images/porsche/porchehero1.png"
-                            alt="Porsche Hero 1"
-                            className="w-full h-full object-cover"
-                        />
-                    </div>
-                    <div className="w-full h-[240px] sm:h-[350px] md:h-[500px] overflow-hidden">
-                        <img
-                            src="/images/porsche/porshcehero2.png"
-                            alt="Porsche Hero 2"
-                            className="w-full h-full object-cover"
-                        />
-                    </div>
-                </div>
-
-                {/* Second Row - 3 images */}
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                    <div className="w-full h-[200px] sm:h-[300px] md:h-[450px] overflow-hidden">
-                        <img
-                            src="/images/porsche/porschehero3.png"
-                            alt="Porsche Hero 3"
-                            className="w-full h-full object-cover"
-                        />
-                    </div>
-                    <div className="w-full h-[200px] sm:h-[300px] md:h-[450px] overflow-hidden">
-                        <img
-                            src="/images/porsche/porschehero4.png"
-                            alt="Porsche Hero 4"
-                            className="w-full h-full object-cover"
-                        />
-                    </div>
-                    <div className="w-full h-[200px] sm:h-[300px] md:h-[450px] overflow-hidden">
-                        <img
-                            src="/images/porsche/porschehero5.png"
-                            alt="Porsche Hero 5"
-                            className="w-full h-full object-cover"
-                        />
-                    </div>
-                </div>
-            </div>
-
-            <main className="container mx-auto px-4 sm:px-6 py-8 sm:py-16">
+            <main className="container mx-auto px-4 sm:px-6 pt-24 sm:pt-32 pb-8 sm:pb-16">
                 {/* Project Header */}
                 <div className="max-w-5xl mx-auto mb-10 sm:mb-20 animate-fade-in-up">
                     <h1 className="text-2xl sm:text-4xl md:text-5xl font-medium mb-16 text-black">Porsche x SCADpro Collaboration</h1>
 
-                    {/* Project Details Grid */}
-                    <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-8 md:gap-4 mb-20 border-b border-gray-100 pb-10 md:border-none md:pb-0">
-                        <div className="space-y-1">
-                            <h3 className="text-base font-bold text-black">Role:</h3>
-                            <p className="text-base font-medium text-gray-900">Senior Backend Lead</p>
-                        </div>
-
-                        <div className="hidden md:block w-px h-12 bg-gray-300"></div>
-
-                        <div className="space-y-1">
-                            <h3 className="text-base font-bold text-black">Industry:</h3>
-                            <p className="text-base font-medium text-gray-900">Automotive Vehicles</p>
-                        </div>
-
-                        <div className="hidden md:block w-px h-12 bg-gray-300"></div>
-
-                        <div className="space-y-1">
-                            <h3 className="text-base font-bold text-black">Duration:</h3>
-                            <p className="text-base font-medium text-gray-900">10 Weeks</p>
-                        </div>
-
-                        <div className="hidden md:block w-px h-12 bg-gray-300"></div>
-
-                        <div className="space-y-1">
-                            <h3 className="text-base font-bold text-black">Location:</h3>
-                            <p className="text-base font-medium text-gray-900">Atlanta, Georgia</p>
-                        </div>
-                    </div>
+                    <Details
+                        items={[
+                            ["Role", "Senior Backend Lead"],
+                            ["Industry", "Automotive Vehicles"],
+                            ["Duration", "10 Weeks"],
+                            ["Location", "Atlanta, Georgia"],
+                        ]}
+                    />
 
                     {/* Project Overview */}
                     <div className="space-y-6 text-black leading-relaxed text-lg md:text-xl font-normal max-w-4xl">
@@ -212,8 +147,7 @@ export default function PorschePage() {
                                 <img
                                     src="/images/porsche/porschemercedesimage.png"
                                     alt="Mercedes Interior"
-                                    className="w-full h-64 object-cover"
-                                />
+                                    className="w-full h-64 object-cover" loading="lazy" decoding="async" />
                             </div>
 
                             {/* Audi */}
@@ -221,8 +155,7 @@ export default function PorschePage() {
                                 <img
                                     src="/images/porsche/porscheaudiimage.png"
                                     alt="Audi Interior"
-                                    className="w-full h-64 object-cover"
-                                />
+                                    className="w-full h-64 object-cover" loading="lazy" decoding="async" />
                             </div>
 
                             {/* Tesla */}
@@ -230,8 +163,7 @@ export default function PorschePage() {
                                 <img
                                     src="/images/porsche/porscheteslaimage.png"
                                     alt="Tesla Interior"
-                                    className="w-full h-64 object-cover"
-                                />
+                                    className="w-full h-64 object-cover" loading="lazy" decoding="async" />
                             </div>
                         </div>
                     </div>
@@ -274,8 +206,7 @@ export default function PorschePage() {
                                 <img
                                     src="/images/porsche/porschestatsimage.png"
                                     alt="Porsche Classic and Modern"
-                                    className="w-full h-full object-cover"
-                                />
+                                    className="w-full h-full object-cover" loading="lazy" decoding="async" />
                             </div>
                         </div>
 
@@ -286,8 +217,7 @@ export default function PorschePage() {
                                 <img
                                     src="/images/porsche/porschestatsimage2.png"
                                     alt="Porsche Interior Controls"
-                                    className="w-full h-full object-cover"
-                                />
+                                    className="w-full h-full object-cover" loading="lazy" decoding="async" />
                             </div>
 
                             {/* Right - Text and Stats */}
@@ -448,8 +378,7 @@ export default function PorschePage() {
                                     <img
                                         src="/images/porsche/screen1.png"
                                         alt="Tech-Luxe Minimalism Dashboard"
-                                        className="w-full h-auto"
-                                    />
+                                        className="w-full h-auto" loading="lazy" decoding="async" />
                                 </div>
                                 <div className="flex flex-col md:flex-row md:items-start gap-4 md:gap-12">
                                     <h3 className="text-xl font-bold text-gray-900 md:w-1/3 flex-shrink-0">
@@ -467,8 +396,7 @@ export default function PorschePage() {
                                     <img
                                         src="/images/porsche/screen2.png"
                                         alt="Heritage-Luxe Classic Dashboard"
-                                        className="w-full h-auto"
-                                    />
+                                        className="w-full h-auto" loading="lazy" decoding="async" />
                                 </div>
                                 <div className="flex flex-col md:flex-row md:items-start gap-4 md:gap-12">
                                     <h3 className="text-xl font-bold text-gray-900 md:w-1/3 flex-shrink-0">
@@ -486,8 +414,7 @@ export default function PorschePage() {
                                     <img
                                         src="/images/porsche/screen3.png"
                                         alt="Tactical Heritage Dashboard"
-                                        className="w-full h-auto"
-                                    />
+                                        className="w-full h-auto" loading="lazy" decoding="async" />
                                 </div>
                                 <div className="flex flex-col md:flex-row md:items-start gap-4 md:gap-12">
                                     <h3 className="text-xl font-bold text-gray-900 md:w-1/3 flex-shrink-0">
@@ -501,6 +428,10 @@ export default function PorschePage() {
                         </div>
                     </div>
                 </div>
+            </div>
+
+            <div className="container mx-auto px-4 sm:px-6 pb-16 max-w-6xl text-center">
+                <CaseNav next={{ label: "Aestura", href: "/case-study/aestura" }} />
             </div>
 
             <Footer />

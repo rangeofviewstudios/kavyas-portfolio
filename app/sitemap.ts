@@ -53,5 +53,17 @@ export default function sitemap(): MetadataRoute.Sitemap {
             changeFrequency: 'monthly',
             priority: 0.9,
         },
+        {
+            url: `${baseUrl}/case-study/fifa`,
+            lastModified: currentDate,
+            changeFrequency: 'monthly',
+            priority: 0.9,
+        },
+        {
+            url: `${baseUrl}/case-study/solace`,
+            lastModified: currentDate,
+            changeFrequency: 'monthly',
+            priority: 0.9,
+        },
     ];
 }

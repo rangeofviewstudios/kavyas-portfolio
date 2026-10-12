@@ -2,6 +2,7 @@ import Image from "next/image";
 import { ArrowRight, ArrowUpRight, Menu } from "lucide-react";
 import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/Footer";
+import { Details } from "@/components/case-study/shared";
 
 /* Kavya's site palette */
 const GREEN = "#343F28";
@@ -79,47 +80,20 @@ const RovCaseStudy = () => {
         <div className="min-h-screen bg-white overflow-x-hidden">
             <Navigation />
             <main>
-                {/* Hero Image Section */}
-                <div className="w-full mt-20">
-                    <Image
-                        src="/images/rov/site-hero.webp"
-                        alt="Range of View Studios homepage, 'Creative Identity'"
-                        width={1404}
-                        height={739}
-                        sizes="100vw"
-                        className="w-full h-auto"
-                        priority
-                    />
-                </div>
-
-                <div className="container mx-auto px-4 sm:px-6 py-8 sm:py-16 max-w-6xl">
+                <div className="container mx-auto px-4 sm:px-6 pt-24 sm:pt-32 pb-8 sm:pb-16 max-w-6xl">
                     {/* Title */}
                     <h1 className="text-2xl sm:text-3xl md:text-5xl font-semibold text-gray-900 mb-6 sm:mb-8 lg:mb-16">
                         Range of View Studios
                     </h1>
 
-                    {/* Project Details Grid with Dividers */}
-                    <div className="grid grid-cols-2 lg:flex lg:items-start gap-4 sm:gap-8 lg:gap-12 mb-8 sm:mb-12 lg:mb-16">
-                        <div className="flex-1">
-                            <h3 className="text-sm font-semibold text-gray-900 mb-2">Role:</h3>
-                            <p className="text-base text-gray-900">Brand &amp; Visual Identity Designer</p>
-                        </div>
-                        <div className="hidden lg:block w-px h-12 bg-gray-200"></div>
-                        <div className="flex-1">
-                            <h3 className="text-sm font-semibold text-gray-900 mb-2">Industry:</h3>
-                            <p className="text-base text-gray-900">Creative Studio</p>
-                        </div>
-                        <div className="hidden lg:block w-px h-12 bg-gray-200"></div>
-                        <div className="flex-1">
-                            <h3 className="text-sm font-semibold text-gray-900 mb-2">Scope:</h3>
-                            <p className="text-base text-gray-900">Identity, Color, Type, Components</p>
-                        </div>
-                        <div className="hidden lg:block w-px h-12 bg-gray-200"></div>
-                        <div className="flex-1">
-                            <h3 className="text-sm font-semibold text-gray-900 mb-2">Location:</h3>
-                            <p className="text-base text-gray-900">Atlanta, Georgia</p>
-                        </div>
-                    </div>
+                    <Details
+                        items={[
+                            ["Role", "Brand & Visual Identity Designer"],
+                            ["Industry", "Creative Studio"],
+                            ["Scope", "Identity, Color, Type, Components"],
+                            ["Location", "Atlanta, Georgia"],
+                        ]}
+                    />
 
                     {/* Project Description */}
                     <div className="mb-16">

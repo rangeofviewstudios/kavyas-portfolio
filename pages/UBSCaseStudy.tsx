@@ -1,50 +1,27 @@
 import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/Footer";
+import { CaseNav, Details, GREEN } from "@/components/case-study/shared";
 
 const UBSCaseStudy = () => {
     return (
         <div className="min-h-screen bg-white overflow-x-hidden">
             <Navigation />
             <main>
-                {/* Hero Image Section */}
-                <div className="w-full mt-20">
-                    <img
-                        src="/images/ubspageheader.png"
-                        alt="UBS Team"
-                        className="w-full h-auto"
-                    />
-                </div>
-
                 {/* Content Section */}
-                <div className="container mx-auto px-4 sm:px-6 py-8 sm:py-16 max-w-6xl">
+                <div className="container mx-auto px-4 sm:px-6 pt-24 sm:pt-32 pb-8 sm:pb-16 max-w-6xl">
                     {/* Title */}
                     <h1 className="text-2xl sm:text-3xl md:text-5xl font-semibold text-gray-900 mb-6 sm:mb-8 lg:mb-16">
                         UBS x SCADpro
                     </h1>
 
-                    {/* Project Details Grid with Dividers */}
-                    {/* Project Details Grid with Dividers */}
-                    <div className="grid grid-cols-2 lg:flex lg:items-start gap-4 sm:gap-8 lg:gap-12 mb-8 sm:mb-12 lg:mb-16">
-                        <div className="flex-1">
-                            <h3 className="text-sm font-semibold text-gray-900 mb-2">Role:</h3>
-                            <p className="text-base text-gray-900">UI/Research Bridge</p>
-                        </div>
-                        <div className="hidden lg:block w-px h-12 bg-gray-200"></div>
-                        <div className="flex-1">
-                            <h3 className="text-sm font-semibold text-gray-900 mb-2">Industry:</h3>
-                            <p className="text-base text-gray-900">Finance/Retail Banking</p>
-                        </div>
-                        <div className="hidden lg:block w-px h-12 bg-gray-200"></div>
-                        <div className="flex-1">
-                            <h3 className="text-sm font-semibold text-gray-900 mb-2">Duration:</h3>
-                            <p className="text-base text-gray-900">10 Weeks</p>
-                        </div>
-                        <div className="hidden lg:block w-px h-12 bg-gray-200"></div>
-                        <div className="flex-1">
-                            <h3 className="text-sm font-semibold text-gray-900 mb-2">Location:</h3>
-                            <p className="text-base text-gray-900">Lacoste, France</p>
-                        </div>
-                    </div>
+                    <Details
+                        items={[
+                            ["Role", "UI/Research Bridge"],
+                            ["Industry", "Finance/Retail Banking"],
+                            ["Duration", "10 Weeks"],
+                            ["Location", "Lacoste, France"],
+                        ]}
+                    />
 
                     {/* Project Description */}
                     <div className="mb-16">
@@ -229,8 +206,7 @@ const UBSCaseStudy = () => {
                                 <img
                                     src="/images/ubsdesignprocess2.png"
                                     alt="Execution Process"
-                                    className="w-full h-auto rounded-2xl"
-                                />
+                                    className="w-full h-auto rounded-2xl" loading="lazy" decoding="async" />
                             </div>
                         </div>
 
@@ -240,8 +216,7 @@ const UBSCaseStudy = () => {
                                 <img
                                     src="/images/ubsdesignprocess3.png"
                                     alt="Deliver Process"
-                                    className="w-full h-auto rounded-2xl"
-                                />
+                                    className="w-full h-auto rounded-2xl" loading="lazy" decoding="async" />
                             </div>
                             <div className="flex-1">
                                 <h3 className="text-2xl md:text-3xl font-semibold text-gray-900 mb-4">Deliver</h3>
@@ -310,7 +285,9 @@ const UBSCaseStudy = () => {
                         </div>
                     </div>
 
-                    {/* Additional content sections can be added here */}
+                    <div className="mt-10 sm:mt-20 text-center">
+                        <CaseNav next={{ label: "Looma", href: "/case-study/looma" }} />
+                    </div>
                 </div>
             </main>
             <Footer />

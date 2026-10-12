@@ -13,8 +13,6 @@ const nextConfig = {
     },
     // Enable compression
     compress: true,
-    // Production optimizations
-    swcMinify: true,
     // Add caching headers for static assets
     async headers() {
         return [

@@ -93,15 +93,14 @@ export function PorscheAppFlow() {
                   <img
                     src={step.phones[1]}
                     alt={`${step.label} detail`}
-                    className={`${step.phoneSizes[1]} w-auto object-contain rounded-2xl`}
-                  />
+                    className={`${step.phoneSizes[1]} w-auto object-contain rounded-2xl`} loading="lazy" decoding="async" />
                 </div>
               ))}
             </div>
 
             {/* Right - Sticky navigation */}
-            <div className="hidden lg:block lg:w-[45%]">
-              <div className="sticky top-1/2 -translate-y-1/2">
+            <div className="hidden lg:block lg:w-[45%] self-stretch">
+              <div className="sticky top-[calc(50vh-200px)]">
                 <ul className="space-y-3">
                   {steps.map((step, i) => (
                     <li key={step.label}>

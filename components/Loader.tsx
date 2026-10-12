@@ -7,7 +7,6 @@ const WORDS = ['Kavya', 'Ray'];
 const SWAP_MS = 1100;
 const MIN_VISIBLE_MS = 2800;
 const EXIT_MS = 800;
-const RAY_COUNT = 24;
 
 // Fired when the loader starts to fade, so the page can begin its intro
 export const LOADER_DONE_EVENT = 'kr:loader-done';
@@ -90,41 +89,32 @@ export function Loader() {
       </div>
 
       <div className="kr-loader__sun-wrap" aria-hidden="true">
+        <div className="kr-loader__bloom" />
+        <div className="kr-loader__beams" />
+        <div className="kr-loader__beams kr-loader__beams--fine" />
         <svg className="kr-loader__sun" viewBox="-100 -100 200 200">
           <defs>
-            <radialGradient id="kr-glow" r="50%">
-              <stop offset="35%" stopColor="#A9B78C" stopOpacity="0.35" />
-              <stop offset="100%" stopColor="#A9B78C" stopOpacity="0" />
-            </radialGradient>
-            <linearGradient id="kr-core" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stopColor="#B4C196" />
+            <radialGradient id="kr-core" cx="40%" cy="34%" r="75%">
+              <stop offset="0%" stopColor="#F4F1DC" />
+              <stop offset="38%" stopColor="#CBD6AE" />
               <stop offset="100%" stopColor="#7E8C63" />
-            </linearGradient>
+            </radialGradient>
+            <radialGradient id="kr-shade" cx="50%" cy="50%" r="50%">
+              <stop offset="70%" stopColor="#2a3220" stopOpacity="0" />
+              <stop offset="100%" stopColor="#2a3220" stopOpacity="0.35" />
+            </radialGradient>
           </defs>
 
-          <circle r="100" fill="url(#kr-glow)" className="kr-loader__glow" />
-
-          <g className="kr-loader__rays">
-            {Array.from({ length: RAY_COUNT }, (_, i) => {
-              const long = i % 2 === 0;
-              return (
-                <line
-                  key={i}
-                  x1="0"
-                  y1={-54}
-                  x2="0"
-                  y2={long ? -78 : -68}
-                  className={long ? 'kr-loader__ray' : 'kr-loader__ray kr-loader__ray--short'}
-                  transform={`rotate(${(360 / RAY_COUNT) * i})`}
-                />
-              );
-            })}
-          </g>
-
-          <circle r="47" className="kr-loader__ring" />
-          <circle r="40" fill="url(#kr-core)" />
+          <circle r="86" className="kr-loader__ring kr-loader__ring--faint" />
+          <circle r="64" className="kr-loader__ring" />
+          <circle r="50" className="kr-loader__ring" />
+          <circle r="38" fill="url(#kr-core)" />
+          <circle r="38" fill="url(#kr-shade)" />
+          <circle r="38" className="kr-loader__rim" />
         </svg>
       </div>
+
+      <div className="kr-loader__grain" aria-hidden="true" />
     </div>
   );
 }

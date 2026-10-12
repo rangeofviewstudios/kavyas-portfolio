@@ -1,67 +1,24 @@
 import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/Footer";
+import { CaseNav, Details, GREEN } from "@/components/case-study/shared";
 
 const AesturaCampaign = () => {
     return (
         <div className="min-h-screen bg-white font-sans overflow-x-hidden">
             <Navigation />
             <main>
-                {/* Hero Section */}
-                <div className="w-full relative bg-white">
-                    {/* Container for the hero image and overlays */}
-                    <div className="relative w-full max-w-[1440px] mx-auto">
-                        <img
-                            src="/images/aestura/aesturaheroimage.png"
-                            alt="Aestura Hero"
-                            className="w-full h-auto object-cover"
-                        />
-
-                        {/* Overlay Content - Absolute positioning to match design */}
-                        {/* Note: Adjusting positions based on visual estimation */}
-                        <div className="absolute top-[20%] left-[10%] space-y-4 hidden md:block">
-                            {/* The Essence Edit Badge */}
-                            <div className="inline-block px-8 py-3 rounded-full bg-white/30 backdrop-blur-md border border-white/50 shadow-lg">
-                                <span className="text-[#343F28] text-xl font-medium">The Essence Edit</span>
-                            </div>
-
-                            {/* Campaign Box */}
-                            <div className="mt-4 p-8 rounded-3xl bg-gradient-to-br from-[#343F28]/90 to-[#343F28]/40 backdrop-blur-md text-white max-w-md shadow-xl border border-white/20">
-                                <h2 className="text-3xl font-bold mb-2">Campaign</h2>
-                                <p className="text-2xl font-light italic leading-tight">
-                                    Bringing Seoul to<br />Your City
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
                 {/* Brand Challenge Section */}
-                <div className="container mx-auto px-4 sm:px-6 py-8 sm:py-16 max-w-6xl">
+                <div className="container mx-auto px-4 sm:px-6 pt-24 sm:pt-32 pb-8 sm:pb-16 max-w-6xl">
                     <h2 className="text-2xl sm:text-3xl md:text-5xl font-semibold mb-8 lg:mb-16 text-black">Aestura Brand Challenge</h2>
 
-                    {/* Project Details Grid with Dividers */}
-                    <div className="grid grid-cols-2 lg:flex lg:items-start gap-8 lg:gap-12 mb-12 lg:mb-16">
-                        <div className="flex-1">
-                            <h3 className="text-sm font-semibold text-gray-900 mb-2">Role:</h3>
-                            <p className="text-base text-gray-900">Project Manager</p>
-                            <p className="text-base text-gray-900">Led UX Designer</p>
-                        </div>
-                        <div className="hidden lg:block w-px h-12 bg-gray-300"></div>
-                        <div className="flex-1">
-                            <h3 className="text-sm font-semibold text-gray-900 mb-2">Industry:</h3>
-                            <p className="text-base text-gray-900">Social Media Marketing Campaign</p>
-                        </div>
-                        <div className="hidden lg:block w-px h-12 bg-gray-300"></div>
-                        <div className="flex-1">
-                            <h3 className="text-sm font-semibold text-gray-900 mb-2">Duration:</h3>
-                            <p className="text-base text-gray-900">1.5 Months</p>
-                        </div>
-                        <div className="hidden lg:block w-px h-12 bg-gray-300"></div>
-                        <div className="flex-1">
-                            <h3 className="text-sm font-semibold text-gray-900 mb-2">Location:</h3>
-                            <p className="text-base text-gray-900">Atlanta, Georgia</p>
-                        </div>
-                    </div>
+                    <Details
+                        items={[
+                            ["Role", "Project Manager, Led UX Designer"],
+                            ["Industry", "Social Media Marketing Campaign"],
+                            ["Duration", "1.5 Months"],
+                            ["Location", "Atlanta, Georgia"],
+                        ]}
+                    />
 
                     <div className="mt-8 sm:mt-16 text-gray-800 text-lg leading-relaxed max-w-4xl">
                         Qualified as a Semi-Finalist in AmorePacific's global brand challenge by developing a U.S. market entry strategy for Aestura, showcasing skills in research, strategy, and brand positioning.
@@ -109,8 +66,7 @@ const AesturaCampaign = () => {
                                 <img
                                     src="/images/aestura/aesturaHMWimage.png"
                                     alt="Research Background"
-                                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                                />
+                                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy" decoding="async" />
                                 <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/60 to-transparent"></div>
                             </div>
 
@@ -195,8 +151,7 @@ const AesturaCampaign = () => {
                                 <img
                                     src="/images/aestura/AesturaCustomerImage.png"
                                     alt="Customer Profile"
-                                    className="w-full h-full object-cover"
-                                />
+                                    className="w-full h-full object-cover" loading="lazy" decoding="async" />
                             </div>
                         </div>
 
@@ -214,7 +169,7 @@ const AesturaCampaign = () => {
 
                             {/* Card Shape */}
                             <div className="w-full aspect-square bg-[#343F28]/10 rounded-tr-[60px] rounded-bl-[60px] rounded-tl-[20px] rounded-br-[20px] p-6 flex items-center justify-center mb-6 transform hover:scale-105 transition-transform duration-300">
-                                <img src="/images/aestura/AesturaCustomer1.png" alt="Icon 1" className="w-16 h-16 object-contain" />
+                                <img src="/images/aestura/AesturaCustomer1.png" alt="Icon 1" className="w-16 h-16 object-contain" loading="lazy" decoding="async" />
                             </div>
                             <h3 className="text-[#343F28] font-bold text-lg mb-3">K-Beauty Builds Skin Knowledge</h3>
                             <p className="text-sm text-gray-600 leading-relaxed">
@@ -226,7 +181,7 @@ const AesturaCampaign = () => {
                         <div className="absolute top-[280px] left-[20%] w-[18%] flex flex-col items-center text-center">
                             {/* Card Shape */}
                             <div className="w-full aspect-square bg-[#343F28]/15 rounded-tr-[60px] rounded-bl-[60px] rounded-tl-[20px] rounded-br-[20px] p-6 flex items-center justify-center mb-6 transform hover:scale-105 transition-transform duration-300 rotate-[-10deg]">
-                                <img src="/images/aestura/AesturaCustomer2.png" alt="Icon 2" className="w-16 h-16 object-contain rotate-[10deg]" />
+                                <img src="/images/aestura/AesturaCustomer2.png" alt="Icon 2" className="w-16 h-16 object-contain rotate-[10deg]" loading="lazy" decoding="async" />
                             </div>
                             <h3 className="text-[#343F28] font-bold text-lg mb-3">Preventative {'>'} Corrective</h3>
                             <p className="text-sm text-gray-600 leading-relaxed">
@@ -238,7 +193,7 @@ const AesturaCampaign = () => {
                         <div className="absolute top-[350px] left-[41%] w-[18%] flex flex-col items-center text-center">
                             {/* Card Shape */}
                             <div className="w-full aspect-square bg-[#343F28]/20 rounded-tr-[60px] rounded-bl-[60px] rounded-tl-[20px] rounded-br-[20px] p-6 flex items-center justify-center mb-6 transform hover:scale-105 transition-transform duration-300">
-                                <img src="/images/aestura/AesturaCustomer3.png" alt="Icon 3" className="w-16 h-16 object-contain" />
+                                <img src="/images/aestura/AesturaCustomer3.png" alt="Icon 3" className="w-16 h-16 object-contain" loading="lazy" decoding="async" />
                             </div>
                             <div className="w-px h-12 bg-[#343F28]/10 mx-auto mb-4"></div>
                             <h3 className="text-[#343F28] font-bold text-lg mb-3">Seeking Gentle, Science-Backed Care</h3>
@@ -251,7 +206,7 @@ const AesturaCampaign = () => {
                         <div className="absolute top-[280px] right-[20%] w-[18%] flex flex-col items-center text-center">
                             {/* Card Shape */}
                             <div className="w-full aspect-square bg-[#343F28]/15 rounded-tr-[60px] rounded-bl-[60px] rounded-tl-[20px] rounded-br-[20px] p-6 flex items-center justify-center mb-6 transform hover:scale-105 transition-transform duration-300 rotate-[10deg]">
-                                <img src="/images/aestura/AesturaCustomer4.png" alt="Icon 4" className="w-16 h-16 object-contain rotate-[-10deg]" />
+                                <img src="/images/aestura/AesturaCustomer4.png" alt="Icon 4" className="w-16 h-16 object-contain rotate-[-10deg]" loading="lazy" decoding="async" />
                             </div>
                             <h3 className="text-[#343F28] font-bold text-lg mb-3">Sensitive Skin Is a Growing Concern</h3>
                             <p className="text-sm text-gray-600 leading-relaxed">
@@ -263,7 +218,7 @@ const AesturaCampaign = () => {
                         <div className="absolute top-[150px] right-[0%] w-[18%] flex flex-col items-center text-center">
                             {/* Card Shape */}
                             <div className="w-full aspect-square bg-[#343F28]/10 rounded-tr-[60px] rounded-bl-[60px] rounded-tl-[20px] rounded-br-[20px] p-6 flex items-center justify-center mb-6 transform hover:scale-105 transition-transform duration-300">
-                                <img src="/images/aestura/AesturaCustomer5.png" alt="Icon 5" className="w-16 h-16 object-contain" />
+                                <img src="/images/aestura/AesturaCustomer5.png" alt="Icon 5" className="w-16 h-16 object-contain" loading="lazy" decoding="async" />
                             </div>
                             <h3 className="text-[#343F28] font-bold text-lg mb-3">Creditable & Trustworthy Brands</h3>
                             <p className="text-sm text-gray-600 leading-relaxed">
@@ -276,7 +231,7 @@ const AesturaCampaign = () => {
                     <div className="md:hidden space-y-12 mt-12">
                         <div className="flex justify-center mb-8">
                             <div className="w-48 h-48 rounded-full overflow-hidden border-4 border-white shadow-xl">
-                                <img src="/images/aestura/AesturaCustomerImage.png" alt="Customer" className="w-full h-full object-cover" />
+                                <img src="/images/aestura/AesturaCustomerImage.png" alt="Customer" className="w-full h-full object-cover" loading="lazy" decoding="async" />
                             </div>
                         </div>
 
@@ -308,7 +263,7 @@ const AesturaCampaign = () => {
                             }
                         ].map((item, i) => (
                             <div key={i} className="bg-[#343F28]/5 p-8 rounded-3xl">
-                                <img src={item.icon} alt={item.title} className="w-16 h-16 object-contain mb-4 mx-auto" />
+                                <img src={item.icon} alt={item.title} className="w-16 h-16 object-contain mb-4 mx-auto" loading="lazy" decoding="async" />
                                 <h3 className="text-[#343F28] font-bold text-xl mb-4 text-center">{item.title}</h3>
                                 <p className="text-gray-600 text-center leading-relaxed">{item.desc}</p>
                             </div>
@@ -385,8 +340,7 @@ const AesturaCampaign = () => {
                             <img
                                 src="/images/aestura/AesturaHandMockup.png"
                                 alt="Social Media Campaign Mockup"
-                                className="w-full h-full object-cover"
-                            />
+                                className="w-full h-full object-cover" loading="lazy" decoding="async" />
 
                             {/* Glass Overlay Card */}
                             <div className="absolute bottom-8 left-6 right-6 p-6 rounded-2xl border border-white/40 shadow-xl backdrop-blur-md bg-white/30">
@@ -407,11 +361,11 @@ const AesturaCampaign = () => {
                                 </div>
                                 <div className="bg-[#343F28] rounded-3xl p-6 pt-8 relative z-10 w-full">
                                     <div className="grid grid-cols-5 gap-3">
-                                        <img src="/images/aestura/Aesturaframe1.png" alt="Frame 1" className="w-full rounded-lg shadow-sm" />
-                                        <img src="/images/aestura/Aesturaframe2.png" alt="Frame 2" className="w-full rounded-lg shadow-sm" />
-                                        <img src="/images/aestura/Aesturaframe3.png" alt="Frame 3" className="w-full rounded-lg shadow-sm" />
-                                        <img src="/images/aestura/Aesturaframe4.png" alt="Frame 4" className="w-full rounded-lg shadow-sm" />
-                                        <img src="/images/aestura/Aesturaframe5.png" alt="Frame 5" className="w-full rounded-lg shadow-sm" />
+                                        <img src="/images/aestura/Aesturaframe1.png" alt="Frame 1" className="w-full rounded-lg shadow-sm" loading="lazy" decoding="async" />
+                                        <img src="/images/aestura/Aesturaframe2.png" alt="Frame 2" className="w-full rounded-lg shadow-sm" loading="lazy" decoding="async" />
+                                        <img src="/images/aestura/Aesturaframe3.png" alt="Frame 3" className="w-full rounded-lg shadow-sm" loading="lazy" decoding="async" />
+                                        <img src="/images/aestura/Aesturaframe4.png" alt="Frame 4" className="w-full rounded-lg shadow-sm" loading="lazy" decoding="async" />
+                                        <img src="/images/aestura/Aesturaframe5.png" alt="Frame 5" className="w-full rounded-lg shadow-sm" loading="lazy" decoding="async" />
                                     </div>
                                 </div>
                             </div>
@@ -425,9 +379,9 @@ const AesturaCampaign = () => {
                                     </div>
                                     <div className="bg-[#343F28] rounded-3xl p-6 pt-8 relative z-10 h-full">
                                         <div className="grid grid-cols-3 gap-3">
-                                            <img src="/images/aestura/Aesturaframe6.png" alt="Frame 6" className="w-full rounded-lg shadow-sm" />
-                                            <img src="/images/aestura/Aesturaframe7.png" alt="Frame 7" className="w-full rounded-lg shadow-sm" />
-                                            <img src="/images/aestura/Aesturaframe8.png" alt="Frame 8" className="w-full rounded-lg shadow-sm" />
+                                            <img src="/images/aestura/Aesturaframe6.png" alt="Frame 6" className="w-full rounded-lg shadow-sm" loading="lazy" decoding="async" />
+                                            <img src="/images/aestura/Aesturaframe7.png" alt="Frame 7" className="w-full rounded-lg shadow-sm" loading="lazy" decoding="async" />
+                                            <img src="/images/aestura/Aesturaframe8.png" alt="Frame 8" className="w-full rounded-lg shadow-sm" loading="lazy" decoding="async" />
                                         </div>
                                     </div>
                                 </div>
@@ -439,8 +393,8 @@ const AesturaCampaign = () => {
                                     </div>
                                     <div className="bg-[#343F28] rounded-3xl p-6 pt-8 relative z-10 h-full">
                                         <div className="grid grid-cols-2 gap-3">
-                                            <img src="/images/aestura/Aesturaframe9.png" alt="Frame 9" className="w-full rounded-lg shadow-sm" />
-                                            <img src="/images/aestura/Aesturaframe10.png" alt="Frame 10" className="w-full rounded-lg shadow-sm" />
+                                            <img src="/images/aestura/Aesturaframe9.png" alt="Frame 9" className="w-full rounded-lg shadow-sm" loading="lazy" decoding="async" />
+                                            <img src="/images/aestura/Aesturaframe10.png" alt="Frame 10" className="w-full rounded-lg shadow-sm" loading="lazy" decoding="async" />
                                         </div>
                                     </div>
                                 </div>
@@ -457,8 +411,7 @@ const AesturaCampaign = () => {
                         <img
                             src="/images/aestura/aesturaHMWimage.png"
                             alt="Aestura Barrier Bar Pop-Up"
-                            className="w-full h-full object-cover"
-                        />
+                            className="w-full h-full object-cover" loading="lazy" decoding="async" />
                         {/* Bubble - Top Right */}
                         <div className="absolute top-[-50px] right-[-50px] w-48 h-48 rounded-full overflow-hidden opacity-80 pointer-events-none z-10">
                             <div className="w-full h-full bg-gradient-to-br from-white/40 to-transparent backdrop-blur-sm rounded-full border border-white/20 shadow-inner"></div>
@@ -501,8 +454,7 @@ const AesturaCampaign = () => {
                             <img
                                 src="/images/aestura/AesturaSuitcase.png"
                                 alt="From Seoul to Your City"
-                                className="w-full h-auto object-contain max-w-md mix-blend-multiply"
-                            />
+                                className="w-full h-auto object-contain max-w-md mix-blend-multiply" loading="lazy" decoding="async" />
                         </div>
 
                         {/* Right Side - Brand Opportunity */}
@@ -536,7 +488,7 @@ const AesturaCampaign = () => {
                         {/* Step 1 */}
                         <div className="flex flex-col items-center text-center relative">
                             <div className="w-48 h-48 rounded-full overflow-hidden mb-8 border-4 border-white shadow-lg z-10 relative">
-                                <img src="/images/aestura/AesturaImpact.png" alt="Impact 1" className="w-full h-full object-cover" />
+                                <img src="/images/aestura/AesturaImpact.png" alt="Impact 1" className="w-full h-full object-cover" loading="lazy" decoding="async" />
                             </div>
                             {/* Arrow for desktop */}
                             <div className="hidden md:block absolute top-24 -right-4 z-0">
@@ -556,7 +508,7 @@ const AesturaCampaign = () => {
                         {/* Step 2 */}
                         <div className="flex flex-col items-center text-center relative">
                             <div className="w-48 h-48 rounded-full overflow-hidden mb-8 border-4 border-white shadow-lg z-10 relative">
-                                <img src="/images/aestura/AesturaImpact2.png" alt="Impact 2" className="w-full h-full object-cover" />
+                                <img src="/images/aestura/AesturaImpact2.png" alt="Impact 2" className="w-full h-full object-cover" loading="lazy" decoding="async" />
                             </div>
                             {/* Arrow for desktop */}
                             <div className="hidden md:block absolute top-24 -right-4 z-0">
@@ -576,7 +528,7 @@ const AesturaCampaign = () => {
                         {/* Step 3 */}
                         <div className="flex flex-col items-center text-center relative">
                             <div className="w-48 h-48 rounded-full overflow-hidden mb-8 border-4 border-white shadow-lg z-10 relative">
-                                <img src="/images/aestura/AesturaImpact3.png" alt="Impact 3" className="w-full h-full object-cover" />
+                                <img src="/images/aestura/AesturaImpact3.png" alt="Impact 3" className="w-full h-full object-cover" loading="lazy" decoding="async" />
                             </div>
                             {/* Arrow for desktop */}
                             <div className="hidden md:block absolute top-24 -right-4 z-0">
@@ -596,7 +548,7 @@ const AesturaCampaign = () => {
                         {/* Step 4 */}
                         <div className="flex flex-col items-center text-center relative">
                             <div className="w-48 h-48 rounded-full overflow-hidden mb-8 border-4 border-white shadow-lg z-10 relative">
-                                <img src="/images/aestura/AesturaImpact4.png" alt="Impact 4" className="w-full h-full object-cover" />
+                                <img src="/images/aestura/AesturaImpact4.png" alt="Impact 4" className="w-full h-full object-cover" loading="lazy" decoding="async" />
                             </div>
 
                             <h3 className="text-lg font-bold mb-3">
@@ -665,6 +617,10 @@ const AesturaCampaign = () => {
                 </div>
 
             </main>
+
+            <div className="container mx-auto px-4 sm:px-6 pb-16 max-w-6xl text-center">
+                <CaseNav next={{ label: "FIFA World Cup 26", href: "/case-study/fifa" }} />
+            </div>
             <Footer />
         </div>
     );

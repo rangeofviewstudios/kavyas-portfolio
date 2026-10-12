@@ -373,8 +373,9 @@
   left: 50%;
   bottom: 0;
   width: min(110vmin, 720px, 90vh);
+  aspect-ratio: 1;
   transform: translate(-50%, 50%);
-  animation: krSunRise 1100ms var(--kr-ease-out) both;
+  animation: krSunRise 1400ms var(--kr-ease-out) both;
 }
 
 .kr-loader--leaving .kr-loader__sun-wrap {
@@ -387,40 +388,68 @@
 }
 
 .kr-loader__sun {
-  display: block;
+  position: absolute;
+  inset: 0;
   width: 100%;
-  height: auto;
+  height: 100%;
   overflow: visible;
 }
 
-.kr-loader__glow {
-  transform-box: view-box;
-  transform-origin: 0 0;
-  animation: krBreathe 3.2s ease-in-out infinite;
+/* Wide, soft bloom: warm centre falling off to nothing */
+.kr-loader__bloom {
+  position: absolute;
+  inset: -45%;
+  background:
+    radial-gradient(circle, rgba(244, 241, 220, 0.34) 0%, rgba(203, 214, 174, 0.2) 14%, rgba(169, 183, 140, 0.1) 30%, rgba(169, 183, 140, 0) 52%);
+  animation: krBreathe 5s ease-in-out infinite;
 }
 
-.kr-loader__rays {
-  transform-box: view-box;
-  transform-origin: 0 0;
-  animation: krSunSpin 16s linear infinite;
+/* Hairline light beams that dissolve with distance */
+.kr-loader__beams {
+  position: absolute;
+  inset: -30%;
+  background: repeating-conic-gradient(from 0deg, rgba(244, 241, 220, 0.55) 0deg 0.35deg, transparent 0.35deg 9deg);
+  -webkit-mask-image: radial-gradient(circle, transparent 24%, #000 34%, transparent 60%);
+  mask-image: radial-gradient(circle, transparent 24%, #000 34%, transparent 60%);
+  opacity: 0.55;
+  animation: krSunSpin 120s linear infinite;
 }
 
-.kr-loader__ray {
-  stroke: #9AA97C;
-  stroke-width: 3.2;
-  stroke-linecap: round;
-}
-
-.kr-loader__ray--short {
-  stroke-opacity: 0.55;
-  stroke-width: 2.4;
+.kr-loader__beams--fine {
+  background: repeating-conic-gradient(from 3deg, rgba(244, 241, 220, 0.4) 0deg 0.2deg, transparent 0.2deg 3deg);
+  -webkit-mask-image: radial-gradient(circle, transparent 28%, #000 36%, transparent 50%);
+  mask-image: radial-gradient(circle, transparent 28%, #000 36%, transparent 50%);
+  opacity: 0.3;
+  animation-direction: reverse;
+  animation-duration: 180s;
 }
 
 .kr-loader__ring {
   fill: none;
   stroke: #FFF3DF;
-  stroke-opacity: 0.18;
-  stroke-width: 0.6;
+  stroke-opacity: 0.2;
+  stroke-width: 0.25;
+}
+
+.kr-loader__ring--faint {
+  stroke-opacity: 0.1;
+}
+
+.kr-loader__rim {
+  fill: none;
+  stroke: #FFF3DF;
+  stroke-opacity: 0.45;
+  stroke-width: 0.35;
+}
+
+/* Fine film grain: stops the gradients banding and adds tactility */
+.kr-loader__grain {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.1;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 1.2 -0.1'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
 }
 
 @keyframes krSunSet {
@@ -434,7 +463,7 @@
 
 @keyframes krBreathe {
   0%, 100% { transform: scale(1);    opacity: 0.85; }
-  50%      { transform: scale(1.06); opacity: 1; }
+  50%      { transform: scale(1.05); opacity: 1; }
 }
 
 @keyframes krFade {
@@ -442,8 +471,8 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .kr-loader__rays,
-  .kr-loader__glow,
+  .kr-loader__beams,
+  .kr-loader__bloom,
   .kr-loader__sun-wrap { animation: none; }
   .kr-loader__word--enter,
   .kr-loader__word--exit { animation-duration: 1ms; }
@@ -469,4 +498,36 @@
 
 @media (prefers-reduced-motion: reduce) {
   .kr-tag:hover .kr-tag__swing { animation: none; }
+}
+
+/* Case study motion (FIFA + Solace pages). All of it switches off for reduced-motion users. */
+@keyframes cs-kenburns {
+  from { transform: scale(1.02); }
+  to { transform: scale(1.1); }
+}
+@keyframes cs-chevron {
+  0%, 100% { opacity: 0.25; transform: translateX(-4px); }
+  50% { opacity: 1; transform: translateX(4px); }
+}
+@keyframes cs-dash {
+  to { stroke-dashoffset: -48; }
+}
+@keyframes cs-drift {
+  from { transform: translateX(-2%); }
+  to { transform: translateX(2%); }
+}
+@keyframes cs-pulse-ring {
+  0% { transform: scale(0.6); opacity: 0.7; }
+  100% { transform: scale(1.8); opacity: 0; }
+}
+@keyframes cs-wiggle {
+  0%, 100% { transform: rotate(var(--r0, 0deg)); }
+  50% { transform: rotate(var(--r1, 40deg)); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cs-anim, .cs-anim * { animation: none !important; transition: none !important; }
+}
+@keyframes cs-rise {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: none; }
 }

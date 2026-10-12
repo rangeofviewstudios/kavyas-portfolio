@@ -45,8 +45,7 @@ export function AboutSection() {
                 <img
                   src="/images/toronto-skyline.jpg"
                   alt="Toronto Skyline"
-                  className="w-full h-48 md:h-full object-cover"
-                />
+                  className="w-full h-48 md:h-full object-cover" loading="lazy" decoding="async" />
               </div>
             </div>
           </div>

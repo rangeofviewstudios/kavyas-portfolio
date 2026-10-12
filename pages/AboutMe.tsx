@@ -8,7 +8,7 @@ import { Gochi_Hand } from "next/font/google";
 
 const hand = Gochi_Hand({ weight: "400", subsets: ["latin"] });
 
-const HERO_VOLUME = 0.2;
+const HERO_VOLUME = 0.08;
 
 function HeroVideo() {
     const videoRef = useRef<HTMLVideoElement>(null);
@@ -81,7 +81,7 @@ function HeroVideo() {
                     e.currentTarget.play().catch(() => {});
                 }}
                 playsInline
-                preload="auto"
+                preload="metadata"
                 aria-label="Kavya — about me intro video"
                 className="w-full h-[58vh] sm:h-[70vh] md:h-[82vh] object-cover"
             >
@@ -143,7 +143,7 @@ const RIGHT_HALF: Snap[] = [
 const EASE_OUT = "cubic-bezier(0.22, 1, 0.36, 1)";
 
 /* Flips true once the element scrolls into view (or immediately with reduced motion). */
-function useOpenOnView<T extends HTMLElement>() {
+function useOpenOnView<T extends HTMLElement>(options: IntersectionObserverInit = { threshold: 0.35 }) {
     const ref = useRef<T>(null);
     const [open, setOpen] = useState(false);
 
@@ -161,13 +161,66 @@ function useOpenOnView<T extends HTMLElement>() {
                     io.disconnect();
                 }
             },
-            { threshold: 0.35 }
+            options
         );
         io.observe(el);
         return () => io.disconnect();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     return { ref, open };
+}
+
+const INTRO_PARAGRAPHS = [
+    "Hi! I'm Kavya, a UX designer currently based in Atlanta and originally from Toronto. I grew up loving basketball and will always be loyal to the Toronto Raptors.",
+    "A lot of my creativity comes from exploring new places, meeting different people, and experiencing cultures through food, travel, and everyday moments. I'm always inspired by the little details that make experiences feel memorable, human, and connected.",
+];
+
+/* Types the paragraphs out once they scroll into view. The full text is always laid out
+   (untyped part is transparent) so the page never reflows while typing. */
+function TypewriterIntro() {
+    const { ref, open } = useOpenOnView<HTMLDivElement>({ threshold: 0.4 });
+    const [count, setCount] = useState(0);
+    const total = INTRO_PARAGRAPHS.reduce((n, p) => n + p.length, 0);
+
+    useEffect(() => {
+        if (!open) return;
+        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+            setCount(total);
+            return;
+        }
+        const id = window.setInterval(() => {
+            setCount((c) => {
+                if (c >= total) {
+                    window.clearInterval(id);
+                    return c;
+                }
+                return c + 1;
+            });
+        }, 22);
+        return () => window.clearInterval(id);
+    }, [open, total]);
+
+    let remaining = count;
+    return (
+        <div ref={ref} className="space-y-6 text-white/90 text-base sm:text-lg leading-relaxed max-w-xl">
+            {INTRO_PARAGRAPHS.map((text, i) => {
+                const typed = Math.max(0, Math.min(text.length, remaining));
+                remaining -= text.length;
+                const typing = typed > 0 && typed < text.length;
+                return (
+                    <p key={i}>
+                        <span className="sr-only">{text}</span>
+                        <span aria-hidden="true">
+                            {text.slice(0, typed)}
+                            {typing && <span className="inline-block w-[2px] h-[1em] -mb-[0.15em] ml-px bg-white/80 animate-pulse" />}
+                            <span className="opacity-0">{text.slice(typed)}</span>
+                        </span>
+                    </p>
+                );
+            })}
+        </div>
+    );
 }
 
 function Polaroid({ snap, open, order }: { snap: Snap; open: boolean; order: number }) {
@@ -201,7 +254,15 @@ function Polaroid({ snap, open, order }: { snap: Snap; open: boolean; order: num
                     {/* front */}
                     <div className="bg-white p-[4%] pb-[11%] shadow-[0_6px_18px_rgba(0,0,0,0.22)] [backface-visibility:hidden]">
                         <div className="relative aspect-square overflow-hidden">
-                            <Image src={snap.src} alt="" fill sizes="(max-width: 768px) 30vw, 200px" className="object-cover" />
+                            <Image
+                                src={snap.src}
+                                alt=""
+                                fill
+                                sizes="(max-width: 768px) 30vw, 200px"
+                                className="object-cover"
+                                /* aboutme shots are pre-tilted cutouts with empty corners; zoom so they fill the frame */
+                                style={snap.src.includes("/aboutme/") ? { transform: "scale(1.32)" } : undefined}
+                            />
                         </div>
                     </div>
                     {/* back */}
@@ -338,7 +399,7 @@ function Note({ children, className, open, delay }: { children: React.ReactNode;
 }
 
 function CarryOn() {
-    const { ref, open } = useOpenOnView<HTMLDivElement>();
+    const { ref, open } = useOpenOnView<HTMLDivElement>({ threshold: 0.6, rootMargin: "0px 0px -15% 0px" });
     const ink = 2100;
 
     return (
@@ -411,18 +472,7 @@ const AboutMe = () => {
                                 />
                             </div>
 
-                            <div className="space-y-6 text-white/90 text-base sm:text-lg leading-relaxed max-w-xl">
-                                <p>
-                                    Hi! I&apos;m Kavya, a UX designer currently based in Atlanta and originally from
-                                    Toronto. I grew up loving basketball and will always be loyal to the Toronto Raptors.
-                                </p>
-                                <p>
-                                    A lot of my creativity comes from exploring new places, meeting different people,
-                                    and experiencing cultures through food, travel, and everyday moments. I&apos;m always
-                                    inspired by the little details that make experiences feel memorable, human, and
-                                    connected.
-                                </p>
-                            </div>
+                            <TypewriterIntro />
                         </div>
                     </div>
                 </section>

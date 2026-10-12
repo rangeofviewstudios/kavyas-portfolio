@@ -1,54 +1,26 @@
 
 import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/Footer";
+import { CaseNav, Details, GREEN } from "@/components/case-study/shared";
 
 export default function LoomaPage() {
     return (
         <div className="min-h-screen bg-white overflow-x-hidden">
             <Navigation />
 
-            {/* Hero Section */}
-            <div className="w-full">
-                <img
-                    src="/images/looma/looma1.png"
-                    alt="LOOMA Project Hero"
-                    className="w-full h-auto object-cover"
-                />
-            </div>
-
-            <main className="container mx-auto px-4 sm:px-6 py-8 sm:py-16">
+            <main className="container mx-auto px-4 sm:px-6 pt-24 sm:pt-32 pb-8 sm:pb-16">
                 {/* Project Header */}
                 <div className="max-w-5xl mx-auto mb-10 sm:mb-20 animate-fade-in-up">
                     <h1 className="text-2xl sm:text-4xl md:text-5xl font-medium mb-16 text-black">LOOMA x StartUp</h1>
 
-                    {/* Project Details Grid */}
-                    <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-8 md:gap-4 mb-20 border-b border-gray-100 pb-10 md:border-none md:pb-0">
-                        <div className="space-y-1">
-                            <h3 className="text-base font-bold text-black">Role:</h3>
-                            <p className="text-base font-medium text-gray-900">UX Researcher/Presenter</p>
-                        </div>
-
-                        <div className="hidden md:block w-px h-12 bg-gray-300"></div>
-
-                        <div className="space-y-1">
-                            <h3 className="text-base font-bold text-black">Industry:</h3>
-                            <p className="text-base font-medium text-gray-900">Wearable Technology</p>
-                        </div>
-
-                        <div className="hidden md:block w-px h-12 bg-gray-300"></div>
-
-                        <div className="space-y-1">
-                            <h3 className="text-base font-bold text-black">Duration:</h3>
-                            <p className="text-base font-medium text-gray-900">1 Week</p>
-                        </div>
-
-                        <div className="hidden md:block w-px h-12 bg-gray-300"></div>
-
-                        <div className="space-y-1">
-                            <h3 className="text-base font-bold text-black">Location:</h3>
-                            <p className="text-base font-medium text-gray-900">Atlanta, Georgia</p>
-                        </div>
-                    </div>
+                    <Details
+                        items={[
+                            ["Role", "UX Researcher/Presenter"],
+                            ["Industry", "Wearable Technology"],
+                            ["Duration", "1 Week"],
+                            ["Location", "Atlanta, Georgia"],
+                        ]}
+                    />
 
                     {/* Project Overview */}
                     <div className="space-y-6 text-black leading-relaxed text-lg md:text-xl font-normal max-w-4xl">
@@ -134,8 +106,7 @@ export default function LoomaPage() {
                     <img
                         src="/images/looma/looma4.png"
                         alt="Looma AR Glasses Demo"
-                        className="w-full h-auto object-cover"
-                    />
+                        className="w-full h-auto object-cover" loading="lazy" decoding="async" />
                 </div>
 
                 {/* Research Section */}
@@ -159,8 +130,7 @@ export default function LoomaPage() {
                                 <img
                                     src="/images/looma/looma5.png"
                                     alt="World Map"
-                                    className="w-full h-auto object-contain opacity-40"
-                                />
+                                    className="w-full h-auto object-contain opacity-40" loading="lazy" decoding="async" />
                             </div>
 
                             {/* Data Bubbles */}
@@ -260,8 +230,7 @@ export default function LoomaPage() {
                                 <img
                                     src="/images/looma/looma6.png"
                                     alt="Patient/User"
-                                    className="w-full h-full object-cover"
-                                />
+                                    className="w-full h-full object-cover" loading="lazy" decoding="async" />
                             </div>
                             <div
                                 className="w-full text-white text-center py-4 px-6 font-semibold text-xl"
@@ -277,8 +246,7 @@ export default function LoomaPage() {
                                 <img
                                     src="/images/looma/looma7.png"
                                     alt="Family Members"
-                                    className="w-full h-full object-cover"
-                                />
+                                    className="w-full h-full object-cover" loading="lazy" decoding="async" />
                             </div>
                             <div
                                 className="w-full text-white text-center py-4 px-6 font-semibold text-xl"
@@ -294,8 +262,7 @@ export default function LoomaPage() {
                                 <img
                                     src="/images/looma/looma8.png"
                                     alt="Caregiver"
-                                    className="w-full h-full object-cover"
-                                />
+                                    className="w-full h-full object-cover" loading="lazy" decoding="async" />
                             </div>
                             <div
                                 className="w-full text-white text-center py-4 px-6 font-semibold text-xl"
@@ -333,8 +300,7 @@ export default function LoomaPage() {
                                 <img
                                     src="/images/looma/looma10.png"
                                     alt="Facial Recognition Glasses"
-                                    className="w-full max-w-lg h-auto object-contain"
-                                />
+                                    className="w-full max-w-lg h-auto object-contain" loading="lazy" decoding="async" />
                             </div>
                         </div>
 
@@ -353,8 +319,7 @@ export default function LoomaPage() {
                                 <img
                                     src="/images/looma/looma11.png"
                                     alt="Spatial Awareness Glasses"
-                                    className="w-full max-w-lg h-auto object-contain"
-                                />
+                                    className="w-full max-w-lg h-auto object-contain" loading="lazy" decoding="async" />
                             </div>
                         </div>
 
@@ -364,8 +329,7 @@ export default function LoomaPage() {
                                 <img
                                     src="/images/looma/looma12.png"
                                     alt="Voice-Assisted Guidance & Bone Conduction"
-                                    className="w-full max-w-lg h-auto object-contain"
-                                />
+                                    className="w-full max-w-lg h-auto object-contain" loading="lazy" decoding="async" />
                             </div>
                             <div className="space-y-4 order-1 lg:order-2">
                                 <h3 className="text-3xl md:text-4xl font-semibold" style={{ color: '#343F28' }}>
@@ -387,8 +351,7 @@ export default function LoomaPage() {
                         <img
                             src="/images/looma/looma13.png"
                             alt="Looma Mobile App Screens"
-                            className="w-full h-auto object-cover"
-                        />
+                            className="w-full h-auto object-cover" loading="lazy" decoding="async" />
                     </div>
 
                     {/* Main Functions List */}
@@ -444,8 +407,7 @@ export default function LoomaPage() {
                                 <img
                                     src="/images/looma/looma11.png"
                                     alt="Looma Glasses"
-                                    className="w-full max-w-3xl h-auto object-contain"
-                                />
+                                    className="w-full max-w-3xl h-auto object-contain" loading="lazy" decoding="async" />
                                 <div className="absolute inset-0 flex items-center justify-center">
                                     <h2 className="text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-bold text-white opacity-60" style={{ letterSpacing: '0.1em' }}>
                                         looma
@@ -512,6 +474,10 @@ export default function LoomaPage() {
                     </div>
                 </div>
             </main>
+
+            <div className="container mx-auto px-4 sm:px-6 pb-16 max-w-6xl text-center">
+                <CaseNav next={{ label: "Lowes", href: "/case-study/lowes" }} />
+            </div>
 
             <Footer />
         </div>
