@@ -1,241 +1,433 @@
 'use client';
 
-import { useState, useRef, useCallback } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/Footer";
+import Image from "next/image";
+import { Gochi_Hand } from "next/font/google";
 
-interface Flight { id: number; dx: number; dy: number; }
+const hand = Gochi_Hand({ weight: "400", subsets: ["latin"] });
 
-function BasketballShooter() {
-    const [shots, setShots] = useState(0);
-    const [bounce, setBounce] = useState(false);
-    const [flights, setFlights] = useState<Flight[]>([]);
-    const [netSwish, setNetSwish] = useState(false);
-    const [rimGlow, setRimGlow] = useState(false);
-    const [pulsing, setPulsing] = useState(false);
-    const ballRef = useRef<HTMLButtonElement>(null);
-    const hoopRef = useRef<HTMLDivElement>(null);
-    const shotsRef = useRef(0);
-    const flightsRef = useRef<Flight[]>([]);
+const HERO_VOLUME = 0.2;
 
-    const shotMsg = shots === 0 ? 'tap the ball.' : shots < 3 ? 'nice.' : shots < 7 ? 'heating up.' : shots < 12 ? 'on fire 🔥' : 'vince carter who.';
+function HeroVideo() {
+    const videoRef = useRef<HTMLVideoElement>(null);
+    const [muted, setMuted] = useState(false);
 
-    const takeShot = useCallback(() => {
-        if (flightsRef.current.length >= 8) return;
-        setBounce(true);
-        setTimeout(() => setBounce(false), 300);
+    useEffect(() => {
+        const v = videoRef.current;
+        if (!v) return;
 
-        let dx = 220, dy = 0;
-        if (ballRef.current && hoopRef.current) {
-            const br = ballRef.current.getBoundingClientRect();
-            const hr = hoopRef.current.getBoundingClientRect();
-            dx = (hr.left + hr.width / 2) - (br.left + br.width / 2);
-            dy = (hr.top + hr.height * 0.4) - (br.top + br.height / 2);
-        }
+        v.volume = HERO_VOLUME;
 
-        const id = Date.now() + Math.random();
-        flightsRef.current = [...flightsRef.current, { id, dx, dy }];
-        setFlights([...flightsRef.current]);
+        // Attempt to autoplay with sound at 20% volume. Most browsers block
+        // unmuted autoplay, so on failure we fall back to muted playback and
+        // un-mute on the visitor's first interaction.
+        const attachUnmuteOnInteraction = () => {
+            const unmute = () => {
+                if (!videoRef.current) return;
+                videoRef.current.muted = false;
+                videoRef.current.volume = HERO_VOLUME;
+                setMuted(false);
+                cleanup();
+            };
+            const cleanup = () => {
+                window.removeEventListener("pointerdown", unmute);
+                window.removeEventListener("keydown", unmute);
+                window.removeEventListener("scroll", unmute);
+                window.removeEventListener("touchstart", unmute);
+            };
+            window.addEventListener("pointerdown", unmute, { once: true });
+            window.addEventListener("keydown", unmute, { once: true });
+            window.addEventListener("scroll", unmute, { once: true });
+            window.addEventListener("touchstart", unmute, { once: true });
+            return cleanup;
+        };
 
-        setTimeout(() => {
-            const next = shotsRef.current + 1;
-            shotsRef.current = next;
-            setShots(next);
-            setNetSwish(true);
-            setPulsing(true);
-            setTimeout(() => setNetSwish(false), 400);
-            setTimeout(() => setPulsing(false), 350);
-            if (next % 5 === 0) {
-                setRimGlow(true);
-                setTimeout(() => setRimGlow(false), 600);
-            }
-            flightsRef.current = flightsRef.current.filter(f => f.id !== id);
-            setFlights([...flightsRef.current]);
-        }, 480);
+        let cleanup: (() => void) | undefined;
+        v.muted = false;
+        v.play()
+            .then(() => setMuted(false))
+            .catch(() => {
+                v.muted = true;
+                setMuted(true);
+                v.play().catch(() => {});
+                cleanup = attachUnmuteOnInteraction();
+            });
+
+        return () => cleanup?.();
     }, []);
 
+    const toggleSound = () => {
+        const v = videoRef.current;
+        if (!v) return;
+        const next = !v.muted;
+        v.muted = next;
+        if (!next) {
+            v.volume = HERO_VOLUME;
+            if (v.paused) v.play().catch(() => {});
+        }
+        setMuted(next);
+    };
+
     return (
-        <div className="rounded-2xl p-6 sm:p-8 mt-8 bg-white">
-            <p className="text-xs font-semibold tracking-widest uppercase mb-6" style={{ color: '#C45827' }}>
-                raptors fan since birth
-            </p>
-            <div className="relative flex flex-wrap items-center gap-8 sm:gap-12">
-                {/* Ghost balls */}
-                {flights.map(f => (
-                    <span key={f.id} className="ghost-ball" style={{ '--shot-dx': `${f.dx}px`, '--shot-dy': `${f.dy}px` } as React.CSSProperties} />
-                ))}
+        <div className="relative overflow-hidden bg-black/10">
+            <video
+                ref={videoRef}
+                autoPlay
+                loop
+                onEnded={(e) => {
+                    e.currentTarget.currentTime = 0;
+                    e.currentTarget.play().catch(() => {});
+                }}
+                playsInline
+                preload="auto"
+                aria-label="Kavya — about me intro video"
+                className="w-full h-[58vh] sm:h-[70vh] md:h-[82vh] object-cover"
+            >
+                <source src="/aboutmeherovid.mp4" type="video/mp4" />
+            </video>
 
-                {/* Ball */}
-                <button
-                    ref={ballRef}
-                    onClick={takeShot}
-                    aria-label="Shoot"
-                    className="text-5xl select-none focus:outline-none flex-shrink-0"
-                    style={{
-                        transform: bounce ? 'scale(0.78) rotate(-10deg)' : 'scale(1) rotate(0deg)',
-                        transition: 'transform 150ms cubic-bezier(0.34,1.56,0.64,1)',
-                    }}
+            {/* Cinematic overlays */}
+            <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/55 via-black/5 to-black/15" />
+
+            {/* Sound toggle */}
+            <button
+                onClick={toggleSound}
+                aria-label={muted ? "Unmute video" : "Mute video"}
+                className="absolute bottom-4 right-4 sm:bottom-6 sm:right-6 flex items-center justify-center w-11 h-11 rounded-full backdrop-blur-md bg-black/30 border border-white/25 text-white transition-all duration-200 hover:bg-black/45 hover:-translate-y-0.5 focus:outline-none"
+            >
+                {muted ? (
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M11 5 6 9H2v6h4l5 4V5z" />
+                        <line x1="23" y1="9" x2="17" y2="15" />
+                        <line x1="17" y1="9" x2="23" y2="15" />
+                    </svg>
+                ) : (
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M11 5 6 9H2v6h4l5 4V5z" />
+                        <path d="M15.54 8.46a5 5 0 0 1 0 7.07" />
+                        <path d="M19.07 4.93a10 10 0 0 1 0 14.14" />
+                    </svg>
+                )}
+            </button>
+        </div>
+    );
+}
+
+type Snap = {
+    src: string;
+    alt: string;
+    /* handwritten line on the back of the polaroid */
+    story: string;
+    /* position inside its suitcase half, in % */
+    top: string;
+    left: string;
+    width: string;
+    rotate: number;
+};
+
+const LEFT_HALF: Snap[] = [
+    { src: "/images/aboutme/aboutme3.png", alt: "Kavya as a kid playing in the snow", story: "Toronto winters. Tongue out, always.", top: "7%", left: "7%", width: "42%", rotate: -6 },
+    { src: "/images/aboutme/aboutme2.png", alt: "Kavya presenting at an industry event", story: "Presenting the work, nerves and all.", top: "10%", left: "52%", width: "40%", rotate: 5 },
+    { src: "/images/torontoskyline.png", alt: "Toronto skyline", story: "Home. Always will be.", top: "56%", left: "5%", width: "42%", rotate: -2 },
+    { src: "/images/aboutme/aboutme6.png", alt: "Kavya with someone who inspires her", story: "My biggest inspiration in life.", top: "50%", left: "51%", width: "42%", rotate: 3 },
+];
+
+const RIGHT_HALF: Snap[] = [
+    { src: "/images/aboutme/aboutme4.png", alt: "Kavya with a close friend", story: "Friends who feel like family.", top: "6%", left: "46%", width: "44%", rotate: 4 },
+    { src: "/images/aboutme/aboutme1.png", alt: "Kavya at home", story: "Recharging between adventures.", top: "22%", left: "7%", width: "40%", rotate: -5 },
+    { src: "/images/aboutme/aboutme5.png", alt: "Kavya kayaking", story: "Paddling somewhere new.", top: "54%", left: "47%", width: "44%", rotate: -3 },
+];
+
+const EASE_OUT = "cubic-bezier(0.22, 1, 0.36, 1)";
+
+/* Flips true once the element scrolls into view (or immediately with reduced motion). */
+function useOpenOnView<T extends HTMLElement>() {
+    const ref = useRef<T>(null);
+    const [open, setOpen] = useState(false);
+
+    useEffect(() => {
+        const el = ref.current;
+        if (!el) return;
+        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+            setOpen(true);
+            return;
+        }
+        const io = new IntersectionObserver(
+            ([entry]) => {
+                if (entry.isIntersecting) {
+                    setOpen(true);
+                    io.disconnect();
+                }
+            },
+            { threshold: 0.35 }
+        );
+        io.observe(el);
+        return () => io.disconnect();
+    }, []);
+
+    return { ref, open };
+}
+
+function Polaroid({ snap, open, order }: { snap: Snap; open: boolean; order: number }) {
+    const [flipped, setFlipped] = useState(false);
+
+    return (
+        <div
+            className={`absolute ${flipped ? "z-30" : "hover:z-20"}`}
+            style={{
+                top: snap.top,
+                left: snap.left,
+                width: snap.width,
+                opacity: open ? 1 : 0,
+                transform: open ? "none" : `translateY(-35%) rotate(${snap.rotate * 2.5}deg) scale(1.1)`,
+                transition: `opacity 500ms ease-out, transform 900ms ${EASE_OUT}`,
+                transitionDelay: `${700 + order * 110}ms`,
+            }}
+        >
+            <button
+                type="button"
+                onClick={() => setFlipped((f) => !f)}
+                aria-pressed={flipped}
+                aria-label={`${snap.alt}. ${flipped ? "Show photo" : "Read the story"}`}
+                className="group/snap block w-full [perspective:900px] focus:outline-none focus-visible:ring-2 focus-visible:ring-white/80 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
+                style={{ rotate: `${snap.rotate}deg` }}
+            >
+                <div
+                    className="relative transition-transform duration-700 [transform-style:preserve-3d] group-hover/snap:scale-[1.06]"
+                    style={{ transform: flipped ? "rotateY(180deg)" : "none", transitionTimingFunction: EASE_OUT }}
                 >
-                    🏀
-                </button>
-
-                {/* Counter */}
-                <div className="flex-1 min-w-[90px]">
-                    <p className="text-xs uppercase tracking-widest mb-1 text-black/40">shots taken</p>
-                    <p
-                        className={`text-5xl font-bold tabular-nums text-black ${pulsing ? 'animate-countPulse' : ''}`}
-                        style={{ lineHeight: 1 }}
-                    >
-                        {String(shots).padStart(2, '0')}
-                    </p>
-                    <p className="text-sm mt-1 text-black/40">{shotMsg}</p>
-                </div>
-
-                {/* Hoop */}
-                <div ref={hoopRef} className="relative w-20 h-28 flex-shrink-0">
-                    {/* Backboard */}
-                    <div className="absolute left-1/2 -translate-x-1/2 top-0 w-14 h-10 rounded-sm border border-black/15 bg-black/5" />
-                    {/* Rim */}
-                    <div
-                        className="absolute left-1/2 -translate-x-1/2 w-16 h-1.5 rounded-full transition-all duration-500"
-                        style={{
-                            top: '40px',
-                            backgroundColor: rimGlow ? '#F1E9D5' : '#C45827',
-                            boxShadow: rimGlow ? '0 0 16px 4px rgba(241,233,213,0.8)' : 'none',
-                        }}
-                    />
-                    {/* Net wrapper (positioned) */}
-                    <div className="absolute left-1/2 -translate-x-1/2" style={{ top: '50px' }}>
-                        <div className={`flex gap-[3px] ${netSwish ? 'animate-netSwish' : ''}`}>
-                            {[0,1,2,3,4].map(i => (
-                                <span key={i} className="block rounded-full origin-top" style={{ width: '2px', height: '20px', backgroundColor: 'rgba(0,0,0,0.25)' }} />
-                            ))}
+                    {/* front */}
+                    <div className="bg-white p-[4%] pb-[11%] shadow-[0_6px_18px_rgba(0,0,0,0.22)] [backface-visibility:hidden]">
+                        <div className="relative aspect-square overflow-hidden">
+                            <Image src={snap.src} alt="" fill sizes="(max-width: 768px) 30vw, 200px" className="object-cover" />
                         </div>
                     </div>
+                    {/* back */}
+                    <div className="absolute inset-0 flex flex-col items-center justify-center gap-[6%] bg-[#fbf8f1] p-[10%] text-center shadow-[0_10px_24px_rgba(0,0,0,0.3)] [backface-visibility:hidden] [transform:rotateY(180deg)]">
+                        <p className={`${hand.className} text-[#2b2b2b] leading-snug`} style={{ fontSize: "clamp(0.6rem, 2.1cqw, 1.15rem)" }}>
+                            {snap.story}
+                        </p>
+                        <span className="h-px w-1/3 bg-black/20" />
+                    </div>
+                </div>
+            </button>
+        </div>
+    );
+}
+
+function BoardingPass({ open }: { open: boolean }) {
+    return (
+        <div
+            className="absolute left-[5%] top-[68%] w-[40%]"
+            style={{
+                opacity: open ? 1 : 0,
+                transform: open ? "rotate(-4deg)" : "translateY(-30%) rotate(-14deg)",
+                transition: `opacity 500ms ease-out, transform 900ms ${EASE_OUT}`,
+                transitionDelay: "1500ms",
+            }}
+            aria-label="Boarding pass from Toronto to Atlanta"
+            role="img"
+        >
+            <div className="flex overflow-hidden rounded-[6px] bg-[#fbf8f1] shadow-[0_6px_16px_rgba(0,0,0,0.2)] text-[#2b2b2b]">
+                <div className="flex-1 p-[6%]">
+                    <p className="font-semibold tracking-[0.2em] uppercase text-black/45" style={{ fontSize: "clamp(0.3rem, 0.75cqw, 0.55rem)" }}>
+                        Boarding pass
+                    </p>
+                    <div className="mt-[4%] flex items-center gap-[6%] font-semibold tracking-tight" style={{ fontSize: "clamp(0.7rem, 2.4cqw, 1.5rem)" }}>
+                        <span>YYZ</span>
+                        <svg viewBox="0 0 24 24" className="w-[1em] h-[1em] text-[hsl(86_10%_45%)]" fill="currentColor" aria-hidden="true">
+                            <path d="M21 16v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z" />
+                        </svg>
+                        <span>ATL</span>
+                    </div>
+                    <p className="mt-[3%] uppercase tracking-[0.12em] text-black/55" style={{ fontSize: "clamp(0.3rem, 0.8cqw, 0.6rem)" }}>
+                        Passenger · Kavya
+                    </p>
+                </div>
+                <div className="w-[26%] border-l-2 border-dashed border-black/15 p-[4%] flex flex-col justify-center items-center gap-[8%]">
+                    <p className="uppercase tracking-[0.12em] text-black/45" style={{ fontSize: "clamp(0.28rem, 0.7cqw, 0.5rem)" }}>Seat</p>
+                    <p className="font-semibold" style={{ fontSize: "clamp(0.55rem, 1.6cqw, 1rem)" }}>UX</p>
                 </div>
             </div>
         </div>
     );
 }
 
-const sections = [
-    {
-        img: '/voyageatlkavya-2.webp',
-        index: '01',
-        label: 'always reading.',
-        sub: 'ideas from everywhere',
-    },
-    {
-        img: '/voyageatlkavya-3.webp',
-        index: '03',
-        label: 'toronto raised.',
-        sub: 'the 6ix lives in everything I make',
-    },
-    {
-        img: '/voyageatlkavya-4.webp',
-        index: '04',
-        label: 'NBA obsessed.',
-        sub: 'Raptors fan, always',
-    },
-    {
-        img: '/voyageatlkavya-5.webp',
-        index: '05',
-        label: 'dog mom.',
-        sub: '+ Korean food every chance I get',
-    },
-    {
-        img: '/voyageatlkavya-6.webp',
-        index: '06',
-        label: 'in the work.',
-        sub: 'campaigns, systems, stories',
-    },
-];
+function LuggageTag() {
+    return (
+        <div className="kr-tag absolute left-[41.5%] -top-[1%] z-10 w-[9%] origin-top">
+            <div className="kr-tag__swing origin-top" style={{ rotate: "8deg" }}>
+                {/* string */}
+                <span className="mx-auto block h-[clamp(10px,2cqw,22px)] w-px bg-[#c9b48f]" />
+                <div
+                    className="relative bg-[#d8c19a] px-[10%] pb-[14%] pt-[22%] text-center text-[#3b2f1e] shadow-[0_4px_10px_rgba(0,0,0,0.25)]"
+                    style={{ clipPath: "polygon(22% 0, 78% 0, 100% 14%, 100% 100%, 0 100%, 0 14%)" }}
+                >
+                    <span className="absolute left-1/2 top-[7%] -translate-x-1/2 w-[16%] aspect-square rounded-full bg-[hsl(86_10%_45%)]" />
+                    <p className={`${hand.className} leading-tight`} style={{ fontSize: "clamp(0.4rem, 1.15cqw, 0.8rem)" }}>
+                        If found, return to Kavya
+                    </p>
+                </div>
+            </div>
+        </div>
+    );
+}
+
+function SuitcaseHalf({ snaps, side, open, offset }: { snaps: Snap[]; side: "left" | "right"; open: boolean; offset: number }) {
+    return (
+        <div
+            className="relative flex-1 rounded-[7%/5%] bg-[#1c1c1e] p-[2.2%] shadow-[0_20px_40px_rgba(0,0,0,0.28)]"
+            style={{
+                transformOrigin: side === "left" ? "right center" : "left center",
+                transform: open ? "none" : `rotateY(${side === "left" ? 78 : -78}deg)`,
+                transition: `transform 1100ms ${EASE_OUT}`,
+                transitionDelay: "150ms",
+            }}
+        >
+            <div className="relative h-full rounded-[6%/4%] bg-gradient-to-b from-[#f4f4f2] to-[#dcdcd8] shadow-[inset_0_2px_14px_rgba(0,0,0,0.18)]">
+                {/* zipper line */}
+                <div className="pointer-events-none absolute inset-[3.5%] rounded-[5%/3.5%] border-2 border-dashed border-black/15" />
+                {snaps.map((snap, i) => (
+                    <Polaroid key={snap.src} snap={snap} open={open} order={offset + i} />
+                ))}
+                {side === "right" && <BoardingPass open={open} />}
+            </div>
+        </div>
+    );
+}
+
+/* Hand-drawn style arrow, drawn in a 100x100 box. Inks in once the case is open. */
+function Arrow({ d, className, open, delay }: { d: string; className: string; open: boolean; delay: number }) {
+    return (
+        <svg
+            viewBox="0 0 100 100"
+            preserveAspectRatio="none"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className={`pointer-events-none absolute hidden md:block text-white/90 ${className}`}
+            aria-hidden="true"
+        >
+            <path
+                d={d}
+                pathLength={1}
+                strokeDasharray="1 1"
+                vectorEffect="non-scaling-stroke"
+                style={{
+                    strokeDashoffset: open ? 0 : 1,
+                    transition: `stroke-dashoffset 700ms ease-in-out ${delay}ms`,
+                }}
+            />
+        </svg>
+    );
+}
+
+function Note({ children, className, open, delay }: { children: React.ReactNode; className: string; open: boolean; delay: number }) {
+    return (
+        <p
+            className={`${hand.className} absolute hidden md:block text-center text-white leading-tight text-[clamp(0.55rem,1.5vw,1.05rem)] ${className}`}
+            style={{ opacity: open ? 1 : 0, transition: `opacity 500ms ease-out ${delay}ms` }}
+        >
+            {children}
+        </p>
+    );
+}
+
+function CarryOn() {
+    const { ref, open } = useOpenOnView<HTMLDivElement>();
+    const ink = 2100;
+
+    return (
+        <section className="px-4 sm:px-6 md:px-10 pt-16 sm:pt-24 pb-24 sm:pb-36 overflow-hidden">
+            <h2 className={`${hand.className} text-center text-white text-2xl sm:text-3xl md:text-4xl`}>
+                A Carry-On Full of Stories
+            </h2>
+            <p className="mt-3 mb-14 sm:mb-20 text-center text-xs sm:text-sm tracking-[0.18em] uppercase text-white/55">
+                Tap a photo to unpack its story
+            </p>
+
+            <div ref={ref} className="relative max-w-5xl mx-auto">
+                {/* Suitcase is sized by aspect ratio so everything inside scales together */}
+                <div className="relative mx-0 md:mx-[14%] aspect-[1.7/1] [container-type:inline-size] [perspective:1600px]">
+                    <div className="absolute left-1/2 -translate-x-1/2 -top-[6%] w-[14%] h-[7%] rounded-t-[40%] border-[clamp(3px,0.6vw,6px)] border-b-0 border-[#1c1c1e]" />
+                    <LuggageTag />
+                    <div className="flex h-full gap-[1.2%]">
+                        <SuitcaseHalf snaps={LEFT_HALF} side="left" open={open} offset={0} />
+                        <SuitcaseHalf snaps={RIGHT_HALF} side="right" open={open} offset={LEFT_HALF.length} />
+                    </div>
+                    {["left-[5%]", "left-[42%]", "right-[42%]", "right-[5%]"].map((pos) => (
+                        <span key={pos} className={`absolute -bottom-[4%] ${pos} w-[3%] aspect-square rounded-full bg-[#1c1c1e]`} />
+                    ))}
+                </div>
+
+                <Note open={open} delay={ink + 300} className="left-0 top-[10%] w-[13%]">Always sticking my tongue out and playing in the snow</Note>
+                <Arrow open={open} delay={ink} className="left-[9%] top-[0%] w-[7%] h-[10%]" d="M5 80 C 20 15, 60 5, 95 30 M82 18 L95 30 L80 38" />
+
+                <Note open={open} delay={ink + 500} className="left-0 bottom-[6%] w-[13%]">Born and raised in Toronto</Note>
+                <Arrow open={open} delay={ink + 200} className="left-[9%] bottom-[22%] w-[7%] h-[10%]" d="M5 95 C 15 45, 55 25, 95 30 M82 18 L95 30 L82 42" />
+
+                <Note open={open} delay={ink + 700} className="left-[32%] -bottom-[17%] w-[16%]">My biggest inspiration in life</Note>
+                <Arrow open={open} delay={ink + 400} className="left-[40%] -bottom-[9%] w-[4%] h-[20%]" d="M30 95 C 20 60, 35 30, 70 5 M52 5 L70 5 L66 22" />
+
+                <Note open={open} delay={ink + 900} className="right-0 top-[10%] w-[13%]">Friends who feel like family</Note>
+                <Arrow open={open} delay={ink + 600} className="right-[9%] top-[0%] w-[7%] h-[10%]" d="M95 80 C 80 15, 40 5, 5 30 M18 18 L5 30 L20 38" />
+
+                <Note open={open} delay={ink + 1100} className="right-0 bottom-[6%] w-[13%]">Always chasing the next adventure</Note>
+                <Arrow open={open} delay={ink + 800} className="right-[9%] bottom-[22%] w-[7%] h-[10%]" d="M95 95 C 85 45, 45 25, 5 30 M18 18 L5 30 L18 42" />
+            </div>
+        </section>
+    );
+}
 
 const AboutMe = () => {
     return (
         <div className="min-h-screen bg-background">
             <Navigation />
 
-            <main className="pt-20 sm:pt-24 md:pt-28 pb-0">
+            <main className="pt-0 pb-0">
+                <HeroVideo />
+
                 {/* Intro */}
-                <div className="px-6 sm:px-10 mb-16 sm:mb-20">
-                    <div className="max-w-6xl mx-auto">
-                        {/* Eyebrow */}
-                        <p className="text-xs font-semibold tracking-[0.28em] uppercase text-foreground/40 mb-5">
-                            UX Designer · SCAD · Toronto
-                        </p>
+                <section className="px-4 sm:px-6 md:px-10 pt-10 sm:pt-14">
+                    <div className="max-w-7xl mx-auto">
+                        <h1 className="relative z-10 text-white italic font-light uppercase leading-[0.85] tracking-[-0.02em] whitespace-nowrap"
+                            style={{ fontSize: "clamp(3.5rem, 20vw, 18rem)" }}
+                        >
+                            About Me
+                        </h1>
 
-                        {/* Headline split: large left, image right */}
-                        <div className="flex flex-col lg:flex-row lg:items-end gap-8 lg:gap-16">
-                            <div className="flex-1 min-w-0">
-                                <h1 className="text-[clamp(3rem,10vw,7rem)] font-bold text-foreground leading-[0.95] tracking-tight mb-6">
-                                    Nice to<br />
-                                    <span className="italic font-light">meet you!</span>
-                                </h1>
-                                <p className="text-base sm:text-lg text-foreground/60 max-w-md leading-relaxed mb-6">
-                                    I&apos;m a UX Design student at SCAD — curious, passionate, and always striving to make a difference through human-centered design.
-                                </p>
-                                {/* Interests */}
-                                <div className="flex items-center gap-0 flex-wrap">
-                                    {['NBA die-hard', 'Toronto born', 'dog mom', 'korean food obsessed'].map((label, i, arr) => (
-                                        <span key={label} className="flex items-center">
-                                            <span className="text-sm sm:text-base text-foreground/55 tracking-wide">{label}</span>
-                                            {i < arr.length - 1 && (
-                                                <span className="mx-3 text-foreground/25 text-xs">✦</span>
-                                            )}
-                                        </span>
-                                    ))}
-                                </div>
-                            </div>
-
-                            {/* Inline hero image — first voyage photo, right-aligned */}
-                            <div className="w-full lg:w-[38%] shrink-0 overflow-hidden rounded-2xl">
-                                <img
+                        <div className="-mt-[clamp(1.25rem,5.5vw,5rem)] grid grid-cols-1 md:grid-cols-[minmax(0,5fr)_minmax(0,6fr)] gap-8 md:gap-14 items-center">
+                            <div className="relative aspect-[4/5] w-full max-w-md md:max-w-none overflow-hidden">
+                                <Image
                                     src="/voyageatlkavya-1.webp"
-                                    alt="Kavya"
-                                    className="w-full h-auto"
+                                    alt="Kavya walking past a wall of her design work"
+                                    fill
+                                    sizes="(max-width: 768px) 100vw, 45vw"
+                                    className="object-cover object-center"
                                 />
                             </div>
-                        </div>
-                    </div>
-                </div>
 
-                {/* Basketball shooter */}
-                <div className="px-6 sm:px-10 mb-10 sm:mb-14">
-                    <div className="max-w-6xl mx-auto">
-                        <BasketballShooter />
-                    </div>
-                </div>
-
-                {/* Image sections */}
-                {sections.map((s, i) => {
-                    const isEven = i % 2 === 0;
-                    return (
-                        <div key={s.index} className="px-6 sm:px-10 mb-6 sm:mb-8">
-                            <div className="max-w-6xl mx-auto">
-                                <div className={`flex flex-col ${isEven ? 'lg:flex-row' : 'lg:flex-row-reverse'} gap-6 items-end`}>
-                                    {/* Image */}
-                                    <div className="w-full lg:w-[72%] overflow-hidden rounded-2xl">
-                                        <img
-                                            src={s.img}
-                                            alt={s.label}
-                                            className="w-full h-auto"
-                                        />
-                                    </div>
-
-                                    {/* Text */}
-                                    <div className={`flex-1 pb-4 ${isEven ? 'lg:text-left' : 'lg:text-right'}`}>
-                                        <p className="text-xs font-semibold tracking-[0.2em] uppercase text-foreground/30 mb-3">{s.index}</p>
-                                        <p className="text-2xl sm:text-3xl font-semibold text-foreground leading-snug mb-2">{s.label}</p>
-                                        <p className="text-sm text-foreground/50">{s.sub}</p>
-                                    </div>
-                                </div>
+                            <div className="space-y-6 text-white/90 text-base sm:text-lg leading-relaxed max-w-xl">
+                                <p>
+                                    Hi! I&apos;m Kavya, a UX designer currently based in Atlanta and originally from
+                                    Toronto. I grew up loving basketball and will always be loyal to the Toronto Raptors.
+                                </p>
+                                <p>
+                                    A lot of my creativity comes from exploring new places, meeting different people,
+                                    and experiencing cultures through food, travel, and everyday moments. I&apos;m always
+                                    inspired by the little details that make experiences feel memorable, human, and
+                                    connected.
+                                </p>
                             </div>
                         </div>
-                    );
-                })}
+                    </div>
+                </section>
 
-                <div className="h-16 sm:h-20" />
+                <CarryOn />
             </main>
 
             <Footer />

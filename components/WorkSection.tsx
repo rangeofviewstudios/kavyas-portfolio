@@ -1,350 +1,350 @@
 'use client';
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { ArrowRight, ArrowUpRight } from "lucide-react";
+import { HomeAbout } from "@/components/HomeAbout";
 
-type FilterTab = "all" | "nda";
+type Project = {
+  id: number;
+  isNda: boolean;
+  client: string;
+  title: string;
+  href: string;
+  alt: string;
+  /** Cover image. Leave empty to render the branded placeholder instead. */
+  cardImage?: string;
+  /** object-position for the cover crop — the card art sits on the right side. */
+  focus?: string;
+  /** Zoom into the artwork; also hides the rounded corners baked into the cards. */
+  zoom?: number;
+  /** No case study page yet: renders without a link. */
+  comingSoon?: boolean;
+  placeholder?: { bg: string; fg: string; logo?: string; wordmark?: string };
+};
 
-const projects = [
+const projects: Project[] = [
   {
     id: 1,
     isNda: true,
-    cardImage: "/images/ubscard.png",
-    alt: "UBS - The Future of Banking",
-    href: "/case-study/ubs",
+    client: "UBS × SCADpro",
     title: "The Future of Banking",
-    description: "We're reimagining banking for Gen Z with intuitive, future-focused solutions. Honoring UBS's legacy, we push creative boundaries and explore AI-driven tools that help users manage their finances with confidence and ease.",
-    buttonText: "View Case Study",
-    buttonColor: "#333333",
+    href: "/case-study/ubs",
+    alt: "UBS - The Future of Banking",
+    cardImage: "/images/ubscard.png",
+    zoom: 1.22,
   },
   {
     id: 2,
     isNda: false,
-    cardImage: "/images/loomacard.png",
-    alt: "LOOMA - Smart Glasses",
+    client: "Startup Competition",
+    title: "LOOMA Smart Glasses",
     href: "/case-study/looma",
-    title: "Startup (LOOMA)",
-    description: "Participated in a week-long competition to design a futuristic wearable. Developed smart glasses aimed at supporting Alzheimer's patients through memory retention, facial recognition, and real-time reminders to enhance daily life.",
-    buttonText: "View Case Study",
-    buttonColor: "#5A4A3C",
+    alt: "LOOMA - Smart Glasses",
+    cardImage: "/images/loomacard.png",
+    focus: "100% 50%",
   },
   {
     id: 3,
     isNda: true,
-    cardImage: "/images/lowescard.png",
-    alt: "Lowes - Garden Center Redesign",
-    href: "/case-study/lowes",
+    client: "Lowe's × SCADpro",
     title: "Garden Center Redesign",
-    description: "UX designer on the Lowe's concept project, where our team is reimagining the garden center experience to better serve a diverse range of customers. We're focused on positioning Lowe's as the premier destination for all gardening needs by creating personalized, inclusive, and engaging user experiences.",
-    buttonText: "View Case Study",
-    buttonColor: "#003D7A",
-    showLowesHeader: true,
+    href: "/case-study/lowes",
+    alt: "Lowes - Garden Center Redesign",
+    cardImage: "/images/lowescard.png",
   },
   {
     id: 4,
     isNda: false,
-    cardImage: "/images/porschecard.png",
-    alt: "Porsche - The Future of Electric Vehicles",
-    href: "/case-study/porsche",
+    client: "Porsche × SCAD",
     title: "The Future of Electric Vehicles",
-    description: "Senior UX Lead for the backend team on a Porsche EV concept project, where we're designing a future-facing digital experience for the next generation of drivers. Primarily focused on building systems that are intuitive, flexible, and aligned with Porsche's commitment to innovation.",
-    buttonText: "View Case Study",
-    buttonColor: "#FFFFFF",
-    darkCard: true,
+    href: "/case-study/porsche",
+    alt: "Porsche - The Future of Electric Vehicles",
+    cardImage: "/images/porschecard.png",
+    zoom: 1.22,
   },
   {
     id: 5,
     isNda: false,
-    cardImage: "/images/aesturacard.png",
-    alt: "Aestura - The Essence Edit",
+    client: "AmorePacific Brand Challenge",
+    title: "Aestura — The Essence Edit",
     href: "/case-study/aestura",
-    title: "The Essence Edit",
-    description: "Selected as a Semi-Finalist in the AmorePacific Brand Challenge, where I developed a comprehensive campaign to introduce Aestura skincare products to the North American market. Conducted market research to identify consumer needs and trends, then created a go-to-market strategy with creative ideas for brand positioning, launch channels, and promotional tactics.",
-    buttonText: "View Campaign",
-    buttonColor: "#6B8DD6",
-    extraTopSpacing: true,
+    alt: "Aestura - The Essence Edit",
+    cardImage: "/images/aesturacard.png",
+    focus: "96% 50%",
+  },
+  {
+    id: 6,
+    isNda: false,
+    client: "FIFA",
+    title: "FIFA",
+    href: "/case-study/fifa",
+    alt: "FIFA case study",
+    comingSoon: true,
+    placeholder: { bg: "#0B1D3F", fg: "#FFFFFF", wordmark: "FIFA" },
+  },
+  {
+    id: 7,
+    isNda: false,
+    client: "Range of View Studios",
+    title: "Brand & Visual Identity",
+    href: "/case-study/rov",
+    alt: "Range of View Studios — Brand & Visual Identity",
+    placeholder: { bg: "#1A1008", fg: "#F5E0C8", logo: "/images/rovgradlogo.png" },
+  },
+  {
+    id: 8,
+    isNda: false,
+    client: "Solcae",
+    title: "Solcae",
+    href: "/case-study/solcae",
+    alt: "Solcae case study",
+    comingSoon: true,
+    placeholder: { bg: "#E9E2D6", fg: "#2A2420", wordmark: "Solcae" },
   },
 ];
 
-gsap.registerPlugin(ScrollTrigger);
+const ROTATE_MS = 4000;
+
+function ProjectVisual({ project, size }: { project: Project; size: "square" | "tile" }) {
+  if (project.cardImage) {
+    return (
+      <img
+        src={project.cardImage}
+        alt={project.alt}
+        className="absolute inset-0 w-full h-full object-cover"
+        style={{ objectPosition: project.focus ?? "92% 50%", transform: `scale(${project.zoom ?? 1.08})` }}
+      />
+    );
+  }
+
+  const p = project.placeholder!;
+  return (
+    <div className="absolute inset-0 flex items-center justify-center" style={{ background: p.bg }}>
+      {p.logo ? (
+        <img
+          src={p.logo}
+          alt={project.alt}
+          className={`w-auto object-contain ${size === "square" ? "h-20 lg:h-24" : "h-12 sm:h-14"}`}
+        />
+      ) : (
+        <span
+          className={`font-semibold tracking-tight ${size === "square" ? "text-6xl lg:text-7xl" : "text-4xl sm:text-5xl"}`}
+          style={{ color: p.fg }}
+        >
+          {p.wordmark}
+        </span>
+      )}
+    </div>
+  );
+}
 
 export function WorkSection() {
-  const [activeFilter, setActiveFilter] = useState<FilterTab>("all");
-  const cardRefs = useRef<(HTMLElement | null)[]>([]);
+  const [active, setActive] = useState(0);
+  const [paused, setPaused] = useState(false);
+  const [reducedMotion, setReducedMotion] = useState(false);
 
-  const filteredProjects =
-    activeFilter === "nda"
-      ? projects.filter((p) => p.isNda)
-      : projects;
+  const current = projects[active] ?? projects[0];
 
   useEffect(() => {
-    const cards = cardRefs.current.filter(Boolean) as HTMLElement[];
-    if (cards.length < 2) return;
-    if (window.matchMedia('(max-width: 639px)').matches) return;
+    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+    setReducedMotion(mq.matches);
+    const onChange = (e: MediaQueryListEvent) => setReducedMotion(e.matches);
+    mq.addEventListener("change", onChange);
+    return () => mq.removeEventListener("change", onChange);
+  }, []);
 
-    const ctx = gsap.context(() => {
-      cards.forEach((card, i) => {
-        if (i === cards.length - 1) return;
+  // Auto-rotate the sticky square; hovering a tile pins it to that project
+  useEffect(() => {
+    if (paused || reducedMotion || projects.length < 2) return;
+    const t = setTimeout(() => setActive((a) => (a + 1) % projects.length), ROTATE_MS);
+    return () => clearTimeout(t);
+  }, [active, paused, reducedMotion, projects.length]);
 
-        // Scale this card down as the NEXT card scrolls over it
-        gsap.to(card, {
-          scale: 0.93,
-          borderRadius: '20px',
-          ease: "none",
-          scrollTrigger: {
-            trigger: cards[i + 1],
-            start: "top 90%",
-            end: "top 80px",
-            scrub: 0.4,
-          },
-        });
-      });
-    });
-
-    return () => {
-      ctx.revert();
-      ScrollTrigger.getAll().forEach(t => t.kill());
-    };
-  }, [filteredProjects]);
+  const focusProject = (index: number) => {
+    setActive(index);
+    setPaused(true);
+  };
 
   return (
     <section id="work" className="pt-6 sm:pt-8 pb-16 sm:pb-20 px-4 sm:px-6">
       <div className="container mx-auto">
         {/* Section Header */}
-        <div className="mb-8 sm:mb-10">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-medium text-foreground mb-4 sm:mb-6">
+        <div className="mb-10 sm:mb-14">
+          <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-medium tracking-tight leading-none text-foreground">
             My Work
           </h2>
-
-          {/* Filter Tabs */}
-          <div className="flex gap-2">
-            <button
-              onClick={() => setActiveFilter("all")}
-              className={`px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm font-medium rounded-full transition-all ${activeFilter === "all"
-                ? "bg-foreground text-background"
-                : "bg-card text-muted-foreground hover:bg-muted"
-                }`}
-            >
-              All
-            </button>
-            <button
-              onClick={() => setActiveFilter("nda")}
-              className={`px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm font-medium rounded-full transition-all ${activeFilter === "nda"
-                ? "bg-foreground text-background"
-                : "bg-card text-muted-foreground hover:bg-muted"
-                }`}
-            >
-              NDA Protected
-            </button>
-          </div>
         </div>
 
-        {/* Projects Grid — GSAP stacking cards */}
-        <div className="flex flex-col">
-          {filteredProjects.map((project, index) => (
-            <article
-              key={project.id}
-              ref={el => { cardRefs.current[index] = el; }}
-              className="sm:rounded-2xl sm:overflow-hidden sm:sticky will-change-transform mb-4 sm:mb-0"
-              style={{
-                top: '80px',
-                zIndex: index + 1,
-                transformOrigin: 'center top',
-              }}
-            >
-              {project.title ? (
-                <>
-                  {/* Mobile layout: thumbnail + content in one card */}
-                  <div className={`sm:hidden rounded-2xl overflow-hidden shadow-sm ${project.darkCard ? 'bg-[#1a1f2e]' : project.showLowesHeader ? 'bg-[#EAF0F8]' : 'bg-[#F5F3EF]'}`}>
-                    <img src={project.cardImage} alt={project.alt} className="w-full h-auto block" />
-                    <div className="p-5 pt-4">
-                      {project.showLowesHeader && (
-                        <div className="flex items-center gap-2 mb-2">
-                          <img src="/images/lowes.png" alt="Lowes Logo" className="h-5 w-auto" />
-                          <span className="h-4 w-[1.5px] bg-[#A8A8A8] inline-block" />
-                          <span className="text-sm font-normal text-[#A8A8A8]">SCADpro</span>
-                          <span className="ml-auto text-xs text-[#8A8A8A]">NDA Protected</span>
-                        </div>
-                      )}
-                      {project.isNda && !project.showLowesHeader && (
-                        <p className="text-xs text-[#8A8A8A] mb-1">NDA Protected</p>
-                      )}
-                      <h3 className="text-base font-bold mb-4 leading-tight" style={{ color: project.darkCard ? '#FFF' : project.showLowesHeader ? '#003D7A' : '#2A2A2A' }}>
-                        {project.title}
-                      </h3>
-                      <Link
-                        href={project.href}
-                        className="inline-flex items-center gap-2 px-4 py-2 border-[1.5px] rounded-xl text-sm font-medium no-underline transition-all group w-fit"
-                        style={{ borderColor: project.buttonColor, color: project.buttonColor, backgroundColor: project.darkCard ? 'transparent' : 'white' }}
-                      >
-                        {project.buttonText}
-                        <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
-                      </Link>
-                    </div>
-                  </div>
-
-                  {/* Desktop layout: text overlaid on image */}
-                  <div className="hidden sm:block relative">
-                    <img src={project.cardImage} alt={project.alt} className="w-full h-auto" />
-                    <div className="absolute inset-0 p-8 md:p-10 lg:p-14 flex flex-col">
-                      <div className="max-w-[55%] md:max-w-[45%]">
-                        {project.showLowesHeader && (
-                          <div>
-                            <div className="flex items-center gap-3 mb-2">
-                              <img src="/images/lowes.png" alt="Lowes Logo" className="h-8 lg:h-9 w-auto" />
-                              <span className="h-8 lg:h-9 w-[2px] bg-[#A8A8A8] inline-block" />
-                              <span className="text-2xl lg:text-[26px] font-normal text-[#A8A8A8]">SCADpro</span>
-                            </div>
-                            <div className="mb-6 lg:mb-8 text-[13px] text-[#8A8A8A]">NDA Protected</div>
-                          </div>
-                        )}
-                        {!project.showLowesHeader && (
-                          <div className={project.extraTopSpacing ? "mt-16 md:mt-20 lg:mt-28" : "mt-20 md:mt-28 lg:mt-36"} />
-                        )}
-                        <Link
-                          href={project.href}
-                          className={`inline-flex items-center gap-2 px-6 py-3 border-[1.5px] rounded-2xl text-sm font-medium no-underline mb-6 transition-all group w-fit ${project.darkCard ? "bg-transparent" : "bg-white"}`}
-                          style={{ borderColor: project.buttonColor, color: project.buttonColor }}
-                          onMouseEnter={(e) => {
-                            e.currentTarget.style.backgroundColor = project.buttonColor || "";
-                            e.currentTarget.style.color = project.darkCard ? "#2A353B" : "white";
-                          }}
-                          onMouseLeave={(e) => {
-                            e.currentTarget.style.backgroundColor = project.darkCard ? "transparent" : "white";
-                            e.currentTarget.style.color = project.buttonColor || "";
-                          }}
-                        >
-                          {project.buttonText}
-                          <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-                        </Link>
-                        <h3 className="text-2xl lg:text-[28px] font-bold mb-3 leading-tight" style={{ color: project.darkCard ? "#FFFFFF" : project.showLowesHeader ? "#003D7A" : "#2A2A2A" }}>
-                          {project.title}
-                        </h3>
-                        <p className="text-[13px] leading-[1.5]" style={{ color: project.darkCard ? "#B0B0B0" : project.showLowesHeader ? "#003D7A" : "#5A5A5A" }}>
-                          {project.description}
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </>
-              ) : (
-                <Link href={project.href} className="block rounded-2xl overflow-hidden">
-                  <img
-                    src={project.cardImage}
-                    alt={project.alt}
-                    className="w-full h-auto rounded-2xl transition-transform duration-300 hover:scale-[1.02]"
-                  />
-                </Link>
-              )}
-            </article>
-          ))}
-        </div>
-
-        {/* Get To Know Me Section */}
-        <div id="about" className="mt-20">
-          <div className="flex flex-col lg:flex-row items-center gap-12">
-            {/* Left - Text Content */}
-            <div className="flex-1">
-              <h2 className="text-3xl md:text-4xl font-semibold text-foreground mb-6">
-                Get To Know Me
-              </h2>
-              <p className="text-base text-foreground leading-relaxed">
-                Hi, I&apos;m Kavya! A UX designer born and raised in Toronto, Canada. I&apos;m a curious and passionate individual, always striving to make a difference through thoughtful, human-centered design. When I&apos;m not glued to my computer, you&apos;ll find me exploring new places, trying new food, or watching basketball.
-              </p>
-            </div>
-
-            {/* Right - Image */}
-            <div className="flex-shrink-0 w-full lg:w-auto flex justify-center lg:block">
-              <div className="rounded-2xl overflow-hidden w-full max-w-[428px]">
-                <img
-                  src="/images/aboutmekavya.jpg"
-                  alt="Kavya Ray"
-                  className="w-full h-auto object-contain"
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Education and Experience Section */}
-        <div className="mt-20 space-y-16">
-          {/* Education */}
-          <div>
-            <h3 className="text-2xl font-semibold text-white mb-8">EDUCATION</h3>
-            <div className="space-y-6">
-              <div className="flex items-start gap-4 pb-6 border-b border-white/20">
-                <span className="text-white/50 font-medium">01.</span>
-                <span className="text-white flex-1 text-right">Savannah College Of Art and Design</span>
-              </div>
-              <div className="flex items-start gap-4 pb-6 border-b border-white/20">
-                <span className="text-white/50 font-medium">02.</span>
-                <span className="text-white flex-1 text-right">Westwood High School</span>
-              </div>
-            </div>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 items-start">
+          {/* Left — sticky auto-rotating square */}
+          <div className="hidden lg:block sticky top-24">
+            <ShowcaseSquare
+              projects={projects}
+              current={current}
+              active={active}
+              paused={paused || reducedMotion}
+              onSelect={focusProject}
+            />
           </div>
 
-        </div>
-
-        {/* About Me Section */}
-        <div className="mt-20 sm:mt-24 md:mt-28 lg:mt-32 text-center">
-          <p className="text-xl sm:text-2xl md:text-3xl font-medium text-foreground mb-6 sm:mb-8 leading-relaxed">
-            Traveler by choice, foodie<br />
-            by instinct, dog lover always
-          </p>
-          <Link
-            href="/about"
-            className="inline-block px-8 sm:px-10 md:px-12 py-3 sm:py-3.5 md:py-4 text-lg sm:text-xl rounded-full text-white font-semibold transition-all hover:scale-105 bg-[#343F28]"
+          {/* Right — scrollable 2-column grid */}
+          <div
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2 gap-4 sm:gap-5"
+            onMouseLeave={() => setPaused(false)}
           >
-            About Me
-          </Link>
-
-          {/* Photo Strip */}
-          <div className="mt-12 sm:mt-20 relative w-full">
-            {/* Mobile: 2-column polaroid grid */}
-            <div className="grid grid-cols-2 gap-4 px-2 md:hidden">
-              {[
-                { src: "/images/footer/homefooter1.png", rotate: "-rotate-3", alt: "Travel moment 1" },
-                { src: "/images/footer/homefooter2.png", rotate: "rotate-2", alt: "Travel moment 2" },
-                { src: "/images/footer/homefooter3.png", rotate: "rotate-3", alt: "Travel moment 3" },
-                { src: "/images/footer/homefooter4.png", rotate: "-rotate-2", alt: "Travel moment 4" },
-                { src: "/images/footer/homefooter5.png", rotate: "-rotate-1", alt: "Travel moment 5" },
-                { src: "/images/footer/homefooter6.png", rotate: "rotate-1", alt: "Travel moment 6" },
-              ].map((photo, i) => (
-                <div key={i} className={`bg-white p-2 shadow-lg transform ${photo.rotate} hover:rotate-0 transition-transform duration-300`}>
-                  <img src={photo.src} alt={photo.alt} className="w-full h-36 object-cover" />
-                </div>
-              ))}
-            </div>
-
-            {/* Desktop: original overlapping scroll */}
-            <div className="hidden md:flex justify-center items-center overflow-visible">
-              <div className="flex items-center h-auto">
-                <div className="bg-white p-3 shadow-2xl transform -rotate-12 hover:rotate-0 transition-transform duration-300 relative w-60 lg:w-[280px] z-[1] flex-shrink-0 -mr-12" style={{ top: "40px" }}>
-                  <img src="/images/footer/homefooter1.png" alt="Travel moment 1" className="w-full h-60 lg:h-64 object-cover" />
-                </div>
-                <div className="relative bg-white p-3 shadow-2xl transform rotate-6 hover:rotate-0 transition-transform duration-300 w-60 lg:w-[280px] z-[2] flex-shrink-0 -mr-12" style={{ top: "10px" }}>
-                  <img src="/images/footer/homefooter2.png" alt="Travel moment 2" className="w-full h-60 lg:h-64 object-cover" />
-                </div>
-                <div className="bg-white p-3 shadow-2xl transform -rotate-3 hover:rotate-0 transition-transform duration-300 relative w-60 lg:w-[280px] z-[3] flex-shrink-0 -mr-12" style={{ top: "-20px" }}>
-                  <img src="/images/footer/homefooter3.png" alt="Travel moment 3" className="w-full h-60 lg:h-64 object-cover" />
-                </div>
-                <div className="bg-white p-3 shadow-2xl transform rotate-3 hover:rotate-0 transition-transform duration-300 relative w-60 lg:w-[280px] z-[2] flex-shrink-0 -mr-12" style={{ top: "-10px" }}>
-                  <img src="/images/footer/homefooter4.png" alt="Travel moment 4" className="w-full h-60 lg:h-64 object-cover" />
-                </div>
-                <div className="bg-white p-3 shadow-2xl transform -rotate-6 hover:rotate-0 transition-transform duration-300 relative w-60 lg:w-[280px] z-[1] flex-shrink-0 -mr-12" style={{ top: "30px" }}>
-                  <img src="/images/footer/homefooter5.png" alt="Travel moment 5" className="w-full h-60 lg:h-64 object-cover" />
-                </div>
-                <div className="bg-white p-3 shadow-2xl transform rotate-12 hover:rotate-0 transition-transform duration-300 relative w-60 lg:w-[280px] z-[0] flex-shrink-0" style={{ top: "60px" }}>
-                  <img src="/images/footer/homefooter6.png" alt="Travel moment 6" className="w-full h-60 lg:h-64 object-cover" />
-                </div>
-              </div>
-            </div>
+            {projects.map((project, index) => (
+              <ProjectTile
+                key={project.id}
+                project={project}
+                isActive={index === active}
+                onFocus={() => focusProject(index)}
+              />
+            ))}
           </div>
         </div>
+
+        <HomeAbout />
+
       </div>
     </section>
+  );
+}
+
+function ShowcaseSquare({
+  projects,
+  current,
+  active,
+  paused,
+  onSelect,
+}: {
+  projects: Project[];
+  current: Project;
+  active: number;
+  paused: boolean;
+  onSelect: (index: number) => void;
+}) {
+  const body = (
+    <div className="relative h-[calc(100svh-8rem)] min-h-[520px] rounded-3xl overflow-hidden bg-black/20 shadow-2xl">
+      {projects.map((project, index) => (
+        <div
+          key={project.id}
+          aria-hidden={index !== active}
+          className={`absolute inset-0 transition-all duration-700 ease-out ${index === active ? "opacity-100 scale-100" : "opacity-0 scale-[1.04]"}`}
+        >
+          <ProjectVisual project={project} size="square" />
+        </div>
+      ))}
+
+      {/* Progress segments */}
+      <div className="absolute top-5 left-5 right-5 flex gap-1.5 z-10">
+        {projects.map((project, index) => (
+          <button
+            key={project.id}
+            type="button"
+            aria-label={`Show ${project.title}`}
+            onClick={(e) => {
+              e.preventDefault();
+              onSelect(index);
+            }}
+            className="relative h-[3px] flex-1 rounded-full bg-white/30 overflow-hidden"
+          >
+            {index < active && <span className="absolute inset-0 bg-white" />}
+            {index === active && (
+              <span
+                key={`${active}-${paused}`}
+                className="absolute inset-0 bg-white origin-left"
+                style={paused ? undefined : { animation: `workProgress ${ROTATE_MS}ms linear forwards` }}
+              />
+            )}
+          </button>
+        ))}
+      </div>
+
+      {/* Caption */}
+      <div className="absolute inset-x-0 bottom-0 z-10 p-6 lg:p-8 pt-24 bg-gradient-to-t from-black/75 via-black/35 to-transparent">
+        <div className="flex items-center gap-3 text-xs text-white/70 mb-2 tabular-nums">
+          <span>
+            {String(active + 1).padStart(2, "0")} / {String(projects.length).padStart(2, "0")}
+          </span>
+          <span className="h-3 w-px bg-white/40" />
+          <span>{current.client}</span>
+          {current.isNda && <span className="ml-auto">NDA Protected</span>}
+        </div>
+        <div className="flex items-end justify-between gap-4">
+          <h3 className="text-2xl xl:text-3xl font-semibold text-white leading-tight">
+            {current.title}
+          </h3>
+          {current.comingSoon ? (
+            <span className="shrink-0 px-4 py-2 rounded-full text-xs font-medium bg-white/15 text-white backdrop-blur">
+              Coming soon
+            </span>
+          ) : (
+            <span className="shrink-0 inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium bg-white text-[#2A2A2A]">
+              View Case Study
+              <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+            </span>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+
+  return current.comingSoon ? (
+    body
+  ) : (
+    <Link href={current.href} className="group block no-underline">
+      {body}
+    </Link>
+  );
+}
+
+function ProjectTile({
+  project,
+  isActive,
+  onFocus,
+}: {
+  project: Project;
+  isActive: boolean;
+  onFocus: () => void;
+}) {
+  const inner = (
+    <div
+      className={`h-full p-2.5 sm:p-3 rounded-3xl bg-[#1E2318]/55 backdrop-blur-sm ring-1 transition-[box-shadow,background-color] duration-300 group-hover:bg-[#1E2318]/70 ${isActive ? "ring-white/10 lg:ring-2 lg:ring-white/80" : "ring-white/10"}`}
+    >
+      <div className="relative aspect-square rounded-2xl overflow-hidden">
+        <div className="absolute inset-0 transition-transform duration-500 ease-out group-hover:scale-[1.04]">
+          <ProjectVisual project={project} size="tile" />
+        </div>
+        {(project.isNda || project.comingSoon) && (
+          <span className="absolute top-3 left-3 px-2.5 py-1 rounded-full text-[11px] font-medium bg-black/45 text-white backdrop-blur">
+            {project.comingSoon ? "Coming soon" : "NDA Protected"}
+          </span>
+        )}
+      </div>
+      <div className="px-2 pt-3.5 pb-2 flex items-start justify-between gap-3">
+        <div className="min-w-0">
+          <p className="text-xs text-white/60 mb-0.5">{project.client}</p>
+          <h3 className="text-base sm:text-lg font-medium text-foreground leading-snug">
+            {project.title}
+          </h3>
+        </div>
+        {!project.comingSoon && (
+          <ArrowUpRight className="w-5 h-5 shrink-0 mt-1 text-white/70 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-white" />
+        )}
+      </div>
+    </div>
+  );
+
+  return (
+    <article onMouseEnter={onFocus} onFocus={onFocus}>
+      {project.comingSoon ? (
+        <div className="group h-full cursor-default">{inner}</div>
+      ) : (
+        <Link href={project.href} className="group block h-full no-underline">
+          {inner}
+        </Link>
+      )}
+    </article>
   );
 }

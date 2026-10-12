@@ -25,7 +25,7 @@ export function Footer() {
               <ArrowUpRight className="w-4 h-4 sm:w-5 sm:h-5" />
             </a>
             <a
-              href="https://linkedin.com"
+              href="https://www.linkedin.com/in/kavya-ray/"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-2 text-base sm:text-lg transition-opacity hover:opacity-70"

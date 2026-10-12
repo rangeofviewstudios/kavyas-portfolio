@@ -305,3 +305,168 @@
     100% { transform: translateX(-33.333%); }
   }
 }
+/* ── Intro loader ───────────────────────────────────────── */
+.kr-loader {
+  --kr-ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --kr-ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  overflow: hidden;
+  background:
+    radial-gradient(90% 60% at 50% 100%, rgba(169, 183, 140, 0.18) 0%, rgba(169, 183, 140, 0) 70%),
+    linear-gradient(180deg, #2a3220 0%, #343F28 55%, #3d4831 100%);
+  font-family: 'DM Sans', system-ui, sans-serif;
+  color: #FFF3DF;
+  transition: opacity 800ms var(--kr-ease-in-out);
+}
+
+.kr-loader--leaving {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.kr-loader__logo {
+  opacity: 0;
+  animation: krFade 600ms var(--kr-ease-out) 150ms forwards;
+}
+
+/* Sequential crossfade: the outgoing word fully fades before the next appears */
+.kr-loader__words {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 34%;
+  height: 1.2em;
+  transform: translateY(-50%);
+  font-size: clamp(2.75rem, 8vw, 5.5rem);
+  font-weight: 500;
+  letter-spacing: -0.035em;
+  line-height: 1.2;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.kr-loader__word {
+  position: absolute;
+  inset: 0;
+  will-change: opacity;
+}
+
+.kr-loader__word--hidden { opacity: 0; }
+.kr-loader__word--exit   { animation: krWordOut 350ms ease-in both; }
+.kr-loader__word--enter  { animation: krWordIn 450ms ease-out 350ms both; }
+
+@keyframes krWordIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes krWordOut {
+  from { opacity: 1; }
+  to   { opacity: 0; }
+}
+
+/* Sun rises on entry, sets on exit */
+.kr-loader__sun-wrap {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: min(110vmin, 720px, 90vh);
+  transform: translate(-50%, 50%);
+  animation: krSunRise 1100ms var(--kr-ease-out) both;
+}
+
+.kr-loader--leaving .kr-loader__sun-wrap {
+  animation: krSunSet 800ms var(--kr-ease-in-out) both;
+}
+
+@keyframes krSunRise {
+  from { transform: translate(-50%, 85%); }
+  to   { transform: translate(-50%, 50%); }
+}
+
+.kr-loader__sun {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.kr-loader__glow {
+  transform-box: view-box;
+  transform-origin: 0 0;
+  animation: krBreathe 3.2s ease-in-out infinite;
+}
+
+.kr-loader__rays {
+  transform-box: view-box;
+  transform-origin: 0 0;
+  animation: krSunSpin 16s linear infinite;
+}
+
+.kr-loader__ray {
+  stroke: #9AA97C;
+  stroke-width: 3.2;
+  stroke-linecap: round;
+}
+
+.kr-loader__ray--short {
+  stroke-opacity: 0.55;
+  stroke-width: 2.4;
+}
+
+.kr-loader__ring {
+  fill: none;
+  stroke: #FFF3DF;
+  stroke-opacity: 0.18;
+  stroke-width: 0.6;
+}
+
+@keyframes krSunSet {
+  from { transform: translate(-50%, 50%); }
+  to   { transform: translate(-50%, 85%); }
+}
+
+@keyframes krSunSpin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes krBreathe {
+  0%, 100% { transform: scale(1);    opacity: 0.85; }
+  50%      { transform: scale(1.06); opacity: 1; }
+}
+
+@keyframes krFade {
+  to { opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .kr-loader__rays,
+  .kr-loader__glow,
+  .kr-loader__sun-wrap { animation: none; }
+  .kr-loader__word--enter,
+  .kr-loader__word--exit { animation-duration: 1ms; }
+}
+
+/* Work showcase — progress bar for the auto-rotating square */
+@keyframes workProgress {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
+}
+
+/* About — carry-on luggage tag sway */
+.kr-tag:hover .kr-tag__swing {
+  animation: krTagSwing 1.6s ease-in-out;
+}
+
+@keyframes krTagSwing {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(-12deg); }
+  55% { transform: rotate(7deg); }
+  80% { transform: rotate(-3deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .kr-tag:hover .kr-tag__swing { animation: none; }
+}

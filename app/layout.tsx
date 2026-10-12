@@ -9,6 +9,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { Analytics } from '@/components/Analytics';
+import { Loader } from '@/components/Loader';
 
 export const metadata: Metadata = {
     title: {
@@ -99,6 +100,7 @@ export default function RootLayout({
     return (
         <html lang="en">
             <body suppressHydrationWarning>
+                <Loader />
                 {/* Google Analytics */}
                 <Script
                     src="https://www.googletagmanager.com/gtag/js?id=G-5ZG5CZJC8H"
