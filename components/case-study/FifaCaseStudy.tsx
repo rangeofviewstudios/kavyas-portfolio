@@ -201,6 +201,115 @@ const FifaCaseStudy = () => {
                         </Reveal>
                     </div>
 
+                    {/* Primary wayfinding */}
+                    <div className="mt-10 sm:mt-20">
+                        <Eyebrow color={F.red}>The plan</Eyebrow>
+                        <h2 className={h2} style={{ color: GREEN }}>Primary Wayfinding</h2>
+                        <p className={`mb-8 sm:mb-12 ${intro}`} style={introStyle}>
+                            Primary signage follows the primary routes, placed at every point where a stranger
+                            would have to choose a direction.
+                        </p>
+                        <Reveal>
+                            <img
+                                src="/images/fifa/primary-wayfinding.webp"
+                                alt="Map of the primary wayfinding plan, showing primary routes and primary signage between the Fan Festival, transit stations and the stadium"
+                                width={1074}
+                                height={608}
+                                loading="lazy"
+                                className="w-full h-auto rounded-2xl"
+                            />
+                        </Reveal>
+                        <h3 className={`${h3} mt-10 sm:mt-16`}>Secondary Wayfinding</h3>
+                        <p className={`mb-8 sm:mb-12 ${intro}`} style={introStyle}>
+                            Secondary routes branch off the primary ones, carrying people to the surrounding streets,
+                            stations and neighbourhoods.
+                        </p>
+                        <Reveal>
+                            <img
+                                src="/images/fifa/secondary-wayfinding.webp"
+                                alt="Map of the secondary wayfinding plan, showing secondary routes and secondary signage branching out from the Fan Festival and stadium into downtown Atlanta"
+                                width={1066}
+                                height={600}
+                                loading="lazy"
+                                className="w-full h-auto rounded-2xl"
+                            />
+                        </Reveal>
+                    </div>
+
+                    {/* Friction points */}
+                    <div className="mt-10 sm:mt-20">
+                        <Eyebrow color={F.red}>The risks</Eyebrow>
+                        <h2 className={h2} style={{ color: GREEN }}>Friction Points</h2>
+                        <p className={`mb-8 sm:mb-12 ${intro}`} style={introStyle}>
+                            Mapping the route showed where movement would slow down: bottlenecks, visual obstructions
+                            that hide the way ahead, and narrow sidewalks.
+                        </p>
+                        <Reveal>
+                            <img
+                                src="/images/fifa/friction-bottlenecks.webp"
+                                alt="Map of friction points along the Last Mile, with bottlenecks marked near the Fan Festival, the stadium and Five Points station"
+                                width={1220}
+                                height={716}
+                                loading="lazy"
+                                className="w-full h-auto rounded-2xl"
+                            />
+                        </Reveal>
+                        <div className="mt-6 grid gap-6 md:grid-cols-2">
+                            <Reveal>
+                                <img
+                                    src="/images/fifa/friction-obstruction.webp"
+                                    alt="Friction points map adding visual obstructions alongside the bottlenecks"
+                                    width={748}
+                                    height={414}
+                                    loading="lazy"
+                                    className="w-full h-auto rounded-2xl"
+                                />
+                            </Reveal>
+                            <Reveal>
+                                <img
+                                    src="/images/fifa/friction-sidewalks.webp"
+                                    alt="Friction points map adding narrow sidewalks to the bottlenecks and visual obstructions"
+                                    width={632}
+                                    height={336}
+                                    loading="lazy"
+                                    className="w-full h-auto rounded-2xl"
+                                />
+                            </Reveal>
+                        </div>
+                    </div>
+
+                    {/* In the news */}
+                    <div className="mt-10 sm:mt-20">
+                        <Eyebrow color={F.blue}>In the news</Eyebrow>
+                        <h2 className={h2} style={{ color: GREEN }}>Now on the Streets of Atlanta</h2>
+                        <Reveal>
+                            <a
+                                href="https://www.wsbtv.com/news/local/atlanta/scad-students-create-murals-signs-welcome-world-atlanta-world-cup/KCLNW34AGVC63HC3JHPW6GKCVE/"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="block rounded-2xl border border-gray-200 p-6 sm:p-8 transition-shadow hover:shadow-lg"
+                            >
+                                <p className="text-xs font-bold uppercase tracking-[0.18em] mb-3" style={{ color: F.red }}>
+                                    WSB-TV Channel 2 · June 11, 2026
+                                </p>
+                                <p className="text-xl sm:text-2xl font-medium leading-snug mb-4" style={{ color: GREEN }}>
+                                    SCAD students create murals, signs to welcome the world to Atlanta for World Cup
+                                </p>
+                                <p className="text-base text-gray-900 leading-relaxed mb-4">
+                                    The Last Mile plan, a wayfinding system of directional signs, flags, ground graphics
+                                    and totems, built with the Atlanta World Cup Host Committee, is now installed
+                                    downtown.
+                                </p>
+                                <p className="text-base text-gray-900 leading-relaxed italic mb-4">
+                                    &ldquo;They feel like they have an intuitive way to get around.&rdquo; Kavya Ray
+                                </p>
+                                <span className="text-sm font-semibold" style={{ color: F.blue }}>
+                                    Read the article &rarr;
+                                </span>
+                            </a>
+                        </Reveal>
+                    </div>
+
                     {/* Close */}
                     <div className="mt-10 sm:mt-20 text-center">
                         <p className="text-xl sm:text-2xl md:text-3xl font-medium text-gray-900 mb-6 sm:mb-8 leading-relaxed">

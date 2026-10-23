@@ -142,8 +142,9 @@ const RIGHT_HALF: Snap[] = [
 
 const EASE_OUT = "cubic-bezier(0.22, 1, 0.36, 1)";
 
-/* Flips true once the element scrolls into view (or immediately with reduced motion). */
-function useOpenOnView<T extends HTMLElement>(options: IntersectionObserverInit = { threshold: 0.35 }) {
+/* Flips true when the element scrolls into view (or immediately with reduced motion).
+   With once=false it flips back to false when the element leaves view. */
+function useOpenOnView<T extends HTMLElement>(options: IntersectionObserverInit = { threshold: 0.35 }, once = true) {
     const ref = useRef<T>(null);
     const [open, setOpen] = useState(false);
 
@@ -158,7 +159,9 @@ function useOpenOnView<T extends HTMLElement>(options: IntersectionObserverInit 
             ([entry]) => {
                 if (entry.isIntersecting) {
                     setOpen(true);
-                    io.disconnect();
+                    if (once) io.disconnect();
+                } else if (!once) {
+                    setOpen(false);
                 }
             },
             options
@@ -318,7 +321,7 @@ function BoardingPass({ open }: { open: boolean }) {
 
 function LuggageTag() {
     return (
-        <div className="kr-tag absolute left-[41.5%] -top-[1%] z-10 w-[9%] origin-top">
+        <div className="kr-tag absolute left-[41.5%] -top-[1%] z-30 w-[9%] origin-top">
             <div className="kr-tag__swing origin-top" style={{ rotate: "8deg" }}>
                 {/* string */}
                 <span className="mx-auto block h-[clamp(10px,2cqw,22px)] w-px bg-[#c9b48f]" />
@@ -340,12 +343,6 @@ function SuitcaseHalf({ snaps, side, open, offset }: { snaps: Snap[]; side: "lef
     return (
         <div
             className="relative flex-1 rounded-[7%/5%] bg-[#1c1c1e] p-[2.2%] shadow-[0_20px_40px_rgba(0,0,0,0.28)]"
-            style={{
-                transformOrigin: side === "left" ? "right center" : "left center",
-                transform: open ? "none" : `rotateY(${side === "left" ? 78 : -78}deg)`,
-                transition: `transform 1100ms ${EASE_OUT}`,
-                transitionDelay: "150ms",
-            }}
         >
             <div className="relative h-full rounded-[6%/4%] bg-gradient-to-b from-[#f4f4f2] to-[#dcdcd8] shadow-[inset_0_2px_14px_rgba(0,0,0,0.18)]">
                 {/* zipper line */}
@@ -355,6 +352,36 @@ function SuitcaseHalf({ snaps, side, open, offset }: { snaps: Snap[]; side: "lef
                 ))}
                 {side === "right" && <BoardingPass open={open} />}
             </div>
+            <ShellDoor side={side} open={open} />
+        </div>
+    );
+}
+
+/* Exterior of the case. Closed, it is the flat front view; opening swings it away on its outer hinge. */
+function ShellDoor({ side, open }: { side: "left" | "right"; open: boolean }) {
+    return (
+        <div
+            className="absolute inset-0 z-20 rounded-[7%/5%] bg-[#2a2a2d] shadow-[inset_0_0_0_2px_rgba(255,255,255,0.06)]"
+            style={{
+                transformOrigin: side === "left" ? "left center" : "right center",
+                transform: `perspective(1600px) rotateY(${open ? (side === "left" ? -115 : 115) : 0}deg)`,
+                opacity: open ? 0 : 1,
+                pointerEvents: open ? "none" : "auto",
+                backfaceVisibility: "hidden",
+                transition: `transform 1100ms ${EASE_OUT}, opacity 300ms ease-out ${open ? 800 : 0}ms`,
+            }}
+            aria-hidden="true"
+        >
+            {/* vertical ribs */}
+            <div
+                className="absolute inset-[6%] rounded-[4%/3%]"
+                style={{ backgroundImage: "repeating-linear-gradient(90deg, rgba(255,255,255,0.07) 0 2px, transparent 2px 9%)" }}
+            />
+            <div className="absolute inset-0 rounded-[7%/5%] bg-gradient-to-br from-white/10 via-transparent to-black/30" />
+            {/* centre latch */}
+            <span
+                className={`absolute top-1/2 -translate-y-1/2 h-[14%] w-[3%] rounded-sm bg-[#8a8a8c] shadow-md ${side === "left" ? "right-[2%]" : "left-[2%]"}`}
+            />
         </div>
     );
 }
@@ -399,7 +426,7 @@ function Note({ children, className, open, delay }: { children: React.ReactNode;
 }
 
 function CarryOn() {
-    const { ref, open } = useOpenOnView<HTMLDivElement>({ threshold: 0.6, rootMargin: "0px 0px -15% 0px" });
+    const { ref, open } = useOpenOnView<HTMLDivElement>({ threshold: 0.4, rootMargin: "0px 0px -15% 0px" }, false);
     const ink = 2100;
 
     return (
@@ -411,9 +438,9 @@ function CarryOn() {
                 Tap a photo to unpack its story
             </p>
 
-            <div ref={ref} className="relative max-w-5xl mx-auto">
+            <div ref={ref} className="relative max-w-[88rem] mx-auto">
                 {/* Suitcase is sized by aspect ratio so everything inside scales together */}
-                <div className="relative mx-0 md:mx-[14%] aspect-[1.7/1] [container-type:inline-size] [perspective:1600px]">
+                <div className="relative mx-0 md:mx-[12%] aspect-[1.7/1] [container-type:inline-size] [perspective:1600px]">
                     <div className="absolute left-1/2 -translate-x-1/2 -top-[6%] w-[14%] h-[7%] rounded-t-[40%] border-[clamp(3px,0.6vw,6px)] border-b-0 border-[#1c1c1e]" />
                     <LuggageTag />
                     <div className="flex h-full gap-[1.2%]">
@@ -425,19 +452,19 @@ function CarryOn() {
                     ))}
                 </div>
 
-                <Note open={open} delay={ink + 300} className="left-0 top-[10%] w-[13%]">Always sticking my tongue out and playing in the snow</Note>
+                <Note open={open} delay={ink + 300} className="left-0 top-[10%] w-[11%]">Always sticking my tongue out and playing in the snow</Note>
                 <Arrow open={open} delay={ink} className="left-[9%] top-[0%] w-[7%] h-[10%]" d="M5 80 C 20 15, 60 5, 95 30 M82 18 L95 30 L80 38" />
 
-                <Note open={open} delay={ink + 500} className="left-0 bottom-[6%] w-[13%]">Born and raised in Toronto</Note>
+                <Note open={open} delay={ink + 500} className="left-0 bottom-[6%] w-[11%]">Born and raised in Toronto</Note>
                 <Arrow open={open} delay={ink + 200} className="left-[9%] bottom-[22%] w-[7%] h-[10%]" d="M5 95 C 15 45, 55 25, 95 30 M82 18 L95 30 L82 42" />
 
                 <Note open={open} delay={ink + 700} className="left-[32%] -bottom-[17%] w-[16%]">My biggest inspiration in life</Note>
                 <Arrow open={open} delay={ink + 400} className="left-[40%] -bottom-[9%] w-[4%] h-[20%]" d="M30 95 C 20 60, 35 30, 70 5 M52 5 L70 5 L66 22" />
 
-                <Note open={open} delay={ink + 900} className="right-0 top-[10%] w-[13%]">Friends who feel like family</Note>
+                <Note open={open} delay={ink + 900} className="right-0 top-[10%] w-[11%]">Friends who feel like family</Note>
                 <Arrow open={open} delay={ink + 600} className="right-[9%] top-[0%] w-[7%] h-[10%]" d="M95 80 C 80 15, 40 5, 5 30 M18 18 L5 30 L20 38" />
 
-                <Note open={open} delay={ink + 1100} className="right-0 bottom-[6%] w-[13%]">Always chasing the next adventure</Note>
+                <Note open={open} delay={ink + 1100} className="right-0 bottom-[6%] w-[11%]">Always chasing the next adventure</Note>
                 <Arrow open={open} delay={ink + 800} className="right-[9%] bottom-[22%] w-[7%] h-[10%]" d="M95 95 C 85 45, 45 25, 5 30 M18 18 L5 30 L18 42" />
             </div>
         </section>

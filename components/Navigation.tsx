@@ -64,7 +64,8 @@ function detectTone(x: number = window.innerWidth / 2): Tone {
 
 const styles = {
   onDark: {
-    pill: 'bg-white/10 border-white/30 shadow-[0_8px_32px_0_rgba(0,0,0,0.1),inset_0_1px_0_0_rgba(255,255,255,0.25)]',
+    // Always carries a dark tint: if detection misreads a light area as dark, white text must still be readable
+    pill: 'bg-neutral-900/45 border-white/25 shadow-[0_8px_32px_0_rgba(0,0,0,0.15),inset_0_1px_0_0_rgba(255,255,255,0.25)]',
     text: 'text-white',
     hover: 'hover:bg-white/10',
     active: 'bg-black/20 border border-black/10',
@@ -114,7 +115,17 @@ export function Navigation() {
   return (
     <>
       {/* Logo — fixed top-left on all sizes */}
-      <Link href="/" data-site-nav className="fixed top-4 sm:top-6 left-4 sm:left-6 z-50">
+      <Link
+        href="/"
+        data-site-nav
+        className="fixed top-4 sm:top-6 left-4 sm:left-6 z-50"
+        // Soft halo on the parent (filters run before masks) keeps the logo visible if the tone guess is wrong
+        style={{
+          filter: logoTone === 'onLight'
+            ? 'drop-shadow(0 0 3px rgba(255,255,255,0.6))'
+            : 'drop-shadow(0 0 3px rgba(0,0,0,0.45))',
+        }}
+      >
         {/* Masked so the white PNG can take any colour: white on dark, Kavya green on light */}
         <span
           role="img"

@@ -43,10 +43,24 @@ const poppins = { fontFamily: '"Poppins", "DM Sans", sans-serif' } as const;
 
 /* ---------- Hero ---------- */
 
+const HERO_VIDEO_ID = "ndV1edX34TA";
+
 export function SolaceHero() {
     return (
         <section className="cs-anim relative w-full overflow-hidden" style={{ background: S.sky }}>
             <div className="relative h-[460px] sm:h-[560px] lg:h-[640px]">
+                <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
+                    <iframe
+                        src={`https://www.youtube-nocookie.com/embed/${HERO_VIDEO_ID}?autoplay=1&mute=1&loop=1&playlist=${HERO_VIDEO_ID}&controls=0&modestbranding=1&playsinline=1&rel=0&disablekb=1`}
+                        title="Solace hero video"
+                        tabIndex={-1}
+                        allow="autoplay; encrypted-media"
+                        loading="lazy"
+                        className="absolute left-1/2 top-1/2 h-[max(100%,56.25vw)] w-[max(100%,177.78vh)] min-h-full min-w-full -translate-x-1/2 -translate-y-1/2 border-0"
+                        style={{ width: "max(100%, 177.78vh)", height: "max(100%, 56.25vw)" }}
+                    />
+                    <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, rgba(63,82,56,0.55) 0%, rgba(63,82,56,0.35) 100%)" }} />
+                </div>
                 <img
                     src="/images/solace/mark.svg"
                     alt=""

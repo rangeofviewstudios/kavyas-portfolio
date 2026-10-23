@@ -49,14 +49,14 @@ export function Footer() {
         {/* Divider Line */}
         <div className="w-full h-px mb-10 sm:mb-12" style={{ backgroundColor: '#FFFFFF' }}></div>
 
-        {/* Bottom - Large Name, bleeds out of footer bottom (clipped by overflow:hidden) */}
-        <div className="text-center" style={{ marginBottom: '-0.45em' }}>
+        {/* Bottom - Large Name. line-height ~0.7 trims the line box to the cap height, so the baseline sits on the footer's bottom edge */}
+        <div className="text-center">
           <h1
             className="font-bold tracking-wider whitespace-nowrap"
             style={{
               fontSize: 'clamp(3rem, calc((100vw - 3rem) / 6.2), 12rem)',
               color: '#FFFFFF',
-              lineHeight: '1',
+              lineHeight: '0.7',
               letterSpacing: '0.05em',
             }}
           >

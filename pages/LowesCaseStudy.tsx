@@ -48,7 +48,7 @@ const LowesCaseStudy = () => {
                             My Contributions
                         </h2>
                         <p className="text-base text-gray-900 leading-relaxed mb-8 sm:mb-12" style={{ color: 'rgba(0, 0, 0, 0.60)' }}>
-                            As part of the UX Research and presentation team, I conducted thorough research through different research methods. This included gathering thorough
+                            As part of the UX Research and presentation team, I conducted thorough research through different research methods, uncovering friction points in the garden center experience for both customers and employees.
                         </p>
 
                         {/* Contribution Cards */}
@@ -65,7 +65,7 @@ const LowesCaseStudy = () => {
                                 </div>
                                 <h3 className="text-4xl font-semibold mb-4 text-black transition-all duration-500 ease-out group-hover:bg-gradient-to-r group-hover:from-[#343F28] group-hover:to-[#343F28] group-hover:bg-clip-text group-hover:text-transparent">01</h3>
                                 <p className="text-base text-gray-900 font-semibold">
-                                    Conducted user research to understand the Swiss market and inform design decisions.
+                                    Conducted user research to understand garden center shoppers and inform design decisions.
                                 </p>
                             </div>
 
@@ -113,61 +113,9 @@ const LowesCaseStudy = () => {
                             <h3 className="text-xl sm:text-3xl font-semibold text-gray-900 mb-6">
                                 Understanding the Garden Market
                             </h3>
-                            <p className="text-base leading-relaxed mb-8 sm:mb-12" style={{ color: 'rgba(0, 0, 0, 0.60)' }}>
+                            <p className="text-base leading-relaxed " style={{ color: 'rgba(0, 0, 0, 0.60)' }}>
                                 This project aimed to uncover hidden friction points within the garden center experience to better understand user behaviors, challenges, and motivations. By identifying these insights, we sought to address the distinct needs of both customers and employees, creating a more cohesive, efficient, and enjoyable experience for everyone involved.
                             </p>
-
-                            {/* User Type Cards */}
-                            <div className="grid md:grid-cols-3 gap-4 sm:gap-6">
-                                {/* Patient/User */}
-                                <div>
-                                    <div className="rounded-2xl overflow-hidden mb-4">
-                                        <img
-                                            src="/images/lowespic1.png"
-                                            alt="Patient/User"
-                                            className="w-full h-64 object-cover"
-                                        />
-                                    </div>
-                                    <div
-                                        className="flex h-[60px] sm:h-[91px] w-full items-center justify-center text-white font-medium text-xl sm:text-2xl transition-all hover:brightness-110 hover:scale-105 cursor-pointer"
-                                        style={{ background: 'linear-gradient(90deg, #2E6B5F 0%, #5AD1B9 100%)', borderRadius: '11.146px' }}
-                                    >
-                                        Patient/User
-                                    </div>
-                                </div>
-
-                                {/* Family Members */}
-                                <div>
-                                    <div className="rounded-2xl overflow-hidden mb-4">
-                                        <img
-                                            src="/images/lowespic2.png"
-                                            alt="Family Members"
-                                            className="w-full h-64 object-cover" loading="lazy" decoding="async" />
-                                    </div>
-                                    <div
-                                        className="flex h-[60px] sm:h-[91px] w-full items-center justify-center text-white font-medium text-xl sm:text-2xl transition-all hover:brightness-110 hover:scale-105 cursor-pointer"
-                                        style={{ background: 'linear-gradient(90deg, #2E6B5F 0%, #5AD1B9 100%)', borderRadius: '11.146px' }}
-                                    >
-                                        Family Members
-                                    </div>
-                                </div>
-
-                                {/* Caregiver */}
-                                <div>
-                                    <div className="rounded-2xl overflow-hidden mb-4">
-                                        <img
-                                            src="/images/lowespic3.png"
-                                            alt="Caregiver"
-                                            className="w-full h-64 object-cover" loading="lazy" decoding="async" />
-                                    </div>
-                                    <div
-                                        className="flex h-[60px] sm:h-[91px] w-full items-center justify-center text-white font-medium text-xl sm:text-2xl transition-all hover:brightness-110 hover:scale-105 cursor-pointer"
-                                        style={{ background: 'linear-gradient(90deg, #2E6B5F 0%, #5AD1B9 100%)', borderRadius: '11.146px' }}
-                                    >
-                                        Caregiver
-                                    </div>
-                                </div>
-                            </div>
                         </div>
                     </div>
 
@@ -262,7 +210,7 @@ const LowesCaseStudy = () => {
                                         </svg>
                                     </div>
                                     <p className="text-base md:text-lg text-gray-900 font-medium leading-relaxed flex-1 pt-2 md:pt-0">
-                                        Translate user insights into informed and culturally relevant design decisions.
+                                        Translated user insights into informed, customer-centered design decisions.
                                     </p>
                                 </div>
                             </div>
