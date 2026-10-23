@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
+import { usePathname } from 'next/navigation';
 
 const WORDS = ['Kavya', 'Ray'];
 const SWAP_MS = 1100;
@@ -12,12 +13,18 @@ const EXIT_MS = 800;
 export const LOADER_DONE_EVENT = 'kr:loader-done';
 
 export function Loader() {
-  const [visible, setVisible] = useState(true);
+  const pathname = usePathname();
+  // Case study pages open straight in, no intro loader
+  const [visible, setVisible] = useState(() => !pathname?.startsWith('/case-study'));
   const [leaving, setLeaving] = useState(false);
   const [index, setIndex] = useState(0);
   const [swapped, setSwapped] = useState(false);
 
   useEffect(() => {
+    if (!visible) {
+      document.documentElement.dataset.loaderDone = '1';
+      return;
+    }
     document.body.style.overflow = 'hidden';
 
     // Play through the words once and hold on the last one

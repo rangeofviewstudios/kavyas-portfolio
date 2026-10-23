@@ -12,50 +12,15 @@ const HERO_VOLUME = 0.08;
 
 function HeroVideo() {
     const videoRef = useRef<HTMLVideoElement>(null);
-    const [muted, setMuted] = useState(false);
+    const [muted, setMuted] = useState(true);
 
+    // Always lands muted; the visitor opts in to sound with the button.
     useEffect(() => {
         const v = videoRef.current;
         if (!v) return;
-
         v.volume = HERO_VOLUME;
-
-        // Attempt to autoplay with sound at 20% volume. Most browsers block
-        // unmuted autoplay, so on failure we fall back to muted playback and
-        // un-mute on the visitor's first interaction.
-        const attachUnmuteOnInteraction = () => {
-            const unmute = () => {
-                if (!videoRef.current) return;
-                videoRef.current.muted = false;
-                videoRef.current.volume = HERO_VOLUME;
-                setMuted(false);
-                cleanup();
-            };
-            const cleanup = () => {
-                window.removeEventListener("pointerdown", unmute);
-                window.removeEventListener("keydown", unmute);
-                window.removeEventListener("scroll", unmute);
-                window.removeEventListener("touchstart", unmute);
-            };
-            window.addEventListener("pointerdown", unmute, { once: true });
-            window.addEventListener("keydown", unmute, { once: true });
-            window.addEventListener("scroll", unmute, { once: true });
-            window.addEventListener("touchstart", unmute, { once: true });
-            return cleanup;
-        };
-
-        let cleanup: (() => void) | undefined;
-        v.muted = false;
-        v.play()
-            .then(() => setMuted(false))
-            .catch(() => {
-                v.muted = true;
-                setMuted(true);
-                v.play().catch(() => {});
-                cleanup = attachUnmuteOnInteraction();
-            });
-
-        return () => cleanup?.();
+        v.muted = true;
+        v.play().catch(() => {});
     }, []);
 
     const toggleSound = () => {
@@ -91,11 +56,11 @@ function HeroVideo() {
             {/* Cinematic overlays */}
             <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/55 via-black/5 to-black/15" />
 
-            {/* Sound toggle */}
+            {/* Sound toggle: lands muted, label invites the visitor to turn sound on */}
             <button
                 onClick={toggleSound}
                 aria-label={muted ? "Unmute video" : "Mute video"}
-                className="absolute bottom-4 right-4 sm:bottom-6 sm:right-6 flex items-center justify-center w-11 h-11 rounded-full backdrop-blur-md bg-black/30 border border-white/25 text-white transition-all duration-200 hover:bg-black/45 hover:-translate-y-0.5 focus:outline-none"
+                className="group absolute bottom-4 right-4 sm:bottom-6 sm:right-6 flex items-center gap-2 h-11 rounded-full px-3.5 backdrop-blur-md bg-black/30 border border-white/25 text-white transition-all duration-200 hover:bg-black/45 hover:-translate-y-0.5 focus:outline-none"
             >
                 {muted ? (
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -110,6 +75,9 @@ function HeroVideo() {
                         <path d="M19.07 4.93a10 10 0 0 1 0 14.14" />
                     </svg>
                 )}
+                <span className={`text-sm font-medium whitespace-nowrap ${muted ? "" : "hidden group-hover:inline"}`}>
+                    {muted ? "Click to unmute" : "Mute"}
+                </span>
             </button>
         </div>
     );
@@ -372,15 +340,29 @@ function ShellDoor({ side, open }: { side: "left" | "right"; open: boolean }) {
             }}
             aria-hidden="true"
         >
-            {/* vertical ribs */}
+            {/* soft shell sheen: light from the top-left, falling off to the lower edge */}
+            <div className="absolute inset-0 rounded-[7%/5%] bg-gradient-to-br from-white/[0.14] via-transparent to-black/35" />
+            {/* embossed centre panel: raised lip on top, shadow below */}
             <div
-                className="absolute inset-[6%] rounded-[4%/3%]"
-                style={{ backgroundImage: "repeating-linear-gradient(90deg, rgba(255,255,255,0.07) 0 2px, transparent 2px 9%)" }}
+                className="absolute inset-[7%] rounded-[5%/4%] bg-gradient-to-b from-[#303034] to-[#232326]"
+                style={{
+                    boxShadow:
+                        "inset 0 2px 3px rgba(255,255,255,0.12), inset 0 -3px 6px rgba(0,0,0,0.45), 0 1px 0 rgba(255,255,255,0.05)",
+                }}
             />
-            <div className="absolute inset-0 rounded-[7%/5%] bg-gradient-to-br from-white/10 via-transparent to-black/30" />
+            {/* fine pebbled grain */}
+            <div
+                className="absolute inset-0 rounded-[7%/5%] opacity-60 mix-blend-overlay"
+                style={{
+                    backgroundImage:
+                        "radial-gradient(rgba(255,255,255,0.22) 0.6px, transparent 0.7px), radial-gradient(rgba(0,0,0,0.35) 0.6px, transparent 0.7px)",
+                    backgroundSize: "5px 5px, 5px 5px",
+                    backgroundPosition: "0 0, 2.5px 2.5px",
+                }}
+            />
             {/* centre latch */}
             <span
-                className={`absolute top-1/2 -translate-y-1/2 h-[14%] w-[3%] rounded-sm bg-[#8a8a8c] shadow-md ${side === "left" ? "right-[2%]" : "left-[2%]"}`}
+                className={`absolute top-1/2 -translate-y-1/2 h-[14%] w-[3%] rounded-sm bg-gradient-to-b from-[#b4b4b7] to-[#6f6f73] shadow-[0_2px_4px_rgba(0,0,0,0.5),inset_0_1px_0_rgba(255,255,255,0.4)] ${side === "left" ? "right-[2%]" : "left-[2%]"}`}
             />
         </div>
     );

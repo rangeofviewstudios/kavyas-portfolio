@@ -59,7 +59,6 @@ export function SolaceHero() {
                         className="absolute left-1/2 top-1/2 h-[max(100%,56.25vw)] w-[max(100%,177.78vh)] min-h-full min-w-full -translate-x-1/2 -translate-y-1/2 border-0"
                         style={{ width: "max(100%, 177.78vh)", height: "max(100%, 56.25vw)" }}
                     />
-                    <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, rgba(63,82,56,0.55) 0%, rgba(63,82,56,0.35) 100%)" }} />
                 </div>
                 <img
                     src="/images/solace/mark.svg"

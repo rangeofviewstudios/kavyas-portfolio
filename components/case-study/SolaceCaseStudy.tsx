@@ -26,7 +26,6 @@ import {
     ScanSteps,
     ScannerExplorer,
     SecurityGrid,
-    SolaceClose,
     SolaceHero,
     TapFlow,
     UsabilityTabs,
@@ -303,8 +302,7 @@ const SolaceCaseStudy = () => {
 
                     {/* Close */}
                     <div className="mt-10 sm:mt-20">
-                        <SolaceClose />
-                        <div className="mt-8 sm:mt-10">
+                        <div>
                             <CaseNav
                                 prev={{ label: "FIFA", href: "/case-study/fifa" }}
                                 next={{ label: "Range of View Studios", href: "/case-study/rov" }}
