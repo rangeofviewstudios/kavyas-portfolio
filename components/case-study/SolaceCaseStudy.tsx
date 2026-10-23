@@ -31,18 +31,6 @@ import {
     UsabilityTabs,
 } from "./SolaceModules";
 
-const JUMP = [
-    ["Problem", "#overview"],
-    ["Journey", "#journey"],
-    ["Ecosystem", "#ecosystem"],
-    ["Scanner", "#scanner"],
-    ["ID", "#id"],
-    ["Platform", "#platform"],
-    ["App", "#app"],
-    ["Security", "#security"],
-    ["Usability", "#usability"],
-];
-
 const PROBLEMS = [
     ["01", "Repeated intake", "Individuals frequently go through intake again and again, causing unnecessary stress and delays."],
     ["02", "No shared visibility", "There is limited shared visibility into services and capacity, which makes coordination challenging."],
@@ -87,17 +75,6 @@ const SolaceCaseStudy = () => {
                             platform, that gives each person one record that travels with them. This case study follows
                             the orientation handbook we wrote to introduce caseworkers to the whole ecosystem.
                         </p>
-                        <nav aria-label="On this page" className="mt-6 flex flex-wrap gap-2">
-                            {JUMP.map(([label, href]) => (
-                                <a
-                                    key={href}
-                                    href={href}
-                                    className="rounded-full border-2 border-gray-200 px-4 py-1.5 text-sm font-medium text-gray-700 no-underline transition-all duration-300 hover:border-[#343F28] hover:text-[#343F28]"
-                                >
-                                    {label}
-                                </a>
-                            ))}
-                        </nav>
                     </div>
 
                     {/* Philosophy */}

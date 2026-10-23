@@ -822,13 +822,13 @@ export function FieldGallery() {
 
     return (
         <>
-            <div className="columns-2 gap-3 sm:gap-4 md:columns-3 lg:columns-4">
+            <div className="grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-4">
                 {FIELD.map((p, i) => (
-                    <Reveal key={p.src} delay={(i % 4) * 70} className="mb-3 break-inside-avoid sm:mb-4">
+                    <Reveal key={p.src} delay={(i % 4) * 70} className="aspect-[3/4]">
                         <button
                             type="button"
                             onClick={() => setOpen(i)}
-                            className="group relative block w-full overflow-hidden rounded-2xl border-2 border-gray-200 transition-all duration-300 hover:border-[#343F28] hover:shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#343F28]"
+                            className="group relative block h-full w-full overflow-hidden rounded-2xl border-2 border-gray-200 transition-all duration-300 hover:border-[#343F28] hover:shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#343F28]"
                             aria-label={`Open photo ${i + 1} of ${FIELD.length}`}
                         >
                             <img
@@ -837,7 +837,7 @@ export function FieldGallery() {
                                 width={p.w}
                                 height={p.h}
                                 loading="lazy"
-                                className="block h-auto w-full transition-transform duration-700 group-hover:scale-105"
+                                className="block h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
                             />
                             <span className="absolute bottom-2 right-2 rounded-full bg-black/60 px-2.5 py-1 text-[11px] font-medium tabular-nums text-white opacity-0 transition-opacity group-hover:opacity-100">
                                 {String(i + 1).padStart(2, "0")} / {String(FIELD.length).padStart(2, "0")}
@@ -902,16 +902,35 @@ const PINS = [
     { id: "cop", label: "Centennial Olympic Park", x: 57, y: 14.5 },
     { id: "backyard", label: "The Home Depot Backyard", x: 27, y: 40.5 },
     { id: "stadium", label: "Atlanta Stadium", x: 28, y: 52.5 },
-    { id: "walton", label: "Walton Spring Park", x: 72.5, y: 28.5 },
+    { id: "peachtree", label: "Peachtree Center Station", x: 80.2, y: 37.8 },
+    { id: "fivepoints", label: "Five Points Station", x: 64.7, y: 65.2 },
+    { id: "garnett", label: "Garnett Station", x: 48.3, y: 94 },
     { id: "woodruff", label: "Woodruff Park", x: 74, y: 56 },
 ];
 
-/* Primary route, in map percentages: Fan Festival down Andrew Young Blvd to the stadium. */
-const ROUTE = "M56,35.5 C52,38.5 45,38.4 40,38.2 C36,38.2 34,40.5 34,46 L33,50.5";
+/* Primary routes and signage, traced from the primary wayfinding plan and registered to the
+   map by the stadium and backyard outlines, in map pixels (1506 x 1080). */
+const MAIN_ROUTE = "M935,324 L894,379 L863,410 L811,434 L756,472 L691,505 L634,529 L584,577";
+const ROUTES = [
+    // Fan Festival to the stadium along Centennial Olympic Park Dr
+    "M935,324 L894,379 L863,410 L811,434 L756,472 L691,505 L634,529 L584,577",
+    // Fan Festival east along Andrew Young Blvd
+    "M1394,284 L954,284",
+    // Peachtree Center down to Five Points and Garnett
+    "M1198,419 L1119,472 L1035,553 L959,620 L925,663 L892,730 L865,754 L835,807 L779,883 L715,1007",
+    // Fan Festival south, joining the Peachtree Center route
+    "M868,412 L906,458 L945,510 L988,548 L1016,572",
+    // Stadium south-east, joining the Five Points route
+    "M584,577 L557,639 L626,651 L691,657 L741,679 L785,711 L835,749 L865,754",
+    // Backyard to the Fan Festival along Andrew Young Blvd
+    "M529,410 L624,412 L682,396 L734,376 L794,329",
+];
+const SIGNS: [number, number][] = [[1033, 284], [1122, 284], [1168, 284], [1280, 284], [1360, 284], [935, 324], [794, 329], [497, 342], [737, 374], [686, 394], [632, 410], [561, 411], [1188, 426], [783, 453], [813, 433], [904, 456], [1120, 472], [755, 472], [693, 504], [640, 526], [1072, 518], [584, 577], [1006, 579], [964, 615], [560, 632], [623, 650], [688, 657], [930, 657], [736, 677], [780, 708], [866, 753], [835, 806], [781, 880]];
 
 export function AreaMap() {
     const [sel, setSel] = useState<string>("fan");
     const [route, setRoute] = useState(true);
+    const [signs, setSigns] = useState(true);
     const reduced = usePrefersReducedMotion();
     const current = PINS.find((p) => p.id === sel);
 
@@ -924,30 +943,37 @@ export function AreaMap() {
                     loading="lazy"
                     className="absolute inset-0 h-full w-full object-cover"
                 />
-                <svg viewBox="0 0 100 100" preserveAspectRatio="none" className="absolute inset-0 h-full w-full" aria-hidden="true">
+                <svg viewBox="0 0 1506 1080" preserveAspectRatio="none" className="absolute inset-0 h-full w-full" aria-hidden="true">
                     <defs>
-                        <path id="fifa-route" d={ROUTE} />
+                        <path id="fifa-route" d={MAIN_ROUTE} />
                     </defs>
-                    {route && (
-                        <>
-                            <path d={ROUTE} fill="none" stroke="#fff" strokeWidth="8" strokeLinecap="round" vectorEffect="non-scaling-stroke" opacity="0.9" />
-                            <path
-                                d={ROUTE}
-                                fill="none"
-                                stroke={F.red}
-                                strokeWidth="4"
-                                strokeLinecap="round"
-                                strokeDasharray="14 10"
-                                vectorEffect="non-scaling-stroke"
-                                className="cs-anim"
-                                style={{ animation: "cs-dash 1.4s linear infinite" }}
-                            />
-                        </>
-                    )}
+                    {route &&
+                        ROUTES.map((d) => (
+                            <g key={d} fill="none" strokeLinecap="round" strokeLinejoin="round">
+                                <path d={d} stroke="#fff" strokeWidth="8" vectorEffect="non-scaling-stroke" opacity="0.9" />
+                                <path
+                                    d={d}
+                                    stroke={F.red}
+                                    strokeWidth="4"
+                                    strokeDasharray="14 10"
+                                    vectorEffect="non-scaling-stroke"
+                                    className="cs-anim"
+                                    style={{ animation: "cs-dash 1.4s linear infinite" }}
+                                />
+                            </g>
+                        ))}
+                    {route &&
+                        signs &&
+                        SIGNS.map(([x, y]) => (
+                            <g key={`${x}-${y}`}>
+                                <circle cx={x} cy={y} r="16" fill="#fff" fillOpacity="0.6" />
+                                <circle cx={x} cy={y} r="7" fill="#8B1A2B" />
+                            </g>
+                        ))}
                 </svg>
                 {route && !reduced && (
-                    <svg viewBox="0 0 100 100" preserveAspectRatio="none" className="absolute inset-0 h-full w-full" aria-hidden="true">
-                        <circle r="1.1" fill="#fff" stroke={F.red} strokeWidth="0.5">
+                    <svg viewBox="0 0 1506 1080" preserveAspectRatio="none" className="absolute inset-0 h-full w-full" aria-hidden="true">
+                        <circle r="14" fill="#fff" stroke={F.red} strokeWidth="6">
                             <animateMotion dur="6s" repeatCount="indefinite" rotate="auto">
                                 <mpath href="#fifa-route" />
                             </animateMotion>
@@ -968,7 +994,7 @@ export function AreaMap() {
                             className="absolute -translate-x-1/2 -translate-y-1/2 outline-none"
                             style={{ left: `${p.x}%`, top: `${p.y}%` }}
                         >
-                            <span className="relative flex h-6 w-6 items-center justify-center sm:h-8 sm:w-8">
+                            <span className="relative flex h-9 w-9 items-center justify-center">
                                 {on && (
                                     <span
                                         className="cs-anim absolute inset-0 rounded-full"
@@ -981,8 +1007,10 @@ export function AreaMap() {
                                 />
                             </span>
                             <span
-                                className="pointer-events-none absolute left-1/2 top-full mt-0.5 -translate-x-1/2 whitespace-nowrap rounded-full bg-white px-2.5 py-1 text-[10px] font-semibold text-gray-900 shadow-md transition-all duration-300 sm:text-xs"
-                                style={{ opacity: on ? 1 : 0, transform: `translate(-50%, ${on ? 0 : -4}px)` }}
+                                className={`pointer-events-none absolute whitespace-nowrap rounded-full bg-white px-2.5 py-1 text-[11px] font-semibold text-gray-900 shadow-md transition-all duration-300 sm:text-xs ${
+                                    p.y > 80 ? "bottom-full mb-0.5" : "top-full mt-0.5"
+                                } ${p.x > 65 ? "right-0" : p.x < 30 ? "left-0" : "left-1/2 -translate-x-1/2"}`}
+                                style={{ opacity: on ? 1 : 0 }}
                             >
                                 {p.label}
                             </span>
@@ -998,7 +1026,7 @@ export function AreaMap() {
                             key={p.id}
                             type="button"
                             onClick={() => setSel(p.id)}
-                            className="rounded-full border px-3.5 py-1.5 text-sm transition-colors"
+                            className="rounded-full border px-4 py-2 text-sm transition-colors"
                             style={{
                                 borderColor: p.id === sel ? F.blue : "#e5e7eb",
                                 background: p.id === sel ? F.blue : "#fff",
@@ -1009,20 +1037,138 @@ export function AreaMap() {
                         </button>
                     ))}
                 </div>
-                <button
-                    type="button"
-                    onClick={() => setRoute((r) => !r)}
-                    aria-pressed={route}
-                    className="inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold text-white transition-transform hover:scale-105"
-                    style={{ background: route ? F.red : "#6b7280" }}
-                >
-                    <Route className="h-4 w-4" />
-                    Primary route: Fan Fest to Stadium
-                </button>
+                <div className="flex flex-wrap gap-2">
+                    <button
+                        type="button"
+                        onClick={() => setRoute((r) => !r)}
+                        aria-pressed={route}
+                        className="inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold text-white transition-transform hover:scale-105"
+                        style={{ background: route ? F.red : "#6b7280" }}
+                    >
+                        <Route className="h-4 w-4" />
+                        Primary routes
+                    </button>
+                    <button
+                        type="button"
+                        onClick={() => setSigns((v) => !v)}
+                        aria-pressed={signs}
+                        disabled={!route}
+                        className="inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold text-white transition-transform hover:scale-105 disabled:opacity-40 disabled:hover:scale-100"
+                        style={{ background: signs ? "#8B1A2B" : "#6b7280" }}
+                    >
+                        Primary signage
+                    </button>
+                </div>
             </div>
             <p className="sr-only" aria-live="polite">
                 {current ? `Selected: ${current.label}` : ""}
             </p>
+        </div>
+    );
+}
+
+/* ---------- Wayfinding plan + friction maps, one viewer ---------- */
+
+/* Source screenshots are ~1070px wide, so the frame stops near native size
+   instead of upscaling them to the full content width. */
+const PLAN_MAPS = [
+    {
+        id: "primary",
+        tab: "Primary",
+        title: "Primary Wayfinding",
+        text: "Primary signage follows the primary routes, placed at every point where a stranger would have to choose a direction.",
+        src: "/images/fifa/primary-wayfinding.webp",
+        w: 1074,
+        h: 608,
+        alt: "Map of the primary wayfinding plan, showing primary routes and primary signage between the Fan Festival, transit stations and the stadium",
+    },
+    {
+        id: "secondary",
+        tab: "Secondary",
+        title: "Secondary Wayfinding",
+        text: "Secondary routes branch off the primary ones, carrying people to the surrounding streets, stations and neighbourhoods.",
+        src: "/images/fifa/secondary-wayfinding.webp",
+        w: 1066,
+        h: 600,
+        alt: "Map of the secondary wayfinding plan, showing secondary routes and secondary signage branching out from the Fan Festival and stadium into downtown Atlanta",
+    },
+    {
+        id: "bottlenecks",
+        tab: "Bottlenecks",
+        title: "Friction: Bottlenecks",
+        text: "Places where crowds converge and movement slows, near the Fan Festival, the stadium and Five Points station.",
+        src: "/images/fifa/friction-bottlenecks.webp",
+        w: 1220,
+        h: 716,
+        alt: "Map of friction points along the Last Mile, with bottlenecks marked near the Fan Festival, the stadium and Five Points station",
+    },
+    {
+        id: "obstruction",
+        tab: "Obstructions",
+        title: "Friction: Visual Obstructions",
+        text: "Structures and barriers that hide the way ahead, layered over the bottlenecks.",
+        src: "/images/fifa/friction-obstruction.webp",
+        w: 748,
+        h: 414,
+        alt: "Friction points map adding visual obstructions alongside the bottlenecks",
+    },
+    {
+        id: "sidewalks",
+        tab: "Sidewalks",
+        title: "Friction: Narrow Sidewalks",
+        text: "Narrow walkways that cannot carry matchday crowds, shown with the bottlenecks and obstructions.",
+        src: "/images/fifa/friction-sidewalks.webp",
+        w: 632,
+        h: 336,
+        alt: "Friction points map adding narrow sidewalks to the bottlenecks and visual obstructions",
+    },
+];
+
+export function WayfindingMaps() {
+    const [active, setActive] = useState(PLAN_MAPS[0].id);
+    const map = PLAN_MAPS.find((m) => m.id === active) ?? PLAN_MAPS[0];
+
+    return (
+        <div className="mx-auto grid w-full max-w-[1000px] items-center gap-6 rounded-2xl border border-gray-200 bg-white p-4 shadow-[0_24px_60px_-30px_rgba(30,77,43,0.35)] sm:p-6 md:grid-cols-[minmax(0,2fr)_minmax(0,3fr)] md:gap-8">
+            <div>
+                <div role="tablist" aria-label="Wayfinding maps" className="mb-5 flex flex-wrap gap-2">
+                    {PLAN_MAPS.map((m) => {
+                        const on = m.id === active;
+                        return (
+                            <button
+                                key={m.id}
+                                role="tab"
+                                aria-selected={on}
+                                onClick={() => setActive(m.id)}
+                                className="rounded-full border px-4 py-2.5 text-xs font-semibold uppercase tracking-[0.12em] transition-colors"
+                                style={{
+                                    background: on ? F.deep : "transparent",
+                                    borderColor: on ? F.deep : "#d4d4d4",
+                                    color: on ? "#fff" : "#525252",
+                                }}
+                            >
+                                {m.tab}
+                            </button>
+                        );
+                    })}
+                </div>
+                <p className="text-lg font-semibold sm:text-xl" style={{ color: F.deep }}>{map.title}</p>
+                <p className="mt-2 text-sm leading-relaxed text-gray-600 sm:text-base">{map.text}</p>
+            </div>
+
+            <figure className="overflow-hidden rounded-xl bg-gray-50">
+                <img
+                    key={map.id}
+                    src={map.src}
+                    alt={map.alt}
+                    width={map.w}
+                    height={map.h}
+                    loading="lazy"
+                    decoding="async"
+                    className="mx-auto block h-auto w-full"
+                    style={{ maxWidth: map.w }}
+                />
+            </figure>
         </div>
     );
 }

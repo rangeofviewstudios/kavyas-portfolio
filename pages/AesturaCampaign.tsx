@@ -59,74 +59,63 @@ const AesturaCampaign = () => {
                         </p>
                     </div>
 
-                    <div className="flex flex-col lg:flex-row gap-6 relative pb-16 lg:pb-10">
+                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 lg:gap-6">
                         {/* Left Card - Image Background */}
-                        <div className="relative flex-[1.2] rounded-[32px] overflow-hidden min-h-[300px] sm:min-h-[400px] group">
-                            <div className="absolute inset-0">
-                                <img
-                                    src="/images/aestura/aesturaHMWimage.png"
-                                    alt="Research Background"
-                                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy" decoding="async" />
-                                <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/60 to-transparent"></div>
-                            </div>
+                        <div className="relative lg:col-span-7 rounded-[28px] overflow-hidden min-h-[360px] lg:min-h-[460px] group">
+                            <img
+                                src="/images/aestura/aesturaHMWimage.png"
+                                alt="Research Background"
+                                className="absolute inset-0 w-full h-full object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-105" loading="lazy" decoding="async" />
+                            <div className="absolute inset-0 bg-gradient-to-r from-[#10150b]/95 via-[#10150b]/80 to-[#10150b]/30"></div>
+                            <div className="absolute inset-0 rounded-[28px] ring-1 ring-inset ring-white/10 pointer-events-none"></div>
 
-                            <div className="relative z-10 h-full flex flex-col justify-center p-6 sm:p-12 max-w-xl">
-                                <p className="text-white text-xl md:text-3xl leading-snug font-light">
-                                    <span className="font-bold">Younger consumers</span>, especially U.S. Gen Z, strongly prefer <span className="font-bold">phygital</span> experiences that combine <span className="font-bold">physical interactions</span> with <span className="font-bold">digital engagement</span> to drive <span className="font-bold">social shareability</span> and <span className="font-bold">brand loyalty</span>.
+                            <div className="relative z-10 h-full flex flex-col justify-end p-8 sm:p-12 lg:p-14">
+                                <span className="mb-6 block text-[11px] uppercase tracking-[0.28em] text-white/55">Key Insight</span>
+                                <div className="mb-6 h-px w-12 bg-white/40"></div>
+                                <p className="max-w-[26ch] sm:max-w-[30ch] text-white text-[22px] sm:text-[28px] lg:text-[32px] leading-[1.3] tracking-[-0.01em] font-light">
+                                    <span className="font-semibold">Younger consumers</span>, especially U.S. Gen Z, strongly prefer <span className="font-semibold">phygital</span> experiences that combine <span className="font-semibold">physical interactions</span> with <span className="font-semibold">digital engagement</span> to drive <span className="font-semibold">social shareability</span> and <span className="font-semibold">brand loyalty</span>.
                                 </p>
                             </div>
                         </div>
 
-                        {/* Right Card - Blue Stats */}
-                        <div className="relative flex-1 rounded-[32px] bg-[#343F28] text-white p-8 sm:p-12 min-h-[300px] sm:min-h-[400px] flex flex-col overflow-hidden">
-                            {/* Top Stats */}
-                            <div className="relative z-10">
-                                <div className="text-6xl sm:text-[120px] font-bold leading-none tracking-tighter mb-4">92%</div>
-                                <div className="inline-flex items-center px-6 py-3 bg-white rounded-full text-black font-bold text-lg shadow-lg">
-                                    +61% growth
+                        {/* Right Card - Stats */}
+                        <div className="relative lg:col-span-5 rounded-[28px] bg-[#2B3521] text-white min-h-[360px] lg:min-h-[460px] flex flex-col justify-between overflow-hidden p-8 sm:p-12 ring-1 ring-inset ring-white/10">
+                            <div className="pointer-events-none absolute -top-24 -right-24 h-72 w-72 rounded-full bg-white/[0.04] blur-2xl"></div>
+
+                            <span className="relative z-10 text-[11px] uppercase tracking-[0.28em] text-white/55">Gen Z Preference</span>
+
+                            <div className="relative z-10 flex items-end justify-between gap-6">
+                                <div>
+                                    <div className="text-[88px] sm:text-[128px] lg:text-[136px] font-light leading-[0.85] tracking-[-0.05em]">92<span className="text-[0.55em] align-top tracking-normal ml-1 font-light">%</span></div>
+                                    <div className="mt-8 inline-flex items-center px-5 py-2.5 rounded-full border border-white/25 text-white text-sm tracking-wide">
+                                        +61% growth
+                                    </div>
                                 </div>
-                            </div>
 
-                            {/* Decorative Elements — hidden on small screens to prevent overflow */}
-                            <div className="hidden sm:flex absolute top-1/2 right-12 transform -translate-y-1/2 flex-col items-center">
-                                {/* Arrow */}
-                                <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" className="mb-4">
-                                    <path d="M12 19V5M12 5l-7 7M12 5l7 7" />
-                                </svg>
-
-                                {/* Dashed Line */}
-                                <svg width="100" height="100" className="absolute top-12 left-[-60px] opacity-50">
-                                    <path d="M100,100 Q50,100 0,0" fill="none" stroke="white" strokeWidth="2" strokeDasharray="8 8" />
-                                </svg>
-
-                                {/* Phone Icon */}
-                                <div className="w-24 h-44 border-4 border-white rounded-3xl flex items-center justify-center relative">
-                                    <div className="w-12 h-1 bg-white absolute top-4 rounded-full"></div>
-                                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5">
-                                        <circle cx="18" cy="5" r="3" />
-                                        <circle cx="6" cy="12" r="3" />
-                                        <circle cx="18" cy="19" r="3" />
-                                        <line x1="8.59" y1="13.51" x2="15.42" y2="17.49" />
-                                        <line x1="15.41" y1="6.51" x2="8.59" y2="10.49" />
+                                {/* Decorative phone — hidden on small screens */}
+                                <div className="hidden sm:flex flex-col items-center shrink-0 opacity-90">
+                                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="mb-4">
+                                        <path d="M12 19V5M12 5l-7 7M12 5l7 7" />
                                     </svg>
-                                </div>
-                                <div className="absolute -right-8 top-20">
-                                    <svg width="30" height="30" viewBox="0 0 24 24" fill="white">
-                                        <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" />
-                                    </svg>
+                                    <div className="w-20 h-36 border-[1.5px] border-white/80 rounded-[22px] flex items-center justify-center relative">
+                                        <div className="w-8 h-[1.5px] bg-white/80 absolute top-4 rounded-full"></div>
+                                        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                                            <circle cx="18" cy="5" r="3" />
+                                            <circle cx="6" cy="12" r="3" />
+                                            <circle cx="18" cy="19" r="3" />
+                                            <line x1="8.59" y1="13.51" x2="15.42" y2="17.49" />
+                                            <line x1="15.41" y1="6.51" x2="8.59" y2="10.49" />
+                                        </svg>
+                                    </div>
                                 </div>
                             </div>
                         </div>
 
-                        {/* Floating Center Card — absolute on desktop, inline on mobile */}
-                        <div className="hidden lg:block absolute bottom-[-30px] left-1/2 transform -translate-x-1/2 bg-[#343F28]/10 p-8 rounded-3xl shadow-xl w-[300px] z-20 text-center">
-                            <div className="text-5xl font-bold text-black mb-2">57%</div>
-                            <div className="text-sm font-medium text-gray-800">growth of phygital experiences</div>
-                        </div>
-                        {/* Mobile inline version of the floating card */}
-                        <div className="lg:hidden w-full bg-[#343F28]/10 p-6 rounded-3xl shadow-xl text-center">
-                            <div className="text-4xl sm:text-5xl font-bold text-black mb-2">57%</div>
-                            <div className="text-sm font-medium text-gray-800">growth of phygital experiences</div>
+                        {/* Supporting stat — solid, in flow, no overlap */}
+                        <div className="lg:col-span-12 rounded-[28px] bg-[#F4F1EA] border border-[#E4DFD3] px-8 py-8 sm:px-12 flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-10">
+                            <div className="text-[56px] sm:text-[72px] font-light leading-none tracking-[-0.04em] text-[#2B3521]">57<span className="text-[0.55em] align-top ml-0.5">%</span></div>
+                            <div className="hidden sm:block h-12 w-px bg-[#2B3521]/20"></div>
+                            <div className="text-[15px] sm:text-base text-[#2B3521]/75 tracking-wide max-w-sm">growth of phygital experiences</div>
                         </div>
                     </div>
                 </div>
@@ -144,10 +133,10 @@ const AesturaCampaign = () => {
                         </blockquote>
                     </div>
 
-                    <div className="relative min-h-[800px] hidden md:block">
+                    <div className="hidden md:block">
                         {/* Central Face Image */}
-                        <div className="absolute left-1/2 transform -translate-x-1/2 top-0 z-20">
-                            <div className="w-64 h-64 rounded-full overflow-hidden border-4 border-white shadow-2xl">
+                        <div className="flex justify-center mb-14 lg:mb-20">
+                            <div className="w-56 h-56 lg:w-64 lg:h-64 rounded-full overflow-hidden border-4 border-white shadow-[0_20px_50px_-20px_rgba(43,53,33,0.45)] ring-1 ring-[#2B3521]/10">
                                 <img
                                     src="/images/aestura/AesturaCustomerImage.png"
                                     alt="Customer Profile"
@@ -155,75 +144,24 @@ const AesturaCampaign = () => {
                             </div>
                         </div>
 
-                        {/* Arc Layout Grid */}
-                        {/* 
-                            We need 5 items in an arc. 
-                            We can use absolute positioning with specific coordinates based on a circle equation or just estimated % values.
-                            Let's try estimated % positions for a "smile" arc below the face.
-                         */}
-
-                        {/* Item 1 - Far Left */}
-                        <div className="absolute top-[150px] left-[0%] w-[18%] flex flex-col items-center text-center group">
-                            {/* Connector Line */}
-                            <div className="h-24 w-px bg-[#343F28]/10 mb-4 absolute -top-20 right-0 hidden lg:block rotate-[-45deg] origin-bottom"></div>
-
-                            {/* Card Shape */}
-                            <div className="w-full aspect-square bg-[#343F28]/10 rounded-tr-[60px] rounded-bl-[60px] rounded-tl-[20px] rounded-br-[20px] p-6 flex items-center justify-center mb-6 transform hover:scale-105 transition-transform duration-300">
-                                <img src="/images/aestura/AesturaCustomer1.png" alt="Icon 1" className="w-16 h-16 object-contain" loading="lazy" decoding="async" />
-                            </div>
-                            <h3 className="text-[#343F28] font-bold text-lg mb-3">K-Beauty Builds Skin Knowledge</h3>
-                            <p className="text-sm text-gray-600 leading-relaxed">
-                                In Korea, skincare is a cultural tradition taught from a young age, centered on prevention, consistency, and care. This approach is reshaping how U.S. consumers understand skin health, giving Aestura an opportunity to lead with education and expertise rooted in that tradition.
-                            </p>
-                        </div>
-
-                        {/* Item 2 - Left */}
-                        <div className="absolute top-[280px] left-[20%] w-[18%] flex flex-col items-center text-center">
-                            {/* Card Shape */}
-                            <div className="w-full aspect-square bg-[#343F28]/15 rounded-tr-[60px] rounded-bl-[60px] rounded-tl-[20px] rounded-br-[20px] p-6 flex items-center justify-center mb-6 transform hover:scale-105 transition-transform duration-300 rotate-[-10deg]">
-                                <img src="/images/aestura/AesturaCustomer2.png" alt="Icon 2" className="w-16 h-16 object-contain rotate-[10deg]" loading="lazy" decoding="async" />
-                            </div>
-                            <h3 className="text-[#343F28] font-bold text-lg mb-3">Preventative {'>'} Corrective</h3>
-                            <p className="text-sm text-gray-600 leading-relaxed">
-                                Skincare is becoming proactive. Younger audiences are investing in their skin earlier, prioritizing maintenance over repair. Aestura aligns with this shift, offering long-term solutions that strengthen the skin barrier and support lasting skin health.
-                            </p>
-                        </div>
-
-                        {/* Item 3 - Center (Bottom) */}
-                        <div className="absolute top-[350px] left-[41%] w-[18%] flex flex-col items-center text-center">
-                            {/* Card Shape */}
-                            <div className="w-full aspect-square bg-[#343F28]/20 rounded-tr-[60px] rounded-bl-[60px] rounded-tl-[20px] rounded-br-[20px] p-6 flex items-center justify-center mb-6 transform hover:scale-105 transition-transform duration-300">
-                                <img src="/images/aestura/AesturaCustomer3.png" alt="Icon 3" className="w-16 h-16 object-contain" loading="lazy" decoding="async" />
-                            </div>
-                            <div className="w-px h-12 bg-[#343F28]/10 mx-auto mb-4"></div>
-                            <h3 className="text-[#343F28] font-bold text-lg mb-3">Seeking Gentle, Science-Backed Care</h3>
-                            <p className="text-sm text-gray-600 leading-relaxed">
-                                Consumers are shifting away from harsh, one-size-fits-all routines. They want effective, dermatologist-developed products that deliver results without compromising skin health. Aestura meets this need with formulas rooted in medical science and built for sensitive skin.
-                            </p>
-                        </div>
-
-                        {/* Item 4 - Right */}
-                        <div className="absolute top-[280px] right-[20%] w-[18%] flex flex-col items-center text-center">
-                            {/* Card Shape */}
-                            <div className="w-full aspect-square bg-[#343F28]/15 rounded-tr-[60px] rounded-bl-[60px] rounded-tl-[20px] rounded-br-[20px] p-6 flex items-center justify-center mb-6 transform hover:scale-105 transition-transform duration-300 rotate-[10deg]">
-                                <img src="/images/aestura/AesturaCustomer4.png" alt="Icon 4" className="w-16 h-16 object-contain rotate-[-10deg]" loading="lazy" decoding="async" />
-                            </div>
-                            <h3 className="text-[#343F28] font-bold text-lg mb-3">Sensitive Skin Is a Growing Concern</h3>
-                            <p className="text-sm text-gray-600 leading-relaxed">
-                                More Americans are experiencing skin sensitivity, irritation, and compromised barriers—whether due to stress, overuse of actives, medications, or environmental triggers. There's a rising demand for solutions that restore and protect, especially those backed by research and long-term results.
-                            </p>
-                        </div>
-
-                        {/* Item 5 - Far Right */}
-                        <div className="absolute top-[150px] right-[0%] w-[18%] flex flex-col items-center text-center">
-                            {/* Card Shape */}
-                            <div className="w-full aspect-square bg-[#343F28]/10 rounded-tr-[60px] rounded-bl-[60px] rounded-tl-[20px] rounded-br-[20px] p-6 flex items-center justify-center mb-6 transform hover:scale-105 transition-transform duration-300">
-                                <img src="/images/aestura/AesturaCustomer5.png" alt="Icon 5" className="w-16 h-16 object-contain" loading="lazy" decoding="async" />
-                            </div>
-                            <h3 className="text-[#343F28] font-bold text-lg mb-3">Creditable & Trustworthy Brands</h3>
-                            <p className="text-sm text-gray-600 leading-relaxed">
-                                In a market overwhelmed with trend-driven claims, consumers crave transparency, integrity, and expertise. Aestura's pharmaceutical origins set it apart as a brand that not only promises results, but proves them.
-                            </p>
+                        {/* Five insights — flow grid so nothing escapes the section */}
+                        <div className="grid grid-cols-2 lg:grid-cols-5 gap-x-6 gap-y-14 lg:gap-x-8">
+                            {[
+                                { icon: 1, title: "K-Beauty Builds Skin Knowledge", desc: "In Korea, skincare is a cultural tradition taught from a young age, centered on prevention, consistency, and care. This approach is reshaping how U.S. consumers understand skin health, giving Aestura an opportunity to lead with education and expertise rooted in that tradition.", offset: "lg:mt-0" },
+                                { icon: 2, title: "Preventative > Corrective", desc: "Skincare is becoming proactive. Younger audiences are investing in their skin earlier, prioritizing maintenance over repair. Aestura aligns with this shift, offering long-term solutions that strengthen the skin barrier and support lasting skin health.", offset: "lg:mt-8" },
+                                { icon: 3, title: "Seeking Gentle, Science-Backed Care", desc: "Consumers are shifting away from harsh, one-size-fits-all routines. They want effective, dermatologist-developed products that deliver results without compromising skin health. Aestura meets this need with formulas rooted in medical science and built for sensitive skin.", offset: "lg:mt-16" },
+                                { icon: 4, title: "Sensitive Skin Is a Growing Concern", desc: "More Americans are experiencing skin sensitivity, irritation, and compromised barriers—whether due to stress, overuse of actives, medications, or environmental triggers. There's a rising demand for solutions that restore and protect, especially those backed by research and long-term results.", offset: "lg:mt-8" },
+                                { icon: 5, title: "Creditable & Trustworthy Brands", desc: "In a market overwhelmed with trend-driven claims, consumers crave transparency, integrity, and expertise. Aestura's pharmaceutical origins set it apart as a brand that not only promises results, but proves them.", offset: "lg:mt-0" },
+                            ].map((item) => (
+                                <div key={item.icon} className={`flex flex-col items-center text-center ${item.offset}`}>
+                                    <div className="w-28 h-28 bg-[#EEF0EA] border border-[#2B3521]/10 rounded-tr-[48px] rounded-bl-[48px] rounded-tl-[16px] rounded-br-[16px] flex items-center justify-center mb-6 transition-transform duration-300 hover:-translate-y-1">
+                                        <img src={`/images/aestura/AesturaCustomer${item.icon}.png`} alt={`Icon ${item.icon}`} className="w-14 h-14 object-contain" loading="lazy" decoding="async" />
+                                    </div>
+                                    <h3 className="text-[#2B3521] font-semibold text-base lg:text-[17px] leading-snug tracking-[-0.01em] mb-3 max-w-[18ch]">{item.title}</h3>
+                                    <div className="h-px w-8 bg-[#2B3521]/25 mb-3"></div>
+                                    <p className="text-[13px] lg:text-sm text-gray-600 leading-relaxed">{item.desc}</p>
+                                </div>
+                            ))}
                         </div>
                     </div>
 
@@ -446,28 +384,30 @@ const AesturaCampaign = () => {
                         </p>
                     </div>
 
-                    <div className="rounded-[32px] overflow-hidden flex flex-col md:flex-row shadow-xl bg-[#343F28]">
-                        {/* Note: Using a color close to the image reference, likely a periwinkle shade */}
+                    <div className="relative overflow-hidden rounded-[32px] bg-[#2B3521] text-white ring-1 ring-inset ring-white/10 px-8 py-12 sm:px-12 sm:py-16 lg:px-16 lg:py-20">
+                        <div aria-hidden="true" className="pointer-events-none absolute -top-32 -right-24 h-[420px] w-[420px] rounded-full bg-[#F4F1EA]/[0.07] blur-3xl"></div>
 
-                        {/* Left Side - Image */}
-                        <div className="md:w-[40%] bg-[#343F28]/20 relative flex items-center justify-center p-8">
-                            <img
-                                src="/images/aestura/AesturaSuitcase.png"
-                                alt="From Seoul to Your City"
-                                className="w-full h-auto object-contain max-w-md mix-blend-multiply" loading="lazy" decoding="async" />
-                        </div>
-
-                        {/* Right Side - Brand Opportunity */}
-                        <div className="md:w-[60%] p-10 md:p-14 flex flex-col justify-center text-white">
-                            <div className="border-l-4 border-[#343F28] pl-6 mb-8">
-                                <h3 className="text-xl sm:text-3xl md:text-4xl italic font-medium leading-tight">
-                                    Brand<br />Opportunity
+                        <div className="relative grid gap-10 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-20">
+                            <div>
+                                <p className="mb-5 text-xs uppercase tracking-[0.22em] text-[#F4F1EA]/60">The Opportunity</p>
+                                <h3 className="text-3xl sm:text-4xl md:text-5xl font-light leading-[1.1] tracking-tight">
+                                    Brand<br />
+                                    <span className="italic">Opportunity</span>
                                 </h3>
                             </div>
 
-                            <p className="text-lg md:text-xl leading-relaxed font-light">
-                                Aestura is our <span className="font-bold">estuary</span>, a bridge between science and care where sensitive skin meets trusted, derma-certified solutions. In Korea, skincare is taught early as a practice of prevention and respect. We aim to bring that same <span className="font-bold">philosophy to the U.S.</span>, guiding consumers toward a brand that truly understands and supports their skin.
-                            </p>
+                            <div className="lg:border-l lg:border-white/15 lg:pl-16">
+                                <p className="text-lg md:text-xl leading-relaxed font-light text-white/85">
+                                    Aestura is our <span className="font-semibold text-white">estuary</span>, a bridge between science and care where sensitive skin meets trusted, derma-certified solutions. In Korea, skincare is taught early as a practice of prevention and respect. We aim to bring that same <span className="font-semibold text-white">philosophy to the U.S.</span>, guiding consumers toward a brand that truly understands and supports their skin.
+                                </p>
+                                <div className="mt-8 flex flex-wrap gap-2.5">
+                                    {['Science-backed', 'Derma-certified', 'Prevention first'].map((tag) => (
+                                        <span key={tag} className="rounded-full border border-white/20 bg-white/[0.06] px-4 py-1.5 text-xs uppercase tracking-[0.14em] text-white/80">
+                                            {tag}
+                                        </span>
+                                    ))}
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

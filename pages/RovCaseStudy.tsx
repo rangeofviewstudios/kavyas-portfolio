@@ -46,6 +46,7 @@ const OUTCOMES = [
 ];
 
 const WILD = [
+    ["site-hero", "Homepage hero"],
     ["site-strategy", "Hero sequence: Creative Strategy"],
     ["site-services", "Services: Web Optimization"],
     ["site-ai-cta", "AI Solutions and the Ember CTA card"],
@@ -149,7 +150,7 @@ const RovCaseStudy = () => {
                                 <div className="h-[520px] overflow-y-auto">
                                     <Image src="/images/rov/old-site.webp" alt="The original Range of View website" width={600} height={4070} className="block h-auto w-full" />
                                 </div>
-                                <span className="pointer-events-none absolute bottom-3 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full bg-black/70 px-3 py-1 text-xs text-white/80">
+                                <span className="pointer-events-none absolute bottom-3 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full bg-black/80 px-3 py-1.5 text-xs font-medium text-white">
                                     Scroll the old site
                                 </span>
                             </div>
@@ -320,10 +321,15 @@ const RovCaseStudy = () => {
                         <p className={`mb-8 sm:mb-12 ${intro}`} style={introStyle}>
                             Everything above, working together on rovstudios.com.
                         </p>
-                        <div className="grid gap-6 md:grid-cols-2">
-                            {WILD.map(([file, alt]) => (
-                                <Shot key={file} src={`/images/rov/${file}.webp`} alt={alt} width={1404} height={739} caption={alt} />
-                            ))}
+                        <div className="relative overflow-hidden rounded-2xl border-2 border-gray-200 bg-black">
+                            <div className="h-[420px] overflow-y-auto sm:h-[560px] lg:h-[680px]">
+                                {WILD.map(([file, alt]) => (
+                                    <Image key={file} src={`/images/rov/${file}.webp`} alt={alt} width={1404} height={739} sizes="(max-width: 1152px) 100vw, 1100px" className="block h-auto w-full" />
+                                ))}
+                            </div>
+                            <span className="pointer-events-none absolute bottom-3 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full bg-black/80 px-3 py-1.5 text-xs font-medium text-white">
+                                Scroll the new site
+                            </span>
                         </div>
                     </div>
 

@@ -27,6 +27,7 @@ import {
     QuoteRotator,
     SpectatorStats,
     WayfindingBanner,
+    WayfindingMaps,
 } from "./FifaModules";
 
 /* FIFA World Cup 26 case study. Kavya's layout and green, with the deck's chevrons, blues and reds as the flare. */
@@ -193,89 +194,25 @@ const FifaCaseStudy = () => {
                             />
                         </div>
                         <p className={`mb-8 sm:mb-12 ${intro}`} style={introStyle}>
-                            The primary route runs from the Fan Festival to the stadium. Pick a place, or switch the
-                            route on and off.
+                            Primary routes link the Fan Festival, the stadium and the transit stations. Pick a place, or switch the
+                            routes and signage on and off.
                         </p>
                         <Reveal>
                             <AreaMap />
                         </Reveal>
                     </div>
 
-                    {/* Primary wayfinding */}
+                    {/* Wayfinding plan + friction points */}
                     <div className="mt-10 sm:mt-20">
                         <Eyebrow color={F.red}>The plan</Eyebrow>
-                        <h2 className={h2} style={{ color: GREEN }}>Primary Wayfinding</h2>
+                        <h2 className={h2} style={{ color: GREEN }}>Wayfinding Plan &amp; Friction Points</h2>
                         <p className={`mb-8 sm:mb-12 ${intro}`} style={introStyle}>
-                            Primary signage follows the primary routes, placed at every point where a stranger
-                            would have to choose a direction.
+                            Primary signage follows the primary routes, with secondary routes branching off them.
+                            Mapping the route also showed where movement would slow down.
                         </p>
                         <Reveal>
-                            <img
-                                src="/images/fifa/primary-wayfinding.webp"
-                                alt="Map of the primary wayfinding plan, showing primary routes and primary signage between the Fan Festival, transit stations and the stadium"
-                                width={1074}
-                                height={608}
-                                loading="lazy"
-                                className="w-full h-auto rounded-2xl"
-                            />
+                            <WayfindingMaps />
                         </Reveal>
-                        <h3 className={`${h3} mt-10 sm:mt-16`}>Secondary Wayfinding</h3>
-                        <p className={`mb-8 sm:mb-12 ${intro}`} style={introStyle}>
-                            Secondary routes branch off the primary ones, carrying people to the surrounding streets,
-                            stations and neighbourhoods.
-                        </p>
-                        <Reveal>
-                            <img
-                                src="/images/fifa/secondary-wayfinding.webp"
-                                alt="Map of the secondary wayfinding plan, showing secondary routes and secondary signage branching out from the Fan Festival and stadium into downtown Atlanta"
-                                width={1066}
-                                height={600}
-                                loading="lazy"
-                                className="w-full h-auto rounded-2xl"
-                            />
-                        </Reveal>
-                    </div>
-
-                    {/* Friction points */}
-                    <div className="mt-10 sm:mt-20">
-                        <Eyebrow color={F.red}>The risks</Eyebrow>
-                        <h2 className={h2} style={{ color: GREEN }}>Friction Points</h2>
-                        <p className={`mb-8 sm:mb-12 ${intro}`} style={introStyle}>
-                            Mapping the route showed where movement would slow down: bottlenecks, visual obstructions
-                            that hide the way ahead, and narrow sidewalks.
-                        </p>
-                        <Reveal>
-                            <img
-                                src="/images/fifa/friction-bottlenecks.webp"
-                                alt="Map of friction points along the Last Mile, with bottlenecks marked near the Fan Festival, the stadium and Five Points station"
-                                width={1220}
-                                height={716}
-                                loading="lazy"
-                                className="w-full h-auto rounded-2xl"
-                            />
-                        </Reveal>
-                        <div className="mt-6 grid gap-6 md:grid-cols-2">
-                            <Reveal>
-                                <img
-                                    src="/images/fifa/friction-obstruction.webp"
-                                    alt="Friction points map adding visual obstructions alongside the bottlenecks"
-                                    width={748}
-                                    height={414}
-                                    loading="lazy"
-                                    className="w-full h-auto rounded-2xl"
-                                />
-                            </Reveal>
-                            <Reveal>
-                                <img
-                                    src="/images/fifa/friction-sidewalks.webp"
-                                    alt="Friction points map adding narrow sidewalks to the bottlenecks and visual obstructions"
-                                    width={632}
-                                    height={336}
-                                    loading="lazy"
-                                    className="w-full h-auto rounded-2xl"
-                                />
-                            </Reveal>
-                        </div>
                     </div>
 
                     {/* In the news */}

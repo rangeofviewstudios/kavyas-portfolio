@@ -78,8 +78,8 @@ export function HomeAbout() {
 
           <div className="mt-10 flex flex-wrap items-center gap-3">
             <a
-              href="/Kavya_Ray_Resume.pdf"
-              download="Kavya_Ray_Resume.pdf"
+              href="/Ray_Kavya_Resume_UX_Designer.pdf"
+              download="Ray_Kavya_Resume_UX_Designer.pdf"
               className="inline-flex h-12 items-center gap-2 rounded-full border border-foreground/30 bg-foreground/[0.06] px-6 text-base font-medium text-foreground transition-colors hover:bg-foreground/15"
             >
               <ArrowDownToLine className="h-4 w-4" />

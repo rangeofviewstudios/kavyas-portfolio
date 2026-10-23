@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
@@ -81,8 +81,48 @@ const styles = {
   },
 } as const;
 
+/** Thin reading-progress bar pinned to the top of the viewport. Case study pages only. */
+function ReadingProgress() {
+  const barRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    let frame = 0;
+    const update = () => {
+      cancelAnimationFrame(frame);
+      frame = requestAnimationFrame(() => {
+        const max = document.documentElement.scrollHeight - window.innerHeight;
+        const ratio = max > 0 ? Math.min(1, Math.max(0, window.scrollY / max)) : 0;
+        if (barRef.current) barRef.current.style.transform = `scaleX(${ratio})`;
+      });
+    };
+
+    update();
+    window.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update);
+    return () => {
+      cancelAnimationFrame(frame);
+      window.removeEventListener('scroll', update);
+      window.removeEventListener('resize', update);
+    };
+  }, []);
+
+  return (
+    <div
+      aria-hidden
+      className="fixed top-0 left-0 right-0 z-[60] h-[5px] bg-white/40 pointer-events-none"
+    >
+      <div
+        ref={barRef}
+        className="h-full origin-left"
+        style={{ background: KAVYA_GREEN, transform: 'scaleX(0)', boxShadow: '0 0 0 0.5px rgba(255,255,255,0.6)' }}
+      />
+    </div>
+  );
+}
+
 export function Navigation() {
   const pathname = usePathname();
+  const isCaseStudy = pathname?.startsWith('/case-study') ?? false;
   const [tone, setTone] = useState<Tone>('onDark');
   const [logoTone, setLogoTone] = useState<Tone>('onDark');
 
@@ -114,6 +154,8 @@ export function Navigation() {
 
   return (
     <>
+      {isCaseStudy && <ReadingProgress />}
+
       {/* Logo — fixed top-left on all sizes */}
       <Link
         href="/"
@@ -149,8 +191,8 @@ export function Navigation() {
             About
           </Link>
           <a
-            href="/Kavya_Ray_Resume.pdf"
-            download="Kavya_Ray_Resume.pdf"
+            href="/Ray_Kavya_Resume_UX_Designer.pdf"
+            download="Ray_Kavya_Resume_UX_Designer.pdf"
             className={`${t.text} font-medium text-xs px-3 py-1.5 rounded-full transition-all duration-200 ${t.cta}`}
           >
             Resume
@@ -179,8 +221,8 @@ export function Navigation() {
             );
           })}
           <a
-            href="/Kavya_Ray_Resume.pdf"
-            download="Kavya_Ray_Resume.pdf"
+            href="/Ray_Kavya_Resume_UX_Designer.pdf"
+            download="Ray_Kavya_Resume_UX_Designer.pdf"
             className={`${t.text} font-medium text-sm px-5 py-2 rounded-full transition-all duration-200 ${t.hover}`}
           >
             Resume

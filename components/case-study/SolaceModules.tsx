@@ -60,21 +60,7 @@ export function SolaceHero() {
                         style={{ width: "max(100%, 177.78vh)", height: "max(100%, 56.25vw)" }}
                     />
                 </div>
-                <img
-                    src="/images/solace/mark.svg"
-                    alt=""
-                    aria-hidden="true"
-                    className="pointer-events-none absolute -right-16 top-6 h-[420px] w-auto opacity-[0.14] sm:h-[560px]"
-                />
-                <div className="relative z-10 mx-auto flex h-full max-w-6xl flex-col items-center px-4 pt-12 text-center sm:px-6 sm:pt-16">
-                    <img src="/images/solace/mark.svg" alt="Solace" className="h-14 w-auto sm:h-20" loading="lazy" decoding="async" />
-                    <p className="mt-5 text-xs font-semibold uppercase tracking-[0.22em] text-white/80 sm:text-sm" style={poppins}>
-                        Solace · Employee Handbook
-                    </p>
-                    <h2 className="mt-4 max-w-4xl text-3xl font-bold leading-[1.1] text-white sm:text-5xl lg:text-[3.4rem]" style={syne}>
-                        Build a system that <span className="font-extrabold">doesn&apos;t forget people</span>
-                    </h2>
-                </div>
+                <h2 className="sr-only">Solace · Employee Handbook. Build a system that doesn&apos;t forget people</h2>
             </div>
         </section>
     );

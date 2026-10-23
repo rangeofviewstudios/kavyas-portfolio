@@ -32,7 +32,7 @@ const projects: Project[] = [
     href: "/case-study/fifa",
     alt: "FIFA case study",
     cardImage: "/images/fifacard.jpg",
-    focus: "50% 40%",
+    focus: "0% 40%",
     zoom: 1,
   },
   {
@@ -145,10 +145,13 @@ function ProjectVisual({ project, size }: { project: Project; size: "square" | "
 }
 
 export function WorkSection() {
-  const [active, setActive] = useState(0);
-  const [paused, setPaused] = useState(false);
+  // `auto` cycles through the featured three; `hovered` (any tile) overrides it while the pointer is on the grid
+  const [auto, setAuto] = useState(0);
+  const [hovered, setHovered] = useState<number | null>(null);
   const [reducedMotion, setReducedMotion] = useState(false);
 
+  const paused = hovered !== null;
+  const active = hovered ?? auto;
   const current = projects[active] ?? projects[0];
 
   useEffect(() => {
@@ -162,14 +165,13 @@ export function WorkSection() {
   // Auto-rotate the sticky square; hovering a tile pins it to that project
   useEffect(() => {
     if (paused || reducedMotion || FEATURED_COUNT < 2) return;
-    const t = setTimeout(() => setActive((a) => (a + 1) % FEATURED_COUNT), ROTATE_MS);
+    const t = setTimeout(() => setAuto((a) => (a + 1) % FEATURED_COUNT), ROTATE_MS);
     return () => clearTimeout(t);
-  }, [active, paused, reducedMotion]);
+  }, [auto, paused, reducedMotion]);
 
-  const focusProject = (index: number) => {
-    if (index >= FEATURED_COUNT) return;
-    setActive(index);
-    setPaused(true);
+  const selectFeatured = (index: number) => {
+    setHovered(null);
+    setAuto(index);
   };
 
   return (
@@ -186,25 +188,25 @@ export function WorkSection() {
           {/* Left — sticky auto-rotating square */}
           <div className="hidden lg:block sticky top-24">
             <ShowcaseSquare
-              projects={projects.slice(0, FEATURED_COUNT)}
+              projects={projects}
               current={current}
               active={active}
               paused={paused || reducedMotion}
-              onSelect={focusProject}
+              onSelect={selectFeatured}
             />
           </div>
 
           {/* Right — scrollable 2-column grid */}
           <div
             className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2 gap-4 sm:gap-5"
-            onMouseLeave={() => setPaused(false)}
+            onMouseLeave={() => setHovered(null)}
           >
             {projects.map((project, index) => (
               <ProjectTile
                 key={project.id}
                 project={project}
                 isActive={index === active}
-                onFocus={() => focusProject(index)}
+                onFocus={() => setHovered(index)}
               />
             ))}
           </div>
@@ -244,7 +246,7 @@ function ShowcaseSquare({
 
       {/* Progress segments */}
       <div className="absolute top-5 left-5 right-5 flex gap-1.5 z-10">
-        {projects.map((project, index) => (
+        {projects.slice(0, FEATURED_COUNT).map((project, index) => (
           <button
             key={project.id}
             type="button"
@@ -255,7 +257,7 @@ function ShowcaseSquare({
             }}
             className="relative h-[3px] flex-1 rounded-full bg-white/30 overflow-hidden"
           >
-            {index < active && <span className="absolute inset-0 bg-white" />}
+            {active < FEATURED_COUNT && index < active && <span className="absolute inset-0 bg-white" />}
             {index === active && (
               <span
                 key={`${active}-${paused}`}
@@ -270,10 +272,14 @@ function ShowcaseSquare({
       {/* Caption */}
       <div className="absolute inset-x-0 bottom-0 z-10 p-6 lg:p-8 pt-24 bg-gradient-to-t from-black/75 via-black/35 to-transparent">
         <div className="flex items-center gap-3 text-xs text-white/70 mb-2 tabular-nums">
-          <span>
-            {String(active + 1).padStart(2, "0")} / {String(projects.length).padStart(2, "0")}
-          </span>
-          <span className="h-3 w-px bg-white/40" />
+          {active < FEATURED_COUNT && (
+            <>
+              <span>
+                {String(active + 1).padStart(2, "0")} / {String(FEATURED_COUNT).padStart(2, "0")}
+              </span>
+              <span className="h-3 w-px bg-white/40" />
+            </>
+          )}
           <span>{current.client}</span>
           {current.isNda && <span className="ml-auto">NDA Protected</span>}
         </div>

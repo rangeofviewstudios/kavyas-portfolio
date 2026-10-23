@@ -35,8 +35,8 @@ export function Footer() {
               <ArrowUpRight className="w-4 h-4 sm:w-5 sm:h-5" />
             </a>
             <a
-              href="/Kavya_Ray_Resume.pdf"
-              download="Kavya_Ray_Resume.pdf"
+              href="/Ray_Kavya_Resume_UX_Designer.pdf"
+              download="Ray_Kavya_Resume_UX_Designer.pdf"
               className="flex items-center gap-2 text-base sm:text-lg transition-opacity hover:opacity-70"
               style={{ color: '#FFFFFF' }}
             >
