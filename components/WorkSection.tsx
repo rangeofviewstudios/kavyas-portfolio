@@ -109,6 +109,8 @@ const projects: Project[] = [
 ];
 
 const ROTATE_MS = 4000;
+/* The left square rotates through the first few projects only: FIFA, ROV, Solace. */
+const FEATURED_COUNT = 3;
 
 function ProjectVisual({ project, size }: { project: Project; size: "square" | "tile" }) {
   if (project.cardImage) {
@@ -159,12 +161,13 @@ export function WorkSection() {
 
   // Auto-rotate the sticky square; hovering a tile pins it to that project
   useEffect(() => {
-    if (paused || reducedMotion || projects.length < 2) return;
-    const t = setTimeout(() => setActive((a) => (a + 1) % projects.length), ROTATE_MS);
+    if (paused || reducedMotion || FEATURED_COUNT < 2) return;
+    const t = setTimeout(() => setActive((a) => (a + 1) % FEATURED_COUNT), ROTATE_MS);
     return () => clearTimeout(t);
-  }, [active, paused, reducedMotion, projects.length]);
+  }, [active, paused, reducedMotion]);
 
   const focusProject = (index: number) => {
+    if (index >= FEATURED_COUNT) return;
     setActive(index);
     setPaused(true);
   };
@@ -183,7 +186,7 @@ export function WorkSection() {
           {/* Left — sticky auto-rotating square */}
           <div className="hidden lg:block sticky top-24">
             <ShowcaseSquare
-              projects={projects}
+              projects={projects.slice(0, FEATURED_COUNT)}
               current={current}
               active={active}
               paused={paused || reducedMotion}
