@@ -76,13 +76,6 @@ export function SolaceHero() {
                         Build a system that <span className="font-extrabold">doesn&apos;t forget people</span>
                     </h2>
                 </div>
-                <img
-                    src="/images/solace/silhouettes.webp"
-                    alt="Silhouettes of people walking at dusk, carrying their belongings"
-                    className="absolute bottom-0 left-[-3%] w-[106%] max-w-none object-cover object-bottom"
-                    style={{ animation: "cs-drift 18s ease-in-out infinite alternate", height: "48%" }}
-                    fetchPriority="high"
-                />
             </div>
         </section>
     );
