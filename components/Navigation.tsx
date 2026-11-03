@@ -192,7 +192,8 @@ export function Navigation() {
           </Link>
           <a
             href="/Ray_Kavya_Resume_UX_Designer.pdf"
-            download="Ray_Kavya_Resume_UX_Designer.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
             className={`${t.text} font-medium text-xs px-3 py-1.5 rounded-full transition-all duration-200 ${t.cta}`}
           >
             Resume
@@ -222,7 +223,8 @@ export function Navigation() {
           })}
           <a
             href="/Ray_Kavya_Resume_UX_Designer.pdf"
-            download="Ray_Kavya_Resume_UX_Designer.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
             className={`${t.text} font-medium text-sm px-5 py-2 rounded-full transition-all duration-200 ${t.hover}`}
           >
             Resume

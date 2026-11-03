@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowDownToLine, LayoutPanelLeft, MousePointer2, PenTool, Plus } from "lucide-react";
+import { ArrowUpRight, LayoutPanelLeft, MousePointer2, PenTool, Plus } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
 const LINKEDIN_URL = "https://www.linkedin.com/in/kavya-ray/";
@@ -79,10 +79,11 @@ export function HomeAbout() {
           <div className="mt-10 flex flex-wrap items-center gap-3">
             <a
               href="/Ray_Kavya_Resume_UX_Designer.pdf"
-              download="Ray_Kavya_Resume_UX_Designer.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex h-12 items-center gap-2 rounded-full border border-foreground/30 bg-foreground/[0.06] px-6 text-base font-medium text-foreground transition-colors hover:bg-foreground/15"
             >
-              <ArrowDownToLine className="h-4 w-4" />
+              <ArrowUpRight className="h-4 w-4" />
               Resume
             </a>
             <Link

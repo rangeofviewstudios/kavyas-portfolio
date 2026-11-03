@@ -36,7 +36,8 @@ export function Footer() {
             </a>
             <a
               href="/Ray_Kavya_Resume_UX_Designer.pdf"
-              download="Ray_Kavya_Resume_UX_Designer.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
               className="flex items-center gap-2 text-base sm:text-lg transition-opacity hover:opacity-70"
               style={{ color: '#FFFFFF' }}
             >

@@ -112,7 +112,7 @@ export function HeroSection() {
           className="text-[2.75rem] sm:text-6xl md:text-7xl lg:text-[5.25rem] font-medium tracking-[-0.045em] leading-[0.96]"
           style={{ opacity: 0.12 }}
         >
-          I bring them to <span style={{ color: '#F26A3D' }}>light.</span>
+          I bring them to <span className="font-normal" style={{ color: 'rgba(255,243,223,0.6)' }}>light.</span>
         </h1>
 
         <div className="mt-6 sm:mt-8 flex flex-col items-start gap-5 sm:gap-6">
@@ -134,7 +134,7 @@ export function HeroSection() {
         className={`${dmMono.className} absolute z-10 bottom-8 sm:bottom-10 left-6 right-6 sm:right-auto sm:left-12 md:left-16 lg:left-24 flex items-center gap-3 sm:gap-4 text-[11px] sm:text-xs tracking-[0.04em]`}
       >
         <span className="opacity-50">ISO</span>
-        <div className="relative flex-1 sm:flex-none sm:w-56 h-3 has-[input:focus-visible]:outline has-[input:focus-visible]:outline-2 has-[input:focus-visible]:outline-offset-[6px] has-[input:focus-visible]:outline-[#F26A3D] rounded-sm">
+        <div className="relative flex-1 sm:flex-none sm:w-56 h-3 has-[input:focus-visible]:outline has-[input:focus-visible]:outline-2 has-[input:focus-visible]:outline-offset-[6px] has-[input:focus-visible]:outline-[#FFF3DF] rounded-sm">
           <div className="absolute inset-0 flex justify-between">
             {Array.from({ length: TICKS }, (_, i) => (
               <i key={i} className={`w-px bg-[#FFF3DF]/30 ${i % 2 ? 'h-[60%] my-auto' : 'h-full'}`} />
@@ -142,7 +142,7 @@ export function HeroSection() {
           </div>
           <span
             ref={markerRef}
-            className="absolute -top-[15%] -bottom-[15%] w-0.5 -translate-x-1/2 rounded-sm bg-[#F26A3D] shadow-[0_0_0_3px_rgba(242,106,61,0.18)]"
+            className="absolute -top-[15%] -bottom-[15%] w-0.5 -translate-x-1/2 rounded-sm bg-[#FFF3DF] shadow-[0_0_0_3px_rgba(255,243,223,0.18)]"
             style={{ left: '0%' }}
           />
           <input

@@ -4,12 +4,19 @@ import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { HomeAbout } from "@/components/HomeAbout";
+import { RotatingWord } from "@/components/RotatingWord";
+import { MomentsSection } from "@/components/MomentsSection";
 
 type Project = {
   id: number;
   isNda: boolean;
   client: string;
   title: string;
+  /** Outcome-focused one-liner shown as the card title. */
+  headline: string;
+  tags: string[];
+  /** Up to three real numbers or results from the case study. */
+  metrics?: { value: string; label: string }[];
   href: string;
   alt: string;
   /** Cover image. Leave empty to render the branded placeholder instead. */
@@ -29,10 +36,17 @@ const projects: Project[] = [
     isNda: false,
     client: "FIFA",
     title: "FIFA",
+    headline: "Guiding ~300K World Cup fans through Atlanta’s last mile",
+    tags: ["Wayfinding", "Service Design", "Field Research"],
+    metrics: [
+      { value: "300K", label: "spectators on the route" },
+      { value: "8", label: "World Cup matches" },
+      { value: "Live", label: "installed downtown ATL" },
+    ],
     href: "/case-study/fifa",
-    alt: "FIFA case study",
-    cardImage: "/images/fifacard.jpg",
-    focus: "0% 40%",
+    alt: "FIFA World Cup 26 wayfinding flags pointing to Atlanta Stadium and Fan Fest",
+    cardImage: "/images/fifa-flags.jpg",
+    focus: "50% 50%",
     zoom: 1,
   },
   {
@@ -40,6 +54,8 @@ const projects: Project[] = [
     isNda: false,
     client: "Range of View Studios",
     title: "Brand & Visual Identity",
+    headline: "Growing a music collective into an Atlanta creative studio",
+    tags: ["Brand Identity", "Visual Systems", "Web"],
     href: "/case-study/rov",
     alt: "Range of View Studios — Brand & Visual Identity",
     cardImage: "/images/rovcard-ember.jpg",
@@ -51,6 +67,13 @@ const projects: Project[] = [
     isNda: false,
     client: "Solace",
     title: "Solace",
+    headline: "One record that follows refugees across every organization",
+    tags: ["Service Design", "Healthcare", "Product Ecosystem"],
+    metrics: [
+      { value: "4", label: "connected tools" },
+      { value: "1", label: "record per person" },
+      { value: "3", label: "person team" },
+    ],
     href: "/case-study/solace",
     alt: "Solace case study",
     cardImage: "/images/solacecard.png",
@@ -62,6 +85,13 @@ const projects: Project[] = [
     isNda: true,
     client: "UBS × SCADpro",
     title: "The Future of Banking",
+    headline: "Researching a north-star UBS.com for the Swiss market",
+    tags: ["Fintech", "UX Research", "Usability Testing"],
+    metrics: [
+      { value: "70", label: "research responses" },
+      { value: "40", label: "Swiss participants" },
+      { value: "30", label: "Gen Z participants" },
+    ],
     href: "/case-study/ubs",
     alt: "UBS - The Future of Banking",
     cardImage: "/images/ubscard.png",
@@ -72,6 +102,11 @@ const projects: Project[] = [
     isNda: false,
     client: "Startup Competition",
     title: "LOOMA Smart Glasses",
+    headline: "AR glasses that help people with Alzheimer’s recognize loved ones",
+    tags: ["Wearables", "AR", "Accessibility"],
+    metrics: [
+      { value: "38M+", label: "people with Alzheimer’s worldwide" },
+    ],
     href: "/case-study/looma",
     alt: "LOOMA - Smart Glasses",
     cardImage: "/images/loomacard.png",
@@ -82,6 +117,8 @@ const projects: Project[] = [
     isNda: true,
     client: "Lowe's × SCADpro",
     title: "Garden Center Redesign",
+    headline: "Finding the friction in Lowe’s garden center, for shoppers and staff",
+    tags: ["Retail", "UX Research", "Journey Mapping"],
     href: "/case-study/lowes",
     alt: "Lowes - Garden Center Redesign",
     cardImage: "/images/lowescard2.png",
@@ -91,6 +128,13 @@ const projects: Project[] = [
     isNda: false,
     client: "Porsche × SCAD",
     title: "The Future of Electric Vehicles",
+    headline: "Designing the in-car experience for Porsche’s next EV drivers",
+    tags: ["Automotive", "HMI", "Mobile App"],
+    metrics: [
+      { value: "160+", label: "survey responses" },
+      { value: "30+", label: "driver interviews" },
+      { value: "4", label: "brands benchmarked" },
+    ],
     href: "/case-study/porsche",
     alt: "Porsche - The Future of Electric Vehicles",
     cardImage: "/images/porschecard.png",
@@ -101,6 +145,11 @@ const projects: Project[] = [
     isNda: false,
     client: "AmorePacific Brand Challenge",
     title: "Aestura — The Essence Edit",
+    headline: "Launching a Korean skincare brand in the U.S. through phygital pop-ups",
+    tags: ["Brand Strategy", "Campaign", "Gen Z"],
+    metrics: [
+      { value: "Semi-finalist", label: "AmorePacific global challenge" },
+    ],
     href: "/case-study/aestura",
     alt: "Aestura - The Essence Edit",
     cardImage: "/images/aesturacard.png",
@@ -175,16 +224,17 @@ export function WorkSection() {
   };
 
   return (
-    <section id="work" className="pt-6 sm:pt-8 pb-16 sm:pb-20 px-4 sm:px-6">
-      <div className="container mx-auto">
+    <section id="work" className="pt-20 sm:pt-28 lg:pt-32 pb-20 sm:pb-28 px-4 sm:px-6">
+      <div className="mx-auto w-full max-w-[1600px] lg:px-20">
         {/* Section Header */}
-        <div className="mb-10 sm:mb-14">
-          <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-medium tracking-tight leading-none text-foreground">
-            My Work
+        <div className="mb-12 sm:mb-16 lg:mb-20">
+          <h2 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-semibold tracking-[-0.045em] leading-[0.95] text-[#FFF3DF]">
+            Experiences I&apos;ve{" "}
+            <RotatingWord words={['designed.', 'researched.', 'strategized.', 'prototyped.', 'tested.']} lineHeight={1.3} className="font-normal text-[#FFF3DF]/60" />
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] gap-8 lg:gap-12 items-start">
           {/* Left — sticky auto-rotating square */}
           <div className="hidden lg:block sticky top-24">
             <ShowcaseSquare
@@ -198,7 +248,7 @@ export function WorkSection() {
 
           {/* Right — scrollable 2-column grid */}
           <div
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2 gap-4 sm:gap-5"
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 xl:grid-cols-2 gap-6 sm:gap-8"
             onMouseLeave={() => setHovered(null)}
           >
             {projects.map((project, index) => (
@@ -212,8 +262,11 @@ export function WorkSection() {
           </div>
         </div>
 
-        <HomeAbout />
+        <MomentsSection />
+      </div>
 
+      <div className="container mx-auto">
+        <HomeAbout />
       </div>
     </section>
   );
@@ -270,7 +323,7 @@ function ShowcaseSquare({
       </div>
 
       {/* Caption */}
-      <div className="absolute inset-x-0 bottom-0 z-10 p-6 lg:p-8 pt-24 bg-gradient-to-t from-black/75 via-black/35 to-transparent">
+      <div className="absolute inset-x-0 bottom-0 z-10 p-6 lg:p-8 pt-32 bg-gradient-to-t from-black/85 via-black/55 to-transparent">
         <div className="flex items-center gap-3 text-xs text-white/70 mb-2 tabular-nums">
           {active < FEATURED_COUNT && (
             <>
@@ -283,10 +336,19 @@ function ShowcaseSquare({
           <span>{current.client}</span>
           {current.isNda && <span className="ml-auto">NDA Protected</span>}
         </div>
-        <div className="flex items-end justify-between gap-4">
-          <h3 className="text-2xl xl:text-3xl font-semibold text-white leading-tight">
-            {current.title}
-          </h3>
+        <h3 className="text-2xl xl:text-3xl font-semibold text-white leading-tight text-balance max-w-xl">
+          {current.headline}
+        </h3>
+        <div className="mt-5 flex items-end justify-between gap-6">
+          <dl className="flex flex-wrap gap-x-8 gap-y-3 min-w-0">
+            {(current.metrics ?? []).map((m) => (
+              <div key={m.label}>
+                <dt className="sr-only">{m.label}</dt>
+                <dd className="text-xl xl:text-2xl font-semibold text-white tabular-nums leading-none">{m.value}</dd>
+                <dd className="mt-1 text-xs text-white/65">{m.label}</dd>
+              </div>
+            ))}
+          </dl>
           {current.comingSoon ? (
             <span className="shrink-0 px-4 py-2 rounded-full text-xs font-medium bg-white/15 text-white backdrop-blur">
               Coming soon
@@ -356,15 +418,35 @@ function ProjectTile({
           </span>
         )}
       </div>
-      <div className="px-2 pt-3.5 pb-2 flex items-start justify-between gap-3">
-        <div className="min-w-0">
-          <p className="text-xs text-white/60 mb-0.5">{project.client}</p>
-          <h3 className="text-base sm:text-lg font-medium text-foreground leading-snug">
-            {project.title}
-          </h3>
+      <div className="px-3 pt-5 pb-3">
+        <div className="flex items-start justify-between gap-3">
+          <div className="min-w-0">
+            <p className="text-xs text-white/60 mb-1">{project.client}</p>
+            <h3 className="text-base sm:text-lg font-medium text-foreground leading-snug">
+              {project.headline}
+            </h3>
+          </div>
+          {!project.comingSoon && (
+            <ArrowUpRight className="w-5 h-5 shrink-0 mt-1 text-white/70 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-white" />
+          )}
         </div>
-        {!project.comingSoon && (
-          <ArrowUpRight className="w-5 h-5 shrink-0 mt-1 text-white/70 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-white" />
+        <ul className="mt-3 flex flex-wrap gap-1.5" aria-label="Tags">
+          {project.tags.map((tag) => (
+            <li key={tag} className="rounded-full px-2.5 py-1 text-[11px] leading-none text-white/75 ring-1 ring-white/15">
+              {tag}
+            </li>
+          ))}
+        </ul>
+        {project.metrics && project.metrics.length > 0 && (
+          <dl className="mt-4 pt-3 border-t border-white/10 grid grid-cols-3 gap-3">
+            {project.metrics.map((m) => (
+              <div key={m.label} className="min-w-0">
+                <dt className="sr-only">{m.label}</dt>
+                <dd className="text-base sm:text-lg font-semibold text-foreground tabular-nums leading-none truncate">{m.value}</dd>
+                <dd className="mt-1 text-[11px] leading-snug text-white/60">{m.label}</dd>
+              </div>
+            ))}
+          </dl>
         )}
       </div>
     </div>
