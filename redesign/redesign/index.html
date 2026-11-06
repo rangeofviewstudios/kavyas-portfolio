@@ -1,0 +1,463 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kavya Ray | UX Designer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&display=swap">
+<style>
+:root{
+  --wall:#687A5B; --wall-ink:#141A10; --wall-soft:#26301F; --paper:#F5F3EC; --deep:#435238;
+  --bg:#F1EFEB; --panel:#FAF9F7; --ink:#161514; --soft:#75716B; --line:#DDD9D2;
+  --gut:clamp(16px,3vw,48px);
+  --sans:"Geist", -apple-system, "Helvetica Neue", Arial, sans-serif;
+  --hand:"Caveat", "Bradley Hand", cursive;
+  --ease:cubic-bezier(.65,0,.25,1);
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.5;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+img{max-width:100%;display:block}
+button{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--paper);outline-offset:3px;border-radius:4px}
+.w{max-width:1600px;margin:0 auto;padding:0 var(--gut)}
+
+/* ---------- HERO: the wall, calm version ---------- */
+.hero{--nm:clamp(84px,12vw,210px);position:relative;height:100svh;min-height:640px;max-height:1100px;overflow:hidden;background:#5E6E52;color:var(--paper);isolation:isolate}
+.cam{position:absolute;left:0;top:0;transform-origin:0 0;will-change:transform;transition:transform 1.1s var(--ease)}
+.drift{position:absolute;inset:0;transition:transform .9s cubic-bezier(.2,.7,.2,1)}
+.drift img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;user-select:none;-webkit-user-drag:none}
+.drift .alt{display:none}
+.hero.fit .drift{-webkit-mask-image:linear-gradient(90deg,#0000 0%,#000 16%);mask-image:linear-gradient(90deg,#0000 0%,#000 16%)}
+.glow{position:absolute;inset:0;pointer-events:none;z-index:2;box-shadow:inset 0 0 160px 40px #4E5D43;background:linear-gradient(180deg,#46553bcc 0%,#0000 18%,#0000 52%,#34412bd9 100%)}
+.spotlight{position:absolute;inset:0;z-index:1;pointer-events:none;opacity:0;transition:opacity .35s;background:radial-gradient(circle at var(--sx,50%) var(--sy,50%),#0000 0,#0000 var(--sr,80px),#1d2617a6 calc(var(--sr,80px) + 90px))}
+.hero.lit .spotlight{opacity:1}
+.hero.zoomed .spotlight{opacity:1;background:linear-gradient(90deg,#1d2617b3 0%,#1d261733 45%,#0000 70%)}
+
+.spot{position:absolute;z-index:3;border:0;background:transparent;padding:0;cursor:pointer;border-radius:4px}
+.spot::after{content:"";position:absolute;inset:-4px;border-radius:6px;border:1.5px solid var(--paper);opacity:0;transition:opacity .25s}
+.spot:hover::after,.spot:focus-visible::after{opacity:1}
+.spot .tip{position:absolute;left:50%;bottom:calc(100% + 10px);transform:translate(-50%,6px);white-space:nowrap;background:var(--paper);color:var(--ink);font-size:13px;font-weight:500;padding:6px 12px;border-radius:999px;opacity:0;transition:.25s;pointer-events:none;box-shadow:0 6px 18px #0004}
+.spot:hover .tip,.spot:focus-visible .tip{opacity:1;transform:translate(-50%,0)}
+.hero.zoomed .spot{pointer-events:none;opacity:0}
+
+/* top: nav only */
+.bar{position:absolute;z-index:6;top:0;left:0;right:0;display:flex;align-items:center;justify-content:space-between;padding:22px var(--gut)}
+.logo{display:flex;align-items:center;text-decoration:none}
+.logo img{height:38px;width:auto}
+.pill{position:absolute;left:50%;transform:translateX(-50%);display:flex;gap:4px;padding:6px;border-radius:999px;background:#ffffff1f;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid #ffffff22}
+.pill a{color:var(--paper);text-decoration:none;font-size:15px;padding:10px 18px;border-radius:999px;transition:background .2s}
+.pill a:hover{background:#ffffff26}
+.pill a[aria-current]{background:var(--paper);color:var(--ink)}
+.hi{background:var(--paper);color:var(--ink);text-decoration:none;font-size:15px;font-weight:500;padding:12px 20px;border-radius:999px}
+
+/* one quiet line above the name */
+.meta{position:absolute;z-index:4;left:var(--gut);right:var(--gut);bottom:calc(var(--nm)*.86 + 44px);display:flex;justify-content:space-between;align-items:flex-end;gap:16px;font-size:15px;transition:opacity .4s}
+.meta .r{font-size:clamp(20px,1.8vw,28px);font-weight:500;letter-spacing:-.02em;line-height:1.15}
+.meta .s{display:flex;align-items:center;gap:8px;font-size:14px;margin-top:8px;opacity:.85}
+.meta .s i{width:8px;height:8px;border-radius:50%;background:#7CF0A6;box-shadow:0 0 0 4px #7cf0a633}
+.meta .h{opacity:.75;font-size:14px;text-align:right}
+
+/* name strip: moves side to side, follows scroll direction */
+.marq{position:absolute;z-index:4;left:0;right:0;bottom:22px;overflow:hidden;transition:opacity .4s}
+.track{display:flex;width:max-content;will-change:transform}
+.seg{display:flex;align-items:center;gap:.28em;padding-right:.28em;font-size:var(--nm);font-weight:700;letter-spacing:-.06em;line-height:.86;white-space:nowrap}
+.seg .dot{width:.14em;height:.14em;border-radius:50%;background:var(--paper);opacity:.5}
+.mchip{display:block;height:.58em;aspect-ratio:16/10;border-radius:.06em;overflow:hidden;transform:rotate(-3deg);box-shadow:0 14px 40px #0006;flex:none}
+.mchip img{width:100%;height:100%;object-fit:cover}
+.hero.zoomed .meta,.hero.zoomed .marq{opacity:0;pointer-events:none}
+
+.curtain{position:absolute;inset:0;z-index:20;background:#4E5D43;display:grid;place-items:center;color:var(--paper);font-size:18px;font-weight:500;transition:transform 1s cubic-bezier(.76,0,.24,1) .15s}
+.curtain em{font-style:normal;opacity:.6;margin:0 8px}
+.hero.in .curtain{transform:translateY(-100%)}
+
+/* project card: sharp cover image instead of a blurry zoom */
+.detail{position:absolute;z-index:7;left:var(--gut);top:50%;width:min(420px,calc(100% - 2*var(--gut)));background:#1d2617cc;backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border:1px solid #ffffff1f;border-radius:18px;padding:12px 12px 20px;opacity:0;transform:translateY(calc(-50% + 16px));pointer-events:none;transition:opacity .45s .25s, transform .45s .25s}
+.hero.zoomed .detail{opacity:1;transform:translateY(-50%);pointer-events:auto}
+.detail .cover{border-radius:10px;overflow:hidden;aspect-ratio:16/10;background:#0003}
+.detail .cover img{width:100%;height:100%;object-fit:cover}
+.detail .in{padding:16px 8px 0}
+.detail .kick{font-size:13px;opacity:.8;display:flex;gap:8px;align-items:center}
+.detail .kick b{background:var(--paper);color:var(--ink);font-weight:500;border-radius:999px;padding:3px 10px;font-size:12px}
+.detail h2{margin:10px 0 0;font-size:clamp(26px,2.2vw,34px);line-height:1;letter-spacing:-.04em;font-weight:700}
+.detail p{margin:8px 0 0;font-size:15px;opacity:.88}
+.stats{display:flex;gap:22px;margin-top:14px;flex-wrap:wrap}
+.stats b{display:block;font-size:22px;font-weight:600;letter-spacing:-.03em;line-height:1.1}
+.stats span{font-size:12.5px;opacity:.75}
+.dnav{display:flex;gap:8px;margin-top:18px;align-items:center;flex-wrap:wrap}
+.btn{background:var(--paper);color:var(--ink);text-decoration:none;border-radius:999px;padding:11px 18px;font-weight:500;font-size:14px;border:0;cursor:pointer}
+.round{width:40px;height:40px;border-radius:50%;border:1px solid #ffffff44;background:transparent;color:var(--paper);cursor:pointer;font-size:16px}
+.round:hover{background:#ffffff1f}
+.count{font-size:13px;opacity:.7;margin-left:4px;font-variant-numeric:tabular-nums}
+.zoomout{position:absolute;z-index:7;right:var(--gut);bottom:32px;background:var(--paper);color:var(--ink);border:0;border-radius:999px;padding:11px 16px;font-size:14px;cursor:pointer;opacity:0;pointer-events:none;transition:opacity .3s .3s}
+.hero.zoomed .zoomout{opacity:1;pointer-events:auto}
+
+.below{position:relative;z-index:2;background:var(--bg);border-radius:32px 32px 0 0;margin-top:-32px;box-shadow:0 -20px 50px -20px #0004}
+
+@media (max-width:900px){
+  .hero{--nm:clamp(72px,24vw,130px)}
+  .pill{display:none}
+  .drift .main{display:none}.drift .alt{display:block}
+  .meta .h{display:none}
+  .detail{top:auto;bottom:16px;transform:translateY(16px);max-height:calc(100% - 110px);overflow:auto}
+  .hero.zoomed .detail{transform:none}
+  .zoomout{top:86px;bottom:auto;right:var(--gut)}
+}
+@media (prefers-reduced-motion:reduce){.curtain{display:none}}
+
+/* ---------- below the fold ---------- */
+.statement{padding:96px 0 0}
+.statement p{margin:0;font-size:clamp(28px,3.2vw,48px);line-height:1.22;letter-spacing:-.025em;font-weight:500;max-width:28ch;text-wrap:pretty}
+.about{margin-top:120px;display:grid;grid-template-columns:1.25fr 1fr;gap:48px;align-items:center}
+.aph{border-radius:20px;overflow:hidden;aspect-ratio:1561/1007}
+.aph img{width:100%;height:100%;object-fit:cover}
+.atx h2{margin:0;font-size:clamp(30px,3.6vw,44px);letter-spacing:-.035em;font-weight:600}
+.atx p{margin:16px 0 0;font-size:16px;color:var(--soft);max-width:44ch}
+.atx dl{margin:26px 0 0;display:grid;gap:0;border-top:1px solid var(--line)}
+.atx dl div{display:grid;grid-template-columns:120px 1fr;gap:16px;padding:12px 0;border-bottom:1px solid var(--line);font-size:14.5px}
+.atx dt{color:var(--soft)}
+.atx dd{margin:0}
+.more{display:inline-block;margin-top:22px;font-weight:500;text-decoration:none;border-bottom:1px solid var(--ink)}
+.logos{display:flex;align-items:center;gap:20px 42px;flex-wrap:wrap;padding:56px 0 8px;margin-top:56px;border-top:1px solid var(--line)}
+.logos small{font-size:13.5px;color:var(--soft);margin-right:6px}
+.logos img{height:34px;width:auto;filter:grayscale(1) contrast(1.2);opacity:.7;mix-blend-mode:multiply}
+.logos .fifa{font-weight:700;font-size:20px;letter-spacing:.02em;opacity:.7}
+
+/* work: her two-up card layout, cleaned up */
+.workband{background:#EEF2EA;margin-top:88px;padding-block:88px 96px}
+.whead{margin-bottom:48px}
+.whead h2{margin:0;font-size:clamp(44px,5.5vw,84px);letter-spacing:-.045em;line-height:1;font-weight:600}
+.whead h2 .rot{color:#5E7150;display:inline-block;transition:opacity .35s, transform .35s}
+.whead h2 .rot.out{opacity:0;transform:translateY(8px)}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:28px}
+.card{background:#fff;border:1px solid #E1E6DB;border-radius:14px;padding:10px;text-decoration:none;display:flex;flex-direction:column;transition:border-color .25s, box-shadow .25s, transform .25s}
+.card:hover{border-color:#C9D3BE}
+.card .img{border-radius:8px;overflow:hidden;aspect-ratio:16/11;background:#F1F3EE;position:relative}
+.card .img img{width:100%;height:100%;object-fit:cover}
+.card .nda{position:absolute;top:10px;left:10px;background:#141A10;color:#fff;font-size:11px;padding:4px 9px;border-radius:6px}
+.card .body{padding:18px 10px 8px;display:flex;flex-direction:column;gap:12px;flex:1}
+.card .kick{display:flex;justify-content:space-between;font-size:12.5px;color:var(--soft)}
+.card .kick span:last-child{font-size:15px;color:var(--ink)}
+.card h3{margin:0;font-size:clamp(20px,1.6vw,26px);line-height:1.3;font-weight:500;letter-spacing:-.015em;max-width:32ch}
+.tags{display:flex;flex-wrap:wrap;gap:6px}
+.tags span{font-size:12px;color:#4B5843;background:#F1F4ED;border-radius:6px;padding:3px 8px}
+.nums{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:auto;padding-top:14px;border-top:1px solid #EDF0E9}
+.nums b{display:block;font-size:22px;font-weight:600;letter-spacing:-.03em;line-height:1.15;font-variant-numeric:tabular-nums}
+.nums span{font-size:12.5px;color:var(--soft)}
+.card:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+
+
+/* "View project" cursor over work cards (mouse only) */
+.vcur{position:fixed;left:0;top:0;z-index:50;width:96px;height:96px;margin:-48px 0 0 -48px;border-radius:50%;background:#141A10;color:#F5F3EC;display:grid;place-items:center;font-size:13.5px;font-weight:500;pointer-events:none;transform:scale(0);transition:transform .25s cubic-bezier(.2,.8,.2,1)}
+.vcur.on{transform:scale(1)}
+@media (hover:hover) and (pointer:fine){.grid .card{cursor:none}}
+
+/* moments */
+.moments{padding-top:110px}
+.moments h2{margin:0 0 28px;font-size:clamp(30px,3.6vw,44px);letter-spacing:-.035em;font-weight:600}
+.mgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.moment{margin:0}
+.moment .img{border-radius:12px;overflow:hidden;aspect-ratio:4/5;background:#E6E9E2}
+.moment img{width:100%;height:100%;object-fit:cover}
+.moment figcaption{padding:14px 2px 0}
+.moment small{display:block;font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--soft)}
+.moment p{margin:6px 0 0;font-size:16px;font-weight:500;letter-spacing:-.01em;line-height:1.35}
+
+.cta{margin-top:110px;background:var(--deep);color:var(--paper);border-radius:28px 28px 0 0;display:grid;grid-template-columns:1fr minmax(0,420px);overflow:hidden}
+.cta .txt{padding:64px 48px;display:flex;flex-direction:column;justify-content:space-between;gap:40px;min-width:0}
+.cta h2{margin:0;font-size:clamp(40px,5.6vw,76px);letter-spacing:-.05em;line-height:.95;font-weight:700;color:var(--paper)}
+.cta h2 span{color:#B9C7AC}
+.cols{display:flex;gap:48px;font-size:14px;flex-wrap:wrap}
+.cols h4{margin:0 0 10px;font-weight:400;color:#B9C7AC;font-size:14px}
+.cols a{display:block;text-decoration:none;margin-bottom:3px}
+.cols a:hover{text-decoration:underline}
+.cta .ph{position:relative;min-height:440px}
+.cta .ph{-webkit-mask-image:linear-gradient(90deg,#0000,#000 30%);mask-image:linear-gradient(90deg,#0000,#000 30%)}
+.cta .ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 20%}
+.fine{display:flex;justify-content:space-between;color:var(--soft);font-size:12.5px;padding:18px 0 28px}
+
+@media (max-width:900px){
+  .about{grid-template-columns:1fr;gap:28px;margin-top:80px}
+  .statement{padding-top:64px}
+  .grid{grid-template-columns:1fr}
+  .mgrid{grid-template-columns:1fr}
+  .moment .img{aspect-ratio:4/3}
+  .workband{padding-block:64px 72px;margin-top:64px}
+  .cta{grid-template-columns:1fr}
+  .cta .txt{padding:44px 24px}
+  .cta .ph{min-height:420px}
+}
+@media (max-width:480px){.who span{display:none}.cols{gap:28px}.fine{flex-direction:column;gap:4px}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+
+<section class="hero" id="hero">
+  <div class="cam" id="cam">
+    <div class="drift" id="drift">
+      <img class="main" src="images/about-wall.jpg" alt="Kavya standing beside prints of her projects pinned to a green wall">
+      <img class="alt" src="images/hero-walk.jpg" alt="Kavya walking past prints of her projects pinned to a green wall">
+      <div id="spots"></div>
+    </div>
+  </div>
+  <div class="spotlight" id="spotlight"></div>
+  <div class="glow"></div>
+
+  <header class="bar">
+    <a class="logo" href="/" aria-label="Kavya Ray, home"><img src="https://www.kavyaray.com/kavlogo.png" alt=""></a>
+    <nav class="pill" aria-label="Main">
+      <a href="/" aria-current="page">Home</a>
+      <a href="#work">Work</a>
+      <a href="https://www.kavyaray.com/about">About Me</a>
+      <a href="https://www.kavyaray.com/Ray_Kavya_Resume_UX_Designer.pdf" target="_blank" rel="noopener">Resume</a>
+    </nav>
+    <a class="hi" href="mailto:kavyaray77@gmail.com">Say hi</a>
+  </header>
+
+  <div class="meta">
+    <div><div class="r">UX Designer &amp; Researcher</div><div class="s"><i></i>Open to work · Atlanta</div></div>
+    <div class="h">Click a print on the wall to explore it</div>
+  </div>
+
+  <div class="marq" aria-label="Kavya Ray">
+    <div class="track" id="track">
+      <div class="seg" aria-hidden="false">
+        <span>Kavya Ray</span>
+        <a class="mchip" href="#work" tabindex="-1"><img src="https://www.kavyaray.com/images/fifa-flags.jpg" alt=""></a>
+        <span>Kavya Ray</span>
+        <a class="mchip" href="#work" tabindex="-1"><img src="images/ubs-cover.webp" alt=""></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="detail" id="detail" aria-live="polite">
+    <div class="cover" id="dCover"><img id="dImg" alt=""></div>
+    <div class="in">
+      <div class="kick"><b id="dTag"></b><span id="dWho"></span></div>
+      <h2 id="dTitle"></h2>
+      <p id="dText"></p>
+      <div class="stats" id="dStats"></div>
+      <div class="dnav">
+        <a class="btn" id="dLink" href="#">Read case study →</a>
+        <button class="round" id="prev" aria-label="Previous print">←</button>
+        <button class="round" id="next" aria-label="Next print">→</button>
+        <span class="count" id="dCount"></span>
+      </div>
+    </div>
+  </div>
+  <button class="zoomout" id="back">← Back to the wall</button>
+
+  <div class="curtain" aria-hidden="true">Kavya<em>•</em>Ray</div>
+</section>
+
+
+
+<div class="w">
+  <section class="statement">
+    <p>I design from what I find in the field: at the stadium gate, at a case worker's desk, in the driver's seat.</p>
+  </section>
+
+  <div class="logos" aria-label="Worked with, through SCAD">
+    <small>Worked with</small>
+    <span class="fifa">FIFA</span>
+    <img src="https://www.kavyaray.com/images/ubslogo.png" alt="UBS">
+    <img src="https://www.kavyaray.com/images/porschelogo.png" alt="Porsche" style="height:14px">
+  </div>
+
+</div>
+
+<section class="workband" id="work"><div class="w">
+  <div class="whead"><h2>Experiences I’ve <span class="rot" id="rot">designed.</span></h2></div>
+  <div class="grid">
+    <a class="card" href="https://www.kavyaray.com/case-study/fifa">
+      <div class="img"><img src="https://www.kavyaray.com/images/fifa-flags.jpg" alt="Guiding ~300K World Cup fans through Atlanta’s last mile" loading="lazy"></div>
+      <div class="body">
+        <div class="kick"><span>FIFA × SCAD</span><span aria-hidden="true">↗</span></div>
+        <h3>Guiding ~300K World Cup fans through Atlanta’s last mile</h3>
+        <div class="tags"><span>Wayfinding</span><span>Service Design</span><span>Field Research</span></div>
+        <div class="nums"><div><b>300K</b><span>spectators on the route</span></div><div><b>8</b><span>World Cup matches</span></div><div><b>Live</b><span>installed downtown ATL</span></div></div>
+      </div>
+    </a>
+    <a class="card" href="https://www.kavyaray.com/case-study/rov">
+      <div class="img"><img src="https://www.kavyaray.com/images/rovcard-ember.jpg" alt="Growing a music collective into an Atlanta creative studio" loading="lazy"></div>
+      <div class="body">
+        <div class="kick"><span>Range of View Studios</span><span aria-hidden="true">↗</span></div>
+        <h3>Growing a music collective into an Atlanta creative studio</h3>
+        <div class="tags"><span>Brand Identity</span><span>Visual Systems</span><span>Web</span></div>
+        
+      </div>
+    </a>
+    <a class="card" href="https://www.kavyaray.com/case-study/solace">
+      <div class="img"><img src="https://www.kavyaray.com/images/solacecard.png" alt="One record that follows refugees across every organization" loading="lazy"></div>
+      <div class="body">
+        <div class="kick"><span>Solace</span><span aria-hidden="true">↗</span></div>
+        <h3>One record that follows refugees across every organization</h3>
+        <div class="tags"><span>Service Design</span><span>Product UI</span></div>
+        <div class="nums"><div><b>4</b><span>connected tools</span></div><div><b>1</b><span>record per person</span></div><div><b>3</b><span>person team</span></div></div>
+      </div>
+    </a>
+    <a class="card" href="https://www.kavyaray.com/case-study/ubs">
+      <div class="img"><img src="images/ubs-cover.webp" alt="Researching a north-star UBS.com for the Swiss market" loading="lazy"></div>
+      <div class="body">
+        <div class="kick"><span>UBS × SCADpro</span><span aria-hidden="true">↗</span></div>
+        <h3>Researching a north-star UBS.com for the Swiss market</h3>
+        <div class="tags"><span>Fintech</span><span>UX Research</span><span>Usability Testing</span></div>
+        <div class="nums"><div><b>70</b><span>research responses</span></div><div><b>40</b><span>Swiss participants</span></div><div><b>30</b><span>Gen Z participants</span></div></div>
+      </div>
+    </a>
+    <a class="card" href="https://www.kavyaray.com/case-study/looma">
+      <div class="img"><img src="https://www.kavyaray.com/images/loomacard.png" alt="AR glasses that help people with Alzheimer’s recognize loved ones" loading="lazy"></div>
+      <div class="body">
+        <div class="kick"><span>Startup Competition</span><span aria-hidden="true">↗</span></div>
+        <h3>AR glasses that help people with Alzheimer’s recognize loved ones</h3>
+        <div class="tags"><span>Wearables</span><span>AR</span><span>Accessibility</span></div>
+        <div class="nums"><div><b>38M+</b><span>people with Alzheimer’s worldwide</span></div></div>
+      </div>
+    </a>
+    <a class="card" href="https://www.kavyaray.com/case-study/porsche">
+      <div class="img"><img src="https://www.kavyaray.com/images/porschecard.png" alt="Designing the in-car experience for Porsche’s next EV drivers" loading="lazy"></div>
+      <div class="body">
+        <div class="kick"><span>Porsche × SCAD</span><span aria-hidden="true">↗</span></div>
+        <h3>Designing the in-car experience for Porsche’s next EV drivers</h3>
+        <div class="tags"><span>Automotive</span><span>HMI</span><span>Mobile App</span></div>
+        <div class="nums"><div><b>160+</b><span>survey responses</span></div><div><b>30+</b><span>driver interviews</span></div><div><b>4</b><span>brands benchmarked</span></div></div>
+      </div>
+    </a>
+  </div>
+</div></section>
+
+<div class="below">
+<div class="w">
+  <section class="moments">
+    <h2>Moments I’m proud of</h2>
+    <div class="mgrid">
+      <figure class="moment"><div class="img"><img src="https://www.kavyaray.com/images/moments/solace-showcase.jpg" alt="Kavya and a teammate at the Solace showcase booth" loading="lazy"></div><figcaption><small>2026 Winner · European Product Design Award</small><p>Solace won for Interface Design, Product UI</p></figcaption></figure>
+      <figure class="moment"><div class="img"><img src="https://www.kavyaray.com/images/moments/google-xi-days.jpg" alt="Kavya in front of the Google Xi Days 2026 sign" loading="lazy" style="object-position:50% 40%"></div><figcaption><small>Exhibitor · Google Xi Days 2026</small><p>Showed an interactive piece on the future of work</p></figcaption></figure>
+      <figure class="moment"><div class="img"><img src="images/moment-fifa-kickoff.jpg" alt="Kavya and two teammates in front of a wall of soccer balls at Atlanta's World Cup kickoff" loading="lazy" style="object-position:62% 50%"></div><figcaption><small>UX Lead · FIFA World Cup 26</small><p>Presenting our Last Mile work at Atlanta’s World Cup kickoff</p></figcaption></figure>
+    </div>
+  </section>
+
+  <section class="about" id="about">
+    <div class="aph"><img src="images/about-wall.jpg" alt="Kavya standing beside prints of Aestura, Solace, LinkedIn and Looma pinned to a wall"></div>
+    <div class="atx">
+      <h2>About</h2>
+      <p>I grew up in Toronto and moved to Atlanta for SCAD. Most of my ideas come from being somewhere new: how a city signs its transit, how a market lays out its stalls, how a place makes strangers feel welcome.</p>
+      <dl>
+        <div><dt>Based in</dt><dd>Atlanta, GA. Open to relocating</dd></div>
+        <div><dt>Focus</dt><dd>UX research, service design, product</dd></div>
+        <div><dt>Learning</dt><dd>Motion design, prompt engineering, building what I design</dd></div>
+        <div><dt>Off the clock</dt><dd>Travel, food, the Toronto Raptors</dd></div>
+      </dl>
+      <a class="more" href="https://www.kavyaray.com/about">More about me →</a>
+    </div>
+  </section>
+
+  <footer>
+    <div class="cta">
+      <div class="txt">
+        <h2>Let's talk.<br><span>Open to full-time roles and relocation.</span></h2>
+        <div class="cols">
+          <div><h4>Contact</h4><a href="mailto:kavyaray77@gmail.com">kavyaray77@gmail.com</a><a href="https://www.linkedin.com/in/kavya-ray/">LinkedIn</a><a href="https://www.kavyaray.com/Ray_Kavya_Resume_UX_Designer.pdf">Resume</a></div>
+          <div><h4>Location</h4>Atlanta, GA<br>Raised in Toronto</div>
+        </div>
+      </div>
+      <div class="ph"><img src="images/contact-flying.jpg" alt="Kavya surrounded by prints of her work flying through the air"></div>
+    </div>
+    <div class="fine"><span>© 2026 Kavya Ray</span><span>Designed in Atlanta</span></div>
+  </footer>
+</div>
+</div>
+
+<script>
+const $=id=>document.getElementById(id);
+const P=[
+  {tip:'Solace',tag:'Service design',who:'3-person team',title:'Solace',text:'One record that follows refugees across every organization, so nobody has to tell their story twice.',stats:[['4','connected tools'],['Winner','European Product Design Award']],img:'https://www.kavyaray.com/images/solacecard.png',link:'https://www.kavyaray.com/case-study/solace',main:[.384,.117,.061,.151],alt:[.478,.138,.071,.078]},
+  {tip:'LinkedIn concept',tag:'Concept',who:'Product design',title:'LinkedIn, redesigned',text:'Redesigned, reconnected: a concept for making your professional network feel personal again.',stats:[],img:'',link:'',main:[.466,.185,.082,.194],alt:[.571,.172,.092,.10]},
+  {tip:'Looma',tag:'AR + accessibility',who:'Startup competition',title:'Looma',text:'AR glasses that help people with Alzheimer’s recognize the people they love.',stats:[['38M+','people with Alzheimer’s worldwide']],img:'https://www.kavyaray.com/images/loomacard.png',link:'https://www.kavyaray.com/case-study/looma',main:[.25,.284,.249,.316],alt:[.33,.224,.281,.161]}
+];
+const hero=$('hero'),cam=$('cam'),drift=$('drift'),spotsEl=$('spots'),light=$('spotlight');
+const RATIO={main:1561/1007,alt:965/1364};
+const mq=matchMedia('(max-width:900px)'),still=matchMedia('(prefers-reduced-motion:reduce)').matches;
+let cur=-1,which='main',W=0,H=0,OX=0,OY=0;
+function layout(){
+  which=mq.matches?'alt':'main';
+  const hw=hero.clientWidth,hh=hero.clientHeight,r=RATIO[which];
+  // desktop: fit the photo to ~94% of the hero height, anchored right, so the prints sit below the nav
+  let h=which==='main'?hh*.94:hh, w=h*r, fit=true;
+  if(which==='alt'||w>hw||w<hw*.55){w=Math.max(hw,hh*r);h=w/r;fit=false}
+  W=w;H=h;OX=fit?hw-w:(hw-w)/2;OY=fit?hh-h:(hh-h)/2;
+  hero.classList.toggle('fit',fit&&OX>0);
+  cam.style.width=W+'px';cam.style.height=H+'px';
+  cam.style.transform=cur<0?`translate(${OX}px,${OY}px)`:camFor(cur);
+  spotsEl.innerHTML=P.map((p,i)=>{const [x,y,w,h]=p[which];return `<button class="spot" data-i="${i}" style="left:${x*100}%;top:${y*100}%;width:${w*100}%;height:${h*100}%" aria-label="Open ${p.tip}"><span class="tip">${p.tip}</span></button>`}).join('');
+}
+// gentle zoom (max 1.4x) so the photo never gets blurry; the card carries the sharp image
+function camFor(i){
+  const [x,y,w,h]=P[i][which],hw=hero.clientWidth,hh=hero.clientHeight;
+  const s=Math.min(1.4,hh*.6/(h*H));
+  const cx=(x+w/2)*W,cy=(y+h/2)*H;
+  let tx=(mq.matches?.5:.66)*hw-s*cx, ty=(mq.matches?.3:.48)*hh-s*cy;
+  // keep the photo covering the hero edges while zoomed
+  if(W*s>=hw)tx=Math.min(0,Math.max(hw-W*s,tx));
+  if(H*s>=hh)ty=Math.min(0,Math.max(hh-H*s,ty));else ty=hh-H*s;
+  return `translate(${tx}px,${ty}px) scale(${s})`;
+}
+function open(i){
+  cur=(i+P.length)%P.length;const p=P[cur];
+  $('dTag').textContent=p.tag;$('dWho').textContent=p.who;$('dTitle').textContent=p.title;$('dText').textContent=p.text;
+  $('dCover').hidden=!p.img;if(p.img)$('dImg').src=p.img;
+  $('dStats').innerHTML=p.stats.map(s=>`<div><b>${s[0]}</b><span>${s[1]}</span></div>`).join('');
+  const l=$('dLink');if(p.link){l.href=p.link;l.textContent='Read case study →';l.style.opacity=1}else{l.removeAttribute('href');l.textContent='Case study coming soon';l.style.opacity=.6}
+  $('dCount').textContent=`${cur+1} / ${P.length}`;
+  hero.classList.add('zoomed');hero.classList.remove('lit');drift.style.transform='';cam.style.transform=camFor(cur);
+}
+function close(){cur=-1;hero.classList.remove('zoomed');layout()}
+spotsEl.addEventListener('click',e=>{const b=e.target.closest('.spot');if(b)open(+b.dataset.i)});
+spotsEl.addEventListener('pointerover',e=>{const b=e.target.closest('.spot');if(!b||cur>=0)return;const r=b.getBoundingClientRect(),hr=hero.getBoundingClientRect();
+  light.style.setProperty('--sx',(r.left+r.width/2-hr.left)+'px');light.style.setProperty('--sy',(r.top+r.height/2-hr.top)+'px');light.style.setProperty('--sr',Math.max(r.width,r.height)*.7+'px');hero.classList.add('lit')});
+spotsEl.addEventListener('pointerout',e=>{if(!e.relatedTarget||!e.relatedTarget.closest||!e.relatedTarget.closest('.spot'))hero.classList.remove('lit')});
+$('prev').onclick=()=>open(cur-1);$('next').onclick=()=>open(cur+1);$('back').onclick=close;
+addEventListener('keydown',e=>{if(cur<0)return;if(e.key==='Escape')close();if(e.key==='ArrowRight')open(cur+1);if(e.key==='ArrowLeft')open(cur-1)});
+addEventListener('resize',layout);mq.addEventListener('change',()=>{cur=-1;hero.classList.remove('zoomed');layout()});
+hero.addEventListener('pointermove',e=>{if(cur>=0||still||mq.matches)return;const r=hero.getBoundingClientRect();const dx=(e.clientX-r.left)/r.width-.5,dy=(e.clientY-r.top)/r.height-.5;drift.style.transform=`translate(${-dx*12}px,${-dy*8}px)`});
+hero.addEventListener('pointerleave',()=>{drift.style.transform=''});
+
+// name strip: drifts sideways, speeds up while you scroll and flips with scroll direction
+(()=>{const track=$('track'),seg=track.firstElementChild;
+  for(let k=0;k<3;k++){const c=seg.cloneNode(true);c.setAttribute('aria-hidden','true');track.appendChild(c)}
+  if(still)return;
+  let x=0,dir=1,boost=0,lastY=scrollY,last=performance.now();
+  addEventListener('scroll',()=>{const d=scrollY-lastY;lastY=scrollY;if(d)dir=d>0?1:-1;boost=Math.min(boost+Math.abs(d)*.08,6)},{passive:true});
+  (function loop(t){const dt=Math.min(t-last,50)/16.7;last=t;const w=seg.offsetWidth;
+    x-=(.55+boost)*dir*dt;boost*=.92;
+    if(x<=-w)x+=w;if(x>0)x-=w;
+    track.style.transform=`translate3d(${x}px,0,0)`;requestAnimationFrame(loop)})(last);
+})();
+
+layout();
+let seen=false;try{seen=sessionStorage.getItem('kr-intro')==='1';sessionStorage.setItem('kr-intro','1')}catch(e){}
+if(seen||still)document.querySelector('.curtain').style.transition='none';
+requestAnimationFrame(()=>setTimeout(()=>hero.classList.add('in'),seen?0:700));
+
+
+
+const btns=[...document.querySelectorAll('.filters button')],projs=[...document.querySelectorAll('.proj')];
+btns.forEach(b=>b.addEventListener('click',()=>{
+  btns.forEach(x=>x.setAttribute('aria-pressed',x===b));
+  projs.forEach(p=>{p.hidden=!(b.dataset.f==='all'||p.dataset.c.split(' ').includes(b.dataset.f));});
+}));
+const words=['designed.','researched.','strategized.','prototyped.','tested.'];let wi=0;const rot=document.getElementById('rot');
+if(rot&&!matchMedia('(prefers-reduced-motion:reduce)').matches)setInterval(()=>{rot.classList.add('out');setTimeout(()=>{wi=(wi+1)%words.length;rot.textContent=words[wi];rot.classList.remove('out')},350)},2400);
+</script>
+<div class="vcur" id="vcur" aria-hidden="true">View ↗</div>
+<script>
+(()=>{const c=document.getElementById('vcur');if(!matchMedia('(hover:hover) and (pointer:fine)').matches)return;let x=0,y=0,tx=0,ty=0;
+addEventListener('pointermove',e=>{tx=e.clientX;ty=e.clientY});
+(function loop(){x+=(tx-x)*.2;y+=(ty-y)*.2;c.style.left=x+'px';c.style.top=y+'px';requestAnimationFrame(loop)})();
+document.querySelectorAll('.grid .card').forEach(a=>{a.addEventListener('pointerenter',()=>{c.textContent=a.querySelector('.nda')?'NDA \u00b7 View':'View \u2197';c.classList.add('on')});a.addEventListener('pointerleave',()=>c.classList.remove('on'))});})();
+</script>
+</body>
+</html>

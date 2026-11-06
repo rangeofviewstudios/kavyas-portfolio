@@ -10,7 +10,7 @@ export default function LoomaPage() {
 
             <main className="container mx-auto px-4 sm:px-6 pt-24 sm:pt-32 pb-8 sm:pb-16">
                 {/* Project Header */}
-                <div className="max-w-5xl mx-auto mb-10 sm:mb-20 animate-fade-in-up">
+                <div className="mb-10 sm:mb-20 animate-fade-in-up">
                     <h1 className="text-2xl sm:text-4xl md:text-5xl font-medium mb-16 text-black">LOOMA x StartUp</h1>
 
                     <Details
@@ -33,7 +33,7 @@ export default function LoomaPage() {
                 </div>
 
                 {/* Quote Section */}
-                <div className="max-w-5xl mx-auto mb-10 sm:mb-20 animate-fade-in-up">
+                <div className="mb-10 sm:mb-20 animate-fade-in-up">
                     <div
                         className="w-full relative overflow-hidden flex flex-col md:flex-row items-center md:items-end"
                         style={{
@@ -64,7 +64,7 @@ export default function LoomaPage() {
                 </div>
 
                 {/* The Situation at Hand Section */}
-                <div className="max-w-5xl mx-auto mb-10 sm:mb-20 animate-fade-in-up">
+                <div className="mb-10 sm:mb-20 animate-fade-in-up">
                     <h2 className="text-2xl sm:text-3xl md:text-5xl font-medium mb-8 text-black">The Situation at Hand</h2>
                     <p className="text-lg md:text-xl text-gray-700 leading-relaxed">
                         People with Alzheimer's and dementia struggle with memory loss, affecting their ability to recognize familiar faces, maintain daily routines, and navigate their surroundings. This not only leads to confusion and anxiety for the individuals but also creates emotional and logistical challenges for their caregivers, family, and friends, who often feel overwhelmed and helpless in providing adequate support.
@@ -94,7 +94,7 @@ export default function LoomaPage() {
                 </div>
 
                 {/* Our Approach Section */}
-                <div className="max-w-5xl mx-auto mb-10 sm:mb-20 animate-fade-in-up">
+                <div className="mb-10 sm:mb-20 animate-fade-in-up">
                     <h2 className="text-2xl sm:text-3xl md:text-5xl font-medium mb-8 text-black">Our Approach</h2>
                     <p className="text-lg md:text-xl text-gray-700 leading-relaxed">
                         To develop an product ecosystem centered around AR glasses that assist individuals with Alzheimer's and dementia by enhancing memory recall, providing routine reminders, and improving spatial awareness. The solution aims to empower caregivers and loved ones with real-time insights and support, fostering a more independent life for patients while easing emotional burdens.
@@ -476,7 +476,7 @@ export default function LoomaPage() {
             </main>
 
             <div className="container mx-auto px-4 sm:px-6 pb-16 max-w-6xl text-center">
-                <CaseNav next={{ label: "Lowes", href: "/case-study/lowes" }} />
+                <CaseNav next={{ label: "Porsche", href: "/case-study/porsche" }} />
             </div>
 
             <Footer />

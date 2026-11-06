@@ -10,7 +10,7 @@ export default function PorschePage() {
 
             <main className="container mx-auto px-4 sm:px-6 pt-24 sm:pt-32 pb-8 sm:pb-16">
                 {/* Project Header */}
-                <div className="max-w-5xl mx-auto mb-10 sm:mb-20 animate-fade-in-up">
+                <div className="mb-10 sm:mb-20 animate-fade-in-up">
                     <h1 className="text-2xl sm:text-4xl md:text-5xl font-medium mb-16 text-black">Porsche x SCADpro Collaboration</h1>
 
                     <Details
@@ -431,7 +431,7 @@ export default function PorschePage() {
             </div>
 
             <div className="container mx-auto px-4 sm:px-6 pb-16 max-w-6xl text-center">
-                <CaseNav next={{ label: "Aestura", href: "/case-study/aestura" }} />
+                <CaseNav next={{ label: "FIFA World Cup 26", href: "/case-study/fifa" }} />
             </div>
 
             <Footer />

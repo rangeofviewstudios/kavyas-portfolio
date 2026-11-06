@@ -24,12 +24,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
             priority: 0.9,
         },
         {
-            url: `${baseUrl}/case-study/lowes`,
-            lastModified: currentDate,
-            changeFrequency: 'monthly',
-            priority: 0.9,
-        },
-        {
             url: `${baseUrl}/case-study/ubs`,
             lastModified: currentDate,
             changeFrequency: 'monthly',
@@ -37,12 +31,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
         },
         {
             url: `${baseUrl}/case-study/porsche`,
-            lastModified: currentDate,
-            changeFrequency: 'monthly',
-            priority: 0.9,
-        },
-        {
-            url: `${baseUrl}/case-study/aestura`,
             lastModified: currentDate,
             changeFrequency: 'monthly',
             priority: 0.9,

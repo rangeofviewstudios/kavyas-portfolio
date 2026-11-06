@@ -1,9 +1,13 @@
-import { Navigation } from "@/components/Navigation";
+import { Geist } from "next/font/google";
+import { HomeNav } from "@/components/HomeNav";
 import { HeroSection } from "@/components/HeroSection";
-import { LogoMarquee } from "@/components/LogoMarquee";
+import { HomeIntro } from "@/components/HomeIntro";
 import { WorkSection } from "@/components/WorkSection";
+import { MomentsSection } from "@/components/MomentsSection";
 import { Footer } from "@/components/Footer";
 import Script from 'next/script';
+
+const geist = Geist({ subsets: ["latin"], weight: ["400", "500", "600", "700"], display: "swap" });
 
 export const metadata = {
     title: "Kavya Ray | UX Designer Portfolio",
@@ -50,15 +54,25 @@ export default function HomePage() {
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteStructuredData) }}
             />
-            <div className="flex flex-col min-h-screen bg-background">
-                <Navigation />
-                <main className="flex-1">
+            {/* Redesigned homepage (from redesign/index.html): light page, Geist type, its own nav bar */}
+            <div className={`${geist.className} min-h-screen bg-[#F1EFEB] text-[15px] leading-[1.5] text-[#161514] antialiased`}>
+                <HomeNav />
+                <main>
                     <HeroSection />
-                    <LogoMarquee />
+                    <div className="home-container">
+                        <HomeIntro />
+                    </div>
                     <WorkSection />
+                    {/* Everything after the work band slides up over it on a rounded panel */}
+                    <div className="relative z-[2] -mt-8 rounded-t-[32px] bg-[#F1EFEB] pb-24 shadow-[0_-20px_50px_-20px_#0004] max-[900px]:pb-16">
+                        <div className="home-container">
+                            <MomentsSection />
+                        </div>
+                    </div>
                 </main>
-                <Footer />
             </div>
+            {/* Same footer as the rest of the site; outside the Geist wrapper so it renders identically */}
+            <Footer />
         </>
     );
 }

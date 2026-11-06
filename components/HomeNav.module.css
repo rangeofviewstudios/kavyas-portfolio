@@ -1,0 +1,56 @@
+/* Homepage nav: fixed at the top like the rest of the site. Logo left, pill centered, "Say hi" right.
+   Each part switches tone with what's behind it (see lib/navTone.ts). */
+
+.bar {
+  --paper: #F5F3EC;
+  --ink: #161514;
+  --green: #343F28;
+  position: fixed; z-index: 50; top: 0; left: 0; right: 0;
+  max-width: var(--home-max); margin: 0 auto;
+  display: flex; align-items: center; justify-content: space-between;
+  /* Fixed height: on desktop the logo and "Say hi" are pinned to the window edges, so nothing
+     else gives the bar height, and the pill centres on it (centre line at 45px) */
+  height: 90px;
+  padding: 22px var(--home-gutter);
+  /* The strip itself never blocks clicks on the page under it */
+  pointer-events: none;
+}
+.bar > * { pointer-events: auto; }
+.bar :focus-visible { outline: 2px solid var(--paper); outline-offset: 3px; border-radius: 4px; }
+
+/* White KR mark tinted with a mask: white on dark, Kavya green on light */
+/* Nudged left with the hero's role line so their left edges match (see --home-hero-nudge in globals.css) */
+.logo { display: block; width: 41px; height: 38px; margin-left: calc(-1 * var(--home-hero-nudge)); transition: background-color .3s; -webkit-mask: url(/kavlogo.png) center / contain no-repeat; mask: url(/kavlogo.png) center / contain no-repeat; }
+.logo.onDark { background-color: #fff; filter: drop-shadow(0 0 3px rgba(0,0,0,.35)); }
+.logo.onLight { background-color: var(--green); }
+
+/* Centered on the bar's vertical middle, so logo, pill and "Say hi" share one centre line */
+.pill { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); display: flex; gap: 4px; padding: 6px; border-radius: 999px; backdrop-filter: blur(14px) saturate(1.5); -webkit-backdrop-filter: blur(14px) saturate(1.5); border: 1px solid; transition: background-color .3s, border-color .3s, box-shadow .3s; }
+.pill a { color: var(--paper); text-decoration: none; font-size: 15px; padding: 10px 18px; border-radius: 999px; transition: background .2s; }
+.pill a:hover { background: #ffffff26; }
+.pill a[aria-current] { background: var(--paper); color: var(--ink); }
+/* Over photos and dark sections. Like the rest of the site's nav, it always keeps a dark tint:
+   photos count as "dark", so over a bright one (e.g. the Google Xi Days sign) white links still read */
+.pill.onDark { background-color: rgba(23, 23, 23, .45); border-color: rgba(255, 255, 255, .25); box-shadow: 0 8px 32px 0 rgba(0,0,0,.15), inset 0 1px 0 0 rgba(255,255,255,.25); }
+/* Over light sections: the smoked glass from the rest of the site */
+.pill.onLight { background-color: rgba(23, 23, 23, .7); border-color: rgba(255, 255, 255, .15); box-shadow: 0 10px 40px -8px rgba(0,0,0,.35), inset 0 1px 0 0 rgba(255,255,255,.18); }
+
+/* margin-left: auto keeps it on the right even when the logo is taken out of the row (desktop, below) */
+.hi { margin-left: auto; text-decoration: none; font-size: 15px; font-weight: 500; padding: 12px 20px; border-radius: 999px; transition: background-color .3s, color .3s; }
+.hi.onDark { background: var(--paper); color: var(--ink); }
+.hi.onLight { background: #141A10; color: var(--paper); }
+
+/* Desktop: the logo sits 24px from the window's left edge, like on the rest of the site,
+   rather than on the content column. Top keeps it on the same centre line as the pill and "Say hi". */
+@media (min-width: 901px) {
+  .logo { position: fixed; left: 24px; top: 26px; margin-left: 0; }
+  /* "Say hi" mirrors the logo: 24px from the right edge, same centre line */
+  .hi { position: fixed; right: 24px; top: 22px; }
+}
+
+@media (max-width: 900px) {
+  .pill { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .logo, .pill, .pill a, .hi { transition: none; }
+}

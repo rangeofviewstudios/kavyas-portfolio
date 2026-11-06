@@ -8,7 +8,7 @@ Should show XML with all pages:
 - Homepage: /
 - About: /about
 - Resume: /resume
-- Case Studies: /case-study/looma, /case-study/lowes, /case-study/ubs, /case-study/porsche, /case-study/aestura
+- Case Studies: /case-study/fifa, /case-study/rov, /case-study/solace, /case-study/ubs, /case-study/looma, /case-study/porsche
 
 ### 2. Check Robots.txt
 Visit: http://localhost:3000/robots.txt

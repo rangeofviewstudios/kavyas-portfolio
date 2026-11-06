@@ -161,7 +161,48 @@
   }
 }
 
+/* Homepage layout: one width and gutter for every section, the hero included (HeroSection.module.css reads these vars) */
+:root {
+  --home-max: 1600px;
+  --home-gutter: clamp(16px, 3vw, 48px);
+  /* The hero's role line and the nav logo sit this much left of the gutter (desktop only) */
+  --home-hero-nudge: 24px;
+}
+@media (max-width: 900px) {
+  :root { --home-hero-nudge: 0px; }
+}
+
+/* ---------- Case study layout system (pages wrapped by app/case-study/layout.tsx) ----------
+   One column for every case study, the same as the homepage: up to --home-max wide with the
+   --home-gutter side margin. Pages used to cap content at 1024-1152px, which left ~380px of empty
+   space per side on a 1920px screen and started each case study at a different place. */
+.case-study .container,
+.case-study .max-w-6xl,
+.case-study .max-w-7xl {
+  max-width: var(--home-max);
+}
+.case-study .container {
+  padding-left: var(--home-gutter);
+  padding-right: var(--home-gutter);
+}
+/* Keep running text readable in the wider column: paragraphs without their own width cap stop at
+   ~75 characters per line, and never wider than 960px (so large statement text doesn't run on either).
+   Centred ones stay centred. Images, cards and grids use the full width. */
+.case-study p:not([class*="max-w-"]) {
+  max-width: min(75ch, 960px);
+}
+.case-study .text-center p:not([class*="max-w-"]),
+.case-study p.text-center:not([class*="max-w-"]) {
+  margin-left: auto;
+  margin-right: auto;
+}
 @layer components {
+  .home-container {
+    max-width: var(--home-max);
+    margin-inline: auto;
+    padding-inline: var(--home-gutter);
+  }
+
   .text-highlight {
     @apply text-accent underline decoration-accent/40 underline-offset-2;
   }

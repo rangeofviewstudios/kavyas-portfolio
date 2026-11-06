@@ -1,0 +1,223 @@
+/* The wall hero, calm version. Ported from redesign/index.html. */
+
+.hero {
+  --wall-ink: #141A10;
+  --paper: #F5F3EC;
+  --ink: #161514;
+  --ease: cubic-bezier(.65, 0, .25, 1);
+  /* Name size */
+  --nm: clamp(84px, 12vw, 210px);
+  /* Left/right edge of the shared 1600px container (vars in app/globals.css), so hero text lines up with the sections below */
+  --edge: calc(max(0px, (100% - var(--home-max)) / 2) + var(--home-gutter));
+  position: relative; height: 100svh; min-height: 640px; max-height: 1100px; overflow: hidden;
+  background: #5E6E52; color: var(--paper); isolation: isolate;
+}
+.hero :focus-visible { outline: 2px solid var(--paper); outline-offset: 3px; border-radius: 4px; }
+
+/* ---------- The photo ---------- */
+/* Sized and placed in JS (see layout in HeroSection.tsx); prints are percentages of it */
+.cam { position: absolute; left: 0; top: 0; transform-origin: 0 0; will-change: transform; transition: transform 1.1s var(--ease); }
+.drift { position: absolute; inset: 0; transition: transform .9s cubic-bezier(.2, .7, .2, 1); }
+/* 8px bleed on every side so the parallax (up to ±6px) never uncovers the hero background at an edge */
+.photo { position: absolute; inset: -8px; width: calc(100% + 16px); height: calc(100% + 16px); max-width: none; object-fit: cover; user-select: none; -webkit-user-drag: none; }
+/* When the photo is anchored right (not covering), fade its left edge into the green.
+   Only the photo fades; the prints on top stay solid even where they overlap the fade. */
+/* Top fade too: the photo starts ~6% below the top of the hero, and without it the wall/background
+   colour change showed as a straight seam across the top-right, at "Say hi" height */
+.fit .photo {
+  -webkit-mask-image: linear-gradient(90deg, #0000 0%, #000 16%), linear-gradient(180deg, #0000 0%, #000 9%);
+  -webkit-mask-composite: source-in;
+  mask-image: linear-gradient(90deg, #0000 0%, #000 16%), linear-gradient(180deg, #0000 0%, #000 9%);
+  mask-composite: intersect;
+}
+.glow { position: absolute; inset: 0; pointer-events: none; z-index: 2; box-shadow: inset 0 0 160px 40px #4E5D43; background: linear-gradient(180deg, #46553bcc 0%, #0000 18%, #0000 52%, #34412bd9 100%); }
+.spotlight { position: absolute; inset: 0; z-index: 1; pointer-events: none; opacity: 0; transition: opacity .35s; }
+.zoomed .spotlight { opacity: 1; background: linear-gradient(90deg, #1d2617b3 0%, #1d261733 45%, #0000 70%); }
+
+/* ---------- Wall collage: prints pinned to the photo (inside .drift, so they move and zoom with it) ---------- */
+.wall {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.print {
+  position: absolute;
+  display: block;
+  padding: 0;
+  border: 0;
+  background: none;
+  pointer-events: auto;
+  cursor: pointer;
+  transform: rotate(var(--r));
+  transform-origin: 50% 40%;
+  box-shadow:
+    0 1px 1px rgba(20, 28, 18, .22),
+    0 6px 10px -4px rgba(20, 28, 18, .28),
+    0 18px 30px -16px rgba(20, 28, 18, .45);
+  transition:
+    transform .5s cubic-bezier(.2, .8, .2, 1),
+    box-shadow .5s,
+    filter .4s;
+}
+
+.print img {
+  display: block;
+  width: 100%;
+  /* next/image sets a height attribute; let aspect-ratio decide instead */
+  height: auto;
+  aspect-ratio: var(--ar);
+  object-fit: cover;
+}
+
+/* faint photo-paper sheen so prints read as physical objects */
+.print::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(135deg, rgba(255,255,255,.14), rgba(255,255,255,0) 40%, rgba(0,0,0,.06));
+}
+
+/* hover: lift the hovered print, step the others back */
+.wall:has(.print:hover) .print:not(:hover),
+.wall:has(.print:focus-visible) .print:not(:focus-visible) {
+  filter: saturate(.35) brightness(.72);
+}
+
+.print:hover,
+.print:focus-visible {
+  z-index: 20 !important;
+  transform: rotate(0deg) translateY(-8px) scale(1.07);
+  box-shadow:
+    0 2px 3px rgba(20, 28, 18, .2),
+    0 30px 50px -18px rgba(20, 28, 18, .65);
+}
+
+.print:focus-visible {
+  outline: 2px solid #f4f1ea;
+  outline-offset: 4px;
+}
+
+/* label pill that slides up on hover */
+.printTag {
+  position: absolute;
+  left: 8px;
+  bottom: 8px;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 6px 6px 12px;
+  border-radius: 999px;
+  background: #f4f1ea;
+  color: #1d211b;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: -.01em;
+  white-space: nowrap;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, .2);
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity .3s, transform .4s cubic-bezier(.2, .8, .2, 1);
+}
+
+.printTag b {
+  display: grid;
+  place-items: center;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #1d211b;
+  color: #f4f1ea;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.print:hover .printTag,
+.print:focus-visible .printTag {
+  opacity: 1;
+  transform: none;
+}
+
+/* While a project is open, the prints stay in the zoomed photo but aren't clickable */
+.zoomed .print { pointer-events: none; }
+
+/* touch screens have no hover, so keep labels visible */
+@media (hover: none) {
+  .printTag { opacity: 1; transform: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .print, .printTag { transition: none; }
+  .print:hover, .print:focus-visible { transform: rotate(0deg); }
+}
+
+/* The nav lives in components/HomeNav (fixed while scrolling) */
+
+/* ---------- One quiet line above the name ---------- */
+/* --lift raises the block above the name strip: 50px on screens 900px+ tall, less on short laptop screens
+   so it never runs into the collage (0 at 720px tall). --home-hero-nudge (globals.css) moves it left with the logo. */
+.meta { --lift: clamp(0px, calc((100svh - 720px) * .28), 50px); position: absolute; z-index: 4; left: calc(var(--edge) - var(--home-hero-nudge)); right: var(--edge); bottom: calc(var(--nm) * .86 + 44px + var(--lift)); display: flex; justify-content: space-between; align-items: flex-end; gap: 16px; font-size: 15px; transition: opacity .4s; }
+.r { font-size: clamp(30px, 2.9vw, 44px); font-weight: 500; letter-spacing: -0.02em; line-height: 1.05; }
+.s { display: flex; align-items: center; gap: 8px; font-size: 15px; margin-top: 8px; opacity: .85; }
+.s i { width: 8px; height: 8px; border-radius: 50%; background: #4ade80; animation: statusGlow 2s ease-in-out infinite; }
+
+@keyframes statusGlow {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(74,222,128,.55), 0 0 6px 1px rgba(74,222,128,.7); }
+  50%      { box-shadow: 0 0 0 6px rgba(74,222,128,0), 0 0 12px 3px rgba(74,222,128,.9); }
+}
+
+/* ---------- Name strip: drifts sideways, follows scroll direction ---------- */
+.marq { position: absolute; z-index: 4; left: 0; right: 0; bottom: 22px; overflow: hidden; transition: opacity .4s; }
+.track { display: flex; width: max-content; will-change: transform; }
+.seg { display: flex; align-items: center; gap: .28em; padding-right: .28em; font-size: var(--nm); font-weight: 700; letter-spacing: -.06em; line-height: .86; white-space: nowrap; }
+.mchip { display: block; position: relative; height: .58em; aspect-ratio: 16 / 10; border-radius: .06em; overflow: hidden; transform: rotate(-3deg); box-shadow: 0 14px 40px #0006; flex: none; }
+.mchip img { object-fit: cover; }
+.zoomed .meta, .zoomed .marq { opacity: 0; pointer-events: none; }
+
+/* ---------- Intro curtain ---------- */
+.curtain { position: absolute; inset: 0; z-index: 20; background: #4E5D43; display: grid; place-items: center; color: var(--paper); font-size: 18px; font-weight: 500; transition: transform 1s cubic-bezier(.76, 0, .24, 1) .15s; }
+.curtain em { font-style: normal; opacity: .6; margin: 0 8px; }
+.in .curtain { transform: translateY(-100%); }
+.instant { transition: none; }
+
+/* ---------- Project card: sharp cover image instead of a blurry zoom ---------- */
+.detail { position: absolute; z-index: 7; left: var(--edge); top: 50%; width: min(420px, calc(100% - 2 * var(--home-gutter))); background: #1d2617cc; backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); border: 1px solid #ffffff1f; border-radius: 18px; padding: 12px 12px 20px; opacity: 0; transform: translateY(calc(-50% + 16px)); pointer-events: none; transition: opacity .45s .25s, transform .45s .25s; }
+.zoomed .detail { opacity: 1; transform: translateY(-50%); pointer-events: auto; }
+.cover { position: relative; border-radius: 10px; overflow: hidden; aspect-ratio: 16 / 10; background: #0003; }
+.cover img { object-fit: cover; }
+.inner { padding: 16px 8px 0; }
+.kick { font-size: 13px; opacity: .8; display: flex; gap: 8px; align-items: center; }
+.kick b { background: var(--paper); color: var(--ink); font-weight: 500; border-radius: 999px; padding: 3px 10px; font-size: 12px; }
+.detail h2 { margin: 10px 0 0; font-size: clamp(26px, 2.2vw, 34px); line-height: 1; letter-spacing: -.04em; font-weight: 700; }
+.detail p { margin: 8px 0 0; font-size: 15px; opacity: .88; }
+.stats { display: flex; gap: 22px; margin-top: 14px; flex-wrap: wrap; }
+.stats b { display: block; font-size: 22px; font-weight: 600; letter-spacing: -.03em; line-height: 1.1; }
+.stats span { font-size: 12.5px; opacity: .75; }
+.dnav { display: flex; gap: 8px; margin-top: 18px; align-items: center; flex-wrap: wrap; }
+.btn { background: var(--paper); color: var(--ink); text-decoration: none; border-radius: 999px; padding: 11px 18px; font-weight: 500; font-size: 14px; border: 0; cursor: pointer; }
+.disabled { opacity: .6; cursor: default; }
+.round { width: 40px; height: 40px; border-radius: 50%; border: 1px solid #ffffff44; background: transparent; color: var(--paper); cursor: pointer; font-size: 16px; }
+.round:hover { background: #ffffff1f; }
+.count { font-size: 13px; opacity: .7; margin-left: 4px; font-variant-numeric: tabular-nums; }
+.zoomout { position: absolute; z-index: 7; right: var(--edge); bottom: 32px; background: var(--paper); color: var(--ink); border: 0; border-radius: 999px; padding: 11px 16px; font-size: 14px; cursor: pointer; opacity: 0; pointer-events: none; transition: opacity .3s .3s; }
+.zoomed .zoomout { opacity: 1; pointer-events: auto; }
+
+/* ---------- Phones and small tablets ---------- */
+@media (max-width: 900px) {
+  .hero { --nm: clamp(72px, 24vw, 130px); }
+  /* Phones show the walking photo instead of the collage */
+  .wall { display: none; }
+  .detail { top: auto; bottom: 16px; transform: translateY(16px); max-height: calc(100% - 110px); overflow: auto; }
+  .zoomed .detail { transform: none; }
+  .zoomout { top: 86px; bottom: auto; right: var(--edge); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .curtain { display: none; }
+  .hero *, .hero *::before, .hero *::after { transition: none !important; animation: none !important; }
+  /* Static glow instead of the pulse */
+  .s i { animation: none; box-shadow: 0 0 8px 2px rgba(74,222,128,.7); }
+}

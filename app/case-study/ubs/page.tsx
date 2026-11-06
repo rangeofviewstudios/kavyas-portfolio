@@ -18,11 +18,20 @@ export const metadata = {
         description: "Reimagining banking for Gen Z through user-centered design",
         url: "https://kavyaray.com/case-study/ubs",
         type: "article",
+        images: [
+            {
+                url: "/images/ubs-cover.webp",
+                width: 2400,
+                height: 1500,
+                alt: "Key4 Banking concept for UBS shown on a laptop, with expense and balance notifications floating beside it",
+            },
+        ],
     },
     twitter: {
         card: "summary_large_image",
         title: "UBS Future of Banking Case Study",
         description: "SCADpro collaboration: Designing Gen Z banking experiences",
+        images: ["/images/ubs-cover.webp"],
     },
     alternates: {
         canonical: "https://kavyaray.com/case-study/ubs",

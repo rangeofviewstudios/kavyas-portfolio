@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/Footer";
 import { CaseNav, Details, GREEN } from "@/components/case-study/shared";
@@ -13,6 +14,18 @@ const UBSCaseStudy = () => {
                     <h1 className="text-2xl sm:text-3xl md:text-5xl font-semibold text-gray-900 mb-6 sm:mb-8 lg:mb-16">
                         UBS x SCADpro
                     </h1>
+
+                    {/* Cover */}
+                    <div className="relative mb-8 sm:mb-12 lg:mb-16 aspect-[16/10] overflow-hidden rounded-2xl sm:rounded-3xl bg-[#111]">
+                        <Image
+                            src="/images/ubs-cover.webp"
+                            alt="Key4 Banking concept for UBS shown on a laptop, with expense and balance notifications floating beside it"
+                            fill
+                            priority
+                            sizes="(max-width: 1152px) 100vw, 1152px"
+                            className="object-cover object-center"
+                        />
+                    </div>
 
                     <Details
                         items={[
