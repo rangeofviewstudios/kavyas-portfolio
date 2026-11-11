@@ -4,7 +4,7 @@ export function Footer() {
   return (
     <footer
       className="pt-12 sm:pt-16 px-6 relative z-10 overflow-hidden"
-      style={{ backgroundColor: '#343F28' }}
+      style={{ backgroundColor: '#5E6E52' }}
     >
       <div className="container mx-auto max-w-6xl">
         {/* Top Section */}
@@ -48,7 +48,7 @@ export function Footer() {
         </div>
 
         {/* Divider Line */}
-        <div className="w-full h-px mb-10 sm:mb-12" style={{ backgroundColor: '#FFFFFF' }}></div>
+        <div className="w-full h-px mb-10 sm:mb-12" style={{ backgroundColor: 'rgba(255,255,255,0.25)' }}></div>
 
         {/* Bottom - Large Name. line-height ~0.7 trims the line box to the cap height, so the baseline sits on the footer's bottom edge */}
         <div className="text-center">

@@ -174,7 +174,7 @@ function TypewriterIntro() {
 
     let remaining = count;
     return (
-        <div ref={ref} className="space-y-6 text-white/90 text-base sm:text-lg leading-relaxed max-w-xl">
+        <div ref={ref} className="space-y-6 text-[#161514] text-base sm:text-lg leading-relaxed max-w-xl">
             {INTRO_PARAGRAPHS.map((text, i) => {
                 const typed = Math.max(0, Math.min(text.length, remaining));
                 remaining -= text.length;
@@ -184,7 +184,7 @@ function TypewriterIntro() {
                         <span className="sr-only">{text}</span>
                         <span aria-hidden="true">
                             {text.slice(0, typed)}
-                            {typing && <span className="inline-block w-[2px] h-[1em] -mb-[0.15em] ml-px bg-white/80 animate-pulse" />}
+                            {typing && <span className="inline-block w-[2px] h-[1em] -mb-[0.15em] ml-px bg-[#161514]/80 animate-pulse" />}
                             <span className="opacity-0">{text.slice(typed)}</span>
                         </span>
                     </p>
@@ -215,7 +215,7 @@ function Polaroid({ snap, open, order }: { snap: Snap; open: boolean; order: num
                 onClick={() => setFlipped((f) => !f)}
                 aria-pressed={flipped}
                 aria-label={`${snap.alt}. ${flipped ? "Show photo" : "Read the story"}`}
-                className="group/snap block w-full [perspective:900px] focus:outline-none focus-visible:ring-2 focus-visible:ring-white/80 focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
+                className="group/snap block w-full [perspective:900px] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#161514] focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
                 style={{ rotate: `${snap.rotate}deg` }}
             >
                 <div
@@ -379,7 +379,7 @@ function Arrow({ d, className, open, delay }: { d: string; className: string; op
             strokeWidth="2"
             strokeLinecap="round"
             strokeLinejoin="round"
-            className={`pointer-events-none absolute hidden md:block text-white/90 ${className}`}
+            className={`pointer-events-none absolute hidden md:block text-[#161514]/80 ${className}`}
             aria-hidden="true"
         >
             <path
@@ -399,7 +399,7 @@ function Arrow({ d, className, open, delay }: { d: string; className: string; op
 function Note({ children, className, open, delay }: { children: React.ReactNode; className: string; open: boolean; delay: number }) {
     return (
         <p
-            className={`${hand.className} absolute hidden md:block text-center text-white leading-tight text-[clamp(0.55rem,1.5vw,1.05rem)] ${className}`}
+            className={`${hand.className} absolute hidden md:block text-center text-[#161514] leading-tight text-[clamp(0.55rem,1.5vw,1.05rem)] ${className}`}
             style={{ opacity: open ? 1 : 0, transition: `opacity 500ms ease-out ${delay}ms` }}
         >
             {children}
@@ -413,10 +413,10 @@ function CarryOn() {
 
     return (
         <section className="px-4 sm:px-6 md:px-10 pt-16 sm:pt-24 pb-24 sm:pb-36 overflow-hidden">
-            <h2 className={`${hand.className} text-center text-white text-2xl sm:text-3xl md:text-4xl`}>
+            <h2 className={`${hand.className} text-center text-[#161514] text-2xl sm:text-3xl md:text-4xl`}>
                 A Carry-On Full of Stories
             </h2>
-            <p className="mt-3 mb-14 sm:mb-20 text-center text-xs sm:text-sm tracking-[0.18em] uppercase text-white/55">
+            <p className="mt-3 mb-14 sm:mb-20 text-center text-xs sm:text-sm tracking-[0.18em] uppercase text-[#75716B]">
                 Tap a photo to unpack its story
             </p>
 
@@ -455,7 +455,7 @@ function CarryOn() {
 
 const AboutMe = () => {
     return (
-        <div className="min-h-screen bg-background">
+        <div className="min-h-screen bg-[#EEF2EA]">
             <Navigation />
 
             <main className="pt-0 pb-0">
@@ -464,7 +464,7 @@ const AboutMe = () => {
                 {/* Intro */}
                 <section className="px-4 sm:px-6 md:px-10 pt-10 sm:pt-14">
                     <div className="max-w-7xl mx-auto">
-                        <h1 className="relative z-10 text-white italic font-light uppercase leading-[0.85] tracking-[-0.02em] whitespace-nowrap"
+                        <h1 className="relative z-10 text-[#161514] italic font-light uppercase leading-[0.85] tracking-[-0.02em] whitespace-nowrap"
                             style={{ fontSize: "clamp(3.5rem, 20vw, 18rem)" }}
                         >
                             About Me

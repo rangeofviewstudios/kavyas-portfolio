@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { RotatingWord } from "@/components/RotatingWord";
 import { ViewCursor } from "@/components/ViewCursor";
+import { CardBadge } from "@/components/CardBadge";
 
 import { projects, type Project } from "@/lib/projects";
 
@@ -43,17 +44,30 @@ function ProjectCard({ project }: { project: Project }) {
           sizes="(max-width: 900px) 100vw, 800px"
           className="object-cover"
         />
-        {(project.isNda || project.comingSoon) && (
-          <span className="absolute left-2.5 top-2.5 rounded-md bg-[#141A10] px-[9px] py-1 text-[11px] text-white">
-            {project.comingSoon ? "Coming soon" : "NDA protected"}
-          </span>
-        )}
+        {project.comingSoon ? (
+          <CardBadge variant="nda">Coming soon</CardBadge>
+        ) : project.isNda ? (
+          <CardBadge variant="nda" />
+        ) : project.badge ? (
+          <CardBadge variant={project.badge} />
+        ) : null}
       </div>
       <div className="flex flex-1 flex-col gap-3 px-2.5 pt-[18px] pb-2">
-        <div className="flex justify-between text-[12.5px] text-[#75716B]">
-          <span>{project.client}</span>
+        {/* Company line: who the project was for, prominent for recruiters. A partner ("× SCAD") stays muted. */}
+        <div className="mb-1 flex items-baseline justify-between gap-3 text-base tracking-[-0.01em] max-[900px]:text-[15px]">
+          <span>
+            {(() => {
+              const [company, partner] = project.client.split(" × ");
+              return (
+                <>
+                  <span className="font-semibold text-[#161514]">{company}</span>
+                  {partner && <span className="font-normal text-[#75716B]"> × {partner}</span>}
+                </>
+              );
+            })()}
+          </span>
           {!project.comingSoon && (
-            <span aria-hidden="true" className="text-[15px] text-[#161514]">
+            <span aria-hidden="true" className="text-[#161514]">
               ↗
             </span>
           )}

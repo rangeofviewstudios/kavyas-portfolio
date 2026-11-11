@@ -176,12 +176,13 @@
    One column for every case study, the same as the homepage: up to --home-max wide with the
    --home-gutter side margin. Pages used to cap content at 1024-1152px, which left ~380px of empty
    space per side on a 1920px screen and started each case study at a different place. */
-.case-study .container,
-.case-study .max-w-6xl,
-.case-study .max-w-7xl {
+/* Scoped to <main> so the shared site footer keeps its own width, the same as on every other page */
+.case-study main .container,
+.case-study main .max-w-6xl,
+.case-study main .max-w-7xl {
   max-width: var(--home-max);
 }
-.case-study .container {
+.case-study main .container {
   padding-left: var(--home-gutter);
   padding-right: var(--home-gutter);
 }

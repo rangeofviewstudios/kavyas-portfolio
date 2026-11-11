@@ -14,11 +14,14 @@ export type Project = {
   cardImage: string;
   /** No case study page yet: renders without a link. */
   comingSoon?: boolean;
+  /** Label on the card image (components/CardBadge). NDA projects show "NDA protected" via isNda instead. */
+  badge?: "shipped" | "award";
 };
 
 export const projects: Project[] = [
   {
     id: 6,
+    badge: "shipped",
     isNda: false,
     client: "FIFA × SCAD",
     title: "FIFA",
@@ -35,6 +38,7 @@ export const projects: Project[] = [
   },
   {
     id: 7,
+    badge: "shipped",
     isNda: false,
     client: "Range of View Studios",
     title: "Brand & Visual Identity",
@@ -46,6 +50,7 @@ export const projects: Project[] = [
   },
   {
     id: 8,
+    badge: "award",
     isNda: false,
     client: "Solace",
     title: "Solace",

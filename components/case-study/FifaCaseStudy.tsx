@@ -1,262 +1,236 @@
+import Image from "next/image";
 import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/Footer";
+import { ChallengeExplorer, CoreTension, FieldGallery, LearnedStats, MapLayers, SpectatorStats } from "./FifaModules";
 import {
-    CaseNav,
-    Details,
-    Eyebrow,
-    GREEN,
-    GradientCallout,
-    Reveal,
-    SectionCaption,
-    h2,
-    h3,
-    intro,
-    introStyle,
-} from "./shared";
-import {
-    Arrows,
-    AreaMap,
-    ChallengeExplorer,
-    CoreTension,
-    F,
-    FieldGallery,
-    FifaHero,
-    FocusAreas,
-    LearnedStats,
-    PillarsExplorer,
-    QuoteRotator,
-    SpectatorStats,
-    WayfindingBanner,
-    WayfindingMaps,
-} from "./FifaModules";
+    BODY,
+    CARD,
+    Caption,
+    CaseStudyMain,
+    FindingCard,
+    LABEL,
+    LearningCard,
+    NextProject,
+    Overview,
+    P,
+    Quote,
+    Section,
+    Stat,
+    SubHeading,
+} from "./CaseStudyKit";
 
-/* FIFA World Cup 26 case study. Kavya's layout and green, with the deck's chevrons, blues and reds as the flare. */
+// FIFA deck blue. Defined here rather than imported: FifaModules is a client module, and a server
+// component only receives its components from it, not plain values like the F palette.
+const FIFA_BLUE = "#3674B9";
+
+const WSB_URL =
+    "https://www.wsbtv.com/news/local/atlanta/scad-students-create-murals-signs-welcome-world-atlanta-world-cup/KCLNW34AGVC63HC3JHPW6GKCVE/";
+
+/*
+  FIFA World Cup 26 case study, on the shared case study kit (CaseStudyKit).
+  00 Overview · 01 Challenge · 02 Research · 03 Mapping · 04 Design · 05 Impact · 06 What I learned · 07 Credits · next.
+  Text in [brackets] is a placeholder to fill in.
+*/
 const FifaCaseStudy = () => {
-    const wc26 = `linear-gradient(90deg, ${F.deep} 0%, ${F.pitch} 35%, ${F.blue} 70%, ${F.red} 100%)`;
-
     return (
         <div className="min-h-screen bg-white overflow-x-hidden">
             <Navigation />
-            <main>
-                <div style={{ background: GREEN }}>
-                    <FifaHero />
-                </div>
+            <CaseStudyMain>
+                {/* 00 Overview */}
+                <Overview
+                    tags={["Service Design", "Wayfinding Strategy", "UX Research"]}
+                    title="Guiding ~300K World Cup fans through Atlanta’s last mile"
+                    badge="shipped"
+                    facts={[
+                        { label: "Role", value: "UX Lead (1 of 4)" },
+                        { label: "Team", value: "11-person UX team, 30+ across UX, advertising & branding" },
+                        { label: "Timeline", value: "Jan – Apr 2026" },
+                        { label: "Client", value: "Atlanta World Cup Host Committee, Metro Atlanta Chamber" },
+                        { label: "Methods", value: "Field audit, route mapping, benchmark study, evaluation metrics" },
+                    ]}
+                    image={{
+                        src: "/images/fifa-flags.jpg",
+                        alt: "FIFA World Cup 26 wayfinding flags pointing to Atlanta Stadium and Fan Fest",
+                        position: "50% 25%",
+                    }}
+                    summary={[
+                        { label: "Problem", text: "[~300K fans, most from out of state, arriving and leaving in waves on a route they have never walked.]" },
+                        { label: "What I did", text: "[As 1 of 4 UX leads: walked the route, benchmarked past global events, and mapped routes and friction points into a signage plan.]" },
+                        { label: "Impact", text: "[Signs, flags, ground graphics and totems installed downtown for 8 World Cup matches, featured on WSB-TV.]" },
+                    ]}
+                    news={{
+                        kicker: "WSB-TV · June 11, 2026",
+                        title: "I’m on the news!",
+                        text: "WSB-TV Channel 2 featured our Last Mile wayfinding, now installed across downtown Atlanta.",
+                        cta: "Watch the story ↗",
+                        href: WSB_URL,
+                    }}
+                />
 
-                <div className="container mx-auto px-4 sm:px-6 py-8 sm:py-16 max-w-6xl">
-                    {/* Title */}
-                    <h1 className="text-2xl sm:text-3xl md:text-5xl font-semibold text-gray-900 mb-6 sm:mb-8 lg:mb-16">
-                        FIFA World Cup 26: The Atlanta Last Mile
-                    </h1>
+                {/* 01 The Challenge */}
+                <Section
+                    id="challenge"
+                    n={1}
+                    label="The challenge"
+                    title="Design a safe, engaging, FIFA-compliant Last Mile"
+                    intro="One that keeps crowds moving smoothly while delivering a world-class fan journey that celebrates Atlanta’s identity."
+                >
+                    <SpectatorStats />
+                    <Quote text="Atlanta has set the standard for what soccer in America can be." by="Don Garber, MLS Commissioner" />
+                    <ChallengeExplorer />
+                    <CoreTension />
+                </Section>
 
-                    <Details
-                        items={[
-                            ["Role", "UX & Wayfinding Designer"],
-                            ["Industry", "Sports & Live Events"],
-                            ["Scope", "Wayfinding strategy, crowd flow, design guidelines"],
-                            ["Location", "Atlanta, Georgia"],
-                        ]}
-                    />
-
-                    <div className="mb-16">
-                        <p className="text-base text-gray-900 leading-relaxed">
-                            Atlanta is about to host the world. Roughly 300,000 spectators will move between the Fan
-                            Festival and the stadium across eight matches, most of them arriving at the same time and
-                            leaving at the same time. This is how we approached the last stretch of that journey: the
-                            Last Mile.
-                        </p>
-                    </div>
-
-                    {/* The Ask */}
-                    <Reveal>
-                        <GradientCallout gradient={wc26}>
-                            <div className="grid lg:grid-cols-[minmax(0,5fr)_minmax(0,6fr)]">
-                                <div className="relative h-56 lg:h-auto">
-                                    <img
-                                        src="/images/fifa/skyline-day.webp"
-                                        alt="Downtown Atlanta skyline above the highway connector at golden hour"
-                                        loading="lazy"
-                                        className="absolute inset-0 h-full w-full object-cover"
-                                    />
-                                    <span
-                                        className="absolute left-4 top-4 rounded-md px-3 py-1.5 text-xs font-bold uppercase tracking-[0.18em] text-white sm:text-sm"
-                                        style={{ background: F.red }}
-                                    >
-                                        The Ask
-                                    </span>
-                                </div>
-                                <div className="p-8 md:py-[74px] md:px-[60px] flex flex-col justify-center gap-5">
-                                    <Arrows color={F.red} />
-                                    <p className="text-2xl sm:text-3xl md:text-[34px] font-medium leading-snug" style={{ color: GREEN }}>
-                                        Design a safe, engaging, FIFA-compliant Last Mile framework.
-                                    </p>
-                                    <p className="text-base text-gray-900 leading-relaxed">
-                                        One that ensures smooth crowd movement while delivering a world-class fan journey
-                                        that celebrates Atlanta&apos;s identity.
-                                    </p>
-                                </div>
-                            </div>
-                        </GradientCallout>
-                    </Reveal>
-
-                    {/* Why Atlanta */}
-                    <div className="mt-10 sm:mt-20">
-                        <Eyebrow color={F.pitch}>Why Atlanta</Eyebrow>
-                        <h2 className={h2} style={{ color: GREEN }}>The Epicenter of Soccer</h2>
-                        <p className={`mb-8 sm:mb-12 ${intro}`} style={introStyle}>
-                            Before the wayfinding, the context. Three things make this city the right place for the
-                            sport to land. Open each one.
-                        </p>
-                        <PillarsExplorer />
+                {/* 02 Research */}
+                <Section
+                    id="research"
+                    n={2}
+                    label="Research"
+                    title="Walking the route, and learning from past events"
+                    intro="We walked the Last Mile ourselves, looking for the moments where a stranger would hesitate, and benchmarked what past global events had learned."
+                >
+                    <div>
+                        <SubHeading>Field walk</SubHeading>
                         <div className="mt-6">
-                            <QuoteRotator />
+                            <FieldGallery />
+                        </div>
+                        <Caption>Tap any photo to open it. Use the arrow keys to move through them.</Caption>
+                    </div>
+                    <div>
+                        <SubHeading>What we learned from global events</SubHeading>
+                        <div className="mt-6">
+                            <LearnedStats />
                         </div>
                     </div>
-
-                    {/* Focus areas */}
-                    <div className="mt-10 sm:mt-20">
-                        <Eyebrow color={F.red}>The framework</Eyebrow>
-                        <h2 className={h2} style={{ color: GREEN }}>Focus Areas</h2>
-                        <p className={`mb-8 sm:mb-12 ${intro}`} style={introStyle}>
-                            Five areas split between two goals: making the Last Mile clear, and making it a place fans
-                            want to be.
-                        </p>
-                        <FocusAreas />
-                    </div>
-
-                    {/* 01 Wayfinding */}
-                    <div className="mt-10 sm:mt-20">
-                        <Eyebrow color={F.blue}>Focus area 01</Eyebrow>
-                        <h2 className={h2} style={{ color: GREEN }}>Wayfinding Strategy</h2>
-                        <Reveal>
-                            <WayfindingBanner />
-                        </Reveal>
-                    </div>
-
-                    <div className="mt-10 sm:mt-16">
-                        <h3 className={h3}>Who is coming</h3>
-                        <p className={`mb-8 sm:mb-12 ${intro}`} style={introStyle}>
-                            Most of the people in the Last Mile will have never seen it before.
-                        </p>
-                        <SpectatorStats />
-                    </div>
-
-                    <div className="mt-10 sm:mt-16">
-                        <h3 className={h3}>When they move</h3>
-                        <p className={`mb-8 sm:mb-12 ${intro}`} style={introStyle}>
-                            Crowds do not trickle. They arrive in a wave before the match and leave in a wave after it.
-                            Switch between the two.
-                        </p>
-                        <ChallengeExplorer />
-                    </div>
-
-                    <div className="mt-10 sm:mt-16">
-                        <h3 className={h3}>The risk</h3>
-                        <CoreTension />
-                    </div>
-
-                    {/* What we learned */}
-                    <div className="mt-10 sm:mt-20">
-                        <Eyebrow color={F.blue}>Research</Eyebrow>
-                        <h2 className={h2} style={{ color: GREEN }}>What We Learned</h2>
-                        <p className={`mb-8 sm:mb-12 ${intro}`} style={introStyle}>
-                            Past global events had already shown what clear wayfinding is worth. Three numbers
-                            shaped the strategy.
-                        </p>
-                        <LearnedStats />
-                    </div>
-
-                    {/* On the ground */}
-                    <div className="mt-10 sm:mt-20">
-                        <Eyebrow color={F.pitch}>Field research</Eyebrow>
-                        <h2 className={h2} style={{ color: GREEN }}>On the Ground</h2>
-                        <p className={`mb-8 sm:mb-12 ${intro}`} style={introStyle}>
-                            We walked the route ourselves, looking for the moments where a stranger would hesitate:
-                            signs, posts, markers, forks in the path.
-                        </p>
-                        <FieldGallery />
-                        <SectionCaption>Tap any photo to open it. Use the arrow keys to move through them.</SectionCaption>
-                    </div>
-
-                    {/* Area map */}
-                    <div className="mt-10 sm:mt-20">
-                        <div className="mb-6 sm:mb-8 flex flex-wrap items-end justify-between gap-4">
-                            <div>
-                                <Eyebrow color={F.red}>Movement routes</Eyebrow>
-                                <h2 className="text-2xl sm:text-3xl md:text-5xl font-semibold" style={{ color: GREEN }}>The Area</h2>
-                            </div>
-                            <img
-                                src="/images/fifa/wc26-logo.webp"
-                                alt="FIFA World Cup 26 Atlanta logo"
-                                width={500}
-                                height={834}
-                                loading="lazy"
-                                className="h-16 w-auto sm:h-24"
+                    <div>
+                        <SubHeading>What we found</SubHeading>
+                        <div className="mt-6 grid gap-6 md:grid-cols-3">
+                            <FindingCard
+                                n={1}
+                                headline="Most fans have never seen downtown."
+                                evidence="75% of the ~300K spectators travel from outside Georgia."
+                                designed="Signs that work without local knowledge: landmarks, arrows, distance."
+                            />
+                            <FindingCard
+                                n={2}
+                                headline="Everyone arrives at once."
+                                evidence="60–70% arrive in the 90 minutes before kickoff."
+                                designed="Signs readable at a glance, above crowd height."
+                            />
+                            <FindingCard
+                                n={3}
+                                headline="Hesitation happens at forks, not on blocks."
+                                evidence="On our field walk, we stopped at exits, crossings and narrow sidewalks."
+                                designed="A sign at every decision point, not every block."
                             />
                         </div>
-                        <p className={`mb-8 sm:mb-12 ${intro}`} style={introStyle}>
-                            Primary routes link the Fan Festival, the stadium and the transit stations. Pick a place, or switch the
-                            routes and signage on and off.
-                        </p>
-                        <Reveal>
-                            <AreaMap />
-                        </Reveal>
                     </div>
+                </Section>
 
-                    {/* Wayfinding plan + friction points */}
-                    <div className="mt-10 sm:mt-20">
-                        <Eyebrow color={F.red}>The plan</Eyebrow>
-                        <h2 className={h2} style={{ color: GREEN }}>Wayfinding Plan &amp; Friction Points</h2>
-                        <p className={`mb-8 sm:mb-12 ${intro}`} style={introStyle}>
-                            Primary signage follows the primary routes, with secondary routes branching off them.
-                            Mapping the route also showed where movement would slow down.
-                        </p>
-                        <Reveal>
-                            <WayfindingMaps />
-                        </Reveal>
-                    </div>
+                {/* 03 Mapping the Last Mile */}
+                <Section
+                    id="mapping"
+                    n={3}
+                    label="Mapping the Last Mile"
+                    title="Routes, signage and friction points"
+                    intro="Primary routes link the Fan Festival, the stadium and the transit stations; mapping them showed where movement would slow down."
+                >
+                    <MapLayers />
+                </Section>
 
-                    {/* In the news */}
-                    <div className="mt-10 sm:mt-20">
-                        <Eyebrow color={F.blue}>In the news</Eyebrow>
-                        <h2 className={h2} style={{ color: GREEN }}>Now on the Streets of Atlanta</h2>
-                        <Reveal>
-                            <a
-                                href="https://www.wsbtv.com/news/local/atlanta/scad-students-create-murals-signs-welcome-world-atlanta-world-cup/KCLNW34AGVC63HC3JHPW6GKCVE/"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="block rounded-2xl border border-gray-200 p-6 sm:p-8 transition-shadow hover:shadow-lg"
-                            >
-                                <p className="text-xs font-bold uppercase tracking-[0.18em] mb-3" style={{ color: F.red }}>
-                                    WSB-TV Channel 2 · June 11, 2026
-                                </p>
-                                <p className="text-xl sm:text-2xl font-medium leading-snug mb-4" style={{ color: GREEN }}>
-                                    SCAD students create murals, signs to welcome the world to Atlanta for World Cup
-                                </p>
-                                <p className="text-base text-gray-900 leading-relaxed mb-4">
-                                    The Last Mile plan, a wayfinding system of directional signs, flags, ground graphics
-                                    and totems, built with the Atlanta World Cup Host Committee, is now installed
-                                    downtown.
-                                </p>
-                                <p className="text-base text-gray-900 leading-relaxed italic mb-4">
-                                    &ldquo;They feel like they have an intuitive way to get around.&rdquo; Kavya Ray
-                                </p>
-                                <span className="text-sm font-semibold" style={{ color: F.blue }}>
-                                    Read the article &rarr;
-                                </span>
-                            </a>
-                        </Reveal>
+                {/* 04 The Design */}
+                <Section
+                    id="design"
+                    n={4}
+                    label="The design"
+                    title="The Last Mile system"
+                    intro="A wayfinding system of directional signs, flags, ground graphics and totems, built with the Atlanta World Cup Host Committee."
+                >
+                    <div className="grid gap-6 md:grid-cols-2">
+                        <figure>
+                            <div className="relative aspect-[1036/863] overflow-hidden rounded-2xl bg-[#EEF2EA]">
+                                <Image
+                                    src="/images/fifa-flags.jpg"
+                                    alt="Two World Cup 26 flags: one reading Right Where You Belong, one pointing to Atlanta Stadium and Fan Fest"
+                                    fill
+                                    sizes="(max-width: 768px) 100vw, 750px"
+                                    className="object-cover"
+                                />
+                            </div>
+                            <Caption>Directional flags for the route.</Caption>
+                        </figure>
+                        <figure>
+                            <div className="relative aspect-[1036/863] overflow-hidden rounded-2xl bg-[#EEF2EA]">
+                                <Image
+                                    src="/images/fifacard.jpg"
+                                    alt="The SCAD team with the white Last Mile city model inside the Atlanta stadium"
+                                    fill
+                                    sizes="(max-width: 768px) 100vw, 750px"
+                                    className="object-cover"
+                                />
+                            </div>
+                            <Caption>The team with the Last Mile model.</Caption>
+                        </figure>
                     </div>
+                    <div className="flex min-h-[140px] items-center rounded-2xl border-2 border-dashed border-[#E1E6DB] p-10 text-lg text-[#75716B] max-[900px]:p-6">
+                        [Add photos of the installed signs, ground graphics and totems, and the zone visuals]
+                    </div>
+                </Section>
 
-                    {/* Close */}
-                    <div className="mt-10 sm:mt-20 text-center">
-                        <p className="text-xl sm:text-2xl md:text-3xl font-medium text-gray-900 mb-6 sm:mb-8 leading-relaxed">
-                            Which way do I go?<br />
-                            <span style={{ color: F.blue }}>The answer should already be in front of them.</span>
-                        </p>
-                        <CaseNav next={{ label: "Solace", href: "/case-study/solace" }} />
+                {/* 05 Impact */}
+                <Section
+                    id="impact"
+                    n={5}
+                    label="Impact"
+                    title="Now on the streets of Atlanta"
+                    intro="The Last Mile plan is installed downtown for the World Cup."
+                >
+                    <div className="grid gap-6 md:grid-cols-3">
+                        <Stat value="8" label="World Cup matches with the system installed downtown" />
+                        <Stat value="~300K" label="spectators on the route" />
+                        <Stat value="Live" label="installed downtown Atlanta" />
                     </div>
-                </div>
-            </main>
+                    <a href={WSB_URL} target="_blank" rel="noopener noreferrer" className={`block no-underline transition-shadow hover:shadow-lg ${CARD}`}>
+                        <p className={LABEL}>In the news · WSB-TV Channel 2 · June 11, 2026</p>
+                        <p className="mt-4 max-w-[40ch] text-[22px] font-semibold leading-[1.3] tracking-[-0.01em] text-[#161514]">
+                            SCAD students create murals, signs to welcome the world to Atlanta for World Cup
+                        </p>
+                        <p className={`mt-4 max-w-[72ch] ${BODY}`}>
+                            The Last Mile plan, a wayfinding system of directional signs, flags, ground graphics and totems,
+                            built with the Atlanta World Cup Host Committee, is now installed downtown.
+                        </p>
+                        <span className="mt-6 inline-block text-lg font-semibold" style={{ color: FIFA_BLUE }}>
+                            Read the article &rarr;
+                        </span>
+                    </a>
+                    <Quote text="They feel like they have an intuitive way to get around." by="Kavya Ray, on WSB-TV" />
+                </Section>
+
+                {/* 06 What I Learned */}
+                <Section id="learned" n={6} label="What I learned" title="What I’d take forward" intro="[One sentence that sums up what this project taught you.]">
+                    <div className="grid gap-6 md:grid-cols-3">
+                        <LearningCard saw="[A moment from the project]" learned="[What it taught you]" />
+                        <LearningCard saw="[A moment from the project]" learned="[What it taught you]" />
+                        <LearningCard saw="[A moment from the project]" learned="[What it taught you]" />
+                    </div>
+                </Section>
+
+                {/* 07 Team & credits */}
+                <Section id="credits" n={7} label="Team & credits" title="Made together">
+                    <P>SCAD Atlanta studio with the Atlanta World Cup Host Committee and the Metro Atlanta Chamber.</P>
+                </Section>
+
+                {/* Closing line + next project */}
+                <NextProject
+                    slug="solace"
+                    closing={
+                        <>
+                            Which way do I go?{" "}
+                            <span style={{ color: FIFA_BLUE }}>The answer should already be in front of them.</span>
+                        </>
+                    }
+                />
+            </CaseStudyMain>
 
             <Footer />
         </div>

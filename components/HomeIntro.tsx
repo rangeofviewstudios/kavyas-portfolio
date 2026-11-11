@@ -37,10 +37,12 @@ function Logo({ company, hidden }: { company: Company; hidden: boolean }) {
 export function HomeIntro() {
   return (
     <>
-      <section className="pt-24 max-[900px]:pt-16">
+      <section className="pt-24 max-[900px]:pt-16" aria-labelledby="approach-label">
+        <p id="approach-label" className="m-0 mb-4 text-sm uppercase tracking-[0.06em] text-[#75716B]">
+          My approach
+        </p>
         <p className="m-0 max-w-[28ch] text-[clamp(28px,3.2vw,48px)] font-medium leading-[1.22] tracking-[-0.025em] [text-wrap:pretty]">
-          I design from what I find in the field: at the stadium gate, at a case worker&apos;s desk, in the
-          driver&apos;s seat.
+          Good questions make better products than good guesses. I keep asking why until the answer surprises me.
         </p>
       </section>
 

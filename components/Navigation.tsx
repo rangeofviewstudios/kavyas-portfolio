@@ -31,7 +31,18 @@ const styles = {
     active: 'bg-white/15 border border-white/20 shadow-[inset_0_1px_0_0_rgba(255,255,255,0.2)]',
     cta: 'bg-white/15 border border-white/20 hover:bg-white/25',
   },
+  // Solid light pill for pages with a light background (see LIGHT_PAGES). Readable over the hero video too.
+  light: {
+    pill: 'bg-white border-[#E1E6DB] shadow-[0_8px_24px_-12px_rgba(20,28,18,0.25)]',
+    text: 'text-[#161514]',
+    hover: 'hover:bg-[#EEF2EA]',
+    active: 'bg-[#161514] !text-white border border-[#161514]',
+    cta: 'bg-[#EEF2EA] border border-[#E1E6DB] hover:bg-[#E1E6DB]',
+  },
 } as const;
+
+/** Pages with a light background that always use the solid light pill */
+const LIGHT_PAGES = ['/about'];
 
 /** Thin reading-progress bar pinned to the top of the viewport. Case study pages only. */
 function ReadingProgress() {
@@ -102,7 +113,7 @@ export function Navigation() {
     };
   }, [pathname]);
 
-  const t = styles[tone];
+  const t = LIGHT_PAGES.includes(pathname ?? '') ? styles.light : styles[tone];
 
   return (
     <>
@@ -139,7 +150,7 @@ export function Navigation() {
           <Link href="/#work" className={`${t.text} font-medium text-xs px-3 py-1.5 rounded-full ${t.hover} transition-all duration-200`}>
             Work
           </Link>
-          <Link href="/about" className={`${t.text} font-medium text-xs px-3 py-1.5 rounded-full ${t.hover} transition-all duration-200`}>
+          <Link href="/about" className={`${t.text} font-medium text-xs px-3 py-1.5 rounded-full ${pathname === '/about' ? t.active : t.hover} transition-all duration-200`}>
             About
           </Link>
           <a

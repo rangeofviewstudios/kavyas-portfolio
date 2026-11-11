@@ -1,11 +1,8 @@
 'use client';
 
 import { useCallback, useEffect, useState, type CSSProperties } from "react";
+import Image from "next/image";
 import { ArrowLeft, ArrowRight, Route, User, X } from "lucide-react";
-import "@fontsource/michroma";
-import "@fontsource/barlow-condensed/600.css";
-import "@fontsource/barlow-condensed/700.css";
-import "@fontsource/barlow-condensed/800.css";
 import { CountUp, Reveal, useInView, usePrefersReducedMotion } from "./shared";
 
 /* FIFA deck palette, sampled from the original slides. */
@@ -19,10 +16,15 @@ export const F = {
     red: "#B4303F",
 };
 
-const display = { fontFamily: '"Michroma", "DM Sans", sans-serif' } as const;
-const impact = { fontFamily: '"Barlow Condensed", "DM Sans", sans-serif' } as const;
-/* Michroma's percent sign is hard to read, so the % borrows the body face */
-const percentFont = { fontFamily: '"DM Sans", sans-serif', fontStyle: "normal", fontWeight: 700 } as const;
+/* Case studies use one type system (Geist, set by CaseStudyMain), so the old display faces
+   (Michroma, Barlow Condensed) are gone and these inherit it. Kept as names so older blocks still compile. */
+const display = {} as const;
+const impact = {} as const;
+const percentFont = {} as const;
+/* Big stat numbers: clamp(40px, 4vw, 56px), weight 600 */
+const STAT = "text-[clamp(40px,4vw,56px)] font-semibold leading-none tracking-[-0.03em] tabular-nums";
+/* Card shell padding: 40px, 24px under 900px */
+const PAD = "p-10 max-[900px]:p-6";
 
 /* ---------- Chevron motif ---------- */
 
@@ -444,76 +446,56 @@ export function WayfindingBanner() {
 
 /* ---------- Spectator numbers ---------- */
 
+const SPECTATOR_STATS = [
+    {
+        img: "/images/fifa/crowd.webp",
+        alt: "Fans cheering with raised hands",
+        value: (inView: boolean) => (
+            <>
+                ~<CountUp to={300000} active={inView} />
+            </>
+        ),
+        text: "unique spectators across the 8 World Cup matches hosted in Atlanta.",
+    },
+    {
+        img: "/images/fifa/traveler.webp",
+        alt: "A traveler pulling a suitcase past an arrivals board",
+        value: (inView: boolean) => <CountUp to={75} active={inView} suffix="%" />,
+        text: "of them will travel from outside Georgia, from other U.S. states or other countries.",
+    },
+    {
+        img: "/images/fifa/skyline-night.webp",
+        alt: "Downtown Atlanta at dusk with light trails on the connector",
+        value: () => <>1 mile</>,
+        text: "the Last Mile: the walk between transit, the Fan Festival and the stadium.",
+    },
+];
+
+/* Three stat cards, left-aligned: photo, number, one line */
 export function SpectatorStats() {
     const [ref, inView] = useInView<HTMLDivElement>(0.3);
-    const circumference = 2 * Math.PI * 54;
 
     return (
-        <div ref={ref} className="grid gap-4 sm:gap-6 md:grid-cols-2">
-            {/* ~300,000 */}
-            <div className="group relative overflow-hidden rounded-2xl border-2 border-gray-200 transition-all duration-300 hover:border-[#343F28] hover:shadow-lg">
-                <div className="relative h-44 w-full overflow-hidden sm:h-52">
-                    <img
-                        src="/images/fifa/crowd.webp"
-                        alt="Fans cheering with raised hands"
-                        loading="lazy"
-                        className="h-full w-full object-cover grayscale transition-all duration-700 group-hover:scale-105 group-hover:grayscale-0"
-                    />
-                    <div className="absolute inset-y-0 left-0 w-2" style={{ background: F.blue }} />
-                    <div className="absolute inset-0 bg-gradient-to-t from-white via-white/0 to-transparent" />
-                </div>
-                <div className="relative p-6 pt-2 text-center sm:p-8 sm:pt-2">
-                    <p className="text-base text-gray-900 sm:text-lg">Atlanta is expected to welcome</p>
-                    <p className="my-1 text-4xl font-bold tabular-nums sm:text-5xl" style={{ color: F.blue }}>
-                        ~<CountUp to={300000} active={inView} />
-                    </p>
-                    <p className="text-xl font-bold sm:text-2xl" style={{ color: F.blue }}>unique spectators</p>
-                    <p className="mt-1 text-base text-gray-900 sm:text-lg">across the 8 World Cup matches hosted in the city.</p>
-                </div>
-            </div>
-
-            {/* 75% */}
-            <div className="group relative overflow-hidden rounded-2xl border-2 border-gray-200 transition-all duration-300 hover:border-[#343F28] hover:shadow-lg">
-                <div className="relative h-44 w-full overflow-hidden sm:h-52">
-                    <img
-                        src="/images/fifa/traveler.webp"
-                        alt="A traveler pulling a suitcase past an arrivals board"
-                        loading="lazy"
-                        className="h-full w-full object-cover grayscale transition-all duration-700 group-hover:scale-105 group-hover:grayscale-0"
-                    />
-                    <div className="absolute inset-y-0 left-0 w-2" style={{ background: F.blue }} />
-                    <div className="absolute inset-0 bg-gradient-to-t from-white via-white/0 to-transparent" />
-                </div>
-                <div className="relative flex flex-col items-center gap-4 p-6 pt-2 text-center sm:flex-row sm:p-8 sm:pt-2 sm:text-left">
-                    <div className="relative h-28 w-28 shrink-0">
-                        <svg viewBox="0 0 120 120" className="h-full w-full -rotate-90" aria-hidden="true">
-                            <circle cx="60" cy="60" r="54" fill="none" stroke={F.ice} strokeWidth="12" />
-                            <circle
-                                cx="60"
-                                cy="60"
-                                r="54"
-                                fill="none"
-                                stroke={F.blue}
-                                strokeWidth="12"
-                                strokeLinecap="round"
-                                strokeDasharray={circumference}
-                                strokeDashoffset={inView ? circumference * 0.25 : circumference}
-                                style={{ transition: "stroke-dashoffset 1.6s cubic-bezier(0.22,1,0.36,1)" }}
-                            />
-                        </svg>
-                        <span className="absolute inset-0 flex items-center justify-center text-2xl font-bold tabular-nums" style={{ color: F.blue }}>
-                            <CountUp to={75} active={inView} suffix="%" />
-                        </span>
+        <div ref={ref} className="grid gap-6 md:grid-cols-3">
+            {SPECTATOR_STATS.map((s) => (
+                <div key={s.img} className="group relative overflow-hidden rounded-2xl border border-[#E1E6DB] bg-white">
+                    <div className="relative h-44 w-full overflow-hidden sm:h-52">
+                        <img
+                            src={s.img}
+                            alt={s.alt}
+                            loading="lazy"
+                            className="h-full w-full object-cover grayscale transition-all duration-700 group-hover:scale-105 group-hover:grayscale-0"
+                        />
+                        <div className="absolute inset-y-0 left-0 w-2" style={{ background: F.blue }} />
                     </div>
-                    <div>
-                        <p className="text-lg font-bold sm:text-xl" style={{ color: F.blue }}>
-                            About 75% of those spectators
+                    <div className={PAD}>
+                        <p className={STAT} style={{ color: F.blue }}>
+                            {s.value(inView)}
                         </p>
-                        <p className="text-base text-gray-900 sm:text-lg">will travel from outside of Georgia</p>
-                        <p className="text-sm text-gray-600">(from other U.S. states or other countries)</p>
+                        <p className="mt-4 max-w-[72ch] text-lg leading-[1.6] text-[#161514]">{s.text}</p>
                     </div>
                 </div>
-            </div>
+            ))}
         </div>
     );
 }
@@ -545,7 +527,7 @@ export function ChallengeExplorer() {
     const [ref, inView] = useInView<HTMLDivElement>(0.3);
 
     return (
-        <div ref={ref} className="relative overflow-hidden rounded-2xl border-2 border-gray-200 bg-white p-6 sm:p-10">
+        <div ref={ref} className={`relative overflow-hidden rounded-2xl border border-[#E1E6DB] bg-white ${PAD}`}>
             <div className="absolute inset-y-0 left-0 w-2" style={{ background: F.blue }} />
             <ChevronStack
                 primary={F.blue}
@@ -555,9 +537,7 @@ export function ChallengeExplorer() {
             />
 
             <div className="relative flex flex-wrap items-center justify-between gap-4">
-                <h3 className="text-2xl font-bold text-black sm:text-3xl">
-                    The <span style={{ color: F.blue }}>Challenge</span>
-                </h3>
+                <h3 className="text-[22px] font-semibold tracking-[-0.01em] text-[#161514]">When they move</h3>
                 <div role="tablist" aria-label="Match day window" className="inline-flex rounded-full bg-gray-100 p-1">
                     {WINDOWS.map((win, i) => (
                         <button
@@ -577,7 +557,7 @@ export function ChallengeExplorer() {
 
             {/* Match-day timeline */}
             <div className="relative mt-8 lg:mr-24">
-                <div className="flex h-12 w-full overflow-hidden rounded-xl text-[11px] font-semibold sm:text-xs">
+                <div className="flex h-12 w-full overflow-hidden rounded-xl text-xs font-semibold">
                     <div
                         className="flex w-[34%] items-center justify-center px-2 text-center transition-colors duration-500"
                         style={{ background: tab === 0 ? F.blue : F.ice, color: tab === 0 ? "#fff" : F.blue }}
@@ -597,7 +577,7 @@ export function ChallengeExplorer() {
                         {WINDOWS[1].bar}
                     </div>
                 </div>
-                <div className="mt-2 flex text-[11px] text-gray-500 sm:text-xs">
+                <div className="mt-2 flex font-[family-name:var(--font-geist-mono)] text-xs text-[#75716B]">
                     <span className="w-[34%]">−90 min</span>
                     <span className="w-[38%]">Kickoff · Final whistle</span>
                     <span className="w-[28%] text-right">+30 min</span>
@@ -606,24 +586,10 @@ export function ChallengeExplorer() {
 
             <div className="relative mt-8 grid items-center gap-8 md:grid-cols-[minmax(0,3fr)_minmax(0,2fr)] lg:mr-24">
                 <div aria-live="polite">
-                    <p
-                        key={w.key}
-                        className="text-5xl font-bold italic leading-none tracking-tight sm:text-6xl lg:text-7xl"
-                        style={{
-                            ...display,
-                            backgroundImage: `linear-gradient(100deg, ${F.blue}, ${F.sky})`,
-                            WebkitBackgroundClip: "text",
-                            backgroundClip: "text",
-                            color: "transparent",
-                        }}
-                    >
-                        <CountUp to={w.from} active={inView} duration={900} />
-                        <span className="text-3xl sm:text-4xl" style={percentFont}>%</span>
-                        <span className="mx-2 text-3xl sm:mx-3 sm:text-5xl">–</span>
-                        <CountUp to={w.to} active={inView} duration={900} />
-                        <span className="text-3xl sm:text-4xl" style={percentFont}>%</span>
+                    <p key={w.key} className={STAT} style={{ color: F.blue }}>
+                        <CountUp to={w.from} active={inView} duration={900} />%–<CountUp to={w.to} active={inView} duration={900} />%
                     </p>
-                    <p className="mt-3 text-lg text-gray-900 sm:text-xl">{w.caption}</p>
+                    <p className="mt-4 text-lg leading-[1.6] text-[#161514]">{w.caption}</p>
                 </div>
 
                 {/* Ten fans, filled in to match the range */}
@@ -647,7 +613,7 @@ export function ChallengeExplorer() {
                             );
                         })}
                     </div>
-                    <p className="mt-3 text-xs text-gray-500">Every figure is a range. Solid fans are the low end, light blue the high end.</p>
+                    <p className="mt-3 text-sm text-[#75716B]">Every figure is a range. Solid fans are the low end, light blue the high end.</p>
                 </div>
             </div>
         </div>
@@ -662,25 +628,24 @@ export function CoreTension() {
     const [clear, setClear] = useState(false);
 
     return (
-        <div className="relative overflow-hidden rounded-2xl border-2 border-gray-200 bg-white">
-            <ChevronStack primary={F.blue} secondary={F.sky} className="pointer-events-none absolute -left-12 top-1/2 h-72 -translate-y-1/2 sm:h-96" />
-            <ChevronStack primary={F.blue} secondary={F.sky} flip className="pointer-events-none absolute -right-12 top-1/2 h-72 -translate-y-1/2 sm:h-96" />
+        <div className={`relative overflow-hidden rounded-2xl border border-[#E1E6DB] bg-white ${PAD}`}>
+            {/* One chevron, on the right inside the card, so it never sits under the left-aligned text */}
+            <ChevronStack primary={F.blue} secondary={F.sky} flip className="pointer-events-none absolute -right-12 top-1/2 hidden h-72 -translate-y-1/2 sm:h-96 md:block" />
 
-            <div className="relative mx-auto max-w-2xl px-6 py-14 text-center sm:px-10 sm:py-20">
-                <div className="mx-auto mb-3 h-[3px] w-14" style={{ background: F.blue }} />
-                <p className="text-lg text-gray-900 sm:text-2xl">
-                    The “Last Mile” becomes
-                    <br />
-                    <span className="font-bold" style={{ color: F.blue }}>the highest-risk zone</span>
+            <div className="relative max-w-[640px]">
+                <div className="mb-3 h-[3px] w-14" style={{ background: F.blue }} />
+                <p className="text-lg leading-[1.6] text-[#161514]">
+                    The &ldquo;Last Mile&rdquo; becomes{" "}
+                    <span className="font-semibold" style={{ color: F.blue }}>the highest-risk zone</span>.
                 </p>
-                <div className="mx-auto mb-3 mt-10 h-[3px] w-14" style={{ background: F.blue }} />
-                <p className="text-lg text-gray-900 sm:text-2xl">Core Tension:</p>
-                <p className="text-2xl font-bold italic sm:text-4xl" style={{ color: F.blue }}>
-                    “Which Way Do I Go?”
+                <div className="mb-3 mt-8 h-[3px] w-14" style={{ background: F.blue }} />
+                <p className="font-[family-name:var(--font-geist-mono)] text-xs uppercase tracking-[0.08em] text-[#75716B]">Core tension</p>
+                <p className="mt-2 text-[clamp(30px,3vw,44px)] font-semibold leading-[1.1] tracking-[-0.02em]" style={{ color: F.blue }}>
+                    &ldquo;Which way do I go?&rdquo;
                 </p>
 
                 {/* Arrow field */}
-                <div className="mt-10 grid grid-cols-8 gap-1 sm:gap-2" aria-hidden="true">
+                <div className="mt-10 grid max-w-[480px] grid-cols-8 gap-1 sm:gap-2" aria-hidden="true">
                     {SCATTER.map((deg, i) => (
                         <div key={i} className="flex aspect-square items-center justify-center">
                             <ArrowRight
@@ -714,73 +679,139 @@ export function CoreTension() {
 
 /* ---------- What we learned: three stats ---------- */
 
+/* Benchmark stats from past global events. `source` is the tiny label under each line. */
 const LEARNED = [
-    { value: 93, label: "movement accuracy when digital + physical signage integrated" },
-    { value: 40, label: "reduction in backtracking when wayfinding is clear" },
-    { value: 23, label: "of user errors occur after 3s decision time" },
+    { value: "93%", label: "movement accuracy when digital and physical signage work together", source: "[Source]" },
+    { value: "40%", label: "less backtracking when wayfinding is clear", source: "[Source]" },
+    { value: "23%", label: "of user errors happen after 3 seconds of decision time", source: "[Source]" },
 ];
 
+/* Three static cards, all visible at once: no hover, motion, blur or reveal. One column on phones. */
 export function LearnedStats() {
-    const [active, setActive] = useState(0);
-    const [engaged, setEngaged] = useState(false);
-    const [ref, inView] = useInView<HTMLDivElement>(0.3, false);
-    const reduced = usePrefersReducedMotion();
+    return (
+        <ul className="grid gap-6 md:grid-cols-3" aria-label="What we learned from global events">
+            {LEARNED.map((s) => (
+                <li key={s.value} className="flex h-full flex-col rounded-xl border border-[#E1E6DB] bg-white p-7">
+                    <p className={STAT} style={{ color: F.blue }}>
+                        {s.value}
+                    </p>
+                    <p className="mt-4 text-lg leading-[1.5] text-[#161514]">{s.label}</p>
+                    <p className="mt-auto pt-5 font-[family-name:var(--font-geist-mono)] text-xs uppercase tracking-[0.08em] text-[#75716B]">
+                        {s.source}
+                    </p>
+                </li>
+            ))}
+        </ul>
+    );
+}
 
-    useEffect(() => {
-        if (engaged || reduced || !inView) return;
-        const t = setTimeout(() => setActive((a) => (a + 1) % LEARNED.length), 4500);
-        return () => clearTimeout(t);
-    }, [active, engaged, reduced, inView]);
+/* ---------- Mapping the Last Mile: three map layers ---------- */
 
-    const pick = (i: number) => {
-        setActive(i);
-        setEngaged(true);
-    };
+/* Legend colours are sampled from each map image so the swatches match exactly. */
+const MAP_LAYERS = [
+    {
+        id: "primary",
+        step: "1 · Primary routes",
+        line: "The main paths fans take from MARTA, hotels and the Fan Festival to the stadium, with a sign at every turn.",
+        src: "/images/fifa/Primary Wayfinding FIFA.png",
+        alt: "Map of primary routes from MARTA stations, hotels and the Fan Festival to Atlanta Stadium, with primary signage at each turn",
+        legend: [
+            { kind: "line", color: "#DA3462", label: "Primary routes" },
+            { kind: "sign", color: "#7F0007", label: "Primary signage" },
+        ],
+    },
+    {
+        id: "secondary",
+        step: "2 · Secondary routes",
+        line: "A wider network of side streets that spreads fans into downtown, signed the same way.",
+        src: "/images/fifa/Secondary Wayfinding FIFA.png",
+        alt: "Map of secondary routes and signage spreading from the Fan Festival and stadium into surrounding downtown streets",
+        legend: [
+            { kind: "line", color: "#6B00F3", label: "Secondary routes" },
+            { kind: "sign", color: "#3F0C7E", label: "Secondary signage" },
+        ],
+    },
+    {
+        id: "friction",
+        step: "3 · Friction points",
+        line: "Where the walk slows down: bottlenecks, blocked views and narrow sidewalks.",
+        src: "/images/fifa/Friction Points FIFA.png",
+        alt: "Map of friction points along the Last Mile: bottlenecks, visual obstructions and narrow sidewalks",
+        legend: [
+            { kind: "dot", color: "#8A0000", label: "Bottlenecks" },
+            { kind: "dot", color: "#00E492", label: "Visual obstructions" },
+            { kind: "dot", color: "#4066FF", label: "Narrow sidewalks" },
+        ],
+    },
+] as const;
+
+function Swatch({ kind, color }: { kind: "line" | "sign" | "dot"; color: string }) {
+    if (kind === "line") return <span aria-hidden="true" className="h-1 w-6 rounded-full" style={{ background: color }} />;
+    if (kind === "sign") return <span aria-hidden="true" className="h-3.5 w-3.5 rounded-[3px]" style={{ background: color }} />;
+    return <span aria-hidden="true" className="h-3.5 w-3.5 rounded-full" style={{ background: color }} />;
+}
+
+/* Segmented control → one line → the map for that layer (crossfade, no zoom or blur) → legend. */
+export function MapLayers() {
+    const [active, setActive] = useState<(typeof MAP_LAYERS)[number]["id"]>("primary");
+    const layer = MAP_LAYERS.find((l) => l.id === active) ?? MAP_LAYERS[0];
 
     return (
-        <div ref={ref} className="relative overflow-hidden rounded-2xl border-2 border-gray-200 bg-white">
-            <div className="absolute inset-y-0 left-0 w-2" style={{ background: F.blue }} />
-            <div className="grid gap-8 p-6 sm:p-10 lg:grid-cols-[minmax(0,2fr)_minmax(0,5fr)] lg:items-center">
-                <div className="relative">
-                    <h3 className="text-2xl font-bold leading-tight text-black sm:text-3xl">
-                        What We Learned
-                        <br />
-                        From <span style={{ color: F.blue }}>Global Events</span>
-                    </h3>
-                    <div className="mt-6 hidden h-40 items-end lg:flex">
-                        <ChevronStack primary={F.blue} secondary={F.sky} className="h-40" />
-                    </div>
-                </div>
-
-                <div role="radiogroup" aria-label="Findings from global events" className="grid grid-cols-2 gap-3 sm:gap-4">
-                    {LEARNED.map((s, i) => {
-                        const on = i === active;
-                        return (
-                            <button
-                                key={s.value}
-                                type="button"
-                                role="radio"
-                                aria-checked={on}
-                                onClick={() => pick(i)}
-                                onMouseEnter={() => pick(i)}
-                                className={`rounded-xl border-2 px-4 py-6 text-center transition-all duration-500 sm:px-6 sm:py-8 ${i === 0 ? "col-span-2" : ""}`}
-                                style={{
-                                    background: on ? F.blue : "#fff",
-                                    borderColor: on ? F.blue : F.ice,
-                                    color: on ? "#fff" : "#9db8d6",
-                                    transform: on ? "scale(1.02)" : "scale(1)",
-                                }}
-                            >
-                                <span className="block text-4xl font-bold tabular-nums sm:text-5xl" style={display}>
-                                    {on ? <CountUp key={`${i}-${active}`} to={s.value} active={inView} duration={900} /> : s.value}
-                                    <span style={percentFont}>%</span>
-                                </span>
-                                <span className="mt-2 block text-sm leading-snug sm:text-base">{s.label}</span>
-                            </button>
-                        );
-                    })}
-                </div>
+        <div>
+            <div role="tablist" aria-label="Map layer" className="inline-flex flex-wrap gap-1 rounded-full border border-[#E1E6DB] bg-white p-1">
+                {MAP_LAYERS.map((l) => {
+                    const on = l.id === active;
+                    return (
+                        <button
+                            key={l.id}
+                            type="button"
+                            role="tab"
+                            aria-selected={on}
+                            aria-controls="fifa-map-panel"
+                            onClick={() => setActive(l.id)}
+                            className={`rounded-full px-4 py-2 text-sm font-medium transition-colors ${on ? "bg-[#161514] text-white" : "text-[#161514] hover:bg-[#EEF2EA]"}`}
+                        >
+                            {l.step}
+                        </button>
+                    );
+                })}
             </div>
+            <p className="mt-4 max-w-[72ch] text-lg leading-[1.6] text-[#161514]" aria-live="polite">
+                {layer.line}
+            </p>
+
+            <div
+                id="fifa-map-panel"
+                role="tabpanel"
+                className="relative mt-6 aspect-[1920/1080] w-full overflow-hidden rounded-xl border border-[#E1E6DB] bg-[#00DCE8]"
+            >
+                {MAP_LAYERS.map((l) => (
+                    <Image
+                        key={l.id}
+                        src={l.src}
+                        alt={l.id === active ? l.alt : ""}
+                        aria-hidden={l.id !== active}
+                        width={1920}
+                        height={1080}
+                        // Hidden layers sit at opacity 0, which the browser's lazy loading skips, so the first
+                        // switch would fade into an empty frame. Load all three up front, at low priority.
+                        loading="eager"
+                        fetchPriority="low"
+                        sizes="(max-width: 1600px) 100vw, 1504px"
+                        className="absolute inset-0 h-full w-full transition-opacity duration-300 ease-out motion-reduce:transition-none"
+                        style={{ opacity: l.id === active ? 1 : 0 }}
+                    />
+                ))}
+            </div>
+
+            <ul className="mt-4 flex flex-wrap gap-x-6 gap-y-2" aria-label={`Legend: ${layer.step}`}>
+                {layer.legend.map((item) => (
+                    <li key={item.label} className="flex items-center gap-2 text-sm text-[#161514]">
+                        <Swatch kind={item.kind} color={item.color} />
+                        {item.label}
+                    </li>
+                ))}
+            </ul>
         </div>
     );
 }
@@ -839,7 +870,7 @@ export function FieldGallery() {
                                 loading="lazy"
                                 className="block h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
                             />
-                            <span className="absolute bottom-2 right-2 rounded-full bg-black/60 px-2.5 py-1 text-[11px] font-medium tabular-nums text-white opacity-0 transition-opacity group-hover:opacity-100">
+                            <span className="absolute bottom-2 right-2 rounded-full bg-black/60 px-2.5 py-1 font-[family-name:var(--font-geist-mono)] text-xs font-medium tabular-nums text-white opacity-0 transition-opacity group-hover:opacity-100">
                                 {String(i + 1).padStart(2, "0")} / {String(FIELD.length).padStart(2, "0")}
                             </span>
                         </button>
@@ -935,7 +966,7 @@ export function AreaMap() {
     const current = PINS.find((p) => p.id === sel);
 
     return (
-        <div className="overflow-hidden rounded-2xl border-2 border-gray-200 bg-white">
+        <div className="overflow-hidden rounded-2xl border border-[#E1E6DB] bg-white">
             <div className="relative aspect-[1506/1080] w-full bg-[#00DCE8]">
                 <img
                     src="/images/fifa/area-map.webp"
@@ -1007,7 +1038,7 @@ export function AreaMap() {
                                 />
                             </span>
                             <span
-                                className={`pointer-events-none absolute whitespace-nowrap rounded-full bg-white px-2.5 py-1 text-[11px] font-semibold text-gray-900 shadow-md transition-all duration-300 sm:text-xs ${
+                                className={`pointer-events-none absolute whitespace-nowrap rounded-full bg-white px-2.5 py-1 text-xs font-semibold text-gray-900 shadow-md transition-all duration-300 ${
                                     p.y > 80 ? "bottom-full mb-0.5" : "top-full mt-0.5"
                                 } ${p.x > 65 ? "right-0" : p.x < 30 ? "left-0" : "left-1/2 -translate-x-1/2"}`}
                                 style={{ opacity: on ? 1 : 0 }}
@@ -1019,7 +1050,7 @@ export function AreaMap() {
                 })}
             </div>
 
-            <div className="flex flex-wrap items-center justify-between gap-4 border-t-2 border-gray-200 p-4 sm:p-6">
+            <div className={`flex flex-wrap items-center justify-between gap-4 border-t border-[#E1E6DB] ${PAD}`}>
                 <div className="flex flex-wrap gap-2">
                     {PINS.map((p) => (
                         <button
@@ -1129,7 +1160,7 @@ export function WayfindingMaps() {
     const map = PLAN_MAPS.find((m) => m.id === active) ?? PLAN_MAPS[0];
 
     return (
-        <div className="mx-auto grid w-full max-w-[1000px] items-center gap-6 rounded-2xl border border-gray-200 bg-white p-4 shadow-[0_24px_60px_-30px_rgba(30,77,43,0.35)] sm:p-6 md:grid-cols-[minmax(0,2fr)_minmax(0,3fr)] md:gap-8">
+        <div className={`grid w-full items-center gap-6 rounded-2xl border border-[#E1E6DB] bg-white ${PAD} md:grid-cols-[minmax(0,2fr)_minmax(0,3fr)] md:gap-10`}>
             <div>
                 <div role="tablist" aria-label="Wayfinding maps" className="mb-5 flex flex-wrap gap-2">
                     {PLAN_MAPS.map((m) => {
@@ -1152,8 +1183,8 @@ export function WayfindingMaps() {
                         );
                     })}
                 </div>
-                <p className="text-lg font-semibold sm:text-xl" style={{ color: F.deep }}>{map.title}</p>
-                <p className="mt-2 text-sm leading-relaxed text-gray-600 sm:text-base">{map.text}</p>
+                <p className="text-[22px] font-semibold tracking-[-0.01em]" style={{ color: F.deep }}>{map.title}</p>
+                <p className="mt-3 max-w-[72ch] text-lg leading-[1.6] text-[#161514]">{map.text}</p>
             </div>
 
             <figure className="overflow-hidden rounded-xl bg-gray-50">
@@ -1165,7 +1196,7 @@ export function WayfindingMaps() {
                     height={map.h}
                     loading="lazy"
                     decoding="async"
-                    className="mx-auto block h-auto w-full"
+                    className="block h-auto w-full"
                     style={{ maxWidth: map.w }}
                 />
             </figure>
