@@ -1,4 +1,4 @@
-import RovCaseStudy from '@/pages/RovCaseStudy';
+import RovCaseStudy from '@/components/case-study/RovCaseStudy';
 
 export const metadata = {
     title: "Range of View Studios - Brand & Visual Identity",

@@ -484,7 +484,7 @@ export function SpectatorStats() {
                             src={s.img}
                             alt={s.alt}
                             loading="lazy"
-                            className="h-full w-full object-cover grayscale transition-all duration-700 group-hover:scale-105 group-hover:grayscale-0"
+                            className="h-full w-full object-cover"
                         />
                         <div className="absolute inset-y-0 left-0 w-2" style={{ background: F.blue }} />
                     </div>
@@ -679,11 +679,11 @@ export function CoreTension() {
 
 /* ---------- What we learned: three stats ---------- */
 
-/* Benchmark stats from past global events. `source` is the tiny label under each line. */
+/* Benchmark stats from past global events. (No longer rendered; the page uses a BarList.) */
 const LEARNED = [
-    { value: "93%", label: "movement accuracy when digital and physical signage work together", source: "[Source]" },
-    { value: "40%", label: "less backtracking when wayfinding is clear", source: "[Source]" },
-    { value: "23%", label: "of user errors happen after 3 seconds of decision time", source: "[Source]" },
+    { value: "93%", label: "movement accuracy when digital and physical signage work together" },
+    { value: "40%", label: "less backtracking when wayfinding is clear" },
+    { value: "23%", label: "of user errors happen after 3 seconds of decision time" },
 ];
 
 /* Three static cards, all visible at once: no hover, motion, blur or reveal. One column on phones. */
@@ -696,9 +696,6 @@ export function LearnedStats() {
                         {s.value}
                     </p>
                     <p className="mt-4 text-lg leading-[1.5] text-[#161514]">{s.label}</p>
-                    <p className="mt-auto pt-5 font-[family-name:var(--font-geist-mono)] text-xs uppercase tracking-[0.08em] text-[#75716B]">
-                        {s.source}
-                    </p>
                 </li>
             ))}
         </ul>

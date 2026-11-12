@@ -1,4 +1,4 @@
-import LoomaPage from '@/pages/LoomaPage';
+import LoomaPage from '@/components/case-study/LoomaCaseStudy';
 
 export const metadata = {
     title: "LOOMA Case Study - Smart AR Glasses for Alzheimer's Patients",

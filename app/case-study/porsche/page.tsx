@@ -1,4 +1,4 @@
-import PorschePage from '@/pages/PorschePage';
+import PorschePage from '@/components/case-study/PorscheCaseStudy';
 
 export const metadata = {
     title: "Porsche EV Case Study - Future of Electric Vehicle Experience",

@@ -1,18 +1,17 @@
 import Image from "next/image";
 import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/Footer";
-import { ChallengeExplorer, CoreTension, FieldGallery, LearnedStats, MapLayers, SpectatorStats } from "./FifaModules";
+import { ChallengeExplorer, CoreTension, FieldGallery, MapLayers, SpectatorStats } from "./FifaModules";
 import {
+    BarList,
     BODY,
     CARD,
     Caption,
     CaseStudyMain,
     FindingCard,
     LABEL,
-    LearningCard,
     NextProject,
     Overview,
-    P,
     Quote,
     Section,
     Stat,
@@ -28,8 +27,7 @@ const WSB_URL =
 
 /*
   FIFA World Cup 26 case study, on the shared case study kit (CaseStudyKit).
-  00 Overview · 01 Challenge · 02 Research · 03 Mapping · 04 Design · 05 Impact · 06 What I learned · 07 Credits · next.
-  Text in [brackets] is a placeholder to fill in.
+  00 Overview · 01 Challenge · 02 Research · 03 Mapping · 04 Design · 05 Impact · next.
 */
 const FifaCaseStudy = () => {
     return (
@@ -74,6 +72,7 @@ const FifaCaseStudy = () => {
                     label="The challenge"
                     title="Design a safe, engaging, FIFA-compliant Last Mile"
                     intro="One that keeps crowds moving smoothly while delivering a world-class fan journey that celebrates Atlanta’s identity."
+                    takeaway="Most fans have never seen downtown, and they arrive all at once. The route has to explain itself."
                 >
                     <SpectatorStats />
                     <Quote text="Atlanta has set the standard for what soccer in America can be." by="Don Garber, MLS Commissioner" />
@@ -88,6 +87,7 @@ const FifaCaseStudy = () => {
                     label="Research"
                     title="Walking the route, and learning from past events"
                     intro="We walked the Last Mile ourselves, looking for the moments where a stranger would hesitate, and benchmarked what past global events had learned."
+                    takeaway="People hesitate at forks, not on straight blocks. So the signs go where decisions happen."
                 >
                     <div>
                         <SubHeading>Field walk</SubHeading>
@@ -99,7 +99,16 @@ const FifaCaseStudy = () => {
                     <div>
                         <SubHeading>What we learned from global events</SubHeading>
                         <div className="mt-6">
-                            <LearnedStats />
+                            <BarList
+                                color={FIFA_BLUE}
+                                max={100}
+                                source="Benchmarks from past global events"
+                                rows={[
+                                    { label: "Movement accuracy when digital and physical signage work together", value: 93, display: "93%" },
+                                    { label: "Less backtracking when wayfinding is clear", value: 40, display: "40%" },
+                                    { label: "User errors that happen after 3 seconds of decision time", value: 23, display: "23%" },
+                                ]}
+                            />
                         </div>
                     </div>
                     <div>
@@ -134,6 +143,7 @@ const FifaCaseStudy = () => {
                     label="Mapping the Last Mile"
                     title="Routes, signage and friction points"
                     intro="Primary routes link the Fan Festival, the stadium and the transit stations; mapping them showed where movement would slow down."
+                    takeaway="The friction points showed where signs, flags and ground graphics had to do the most work."
                 >
                     <MapLayers />
                 </Section>
@@ -172,9 +182,6 @@ const FifaCaseStudy = () => {
                             <Caption>The team with the Last Mile model.</Caption>
                         </figure>
                     </div>
-                    <div className="flex min-h-[140px] items-center rounded-2xl border-2 border-dashed border-[#E1E6DB] p-10 text-lg text-[#75716B] max-[900px]:p-6">
-                        [Add photos of the installed signs, ground graphics and totems, and the zone visuals]
-                    </div>
                 </Section>
 
                 {/* 05 Impact */}
@@ -206,19 +213,7 @@ const FifaCaseStudy = () => {
                     <Quote text="They feel like they have an intuitive way to get around." by="Kavya Ray, on WSB-TV" />
                 </Section>
 
-                {/* 06 What I Learned */}
-                <Section id="learned" n={6} label="What I learned" title="What I’d take forward" intro="[One sentence that sums up what this project taught you.]">
-                    <div className="grid gap-6 md:grid-cols-3">
-                        <LearningCard saw="[A moment from the project]" learned="[What it taught you]" />
-                        <LearningCard saw="[A moment from the project]" learned="[What it taught you]" />
-                        <LearningCard saw="[A moment from the project]" learned="[What it taught you]" />
-                    </div>
-                </Section>
-
-                {/* 07 Team & credits */}
-                <Section id="credits" n={7} label="Team & credits" title="Made together">
-                    <P>SCAD Atlanta studio with the Atlanta World Cup Host Committee and the Metro Atlanta Chamber.</P>
-                </Section>
+                {/* "What I learned" (LearningCard) and "Team & credits" are no longer shown; the components stay in CaseStudyKit. */}
 
                 {/* Closing line + next project */}
                 <NextProject

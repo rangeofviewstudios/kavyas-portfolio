@@ -1,4 +1,4 @@
-import UBSCaseStudy from '@/pages/UBSCaseStudy';
+import UBSCaseStudy from '@/components/case-study/UbsCaseStudy';
 
 export const metadata = {
     title: "UBS Banking Case Study - Future of Banking for Gen Z",
